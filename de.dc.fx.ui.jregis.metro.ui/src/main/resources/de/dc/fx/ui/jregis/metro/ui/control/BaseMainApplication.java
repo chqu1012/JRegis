@@ -1,12 +1,15 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
+import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +70,30 @@ public abstract class BaseMainApplication extends BorderPane{
     protected PasswordField textPassword;
 
     @FXML
+    protected TextField textDocumentId;
+
+    @FXML
+    protected TextField textDocumentName;
+
+    @FXML
+    protected TextField textUrl;
+
+    @FXML
+    protected ComboBox<Category> comboBoxCategory;
+
+    @FXML
+    protected TextField textCreatedOn;
+
+    @FXML
+    protected TextArea textDescription;
+
+    @FXML
+    protected abstract void onButtonCancelAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonCreateAction(ActionEvent event);
+    
+    @FXML
     protected abstract void onButtonLoginAction(ActionEvent event);
 
     @FXML
@@ -89,4 +116,13 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onTableViewDocumentClicked(MouseEvent event);
+    
+    @FXML
+    protected abstract void onButtonAddCategoryAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonEditCategoryAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonRemoveCategoryAction(ActionEvent event);
 }

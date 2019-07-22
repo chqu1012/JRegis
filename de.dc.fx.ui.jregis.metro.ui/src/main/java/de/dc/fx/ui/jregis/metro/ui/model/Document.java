@@ -4,23 +4,58 @@ import java.sql.Timestamp;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.google.common.base.MoreObjects.ToStringHelper;
-
 public class Document {
 
 	private long id;
 	private long categoryId;
 	private String name;
-	private Timestamp timestamp;
+	private String description;
+	private String url;
+	private Timestamp createdOn;
+	private Timestamp updatedOn;
 	
 	public Document() {
 	}
 	
-	public Document(int id, int categoryId, String name, Timestamp timestamp) {
+	public Document(int id, int categoryId, String name, String description, Timestamp createdOn, Timestamp updatedOn) {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.name = name;
-		this.timestamp = timestamp;
+		this.description = description;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public Timestamp getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Timestamp updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public long getId() {
@@ -40,12 +75,6 @@ public class Document {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
 	}
 	
 	@Override

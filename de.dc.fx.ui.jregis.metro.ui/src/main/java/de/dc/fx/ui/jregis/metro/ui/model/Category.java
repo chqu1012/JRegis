@@ -1,5 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,9 +8,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Category {
 
-	private int id;
+	private long id;
 	private String name;
-	private int parentId;
+	private long parentId;
+	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 	
 	private Category parent;
 	private List<Category> children = new ArrayList<>();
@@ -21,6 +24,29 @@ public class Category {
 		this.id = id;
 		this.name = name;
 		this.parentId = parentId;
+	}
+
+	public Category(String name, long parentId, LocalDateTime createdOn, LocalDateTime updatedOn) {
+		this.name = name;
+		this.parentId = parentId;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
+	}
+
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public Category getParent() {
@@ -39,10 +65,10 @@ public class Category {
 		this.children = children;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -51,10 +77,10 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getParentId() {
+	public long getParentId() {
 		return parentId;
 	}
-	public void setParentId(int parentId) {
+	public void setParentId(long parentId) {
 		this.parentId = parentId;
 	}
 	

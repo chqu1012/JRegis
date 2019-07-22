@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -10,12 +11,14 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
@@ -23,6 +26,63 @@
    <center>
       <StackPane fx:id="mainStackPane">
          <children>
+            <BorderPane fx:id="paneAddDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
+               <center>
+                  <AnchorPane maxHeight="504.0" maxWidth="600.0" prefHeight="504.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" style="-fx-background-color: #55A6DD;" text="Add new Document" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="textDocumentId" disable="true" layoutX="76.0" layoutY="77.0" prefHeight="25.0" prefWidth="464.0" promptText="Document ID" />
+                        <Label layoutX="76.0" layoutY="62.0" text="DOCUMENT ID">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textDocumentName" layoutX="76.0" layoutY="130.0" prefHeight="25.0" prefWidth="463.0" promptText="Document Name" />
+                        <Label layoutX="76.0" layoutY="115.0" text="DOCUMENT NAME">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textUrl" layoutX="76.0" layoutY="233.0" prefHeight="25.0" prefWidth="464.0" />
+                        <Label layoutX="76.0" layoutY="218.0" text="URL">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="76.0" layoutY="168.0" text="CATEGORY">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="75.0" layoutY="182.0" spacing="5.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0" />
+                              <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
+                              <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
+                              <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="textCreatedOn" disable="true" editable="false" layoutX="76.0" layoutY="364.0" prefHeight="25.0" prefWidth="464.0" />
+                        <Label layoutX="76.0" layoutY="349.0" text="CREATED ON">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="textDescription" layoutX="76.0" layoutY="282.0" prefHeight="59.0" prefWidth="465.0" promptText="Description" />
+                        <Label layoutX="76.0" layoutY="267.0" text="DESCRIPTION">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="458.0" layoutY="446.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" />
+                        <Hyperlink layoutX="411.0" layoutY="447.0" onAction="#onButtonCancelAction" text="Cancel" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
             <BorderPane fx:id="paneOverview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <center>
                   <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
@@ -30,24 +90,6 @@
                       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1200.0" />
                     </content>
                   </ScrollPane>
-               </center>
-            </BorderPane>
-            <BorderPane fx:id="paneAddDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
-               <center>
-                  <AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" style="-fx-background-color: #55A6DD;" text="Add new Document" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <TextField layoutX="76.0" layoutY="77.0" />
-                        <Label layoutX="76.0" layoutY="62.0" text="DOCUMENT ID">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </AnchorPane>
                </center>
             </BorderPane>
             <BorderPane fx:id="paneLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">

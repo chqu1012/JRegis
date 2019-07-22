@@ -20,7 +20,7 @@ public abstract class BaseRepository<T> {
 	private Connection connection;
 
 	private List<T> cachedList = new ArrayList<>();
-	
+
 	public BaseRepository() {
 		try {
 			Class.forName("org.h2.Driver");
@@ -35,20 +35,20 @@ public abstract class BaseRepository<T> {
 		}
 		return Optional.ofNullable(forceFindBy(id));
 	}
-	
+
 	public List<T> findAll() {
 		if (cachedList.isEmpty()) {
 			cachedList = forceFindAll();
 		}
 		return cachedList;
 	}
-	
+
 	public List<T> forceFindAll() {
 		List<T> tempList = new ArrayList<>();
 		PreparedStatement statement;
 		try {
 			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(findAllStatement()+orderBy());
+			statement = connection.prepareStatement(findAllStatement() + orderBy());
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				tempList.add(map(resultSet));
@@ -90,26 +90,33 @@ public abstract class BaseRepository<T> {
 	}
 
 	protected abstract T map(ResultSet resultSet) throws SQLException;
-	
+
 	protected abstract String findByIdStatement(int id);
 
 	protected abstract String findAllStatement();
-	
+
 	protected abstract String saveStatement();
-	
+
 	protected abstract void prepareStatetmentForSave(T t, PreparedStatement statement) throws SQLException;
-	
+
 	public String orderBy() {
 		return StringUtils.EMPTY;
 	}
-	
-	public void save(T t) {
+
+	public long save(T t) {
 		PreparedStatement statement;
 		try {
 			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
 			statement = connection.prepareStatement(saveStatement());
 			prepareStatetmentForSave(t, statement);
 			statement.execute();
+
+			cachedList.add(t);
+			
+			ResultSet rs = statement.getGeneratedKeys();
+			while (rs.next()) {
+				return rs.getLong(1);
+			}
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
 		} finally {
@@ -119,8 +126,9 @@ public abstract class BaseRepository<T> {
 				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
 			}
 		}
+		return -1;
 	}
-	
+
 	public void close() {
 		try {
 			connection.close();

@@ -1,9 +1,8 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.controlsfx.control.table.TableFilter;
@@ -15,6 +14,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
+import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 
 public class MainApplication extends BaseMainApplication {
 
@@ -51,13 +52,10 @@ public class MainApplication extends BaseMainApplication {
 	public void initialize() {
 		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(e.getId()));
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
-		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getTimestamp()));
+		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOn()));
+		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOn()));
 		columnCategory.setCellValueFactory(param -> {
-			String name = masterCategoryData.stream()
-					.filter(p-> p.getId()==param.getValue().getCategoryId()).findAny()
-					.get().getName();
-			
-			return new SimpleObjectProperty<>(name);
+			return new SimpleObjectProperty<>(param.getValue().getCategoryId()+"");
 		});		
 		
 		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
@@ -68,6 +66,18 @@ public class MainApplication extends BaseMainApplication {
 		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
 		List<Category> categories = categoryRepository.findAll();
 		masterCategoryData.addAll(categories);
+		comboBoxCategory.setItems(masterCategoryData);
+		comboBoxCategory.setConverter(new StringConverter<Category>() {
+			@Override
+			public String toString(Category c) {
+				return c.getName();
+			}
+			
+			@Override
+			public Category fromString(String name) {
+				return new Category(-1, name, -1);
+			}
+		});
 		
 		TableFilter<Document> filter = new TableFilter<>(tableViewDocument);
 		filter.setSearchStrategy((input,target) -> {
@@ -83,22 +93,12 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonLoginAction(ActionEvent event) {
+		textCreatedOn.setText(LocalDateTime.now().toString());
 		paneDocumentTableView.toFront();
 	}
 
 	@Override
 	protected void onLinkCreateNewUserAction(ActionEvent event) {
-		Connection conn;
-		try {
-			conn = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-
-			conn.createStatement().executeQuery("SELECT * FROM DOCUMENT");
-			conn.close();
-
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -143,5 +143,61 @@ public class MainApplication extends BaseMainApplication {
 				documentDetails.setDocument(selection);
 			}
 		}
+	}
+
+	@Override
+	protected void onButtonCancelAction(ActionEvent event) {
+		paneAddDocument.toBack();
+	}
+
+	@Override
+	protected void onButtonCreateAction(ActionEvent event) {
+		Document document = new Document();
+		document.setCategoryId(0);
+		document.setName(textDocumentName.getText());
+		document.setDescription(textDescription.getText());
+		document.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+		document.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+		
+		Category category = comboBoxCategory.getSelectionModel().getSelectedItem();
+		if (category!=null) {
+			document.setCategoryId(category.getId());
+		}else {
+			category = new Category();
+			category.setName(comboBoxCategory.getEditor().getText());
+			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
+			document.setCategoryId(newId);
+		}
+		
+		JRegisPlatform.getInstance(DocumentRepository.class).save(document);
+		
+		masterDocumentData.add(document);
+		
+		paneAddDocument.toBack();
+	}
+
+	@Override
+	protected void onButtonAddCategoryAction(ActionEvent event) {
+		DialogUtil.openInput("New Category", "Category*","Create new Category", "", e->{
+			Category category = new Category();
+			category.setName(e);
+			category.setCreatedOn(LocalDateTime.now());
+			category.setUpdatedOn(LocalDateTime.now());
+			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
+			category.setId(newId);
+			masterCategoryData.add(category);
+		});
+	}
+
+	@Override
+	protected void onButtonEditCategoryAction(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onButtonRemoveCategoryAction(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 }
