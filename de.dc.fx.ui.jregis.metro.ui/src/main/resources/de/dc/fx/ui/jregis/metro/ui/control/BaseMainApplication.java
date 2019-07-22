@@ -1,0 +1,92 @@
+package de.dc.fx.ui.jregis.metro.ui.control;
+
+import de.dc.fx.ui.jregis.metro.ui.model.Document;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+
+public abstract class BaseMainApplication extends BorderPane{
+
+    @FXML
+    protected TableColumn<Document, String> columnId;
+
+    @FXML
+    protected TableColumn<Document, String> columnName;
+
+    @FXML
+    protected TableColumn<Document, String> columnCreated;
+
+    @FXML
+    protected TableColumn<Document, String> columnCategory;
+
+    @FXML
+    protected TableColumn<Document, String> columnUpdated;
+	
+	@FXML
+	protected BorderPane root;
+	
+	@FXML
+	protected TableView<Document> tableViewDocument;
+	
+    @FXML
+    protected StackPane mainStackPane;
+
+    @FXML
+    protected BorderPane paneDocumentTableView;
+
+    @FXML
+    protected BorderPane main;
+
+    @FXML
+    protected BorderPane paneAddDocument;
+
+    @FXML
+    protected BorderPane paneOverview;
+
+    @FXML
+    protected BorderPane paneLogin;
+
+    @FXML
+    protected TextField textUsername;
+
+    @FXML
+    protected ImageView imageViewUser;
+
+    @FXML
+    protected Button buttonLogin;
+
+    @FXML
+    protected PasswordField textPassword;
+
+    @FXML
+    protected abstract void onButtonLoginAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onLinkCreateNewUserAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onLinkForgottenPasswordAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onMenuItemDeleteDocumentAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onMenuItemEditDocumentAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onMenuItemNewDocumentAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onMenuItemOpenDocumentAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onTableViewDocumentClicked(MouseEvent event);
+}

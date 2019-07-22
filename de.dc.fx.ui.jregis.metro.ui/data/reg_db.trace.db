@@ -1,0 +1,8 @@
+2019-07-22 19:55:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" nicht gefunden
+Table "DOCUMENT" not found; SQL statement:
+SELECT * FROM document ORDER BY documentation_id DESC [42102-196]
+2019-07-22 19:55:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_CATEGORY" nicht gefunden
+Table "DOCUMENT_CATEGORY" not found; SQL statement:
+SELECT * FROM document_category ORDER BY name ASC [42102-196]
