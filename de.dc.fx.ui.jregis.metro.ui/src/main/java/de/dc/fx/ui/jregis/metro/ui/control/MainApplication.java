@@ -162,17 +162,10 @@ public class MainApplication extends BaseMainApplication {
 		Category category = comboBoxCategory.getSelectionModel().getSelectedItem();
 		if (category!=null) {
 			document.setCategoryId(category.getId());
-		}else {
-			category = new Category();
-			category.setName(comboBoxCategory.getEditor().getText());
-			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
-			document.setCategoryId(newId);
 		}
 		
 		JRegisPlatform.getInstance(DocumentRepository.class).save(document);
-		
 		masterDocumentData.add(document);
-		
 		paneAddDocument.toBack();
 	}
 
@@ -191,8 +184,15 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonEditCategoryAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		Category selection = comboBoxCategory.getSelectionModel().getSelectedItem();
+		if (selection != null) {
+			DialogUtil.openInput("Edit Category", selection.getName(),"Edit Category", "", e->{
+				selection.setName(e);
+//				long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
+				masterCategoryData.clear();
+				masterCategoryData.addAll(JRegisPlatform.getInstance(CategoryRepository.class).findAll());
+			});
+		}
 	}
 
 	@Override
