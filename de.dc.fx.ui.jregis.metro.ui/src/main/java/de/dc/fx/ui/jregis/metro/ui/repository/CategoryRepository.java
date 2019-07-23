@@ -20,7 +20,7 @@ public class CategoryRepository extends BaseRepository<Category> {
 	}
 
 	@Override
-	protected String findByIdStatement(int id) {
+	protected String findByIdStatement(long id) {
 		return "SELECT * FROM document_category WHERE document_category_id=" + id;
 	}
 

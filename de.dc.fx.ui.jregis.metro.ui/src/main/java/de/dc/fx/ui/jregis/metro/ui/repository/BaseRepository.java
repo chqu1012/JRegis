@@ -29,7 +29,7 @@ public abstract class BaseRepository<T> {
 		}
 	}
 
-	public Optional<T> findById(int id) {
+	public Optional<T> findById(long id) {
 		if (cachedList.isEmpty()) {
 			return Optional.ofNullable(forceFindBy(id));
 		}
@@ -66,7 +66,7 @@ public abstract class BaseRepository<T> {
 		return tempList;
 	}
 
-	public T forceFindBy(int id) {
+	public T forceFindBy(long id) {
 		PreparedStatement statement;
 		try {
 			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
@@ -91,7 +91,7 @@ public abstract class BaseRepository<T> {
 
 	protected abstract T map(ResultSet resultSet) throws SQLException;
 
-	protected abstract String findByIdStatement(int id);
+	protected abstract String findByIdStatement(long id);
 
 	protected abstract String findAllStatement();
 

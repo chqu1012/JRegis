@@ -21,7 +21,7 @@ public class HistoryRepository extends BaseRepository<History>{
 	}
 
 	@Override
-	protected String findByIdStatement(int id) {
+	protected String findByIdStatement(long id) {
 		return "SELECT * FROM document_history WHERE document_history_id="+id;
 	}
 

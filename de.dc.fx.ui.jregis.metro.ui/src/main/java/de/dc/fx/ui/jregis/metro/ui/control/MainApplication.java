@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.controlsfx.control.table.TableFilter;
 
@@ -55,7 +56,12 @@ public class MainApplication extends BaseMainApplication {
 		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOn()));
 		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOn()));
 		columnCategory.setCellValueFactory(param -> {
-			return new SimpleObjectProperty<>(param.getValue().getCategoryId()+"");
+			long id = param.getValue().getCategoryId();
+			Optional<Category> category = JRegisPlatform.getInstance(CategoryRepository.class).findById(id);
+			if (category.isPresent()) {
+				return new SimpleObjectProperty<>(category.get().getName());
+			}
+			return new SimpleObjectProperty<>("");
 		});		
 		
 		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);

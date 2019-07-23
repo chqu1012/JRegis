@@ -27,7 +27,7 @@ public class DocumentRepository extends BaseRepository<Document>{
 	}
 	
 	@Override
-	protected String findByIdStatement(int id) {
+	protected String findByIdStatement(long id) {
 		return "SELECT * FROM document WHERE id = "+id;
 	}
 
