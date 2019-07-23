@@ -164,7 +164,8 @@ public class MainApplication extends BaseMainApplication {
 			document.setCategoryId(category.getId());
 		}
 		
-		JRegisPlatform.getInstance(DocumentRepository.class).save(document);
+		long newDocumentId = JRegisPlatform.getInstance(DocumentRepository.class).save(document);
+		document.setId(newDocumentId);
 		masterDocumentData.add(document);
 		paneAddDocument.toBack();
 	}
