@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.controlsfx.control.table.TableFilter;
 
@@ -16,6 +18,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,27 +33,67 @@ import javafx.util.StringConverter;
 
 public class MainApplication extends BaseMainApplication {
 
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
+	
+	private static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/MainApplication.fxml";
+
 	private ObservableList<Document> masterDocumentData = FXCollections.observableArrayList();
 	private FilteredList<Document> filteredDocumentData = new FilteredList<>(masterDocumentData, p -> true);
-
-	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
 	
+	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
 	private DocumentDetails documentDetails = new DocumentDetails();
+	
+	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
+	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
 	
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
-				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/MainApplication.fxml"));
+				getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
 		try {
 			fxmlLoader.load();
 		} catch (IOException exception) {
-			throw new RuntimeException(exception);
+			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
 		}
 	}
 
 	public void initialize() {
+		initTableView();
+		initCategoryComboBox();
+		initControls();
+		initBindings();
+		mainStackPane.getChildren().add(documentDetails);
+		paneDocumentTableView.toFront();
+	}
+
+	private void initControls() {
+		new AutoCompletionTextFieldBinding<>(textDocumentName, param -> {
+			filteredSuggestionData.setPredicate(p->p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			return filteredSuggestionData;
+		});
+	}
+
+	private void initCategoryComboBox() {
+		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
+		List<Category> categories = categoryRepository.findAll();
+		masterCategoryData.addAll(categories);
+		comboBoxCategory.setItems(masterCategoryData);
+		comboBoxCategory.setConverter(new StringConverter<Category>() {
+			@Override
+			public String toString(Category c) {
+				return c.getName();
+			}
+			
+			@Override
+			public Category fromString(String name) {
+				return new Category(-1, name, -1);
+			}
+		});
+	}
+
+	private void initTableView() {
 		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(e.getId()));
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
 		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOn()));
@@ -68,33 +111,18 @@ public class MainApplication extends BaseMainApplication {
 		List<Document> documents = documentRepository.findAll();
 		masterDocumentData.addAll(documents);
 		tableViewDocument.setItems(filteredDocumentData);
-
-		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
-		List<Category> categories = categoryRepository.findAll();
-		masterCategoryData.addAll(categories);
-		comboBoxCategory.setItems(masterCategoryData);
-		comboBoxCategory.setConverter(new StringConverter<Category>() {
-			@Override
-			public String toString(Category c) {
-				return c.getName();
-			}
-			
-			@Override
-			public Category fromString(String name) {
-				return new Category(-1, name, -1);
-			}
-		});
 		
-		TableFilter<Document> filter = new TableFilter<>(tableViewDocument);
-		filter.setSearchStrategy((input,target) -> {
+		TableFilter.forTableView(tableViewDocument).apply().setSearchStrategy((input,target) -> {
 		    try {
 		        return target.toLowerCase().contains(input.toLowerCase());
 		    } catch (Exception e) {
 		        return false;
 		    }
 		});
-		
-		mainStackPane.getChildren().add(documentDetails);
+	}
+
+	private void initBindings() {
+		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
 	}
 
 	@Override
@@ -207,6 +235,13 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onButtonRemoveCategoryAction(ActionEvent event) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onButtonAddDocumentNameSuggestionAction(ActionEvent event) {
+		String name = textDocumentName.getText();		
+		
 		
 	}
 }

@@ -86,6 +86,9 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected TextArea textDescription;
+    
+    @FXML
+    protected Button buttonAddDocumentNameSuggestion;
 
     @FXML
     protected abstract void onButtonCancelAction(ActionEvent event);
@@ -125,4 +128,7 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onButtonRemoveCategoryAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonAddDocumentNameSuggestionAction(ActionEvent event);
 }

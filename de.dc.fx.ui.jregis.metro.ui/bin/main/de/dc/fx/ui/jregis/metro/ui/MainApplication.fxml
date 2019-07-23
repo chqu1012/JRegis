@@ -37,13 +37,13 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textDocumentName" layoutX="76.0" layoutY="130.0" prefHeight="25.0" prefWidth="463.0" promptText="Document Name" />
+                        <TextField fx:id="textDocumentName" layoutX="76.0" layoutY="130.0" prefHeight="25.0" prefWidth="413.0" promptText="Document Name" />
                         <Label layoutX="76.0" layoutY="115.0" text="DOCUMENT NAME">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textUrl" layoutX="76.0" layoutY="233.0" prefHeight="25.0" prefWidth="464.0" />
+                        <TextField fx:id="textUrl" layoutX="76.0" layoutY="233.0" prefHeight="25.0" prefWidth="465.0" />
                         <Label layoutX="76.0" layoutY="218.0" text="URL">
                            <font>
                               <Font size="10.0" />
@@ -76,6 +76,7 @@
                         </Label>
                         <Button layoutX="458.0" layoutY="446.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" />
                         <Hyperlink layoutX="411.0" layoutY="447.0" onAction="#onButtonCancelAction" text="Cancel" />
+                        <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="495.0" layoutY="130.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" />
                      </children>
                      <effect>
                         <DropShadow />
