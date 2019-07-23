@@ -1835,3 +1835,7 @@ SELECT * FROM document_category WHERE document_category_id=0 [42122-196]
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Unknown Source)
+2019-07-23 18:34:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_NAME_SUGGESTION" nicht gefunden
+Table "DOCUMENT_NAME_SUGGESTION" not found; SQL statement:
+SELECT * FROM document_name_suggestion ORDER BY name [42102-196]

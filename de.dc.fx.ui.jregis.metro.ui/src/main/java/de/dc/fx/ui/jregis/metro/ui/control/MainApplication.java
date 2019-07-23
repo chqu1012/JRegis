@@ -16,6 +16,7 @@ import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
@@ -60,12 +61,28 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	public void initialize() {
+		initData();
 		initTableView();
 		initCategoryComboBox();
 		initControls();
 		initBindings();
+		
 		mainStackPane.getChildren().add(documentDetails);
 		paneDocumentTableView.toFront();
+	}
+
+	private void initData() {
+		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
+		List<Category> categories = categoryRepository.findAll();
+		masterCategoryData.addAll(categories);
+		
+		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
+		List<Document> documents = documentRepository.findAll();
+		masterDocumentData.addAll(documents);
+		
+		DocumentNameRepository documentNameRepository = JRegisPlatform.getInstance(DocumentNameRepository.class);
+		List<String> documentNames = documentNameRepository.findAll();
+		masterSuggestionData.addAll(documentNames);
 	}
 
 	private void initControls() {
@@ -76,9 +93,6 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initCategoryComboBox() {
-		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
-		List<Category> categories = categoryRepository.findAll();
-		masterCategoryData.addAll(categories);
 		comboBoxCategory.setItems(masterCategoryData);
 		comboBoxCategory.setConverter(new StringConverter<Category>() {
 			@Override
@@ -107,9 +121,6 @@ public class MainApplication extends BaseMainApplication {
 			return new SimpleObjectProperty<>("");
 		});		
 		
-		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
-		List<Document> documents = documentRepository.findAll();
-		masterDocumentData.addAll(documents);
 		tableViewDocument.setItems(filteredDocumentData);
 		
 		TableFilter.forTableView(tableViewDocument).apply().setSearchStrategy((input,target) -> {
@@ -241,7 +252,7 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onButtonAddDocumentNameSuggestionAction(ActionEvent event) {
 		String name = textDocumentName.getText();		
-		
-		
+		JRegisPlatform.getInstance(DocumentNameRepository.class).save(name);
+		masterSuggestionData.add(name);
 	}
 }
