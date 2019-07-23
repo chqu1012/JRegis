@@ -121,6 +121,8 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onMenuItemNewDocumentAction(ActionEvent event) {
+		textCreatedOn.setText(LocalDateTime.now().toString());
+		comboBoxCategory.getSelectionModel().selectFirst();
 		paneAddDocument.toFront();
 	}
 
