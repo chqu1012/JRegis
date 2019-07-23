@@ -45,4 +45,20 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setTimestamp(5, t.getUpdatedOn());
 		statement.setString(6, "");
 	}
+
+	@Override
+	protected String updateStatement() {
+		return "MERGE INTO document KEY (ID) VALUES (?, ?, ?, ?, ?, ?, ?);";
+	}
+
+	@Override
+	protected void prepareStatetmentForUpdate(Document t, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, t.getId());
+		statement.setString(2, t.getDescription());
+		statement.setString(3, t.getName());
+		statement.setTimestamp(4, t.getCreatedOn());
+		statement.setTimestamp(5, t.getUpdatedOn());
+		statement.setString(6, "");
+		statement.setLong(7, t.getCategoryId());
+	}
 }

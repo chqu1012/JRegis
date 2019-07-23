@@ -42,5 +42,19 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setString(3, t.getName());
 		statement.setTimestamp(4, Timestamp.valueOf(t.getTimestamp()));
 	}
+	
+	@Override
+	protected String updateStatement() {
+		return "MERGE INTO document_history KEY (ID) VALUES (?, ?, ?, ?, ?);";
+	}
+
+	@Override
+	protected void prepareStatetmentForUpdate(History t, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, t.getId());
+		statement.setLong(2, t.getDocumentId());
+		statement.setString(3, t.getFiles());
+		statement.setString(4, t.getName());
+		statement.setTimestamp(5, Timestamp.valueOf(t.getTimestamp()));
+	}
 
 }

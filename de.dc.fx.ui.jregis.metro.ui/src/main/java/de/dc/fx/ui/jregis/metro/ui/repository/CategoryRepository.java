@@ -4,10 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 
-public class CategoryRepository extends BaseRepository<Category>{
+public class CategoryRepository extends BaseRepository<Category> {
 
 	@Override
 	protected Category map(ResultSet resultSet) throws SQLException {
@@ -20,7 +21,7 @@ public class CategoryRepository extends BaseRepository<Category>{
 
 	@Override
 	protected String findByIdStatement(int id) {
-		return "SELECT * FROM document_category WHERE document_category_id="+id;
+		return "SELECT * FROM document_category WHERE document_category_id=" + id;
 	}
 
 	@Override
@@ -39,5 +40,19 @@ public class CategoryRepository extends BaseRepository<Category>{
 		statement.setLong(2, c.getParentId());
 		statement.setTimestamp(3, Timestamp.valueOf(c.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(c.getUpdatedOn()));
+	}
+
+	@Override
+	protected String updateStatement() {
+		return "MERGE INTO document_category KEY (ID) VALUES (?, ?, ?, ?, ?);";
+	}
+
+	@Override
+	protected void prepareStatetmentForUpdate(Category c, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, c.getId());
+		statement.setString(2, c.getName());
+		statement.setLong(3, c.getParentId());
+		statement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+		statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
 	}
 }

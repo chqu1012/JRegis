@@ -99,16 +99,25 @@ public abstract class BaseRepository<T> {
 
 	protected abstract void prepareStatetmentForSave(T t, PreparedStatement statement) throws SQLException;
 
+	protected abstract String updateStatement();
+
+	protected abstract void prepareStatetmentForUpdate(T t, PreparedStatement statement) throws SQLException;
+
 	public String orderBy() {
 		return StringUtils.EMPTY;
 	}
 
 	public long save(T t) {
-		PreparedStatement statement;
+		PreparedStatement statement = null;
 		try {
 			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(saveStatement());
-			prepareStatetmentForSave(t, statement);
+			if (cachedList.contains(t)) {
+				statement = connection.prepareStatement(updateStatement());
+				prepareStatetmentForUpdate(t, statement);
+			}else {
+				statement = connection.prepareStatement(saveStatement());
+				prepareStatetmentForSave(t, statement);
+			}
 			statement.execute();
 
 			cachedList.add(t);
