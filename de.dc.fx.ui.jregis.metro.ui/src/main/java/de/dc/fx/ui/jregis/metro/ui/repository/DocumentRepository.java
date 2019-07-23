@@ -61,4 +61,14 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setString(6, "");
 		statement.setLong(7, t.getCategoryId());
 	}
+
+	@Override
+	protected String deleteStatement() {
+		return "DELETE FROM document WHERE id = ?";
+	}
+	
+	@Override
+	protected void prepapreStatementForDelete(Document t, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, t.getId());
+	}
 }

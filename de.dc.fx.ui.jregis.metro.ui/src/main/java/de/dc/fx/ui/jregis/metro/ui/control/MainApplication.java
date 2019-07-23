@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
@@ -46,6 +47,8 @@ public class MainApplication extends BaseMainApplication {
 	
 	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
 	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
+	
+	@Inject CategoryRepository categoryRepository;
 	
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -102,7 +105,7 @@ public class MainApplication extends BaseMainApplication {
 			
 			@Override
 			public Category fromString(String name) {
-				return new Category(-1, name, -1);
+				return new Category(name, -1);
 			}
 		});
 	}
@@ -227,6 +230,8 @@ public class MainApplication extends BaseMainApplication {
 			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
 			category.setId(newId);
 			masterCategoryData.add(category);
+			
+			comboBoxCategory.getSelectionModel().select(category);
 		});
 	}
 
@@ -236,17 +241,23 @@ public class MainApplication extends BaseMainApplication {
 		if (selection != null) {
 			DialogUtil.openInput("Edit Category", selection.getName(),"Edit Category", "", e->{
 				selection.setName(e);
-//				long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
+				long newId = categoryRepository.save(selection);
+				selection.setId(newId);
 				masterCategoryData.clear();
 				masterCategoryData.addAll(JRegisPlatform.getInstance(CategoryRepository.class).findAll());
+				comboBoxCategory.getSelectionModel().select(selection);
 			});
 		}
 	}
 
 	@Override
 	protected void onButtonRemoveCategoryAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		Category selection = comboBoxCategory.getSelectionModel().getSelectedItem();
+		if (selection != null) {
+			categoryRepository.delete(selection);
+			masterCategoryData.remove(selection);
+			comboBoxCategory.getSelectionModel().selectFirst();
+		}
 	}
 
 	@Override

@@ -14,10 +14,12 @@ public class HistoryRepository extends BaseRepository<History>{
 	protected History map(ResultSet resultSet) throws SQLException {
 		String name = resultSet.getString("NAME");
 		String files = resultSet.getString("FILES");
-		Long id= resultSet.getLong("DOCUMENT_HISTORY_ID");
+		Long id= resultSet.getLong("ID");
 		Long documentId= resultSet.getLong("DOCUMENT_ID");
 		LocalDateTime timestamp= resultSet.getTimestamp("TIMESTAMP").toLocalDateTime();
-		return new History(id,name, documentId, timestamp, files);
+		History history = new History(name, documentId, timestamp, files);
+		history.setId(id);
+		return history;
 	}
 
 	@Override
@@ -57,4 +59,13 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setTimestamp(5, Timestamp.valueOf(t.getTimestamp()));
 	}
 
+	@Override
+	protected String deleteStatement() {
+		return "DELETE FROM document_history WHERE id = ?";
+	}
+
+	@Override
+	protected void prepapreStatementForDelete(History t, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, t.getId());
+	}
 }

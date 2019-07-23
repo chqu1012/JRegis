@@ -11,7 +11,7 @@ public class JRegisMetroApplication extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = new MainApplication();
+		Parent root = JRegisPlatform.getInstance(MainApplication.class);
 		primaryStage.setScene(new Scene(root , 1200, 700));
 		primaryStage.show();
 	}

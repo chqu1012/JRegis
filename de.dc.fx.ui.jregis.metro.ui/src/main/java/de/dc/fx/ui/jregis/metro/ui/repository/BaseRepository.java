@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 
+import de.dc.fx.ui.jregis.metro.ui.model.IdElement;
+
 public abstract class BaseRepository<T> {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
@@ -96,17 +98,41 @@ public abstract class BaseRepository<T> {
 	protected abstract String findAllStatement();
 
 	protected abstract String saveStatement();
-
-	protected abstract void prepareStatetmentForSave(T t, PreparedStatement statement) throws SQLException;
+	
+	protected abstract String deleteStatement();
 
 	protected abstract String updateStatement();
 
+	protected abstract void prepareStatetmentForSave(T t, PreparedStatement statement) throws SQLException;
+
 	protected abstract void prepareStatetmentForUpdate(T t, PreparedStatement statement) throws SQLException;
 
+	protected abstract void prepapreStatementForDelete(T t, PreparedStatement statement) throws SQLException;
+	
 	public String orderBy() {
 		return StringUtils.EMPTY;
 	}
 
+	public void delete(T t) {
+		PreparedStatement statement = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
+			statement = connection.prepareStatement(deleteStatement());
+			prepapreStatementForDelete(t, statement);
+			statement.execute();
+			
+			cachedList.remove(t);
+		} catch (SQLException e) {
+			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
+			}
+		}
+	}
+	
 	public long save(T t) {
 		PreparedStatement statement = null;
 		try {
@@ -117,10 +143,9 @@ public abstract class BaseRepository<T> {
 			}else {
 				statement = connection.prepareStatement(saveStatement());
 				prepareStatetmentForSave(t, statement);
+				cachedList.add(t);
 			}
 			statement.execute();
-
-			cachedList.add(t);
 			
 			ResultSet rs = statement.getGeneratedKeys();
 			while (rs.next()) {

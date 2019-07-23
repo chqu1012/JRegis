@@ -4,9 +4,8 @@ import java.sql.Timestamp;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class Document {
+public class Document extends IdElement{
 
-	private long id;
 	private long categoryId;
 	private String name;
 	private String description;
@@ -17,8 +16,7 @@ public class Document {
 	public Document() {
 	}
 	
-	public Document(int id, int categoryId, String name, String description, Timestamp createdOn, Timestamp updatedOn) {
-		this.id = id;
+	public Document(int categoryId, String name, String description, Timestamp createdOn, Timestamp updatedOn) {
 		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
@@ -58,12 +56,6 @@ public class Document {
 		this.updatedOn = updatedOn;
 	}
 
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public long getCategoryId() {
 		return categoryId;
 	}

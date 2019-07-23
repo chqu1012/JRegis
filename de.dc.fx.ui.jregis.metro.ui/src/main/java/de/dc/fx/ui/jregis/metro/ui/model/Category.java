@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class Category {
+public class Category extends IdElement{
 
-	private long id;
 	private String name;
 	private long parentId;
 	private LocalDateTime createdOn;
@@ -20,8 +21,7 @@ public class Category {
 	public Category() {
 	}
 	
-	public Category(int id, String name, int parentId) {
-		this.id = id;
+	public Category(String name, int parentId) {
 		this.name = name;
 		this.parentId = parentId;
 	}
@@ -65,12 +65,6 @@ public class Category {
 		this.children = children;
 	}
 
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -87,5 +81,15 @@ public class Category {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

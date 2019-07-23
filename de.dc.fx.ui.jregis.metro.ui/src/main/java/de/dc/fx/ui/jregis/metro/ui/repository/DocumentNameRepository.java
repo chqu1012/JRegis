@@ -41,4 +41,13 @@ public class DocumentNameRepository extends BaseRepository<String>{
 		statement.setString(1, t);
 	}
 
+	@Override
+	protected String deleteStatement() {
+		return "DELETE FROM document_name_suggestion WHERE name = ?";
+	}
+
+	@Override
+	protected void prepapreStatementForDelete(String t, PreparedStatement statement) throws SQLException {
+		statement.setString(1, t);
+	}
 }

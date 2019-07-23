@@ -2,9 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.model;
 
 import java.time.LocalDateTime;
 
-public class History {
-
-	private Long id;
+public class History extends IdElement{
 
 	private String name;
 
@@ -25,8 +23,7 @@ public class History {
 		this.timestamp = timeestamp;
 	}
 
-	public History(Long id, String name, Long documentId, LocalDateTime timeestamp, String files) {
-		this.id = id;
+	public History(String name, Long documentId, LocalDateTime timeestamp, String files) {
 		this.name = name;
 		this.documentId = documentId;
 		this.timestamp = timeestamp;
@@ -63,14 +60,6 @@ public class History {
 
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {

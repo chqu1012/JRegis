@@ -55,4 +55,14 @@ public class CategoryRepository extends BaseRepository<Category> {
 		statement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
 		statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
 	}
+
+	@Override
+	protected String deleteStatement() {
+		return "DELETE FROM document_category WHERE id = ?";
+	}
+
+	@Override
+	protected void prepapreStatementForDelete(Category t, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, t.getId());
+	}
 }
