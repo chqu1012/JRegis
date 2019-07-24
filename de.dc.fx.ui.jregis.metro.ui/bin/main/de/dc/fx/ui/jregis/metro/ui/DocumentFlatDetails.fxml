@@ -1,84 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1000.0" style="-fx-background-color: #FAFBFE;">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
-            <Label layoutX="20.0" layoutY="23.0" text="Document Details" textFill="#b9b9b9">
+            <Label layoutX="20.0" layoutY="23.0" text="DOCUMENT DETAILS" textFill="#b9b9b9" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="37.0" layoutY="68.0" prefHeight="430.0" prefWidth="521.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
+            <AnchorPane layoutX="40.0" layoutY="78.0" prefHeight="275.0" prefWidth="580.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="75.0">
                <children>
-                  <Label layoutX="21.0" layoutY="11.0" text="A small description placed on this" textFill="#a4a4a4">
+                  <Label fx:id="labelDocumentName" layoutX="21.0" layoutY="11.0" text="A small description placed on this" textFill="#a4a4a4">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="21.0" layoutY="46.0" prefHeight="19.0" prefWidth="59.0" style="-fx-background-color: #A6A7A9; -fx-background-radius: 5;" text="ID-000001" textFill="WHITE">
+                  <Label fx:id="labelDocumentId" alignment="CENTER" layoutX="21.0" layoutY="33.0" prefHeight="19.0" prefWidth="59.0" style="-fx-background-color: #A6A7A9; -fx-background-radius: 5;" text="ID-000001" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label layoutX="21.0" layoutY="95.0" text="Document Description:" textFill="#a4a4a4">
+                  <Label layoutX="21.0" layoutY="69.0" text="Document Description:" textFill="#a4a4a4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_LEFT" layoutX="25.0" layoutY="117.0" prefHeight="190.0" prefWidth="476.0" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." wrapText="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0" />
-                  <Label layoutX="25.0" layoutY="314.0" text="Created On:" textFill="#a4a4a4">
+                  <Label fx:id="labelDocumentDescription" alignment="TOP_LEFT" layoutX="23.0" layoutY="86.0" prefHeight="129.0" prefWidth="535.0" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." wrapText="true" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="22.0" />
+                  <Label layoutX="25.0" layoutY="225.0" text="Created On:" textFill="#a4a4a4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="191.0" layoutY="314.0" text="Updated On:" textFill="#a4a4a4">
+                  <Label layoutX="191.0" layoutY="225.0" text="Updated On:" textFill="#a4a4a4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="314.0" text="Created By:" textFill="#a4a4a4">
+                  <Label layoutX="355.0" layoutY="225.0" text="Created By:" textFill="#a4a4a4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="25.0" layoutY="339.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
-                  <Label layoutX="191.0" layoutY="339.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
-                  <Label layoutX="355.0" layoutY="339.0" text="Max Mustermann" textFill="#a4a4a4" />
+                  <Label fx:id="labelCreatedOn" layoutX="28.0" layoutY="242.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
+                  <Label fx:id="labelUpdatedOn" layoutX="191.0" layoutY="242.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
+                  <Label fx:id="labelEditor" layoutX="355.0" layoutY="242.0" text="Max Mustermann" textFill="#a4a4a4" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="594.0" layoutY="68.0" prefHeight="429.0" prefWidth="358.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+            <AnchorPane layoutX="594.0" layoutY="68.0" prefHeight="275.0" prefWidth="358.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
                <children>
                   <Label layoutX="21.0" layoutY="8.0" text="History" textFill="#a4a4a4">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="37.0" layoutY="520.0" prefHeight="666.0" prefWidth="521.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="515.0">
+            <AnchorPane layoutX="37.0" layoutY="364.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="365.0">
                <children>
                   <Label layoutX="21.0" layoutY="11.0" text="Comments" textFill="#a4a4a4">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="124.0" layoutY="11.0" text="(100)" textFill="#a4a4a4">
+                  <Label layoutX="95.0" layoutY="11.0" text="(100)" textFill="#a4a4a4">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="24.0" layoutY="46.0" prefHeight="95.0" prefWidth="473.0" />
+                  <TextArea fx:id="textAreaComment" layoutX="21.0" layoutY="37.0" prefHeight="95.0" prefWidth="538.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                  <VBox fx:id="vboxComment" layoutX="21.0" layoutY="143.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </AnchorPane>
+            <Label layoutX="15.0" layoutY="40.0" text="All corresponding information about that document will be shown on this page.. This is separated in different sections." />
+            <AnchorPane layoutX="622.0" layoutY="367.0" prefHeight="425.0" prefWidth="358.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="365.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="8.0" text="Files" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
       </AnchorPane>
    </content>
-</ScrollPane>
+</fx:root>

@@ -44,11 +44,14 @@ public class MainApplication extends BaseMainApplication {
 	
 	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
 	private DocumentDetails documentDetails = new DocumentDetails();
+	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	
 	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
 	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
 	
 	@Inject CategoryRepository categoryRepository;
+	
+	
 	
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -71,6 +74,7 @@ public class MainApplication extends BaseMainApplication {
 		initBindings();
 		
 		mainStackPane.getChildren().add(documentDetails);
+		mainStackPane.getChildren().add(documentFlatDetails);
 		paneDocumentTableView.toFront();
 	}
 
@@ -188,8 +192,8 @@ public class MainApplication extends BaseMainApplication {
 		if (event.getClickCount()==2) {
 			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 			if (selection!=null) {
-				documentDetails.toFront();
-				documentDetails.setDocument(selection);
+				documentFlatDetails.toFront();
+//				documentDetails.setDocument(selection);
 			}
 		}
 	}
