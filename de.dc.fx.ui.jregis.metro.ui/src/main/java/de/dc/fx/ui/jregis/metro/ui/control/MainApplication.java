@@ -22,6 +22,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -140,6 +141,7 @@ public class MainApplication extends BaseMainApplication {
 
 	private void initBindings() {
 		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
+		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries", Bindings.size(filteredDocumentData), Bindings.size(masterDocumentData)));
 	}
 
 	@Override
