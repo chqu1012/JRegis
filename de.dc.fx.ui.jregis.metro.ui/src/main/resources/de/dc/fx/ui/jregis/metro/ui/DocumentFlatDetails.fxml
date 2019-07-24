@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1000.0" style="-fx-background-color: #FAFBFE;">
+         <children>
+            <Label layoutX="20.0" layoutY="23.0" text="Document Details" textFill="#b9b9b9">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="37.0" layoutY="68.0" prefHeight="430.0" prefWidth="521.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" text="A small description placed on this" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="21.0" layoutY="46.0" prefHeight="19.0" prefWidth="59.0" style="-fx-background-color: #A6A7A9; -fx-background-radius: 5;" text="ID-000001" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="95.0" text="Document Description:" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" layoutX="25.0" layoutY="117.0" prefHeight="190.0" prefWidth="476.0" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." wrapText="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0" />
+                  <Label layoutX="25.0" layoutY="314.0" text="Created On:" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="191.0" layoutY="314.0" text="Updated On:" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="355.0" layoutY="314.0" text="Created By:" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="339.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
+                  <Label layoutX="191.0" layoutY="339.0" text="12-12-2019 13:15 Uhr" textFill="#a4a4a4" />
+                  <Label layoutX="355.0" layoutY="339.0" text="Max Mustermann" textFill="#a4a4a4" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="594.0" layoutY="68.0" prefHeight="429.0" prefWidth="358.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="8.0" text="History" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="37.0" layoutY="520.0" prefHeight="666.0" prefWidth="521.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="515.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" text="Comments" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="124.0" layoutY="11.0" text="(100)" textFill="#a4a4a4">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextArea layoutX="24.0" layoutY="46.0" prefHeight="95.0" prefWidth="473.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
