@@ -1,12 +1,16 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 
 public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
+	
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/DocumentFlatDetails.fxml"));
 		fxmlLoader.setRoot(this);
@@ -15,11 +19,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		try {
 			fxmlLoader.load();
 		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		}
-		
-		for (int i = 0; i < 20; i++) {
-			vboxComment.getChildren().add(new Button("It is a small Button on my side!"));
+			log.log(Level.SEVERE, "Failed to load fxml ", exception);
 		}
 	}
+
+	@Override
+	protected void onLinkBackAction(ActionEvent event) {
+		root.toBack();
+	}
+	
+	
 }

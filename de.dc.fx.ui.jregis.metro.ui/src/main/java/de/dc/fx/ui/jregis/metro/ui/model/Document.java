@@ -1,11 +1,14 @@
 package de.dc.fx.ui.jregis.metro.ui.model;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Document extends IdElement{
 
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
 	private long categoryId;
 	private String name;
 	private String description;
@@ -43,11 +46,19 @@ public class Document extends IdElement{
 	public Timestamp getCreatedOn() {
 		return createdOn;
 	}
+	
+	public String getCreatedOnString() {
+		return createdOn.toLocalDateTime().format(formatter);
+	}
 
 	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
+	public String getUpdatedOnString() {
+		return updatedOn.toLocalDateTime().format(formatter);
+	}
+	
 	public Timestamp getUpdatedOn() {
 		return updatedOn;
 	}

@@ -3,6 +3,7 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -50,8 +51,6 @@ public class MainApplication extends BaseMainApplication {
 	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
 	
 	@Inject CategoryRepository categoryRepository;
-	
-	
 	
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -117,8 +116,8 @@ public class MainApplication extends BaseMainApplication {
 	private void initTableView() {
 		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(e.getId()));
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
-		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOn()));
-		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOn()));
+		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnString()));
+		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnString()));
 		columnCategory.setCellValueFactory(param -> {
 			long id = param.getValue().getCategoryId();
 			Optional<Category> category = JRegisPlatform.getInstance(CategoryRepository.class).findById(id);

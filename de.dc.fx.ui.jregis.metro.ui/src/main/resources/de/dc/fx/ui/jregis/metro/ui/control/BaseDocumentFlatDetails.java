@@ -1,4 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,9 @@ import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane{
 
+	@FXML
+	protected ScrollPane root;
+	
     @FXML
     protected Label labelDocumentName;
 
@@ -26,9 +30,18 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane{
     protected Label labelEditor;
 
     @FXML
+    protected Label labelFilesCount;
+
+    @FXML
     protected TextArea textAreaComment;
 
     @FXML
     protected VBox vboxComment;
+
+    @FXML
+    protected VBox vboxFiles;
+    
+    @FXML
+    protected abstract void onLinkBackAction(ActionEvent event);
 
 }
