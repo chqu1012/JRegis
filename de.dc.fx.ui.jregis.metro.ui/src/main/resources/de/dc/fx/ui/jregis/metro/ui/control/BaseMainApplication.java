@@ -13,7 +13,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public abstract class BaseMainApplication extends BorderPane{
@@ -43,14 +45,14 @@ public abstract class BaseMainApplication extends BorderPane{
     protected StackPane mainStackPane;
 
     @FXML
-    protected BorderPane paneDocumentTableView;
+    protected HBox paneDocumentTableView;
 
     @FXML
     protected BorderPane main;
 
     @FXML
-    protected BorderPane paneAddDocument;
-
+    protected AnchorPane paneAddNewDocument;
+    
     @FXML
     protected BorderPane paneOverview;
 

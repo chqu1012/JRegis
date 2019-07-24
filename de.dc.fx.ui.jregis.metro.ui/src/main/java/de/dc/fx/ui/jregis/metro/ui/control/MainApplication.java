@@ -171,7 +171,6 @@ public class MainApplication extends BaseMainApplication {
 	protected void onMenuItemNewDocumentAction(ActionEvent event) {
 		textCreatedOn.setText(LocalDateTime.now().toString());
 		comboBoxCategory.getSelectionModel().selectFirst();
-		paneAddDocument.toFront();
 	}
 
 	@Override
@@ -197,7 +196,6 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonCancelAction(ActionEvent event) {
-		paneAddDocument.toBack();
 	}
 
 	@Override
@@ -217,7 +215,6 @@ public class MainApplication extends BaseMainApplication {
 		long newDocumentId = JRegisPlatform.getInstance(DocumentRepository.class).save(document);
 		document.setId(newDocumentId);
 		masterDocumentData.add(document);
-		paneAddDocument.toBack();
 	}
 
 	@Override

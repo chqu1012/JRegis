@@ -45,7 +45,7 @@
 .table-view .column-header .label{
     -fx-text-fill: text_color;
     -fx-font-family: "Segoe UI SemiBold";
-    -fx-font-size: 1.166667em;  /* 14 */
+    -fx-font-size: 10;
     -fx-alignment: center-left;
 
     -fx-padding: 0.666666em 2em 0.666666em 2em;

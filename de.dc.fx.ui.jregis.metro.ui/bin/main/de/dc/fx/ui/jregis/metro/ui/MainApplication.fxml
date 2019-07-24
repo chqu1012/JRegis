@@ -23,82 +23,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" prefWidth="1200.0" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane>
          <center>
-            <StackPane fx:id="mainStackPane">
+            <StackPane fx:id="mainStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
-                  <BorderPane fx:id="paneAddDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
-                     <center>
-                        <AnchorPane maxHeight="504.0" maxWidth="600.0" prefHeight="504.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" style="-fx-background-color: #55A6DD;" text="Add new Document" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <TextField fx:id="textDocumentId" disable="true" layoutX="76.0" layoutY="77.0" prefHeight="25.0" prefWidth="464.0" promptText="Document ID" />
-                              <Label layoutX="76.0" layoutY="62.0" text="DOCUMENT ID">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="textDocumentName" layoutX="76.0" layoutY="130.0" prefHeight="25.0" prefWidth="413.0" promptText="Document Name" />
-                              <Label layoutX="76.0" layoutY="115.0" text="DOCUMENT NAME">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="textUrl" layoutX="76.0" layoutY="233.0" prefHeight="25.0" prefWidth="465.0" />
-                              <Label layoutX="76.0" layoutY="218.0" text="URL">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="76.0" layoutY="168.0" text="CATEGORY">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <HBox layoutX="75.0" layoutY="182.0" spacing="5.0">
-                                 <children>
-                                    <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0" />
-                                    <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
-                                    <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
-                                    <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
-                                 </children>
-                              </HBox>
-                              <TextField fx:id="textCreatedOn" disable="true" editable="false" layoutX="76.0" layoutY="364.0" prefHeight="25.0" prefWidth="464.0" />
-                              <Label layoutX="76.0" layoutY="349.0" text="CREATED ON">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <TextArea fx:id="textDescription" layoutX="76.0" layoutY="282.0" prefHeight="59.0" prefWidth="465.0" promptText="Description" />
-                              <Label layoutX="76.0" layoutY="267.0" text="DESCRIPTION">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="458.0" layoutY="446.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" />
-                              <Hyperlink layoutX="411.0" layoutY="447.0" onAction="#onButtonCancelAction" text="Cancel" />
-                              <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="495.0" layoutY="130.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" />
-                           </children>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </AnchorPane>
-                     </center>
-                  </BorderPane>
-                  <BorderPane fx:id="paneOverview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+                  <BorderPane fx:id="paneOverview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
                      <center>
                         <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
                           <content>
-                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1200.0" />
+                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" />
                           </content>
                         </ScrollPane>
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="paneLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
+                  <BorderPane fx:id="paneLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #E6EAED; -fx-background-radius: 10;">
                      <center>
-                        <AnchorPane maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                        <AnchorPane maxHeight="600.0" maxWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" style="-fx-background-color: #55A6DD;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               <TextField fx:id="textUsername" layoutX="160.0" layoutY="337.0" prefHeight="25.0" prefWidth="280.0" promptText="Username" />
@@ -128,21 +70,18 @@
                         </AnchorPane>
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="paneDocumentTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;">
-                     <center>
-                        <BorderPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                           <center>
-                              <TableView fx:id="tableViewDocument" onMouseClicked="#onTableViewDocumentClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/MetroTableView.css" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+                  <HBox fx:id="paneDocumentTableView" spacing="20.0" style="-fx-background-color: #E6EAED;">
+                     <children>
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TableView fx:id="tableViewDocument" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onTableViewDocumentClicked" prefHeight="471.0" prefWidth="739.0" stylesheets="@css/MetroTableView.css" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
                                 <columns>
                                   <TableColumn fx:id="columnId" prefWidth="95.0" text="#ID" />
-                                  <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="480.0" prefWidth="480.0" text="#NAME" />
-                                    <TableColumn fx:id="columnCategory" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="223.0" text="#CATEGORY" />
-                                    <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="223.0" text="#CREATED" />
-                                    <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="223.0" text="#UPDATE" />
+                                  <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="188.0" prefWidth="188.0" text="#NAME" />
+                                    <TableColumn fx:id="columnCategory" maxWidth="1.7976931348623157E308" minWidth="148.0" prefWidth="162.0" text="#CATEGORY" />
+                                    <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="151.0" text="#CREATED" />
+                                    <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="154.0" text="#UPDATE" />
                                 </columns>
-                                 <BorderPane.margin>
-                                    <Insets />
-                                 </BorderPane.margin>
                                  <contextMenu>
                                     <ContextMenu>
                                       <items>
@@ -154,39 +93,120 @@
                                     </ContextMenu>
                                  </contextMenu>
                               </TableView>
-                           </center>
-                        </BorderPane>
-                     </center>
-                  </BorderPane>
+                              <Label layoutX="23.0" layoutY="14.0" text="DOCUMENT TABLEVIEW" textFill="#727272" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_LEFT" layoutX="30.0" layoutY="41.0" prefHeight="63.0" prefWidth="729.0" text="All inserted document with attachments will shows in the table view. Documents can sorted by their attributes. Futher the user can combined the search by right clicking on the columns to accept the filter." textFill="#9e9a9a" wrapText="true" />
+                              <TextField layoutX="570.0" layoutY="85.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="20.0" />
+                              <Label layoutX="506.0" layoutY="89.0" text="Search:" AnchorPane.rightAnchor="215.0" />
+                              <Label layoutX="14.0" layoutY="583.0" prefHeight="17.0" prefWidth="165.0" text="Showing 1 of 100 entries" textFill="#727272" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="paneAddNewDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;">
+                           <children>
+                              <TextField fx:id="textDocumentId" disable="true" layoutX="15.0" layoutY="99.0" prefHeight="25.0" prefWidth="239.0" promptText="Document ID" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="84.0" text="DOCUMENT ID" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="textDocumentName" layoutX="15.0" layoutY="146.0" prefHeight="25.0" prefWidth="190.0" promptText="Document Name" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="70.0" />
+                              <Label layoutX="15.0" layoutY="131.0" text="DOCUMENT NAME" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="textUrl" layoutX="15.0" layoutY="248.0" prefHeight="25.0" prefWidth="243.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="233.0" text="URL" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="184.0" text="CATEGORY" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <HBox layoutX="15.0" layoutY="198.0" prefHeight="25.0" prefWidth="245.0" spacing="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0" />
+                                    <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
+                                    <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
+                                    <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="textCreatedOn" disable="true" editable="false" layoutX="15.0" layoutY="395.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="380.0" text="CREATED ON" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="textDescription" layoutX="15.0" layoutY="301.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="286.0" text="DESCRIPTION" AnchorPane.leftAnchor="15.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
+                              <Hyperlink layoutX="182.0" layoutY="434.0" onAction="#onButtonCancelAction" text="Cancel" AnchorPane.rightAnchor="124.0" />
+                              <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="291.0" layoutY="146.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="17.0" layoutY="9.0" text="ADD DOCUMENT FORMULAR" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="39.0" text="Section to create a document entry with all madatory fields. Document id will automatically generated." textFill="#9e9a9a" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
                </children>
             </StackPane>
          </center>
          <top>
-            <HBox prefHeight="45.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" style="-fx-background-color: #254962;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField prefHeight="34.0" prefWidth="266.0" promptText="Search...">
+                  <TextField prefHeight="25.0" prefWidth="238.0" promptText="Search..." style="-fx-background-color: #386E93; -fx-text-fill: white;">
                      <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
                <effect>
-                  <DropShadow height="11.0" radius="2.25" width="0.0" />
+                  <DropShadow height="6.17" radius="1.8449999999999998" width="3.21" />
                </effect>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </HBox>
          </top>
       </BorderPane>
    </center>
    <left>
-      <VBox prefHeight="700.0" prefWidth="253.0" style="-fx-background-color: #3498DB;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="700.0" prefWidth="253.0" style="-fx-background-color: #1C3749;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="253.0" text="JREGIS APP" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="A better way to manage documents..." textFill="WHITE" />
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="A better way to manage documents." textFill="WHITE" />
          </children>
+         <effect>
+            <DropShadow height="0.0" radius="0.0" width="0.0" />
+         </effect>
       </VBox>
    </left>
 </fx:root>
