@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.controlsfx.control.Notifications;
+
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
@@ -56,9 +58,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonSubmitComment(ActionEvent event) {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
-
+		
 		History history = new History(comment, document.getId(), LocalDateTime.now());
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+		
+		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
+		
+		addHistory(history);
 	}
 
 }
