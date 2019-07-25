@@ -16,7 +16,7 @@ public class HistoryRepository extends BaseRepository<History>{
 		String files = resultSet.getString("FILES");
 		Long id= resultSet.getLong("ID");
 		Long documentId= resultSet.getLong("DOCUMENT_ID");
-		LocalDateTime timestamp= resultSet.getTimestamp("TIMESTAMP").toLocalDateTime();
+		LocalDateTime timestamp= resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		History history = new History(name, documentId, timestamp, files);
 		history.setId(id);
 		return history;
@@ -34,7 +34,7 @@ public class HistoryRepository extends BaseRepository<History>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document_history (document_id, files, name, timestamp) VALUES (?,?,?,?);";
+		return "INSERT INTO document_history (document_id, files, name, created_on) VALUES (?,?,?,?);";
 	}
 
 	@Override
