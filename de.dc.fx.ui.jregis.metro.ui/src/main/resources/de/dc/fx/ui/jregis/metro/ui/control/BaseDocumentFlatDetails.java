@@ -1,13 +1,18 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
+import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane{
 
+	@FXML
+	protected ListView<Attachment> listViewFiles;
+	
 	@FXML
 	protected ScrollPane root;
 	
@@ -43,5 +48,8 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane{
     
     @FXML
     protected abstract void onLinkBackAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonSubmitComment(ActionEvent event);
 
 }

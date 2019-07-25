@@ -70,9 +70,9 @@
                         </AnchorPane>
                      </center>
                   </BorderPane>
-                  <HBox fx:id="paneDocumentTableView" spacing="20.0" style="-fx-background-color: #E6EAED;">
+                  <AnchorPane fx:id="paneDocumentTableView" style="-fx-background-color: #DBDFE2;">
                      <children>
-                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" HBox.hgrow="ALWAYS">
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="80.0">
                            <children>
                               <TableView fx:id="tableViewDocument" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onTableViewDocumentClicked" prefHeight="471.0" prefWidth="739.0" stylesheets="@css/MetroTableView.css" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
                                 <columns>
@@ -108,7 +108,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="paneAddNewDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;">
+                        <AnchorPane fx:id="paneAddNewDocument" layoutX="779.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
                            <children>
                               <TextField fx:id="textDocumentId" disable="true" layoutX="15.0" layoutY="99.0" prefHeight="25.0" prefWidth="239.0" promptText="Document ID" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
                               <Label layoutX="15.0" layoutY="84.0" text="DOCUMENT ID" AnchorPane.leftAnchor="15.0">
@@ -164,14 +164,14 @@
                               <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="39.0" text="Section to create a document entry with all madatory fields. Document id will automatically generated." textFill="#9e9a9a" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
                            </children>
                         </AnchorPane>
+                        <Label layoutX="20.0" layoutY="14.0" text="DOCUMENT OVERVIEW" textFill="#838383">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="34.0" text="Main view to manage all included documents." textFill="#8a8a8a" />
                      </children>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
+                  </AnchorPane>
                </children>
             </StackPane>
          </center>

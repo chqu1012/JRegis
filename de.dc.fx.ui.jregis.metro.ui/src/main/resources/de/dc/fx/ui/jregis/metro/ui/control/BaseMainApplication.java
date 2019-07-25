@@ -49,7 +49,7 @@ public abstract class BaseMainApplication extends BorderPane{
     protected StackPane mainStackPane;
 
     @FXML
-    protected HBox paneDocumentTableView;
+    protected AnchorPane paneDocumentTableView;
 
     @FXML
     protected BorderPane main;
