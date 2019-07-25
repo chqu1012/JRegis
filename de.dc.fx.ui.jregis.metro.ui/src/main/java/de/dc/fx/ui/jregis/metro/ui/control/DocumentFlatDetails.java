@@ -45,11 +45,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	public void setSelection(Document document) {
 		this.document = document;
 		vboxComment.getChildren().clear();
-        vboxComment.getChildren().add(vboxCommentEditBox);
-        
+		vboxComment.getChildren().add(vboxCommentEditBox);
+
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
-		
+
 		root.requestFocus();
 	}
 
@@ -71,12 +71,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonSubmitComment(ActionEvent event) {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
-		
+
 		History history = new History(comment, document.getId(), LocalDateTime.now());
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
-		
+
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
-		
+
 		addHistory(history);
 	}
 
@@ -84,10 +84,15 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonAttachmentsAction(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
 		List<File> files = chooser.showOpenMultipleDialog(new Stage());
-		if (files!=null) {
+		if (files != null) {
 			flowPaneFiles.getChildren().clear();
-			files.stream().forEach(e->flowPaneFiles.getChildren().add(new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())))));
-		}		
+			files.stream().forEach(e -> flowPaneFiles.getChildren()
+					.add(new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())))));
+		}
+
+		if (textAreaComment.getText().isEmpty()) {
+			textAreaComment.setText("Attached files from os.");
+		}
 	}
 
 	@Override
