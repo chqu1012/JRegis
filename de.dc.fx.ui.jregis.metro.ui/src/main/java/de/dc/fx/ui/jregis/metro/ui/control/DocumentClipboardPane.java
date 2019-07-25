@@ -73,7 +73,7 @@ public class DocumentClipboardPane extends BaseDocumentClipboardPane{
 		Notifications.create().title("Clipboard Notification").text("Save image to destination path: " + destinationPath + "/" + name).showInformation();	
 		
 		String message = transactionMessageText.getText();
-		History history = new History(message, selection.getId(), LocalDateTime.now());
+		History history = new History(message, selection.getId(), LocalDateTime.now(), LocalDateTime.now(), "");
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 		
 		documentClipboardPane.toBack();

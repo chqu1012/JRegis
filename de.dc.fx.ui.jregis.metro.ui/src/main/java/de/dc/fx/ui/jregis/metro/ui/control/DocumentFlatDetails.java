@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,7 +73,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
 
-		History history = new History(comment, document.getId(), LocalDateTime.now());
+		Optional<String> files = flowPaneFiles.getChildren().stream().map(e->((Hyperlink)e).getText()).reduce((s1,s2)->s1+","+s2);
+		String fileNames = files.isPresent()? files.get() : "";
+		
+		History history = new History(comment, document.getId(), LocalDateTime.now(), LocalDateTime.now(), fileNames);
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();

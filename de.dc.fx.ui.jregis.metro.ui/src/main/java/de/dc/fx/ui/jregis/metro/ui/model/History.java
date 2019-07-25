@@ -2,36 +2,49 @@ package de.dc.fx.ui.jregis.metro.ui.model;
 
 import java.time.LocalDateTime;
 
-public class History extends IdElement{
+public class History extends IdElement {
 
 	private String name;
 
 	private Long documentId;
 
-	private LocalDateTime timestamp;
+	private LocalDateTime createdOn;
+	
+	private LocalDateTime updatedOn;
 
 	private String files;
-	
+
 	private Document document;
 
 	public History() {
 	}
-	
-	public History(String name, Long documentId, LocalDateTime timeestamp) {
-		this.name = name;
-		this.documentId = documentId;
-		this.timestamp = timeestamp;
-	}
 
-	public History(String name, Long documentId, LocalDateTime timeestamp, String files) {
+	public History(String name, Long documentId, LocalDateTime createdOn, LocalDateTime updatedOn, String files) {
 		this.name = name;
 		this.documentId = documentId;
-		this.timestamp = timeestamp;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 		this.files = files;
 	}
 
 	public Document getDocument() {
 		return document;
+	}
+
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public void setDocument(Document document) {
@@ -52,14 +65,6 @@ public class History extends IdElement{
 
 	public void setFiles(String files) {
 		this.files = files;
-	}
-
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
 	}
 
 	public String getName() {

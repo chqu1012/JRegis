@@ -16,8 +16,9 @@ public class HistoryRepository extends BaseRepository<History>{
 		String files = resultSet.getString("FILES");
 		Long id= resultSet.getLong("ID");
 		Long documentId= resultSet.getLong("DOCUMENT_ID");
-		LocalDateTime timestamp= resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
-		History history = new History(name, documentId, timestamp, files);
+		LocalDateTime createdOn= resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
+		LocalDateTime updatedOn= resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		History history = new History(name, documentId, createdOn, updatedOn, files);
 		history.setId(id);
 		return history;
 	}
@@ -34,7 +35,7 @@ public class HistoryRepository extends BaseRepository<History>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document_history (document_id, files, name, created_on) VALUES (?,?,?,?);";
+		return "INSERT INTO document_history (document_id, files, name, created_on, updated_on) VALUES (?,?,?,?,?);";
 	}
 
 	@Override
@@ -42,12 +43,13 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setLong(1, t.getDocumentId());
 		statement.setString(2, t.getFiles());
 		statement.setString(3, t.getName());
-		statement.setTimestamp(4, Timestamp.valueOf(t.getTimestamp()));
+		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 	
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO document_history KEY (ID) VALUES (?, ?, ?, ?, ?);";
+		return "MERGE INTO document_history KEY (ID) VALUES (?, ?, ?, ?, ?, ?);";
 	}
 
 	@Override
@@ -56,7 +58,8 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setLong(2, t.getDocumentId());
 		statement.setString(3, t.getFiles());
 		statement.setString(4, t.getName());
-		statement.setTimestamp(5, Timestamp.valueOf(t.getTimestamp()));
+		statement.setTimestamp(5, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
 	}
 
 	@Override

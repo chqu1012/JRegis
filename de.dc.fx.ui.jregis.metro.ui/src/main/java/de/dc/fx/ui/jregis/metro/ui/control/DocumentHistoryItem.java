@@ -44,7 +44,7 @@ public class DocumentHistoryItem extends AnchorPane {
 	}
 
 	public void setHistory(History history, Consumer<String> executer) {
-		createdTimestamp.setText(history.getTimestamp().toString());
+		createdTimestamp.setText(history.getCreatedOn().toString());
 		message.setText(history.getName());
 		if (history.getFiles()!=null) {
 			String[] files = history.getFiles().split(",");
