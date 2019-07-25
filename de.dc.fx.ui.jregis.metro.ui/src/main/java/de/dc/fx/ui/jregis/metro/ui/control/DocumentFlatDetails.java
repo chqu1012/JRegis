@@ -1,5 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,9 @@ import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Hyperlink;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
@@ -69,8 +73,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onButtonAttachmentsAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		FileChooser chooser = new FileChooser();
+		List<File> files = chooser.showOpenMultipleDialog(new Stage());
+		if (files!=null) {
+			flowPaneFiles.getChildren().clear();
+			files.stream().forEach(e->flowPaneFiles.getChildren().add(new Hyperlink(e.getName())));
+		}		
 	}
 
 }

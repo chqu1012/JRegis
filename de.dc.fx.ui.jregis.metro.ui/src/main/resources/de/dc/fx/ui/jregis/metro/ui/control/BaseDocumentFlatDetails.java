@@ -6,10 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane{
 
+	@FXML
+	protected FlowPane flowPaneFiles;
+	
 	@FXML
 	protected ListView<Attachment> listViewFiles;
 	
