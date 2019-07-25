@@ -20,8 +20,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -51,6 +54,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
 
+		labelCreatedOn.setText(document.getCreatedOnString());
+		labelUpdatedOn.setText(document.getUpdatedOnString());
+		labelDocumentDescription.setText(document.getDescription());
+		labelDocumentName.setText(document.getName());
+		labelDocumentId.setText(String.format("JREG-%05d", document.getId()));
+		
 		root.requestFocus();
 	}
 
@@ -104,5 +113,36 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		if (e.getCode().equals(KeyCode.ESCAPE)) {
 			root.toBack();
 		}
+	}
+	
+	@Override
+	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
+		Dragboard db = event.getDragboard();
+		boolean success = false;
+		if (db.hasFiles() && document!=null) {
+//			DialogUtil.openInput("Transaction Message Dialog", "Dragged files.", "Dragged Files into document folder.", "Dragged Files into document folder.", message ->{
+//				populateFilesData(db.getFiles());
+//				String fileNames = db.getFiles().stream().map(e->e.getName()).reduce("", ( s1, s2 ) -> (s1.isEmpty()) ? s2 : s1 + "," + s2 );
+//				DocumentHistory history = historyList.createNewHistoryFile(selection, fileNames, message);
+//				documentHistoryRepository.save(history);
+//			});
+			success = true;
+			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
+			files.ifPresent(s->Notifications.create().title("Clipboard Notification").text("Import file(s): " + s + " sucessfully!").darkStyle().showInformation());
+		}
+		labelDraggingFilesArea.getStyleClass().clear();
+		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
+		event.setDropCompleted(success);
+		event.consume();		
+	}
+
+	@Override
+	protected void onVBoxDraggingFileBoxDragOver(DragEvent event) {
+		labelDraggingFilesArea.getStyleClass().clear();
+		labelDraggingFilesArea.getStyleClass().add("dragged-file-label-dragged");
+		if (event.getDragboard().hasFiles()) {
+			event.acceptTransferModes(TransferMode.COPY);
+		}
+		event.consume();		
 	}
 }
