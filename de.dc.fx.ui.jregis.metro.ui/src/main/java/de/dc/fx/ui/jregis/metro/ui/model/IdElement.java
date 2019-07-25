@@ -7,13 +7,13 @@ public class IdElement {
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	
-	private long id;
+	protected long id;
 
-	private String name;
+	protected String name;
 
-	private LocalDateTime createdOn;
+	protected LocalDateTime createdOn;
 
-	private LocalDateTime updatedOn;
+	protected LocalDateTime updatedOn;
 	
 	public IdElement(String name, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.name = name;

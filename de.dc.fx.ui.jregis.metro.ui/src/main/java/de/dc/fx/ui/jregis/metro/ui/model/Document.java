@@ -12,8 +12,19 @@ public class Document extends IdElement{
 	private String description;
 	private String url;
 	
-	public Document(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long categoryId, String description,
+	
+	
+	public Document(int id, String name, LocalDateTime createdOn, LocalDateTime updatedOn, long categoryId, String description,
 			String url) {
+		super(name, createdOn, updatedOn);
+		this.categoryId = categoryId;
+		this.description = description;
+		this.url = url;
+		this.id = id;
+	}
+		
+	public Document(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long categoryId, String description,
+				String url) {
 		super(name, createdOn, updatedOn);
 		this.categoryId = categoryId;
 		this.description = description;

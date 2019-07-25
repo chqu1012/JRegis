@@ -16,10 +16,11 @@ public class DocumentRepository extends BaseRepository<Document>{
 		String description = resultSet.getString("DESCRIPTION");
 		String url = resultSet.getString("URL");
 		int categoryId = resultSet.getInt("CATEGORY_ID");
+		int id = resultSet.getInt("ID");
 		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
 		
-		return new Document(name, createdOn, updatedOn, categoryId, description, url);
+		return new Document(id, name, createdOn, updatedOn, categoryId, description, url);
 	}
 
 	@Override

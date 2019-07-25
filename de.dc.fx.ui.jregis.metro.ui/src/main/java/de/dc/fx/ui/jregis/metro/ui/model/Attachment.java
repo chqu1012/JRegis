@@ -6,7 +6,7 @@ public class Attachment extends IdElement {
 
 	private long documentId;
 
-	public Attachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, String name2, long documentId) {
+	public Attachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long documentId) {
 		super(name, createdOn, updatedOn);
 		this.documentId = documentId;
 	}
