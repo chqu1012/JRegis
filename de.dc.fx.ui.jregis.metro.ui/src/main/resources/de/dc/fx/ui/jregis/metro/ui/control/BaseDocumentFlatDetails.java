@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 public abstract class BaseDocumentFlatDetails extends ScrollPane{
 
 	@FXML
+	protected VBox vboxCommentEditBox;
+	
+	@FXML
 	protected FlowPane flowPaneFiles;
 	
 	@FXML

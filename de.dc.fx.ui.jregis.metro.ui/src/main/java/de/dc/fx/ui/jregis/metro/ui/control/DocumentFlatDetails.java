@@ -39,7 +39,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	public void setSelection(Document document) {
 		this.document = document;
-
+		vboxComment.getChildren().clear();
+        vboxComment.getChildren().add(vboxCommentEditBox);
+        
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
 	}
