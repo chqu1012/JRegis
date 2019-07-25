@@ -1,5 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
+import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -79,7 +82,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		List<File> files = chooser.showOpenMultipleDialog(new Stage());
 		if (files!=null) {
 			flowPaneFiles.getChildren().clear();
-			files.stream().forEach(e->flowPaneFiles.getChildren().add(new Hyperlink(e.getName())));
+			files.stream().forEach(e->flowPaneFiles.getChildren().add(new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())))));
 		}		
 	}
 

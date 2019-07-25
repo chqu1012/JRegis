@@ -58,7 +58,7 @@ public class DocumentFileItem extends HBox{
 		fileNameLabel.setText(label);
 	}
 	
-	private String getFileExt(String fname) {
+	private static String getFileExt(String fname) {
 		String ext = ".";
 		int p = fname.lastIndexOf('.');
 		if (p >= 0) {
@@ -67,7 +67,7 @@ public class DocumentFileItem extends HBox{
 		return ext.toLowerCase();
 	}
 
-	private Image getFileIcon(String fname) {
+	public static Image getFileIcon(String fname) {
 		String ext = getFileExt(fname);
 		Image fileIcon = mapOfFileExtToSmallIcon.get(ext);
 		if (fileIcon == null) {
@@ -99,12 +99,12 @@ public class DocumentFileItem extends HBox{
 		return fileIcon;
 	}
 	
-    private javax.swing.Icon getJSwingIconFromFileSystem(File file) {
+    private static javax.swing.Icon getJSwingIconFromFileSystem(File file) {
         FileSystemView view = FileSystemView.getFileSystemView();
         return view.getSystemIcon(file);
     }
 
-	private Image jswingIconToImage(javax.swing.Icon jswingIcon) {
+	private static Image jswingIconToImage(javax.swing.Icon jswingIcon) {
 		BufferedImage bufferedImage = new BufferedImage(jswingIcon.getIconWidth(), jswingIcon.getIconHeight(),
 				BufferedImage.TYPE_INT_ARGB);
 		jswingIcon.paintIcon(null, bufferedImage.getGraphics(), 0, 0);
