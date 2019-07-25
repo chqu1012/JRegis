@@ -67,4 +67,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		addHistory(history);
 	}
 
+	@Override
+	protected void onButtonAttachmentsAction(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

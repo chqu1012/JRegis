@@ -51,5 +51,8 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane{
 
     @FXML
     protected abstract void onButtonSubmitComment(ActionEvent event);
+    
+    @FXML
+    protected abstract void onButtonAttachmentsAction(ActionEvent event);
 
 }
