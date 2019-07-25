@@ -12,11 +12,12 @@ public class CategoryRepository extends BaseRepository<Category> {
 
 	@Override
 	protected Category map(ResultSet resultSet) throws SQLException {
-		Category category = new Category();
-		category.setId(resultSet.getInt("ID"));
-		category.setName(resultSet.getString("NAME"));
-		category.setParentId(resultSet.getInt("PARENT_ID"));
-		return category;
+		String name = resultSet.getString("NAME");
+		int parentId = resultSet.getInt("PARENT_ID");
+		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
+		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		
+		return new Category(name, createdOn, updatedOn, parentId);
 	}
 
 	@Override

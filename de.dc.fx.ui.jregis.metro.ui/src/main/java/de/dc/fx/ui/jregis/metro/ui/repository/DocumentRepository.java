@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 
@@ -11,14 +12,14 @@ public class DocumentRepository extends BaseRepository<Document>{
 
 	@Override
 	protected Document map(ResultSet resultSet) throws SQLException{
-		Document document = new Document();
-		document.setName(resultSet.getString("NAME"));
-		document.setDescription(resultSet.getString("DESCRIPTION"));
-		document.setCategoryId(resultSet.getInt("CATEGORY_ID"));
-		document.setId(resultSet.getInt("ID"));
-		document.setCreatedOn(Timestamp.valueOf(resultSet.getNString("CREATED_ON")));
-		document.setUpdatedOn(Timestamp.valueOf(resultSet.getNString("UPDATED_ON")));
-		return document;
+		String name = resultSet.getString("NAME");
+		String description = resultSet.getString("DESCRIPTION");
+		String url = resultSet.getString("URL");
+		int categoryId = resultSet.getInt("CATEGORY_ID");
+		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
+		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		
+		return new Document(name, createdOn, updatedOn, categoryId, description, url);
 	}
 
 	@Override
@@ -41,8 +42,8 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setLong(1, t.getCategoryId());
 		statement.setString(2, t.getDescription());
 		statement.setString(3, t.getName());
-		statement.setTimestamp(4, t.getCreatedOn());
-		statement.setTimestamp(5, t.getUpdatedOn());
+		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(6, "");
 	}
 
@@ -56,8 +57,8 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setLong(1, t.getId());
 		statement.setString(2, t.getDescription());
 		statement.setString(3, t.getName());
-		statement.setTimestamp(4, t.getCreatedOn());
-		statement.setTimestamp(5, t.getUpdatedOn());
+		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(6, "");
 		statement.setLong(7, t.getCategoryId());
 	}

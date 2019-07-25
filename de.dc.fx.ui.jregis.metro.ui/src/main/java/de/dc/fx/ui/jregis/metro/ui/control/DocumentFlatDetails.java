@@ -54,8 +54,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
 
-		labelCreatedOn.setText(document.getCreatedOnString());
-		labelUpdatedOn.setText(document.getUpdatedOnString());
+		labelCreatedOn.setText(document.getCreatedOnAsString());
+		labelUpdatedOn.setText(document.getUpdatedOnAsString());
 		labelDocumentDescription.setText(document.getDescription());
 		labelDocumentName.setText(document.getName());
 		labelDocumentId.setText(String.format("JREG-%05d", document.getId()));
@@ -85,7 +85,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		Optional<String> files = flowPaneFiles.getChildren().stream().map(e->((Hyperlink)e).getText()).reduce((s1,s2)->s1+","+s2);
 		String fileNames = files.isPresent()? files.get() : "";
 		
-		History history = new History(comment, document.getId(), LocalDateTime.now(), LocalDateTime.now(), fileNames);
+		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId(),fileNames);
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
@@ -128,8 +128,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 //			});
 			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
 			String fileNames = files.isPresent()? files.get() : "";
-			
-			History history = new History("Dragged Files.", document.getId(), LocalDateTime.now(), LocalDateTime.now(), fileNames);
+			History history = new History("Dragged Files.", LocalDateTime.now(), LocalDateTime.now(), document.getId(), fileNames);
 			addHistory(history);
 			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			

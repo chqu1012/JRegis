@@ -10,43 +10,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Category extends IdElement{
 
-	private String name;
 	private long parentId;
-	private LocalDateTime createdOn;
-	private LocalDateTime updatedOn;
-	
 	private Category parent;
 	private List<Category> children = new ArrayList<>();
-	
-	public Category() {
-	}
-	
-	public Category(String name, int parentId) {
-		this.name = name;
+
+	public Category(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long parentId) {
+		super(name, createdOn, updatedOn);
 		this.parentId = parentId;
-	}
-
-	public Category(String name, long parentId, LocalDateTime createdOn, LocalDateTime updatedOn) {
-		this.name = name;
-		this.parentId = parentId;
-		this.createdOn = createdOn;
-		this.updatedOn = updatedOn;
-	}
-
-	public LocalDateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(LocalDateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public LocalDateTime getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(LocalDateTime updatedOn) {
-		this.updatedOn = updatedOn;
 	}
 
 	public Category getParent() {
@@ -65,12 +35,6 @@ public class Category extends IdElement{
 		this.children = children;
 	}
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public long getParentId() {
 		return parentId;
 	}

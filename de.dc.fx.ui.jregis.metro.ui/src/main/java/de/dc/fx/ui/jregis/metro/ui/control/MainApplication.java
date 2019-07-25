@@ -1,7 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -108,7 +107,7 @@ public class MainApplication extends BaseMainApplication {
 			
 			@Override
 			public Category fromString(String name) {
-				return new Category(name, -1);
+				return new Category(name, null, null, -1);
 			}
 		});
 	}
@@ -116,8 +115,8 @@ public class MainApplication extends BaseMainApplication {
 	private void initTableView() {
 		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(e.getId()));
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
-		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnString()));
-		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnString()));
+		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnAsString()));
+		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnAsString()));
 		columnCategory.setCellValueFactory(param -> {
 			long id = param.getValue().getCategoryId();
 			Optional<Category> category = JRegisPlatform.getInstance(CategoryRepository.class).findById(id);
@@ -204,13 +203,13 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonCreateAction(ActionEvent event) {
-		Document document = new Document();
-		document.setCategoryId(0);
-		document.setName(textDocumentName.getText());
-		document.setDescription(textDescription.getText());
-		document.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
-		document.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+		String name = textDocumentName.getText();
+		String description = textDescription.getText();
+		LocalDateTime createdOn = LocalDateTime.now();
+		String url = textUrl.getText();
 		
+		Document document = new Document(name, createdOn, createdOn, -1, description, url);
+
 		Category category = comboBoxCategory.getSelectionModel().getSelectedItem();
 		if (category!=null) {
 			document.setCategoryId(category.getId());
@@ -224,10 +223,8 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onButtonAddCategoryAction(ActionEvent event) {
 		DialogUtil.openInput("New Category", "Category*","Create new Category", "", e->{
-			Category category = new Category();
-			category.setName(e);
-			category.setCreatedOn(LocalDateTime.now());
-			category.setUpdatedOn(LocalDateTime.now());
+			LocalDateTime createdOn = LocalDateTime.now();
+			Category category = new Category(e, createdOn, createdOn, -1);
 			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
 			category.setId(newId);
 			masterCategoryData.add(category);

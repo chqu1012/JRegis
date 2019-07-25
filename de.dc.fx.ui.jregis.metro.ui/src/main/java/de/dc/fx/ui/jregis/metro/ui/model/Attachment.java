@@ -1,26 +1,21 @@
 package de.dc.fx.ui.jregis.metro.ui.model;
 
-public class Attachment {
+import java.time.LocalDateTime;
 
-	private String name;
+public class Attachment extends IdElement {
 
-	public Attachment() {
+	private long documentId;
+
+	public Attachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, String name2, long documentId) {
+		super(name, createdOn, updatedOn);
+		this.documentId = documentId;
 	}
 
-	public Attachment(String name) {
-		this.name = name;
+	public long getDocumentId() {
+		return documentId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Override
-	public String toString() {
-		return name;
+	public void setDocumentId(long documentId) {
+		this.documentId = documentId;
 	}
 }

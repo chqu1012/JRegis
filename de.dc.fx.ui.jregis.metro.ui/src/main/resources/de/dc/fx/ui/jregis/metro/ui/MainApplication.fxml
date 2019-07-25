@@ -110,58 +110,54 @@
                         </AnchorPane>
                         <AnchorPane fx:id="paneAddNewDocument" layoutX="779.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
                            <children>
-                              <TextField fx:id="textDocumentId" disable="true" layoutX="15.0" layoutY="99.0" prefHeight="25.0" prefWidth="239.0" promptText="Document ID" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="15.0" layoutY="84.0" text="DOCUMENT ID" AnchorPane.leftAnchor="15.0">
+                              <TextField fx:id="textDocumentName" layoutX="20.0" layoutY="109.0" prefHeight="25.0" prefWidth="190.0" promptText="Document Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="70.0" />
+                              <Label layoutX="20.0" layoutY="94.0" text="DOCUMENT NAME" AnchorPane.leftAnchor="20.0">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="textDocumentName" layoutX="15.0" layoutY="146.0" prefHeight="25.0" prefWidth="190.0" promptText="Document Name" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="70.0" />
-                              <Label layoutX="15.0" layoutY="131.0" text="DOCUMENT NAME" AnchorPane.leftAnchor="15.0">
+                              <TextField fx:id="textUrl" layoutX="15.0" layoutY="248.0" prefHeight="25.0" prefWidth="243.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="233.0" text="URL" AnchorPane.leftAnchor="20.0">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="textUrl" layoutX="15.0" layoutY="248.0" prefHeight="25.0" prefWidth="243.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="15.0" layoutY="233.0" text="URL" AnchorPane.leftAnchor="15.0">
+                              <Label layoutX="20.0" layoutY="166.0" text="CATEGORY" AnchorPane.leftAnchor="20.0">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="15.0" layoutY="184.0" text="CATEGORY" AnchorPane.leftAnchor="15.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <HBox layoutX="15.0" layoutY="198.0" prefHeight="25.0" prefWidth="245.0" spacing="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                              <HBox layoutX="20.0" layoutY="181.0" prefHeight="25.0" prefWidth="245.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0">
                                  <children>
-                                    <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0" />
+                                    <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0">
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding>
+                                    </ComboBox>
                                     <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
                                     <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
                                     <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="textCreatedOn" disable="true" editable="false" layoutX="15.0" layoutY="395.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="15.0" layoutY="380.0" text="CREATED ON" AnchorPane.leftAnchor="15.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <TextArea fx:id="textDescription" layoutX="15.0" layoutY="301.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="15.0" layoutY="286.0" text="DESCRIPTION" AnchorPane.leftAnchor="15.0">
+                              <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="20.0" layoutY="308.0" text="DESCRIPTION" AnchorPane.leftAnchor="20.0">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
                               <Button layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
                               <Hyperlink layoutX="182.0" layoutY="434.0" onAction="#onButtonCancelAction" text="Cancel" AnchorPane.rightAnchor="124.0" />
-                              <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="291.0" layoutY="146.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="15.0" />
+                              <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="284.0" layoutY="109.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="22.0" />
                               <Label layoutX="17.0" layoutY="9.0" text="ADD DOCUMENT FORMULAR" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="39.0" text="Section to create a document entry with all madatory fields. Document id will automatically generated." textFill="#9e9a9a" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="24.0" layoutY="134.0" text="e.g. the name of the document entry" textFill="#ababab" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="20.0" layoutY="206.0" text="e.g. category of the document" textFill="#ababab" />
+                              <Label layoutX="20.0" layoutY="273.0" text="e.g. maybe the source of the document can noticed " textFill="#ababab" />
+                              <Label layoutX="20.0" layoutY="387.0" text="e.g. all description about this document" textFill="#ababab" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="20.0" layoutY="14.0" text="DOCUMENT OVERVIEW" textFill="#838383">
