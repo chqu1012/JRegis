@@ -3,7 +3,6 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -193,8 +192,8 @@ public class MainApplication extends BaseMainApplication {
 		if (event.getClickCount()==2) {
 			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 			if (selection!=null) {
+				documentFlatDetails.setSelection(selection);
 				documentFlatDetails.toFront();
-//				documentDetails.setDocument(selection);
 			}
 		}
 	}

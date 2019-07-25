@@ -19,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -47,6 +49,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
         
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
+		
+		root.requestFocus();
 	}
 
 	private void addHistory(History history) {
@@ -86,4 +90,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		}		
 	}
 
+	@Override
+	protected void onScrollPaneKeyPressed(KeyEvent e) {
+		if (e.getCode().equals(KeyCode.ESCAPE)) {
+			root.toBack();
+		}
+	}
 }
