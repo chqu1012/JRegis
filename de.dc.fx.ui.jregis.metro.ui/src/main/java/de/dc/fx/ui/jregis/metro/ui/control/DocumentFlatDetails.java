@@ -126,8 +126,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 //				DocumentHistory history = historyList.createNewHistoryFile(selection, fileNames, message);
 //				documentHistoryRepository.save(history);
 //			});
-			success = true;
 			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
+			String fileNames = files.isPresent()? files.get() : "";
+			
+			History history = new History("Dragged Files.", document.getId(), LocalDateTime.now(), LocalDateTime.now(), fileNames);
+			addHistory(history);
+			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			
+			success = true;
 			files.ifPresent(s->Notifications.create().title("Clipboard Notification").text("Import file(s): " + s + " sucessfully!").darkStyle().showInformation());
 		}
 		labelDraggingFilesArea.getStyleClass().clear();

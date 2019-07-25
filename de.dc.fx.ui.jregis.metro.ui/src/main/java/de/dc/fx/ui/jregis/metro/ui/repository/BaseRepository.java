@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 
-import de.dc.fx.ui.jregis.metro.ui.model.IdElement;
-
 public abstract class BaseRepository<T> {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
