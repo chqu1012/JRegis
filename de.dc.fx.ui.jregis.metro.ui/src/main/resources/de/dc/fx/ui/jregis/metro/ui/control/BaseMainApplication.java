@@ -95,6 +95,9 @@ public abstract class BaseMainApplication extends BorderPane{
     
     @FXML
     protected Button buttonAddDocumentNameSuggestion;
+    
+    @FXML
+    protected Button buttonCreateDocument;
 
     @FXML
     protected abstract void onButtonCancelAction(ActionEvent event);

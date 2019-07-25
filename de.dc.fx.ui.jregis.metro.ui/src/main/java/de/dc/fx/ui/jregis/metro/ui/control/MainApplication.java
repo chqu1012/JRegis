@@ -140,6 +140,7 @@ public class MainApplication extends BaseMainApplication {
 	private void initBindings() {
 		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
 		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries", Bindings.size(filteredDocumentData), Bindings.size(masterDocumentData)));
+		buttonCreateDocument.disableProperty().bind(textDocumentName.textProperty().isEmpty());
 	}
 
 	@Override

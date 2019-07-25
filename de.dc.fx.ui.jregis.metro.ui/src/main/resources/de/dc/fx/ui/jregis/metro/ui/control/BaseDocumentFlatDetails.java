@@ -21,6 +21,9 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 	protected VBox vboxDraggingFilesBox;
 
 	@FXML
+	protected VBox vboxReferences;
+
+	@FXML
 	protected VBox vboxCommentEditBox;
 
 	@FXML

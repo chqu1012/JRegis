@@ -18,6 +18,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -48,9 +49,25 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	public void setSelection(Document document) {
 		this.document = document;
+		vboxReferences.getChildren().clear();
+		flowPaneFiles.getChildren().clear();
+		textAreaComment.clear();
+		vboxFiles.getChildren().clear();
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
 
+		// TODO: Implement real content
+		// Fill files
+		for (int i = 0; i < 10; i++) {
+			vboxFiles.getChildren().add(new Button("aaaaaaaa"));
+		}
+		
+		// Fill References
+		for (int i = 0; i < 10; i++) {
+			vboxReferences.getChildren().add(new Button("sssssssss"));
+		}
+
+		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
 
@@ -122,9 +139,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		if (db.hasFiles() && document!=null) {
 //			DialogUtil.openInput("Transaction Message Dialog", "Dragged files.", "Dragged Files into document folder.", "Dragged Files into document folder.", message ->{
 //				populateFilesData(db.getFiles());
-//				String fileNames = db.getFiles().stream().map(e->e.getName()).reduce("", ( s1, s2 ) -> (s1.isEmpty()) ? s2 : s1 + "," + s2 );
-//				DocumentHistory history = historyList.createNewHistoryFile(selection, fileNames, message);
-//				documentHistoryRepository.save(history);
 //			});
 			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
 			String fileNames = files.isPresent()? files.get() : "";

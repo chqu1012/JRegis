@@ -145,7 +145,7 @@
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
+                              <Button fx:id="buttonCreateDocument" layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
                               <Hyperlink layoutX="182.0" layoutY="434.0" onAction="#onButtonCancelAction" text="Cancel" AnchorPane.rightAnchor="124.0" />
                               <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="284.0" layoutY="109.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="22.0" />
                               <Label layoutX="17.0" layoutY="9.0" text="ADD DOCUMENT FORMULAR" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">

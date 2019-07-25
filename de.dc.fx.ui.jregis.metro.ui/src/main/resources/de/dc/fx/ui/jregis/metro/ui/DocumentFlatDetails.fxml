@@ -135,43 +135,60 @@
                </padding>
             </AnchorPane>
             <Label layoutX="15.0" layoutY="40.0" text="All corresponding information about that document will be shown on this page.. This is separated in different sections." />
-            <AnchorPane layoutX="1133.0" layoutY="75.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="399.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
+            <VBox layoutX="620.0" layoutY="75.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
                <children>
-                  <Label layoutX="21.0" layoutY="8.0" text="Files" textFill="#a4a4a4">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <VBox fx:id="vboxFiles" layoutX="21.0" layoutY="38.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="145.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                     <children>
+                        <Label layoutX="21.0" layoutY="8.0" text="Dragging File Box" textFill="#a4a4a4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelDraggingFilesArea" alignment="CENTER" layoutX="21.0" layoutY="35.0" onDragDropped="#onVBoxDraggingFileBoxDragDropped" onDragOver="#onVBoxDraggingFileBoxDragOver" prefHeight="92.0" prefWidth="360.0" styleClass="dragged-file-label" stylesheets="@css/FileDraggedLabel.css" text="Dragging Files Area" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0" />
+                        <VBox fx:id="vboxDraggingFilesBox" layoutX="20.0" layoutY="122.0" maxHeight="1.7976931348623157E308" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                     </children>
                      <padding>
                         <Insets bottom="20.0" />
                      </padding>
-                  </VBox>
-                  <Label fx:id="labelFilesCount" layoutX="52.0" layoutY="8.0" text="(1)" textFill="#a4a4a4">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="272.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                     <children>
+                        <Label layoutX="21.0" layoutY="8.0" text="Files" textFill="#a4a4a4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="vboxFiles" layoutX="21.0" layoutY="38.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                        </VBox>
+                        <Label fx:id="labelFilesCount" layoutX="52.0" layoutY="8.0" text="(1)" textFill="#a4a4a4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                     <children>
+                        <Label layoutX="21.0" layoutY="8.0" text="References" textFill="#a4a4a4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="vboxReferences" layoutX="20.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </AnchorPane>
                </children>
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
-            </AnchorPane>
+            </VBox>
             <Hyperlink layoutX="975.0" layoutY="14.0" onAction="#onLinkBackAction" text="Back" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0" />
-            <AnchorPane layoutX="1103.0" layoutY="490.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="230.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" AnchorPane.rightAnchor="20.0">
-               <children>
-                  <Label layoutX="21.0" layoutY="8.0" text="Dragging File Box" textFill="#a4a4a4">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelDraggingFilesArea" alignment="CENTER" layoutX="21.0" layoutY="35.0" onDragDropped="#onVBoxDraggingFileBoxDragDropped" onDragOver="#onVBoxDraggingFileBoxDragOver" prefHeight="181.0" prefWidth="360.0" styleClass="dragged-file-label" stylesheets="@css/FileDraggedLabel.css" text="Dragging Files Area" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0" />
-                  <VBox fx:id="vboxDraggingFilesBox" layoutX="20.0" layoutY="122.0" maxHeight="1.7976931348623157E308" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
-            </AnchorPane>
          </children>
          <padding>
             <Insets bottom="20.0" />
