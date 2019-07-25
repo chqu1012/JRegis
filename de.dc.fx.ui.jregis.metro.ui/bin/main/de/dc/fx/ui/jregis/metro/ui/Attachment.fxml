@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-border-radius: 5;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="36.0" layoutY="6.0" prefHeight="28.0" prefWidth="273.0" style="-fx-border-color: lightgray; -fx-border-radius: 3;" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+         <children>
+            <ImageView fx:id="imageViewFileType" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="2.0">
+               <image>
+                  <Image url="@images/icons8_Overview_64px.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelFilename" layoutX="37.0" layoutY="7.0" maxWidth="1.7976931348623157E308" text="Filename.zip" textFill="#6b6969" AnchorPane.leftAnchor="45.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fx:id="imageViewExport" fitHeight="24.0" fitWidth="24.0" layoutX="254.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
+               <image>
+                  <Image url="@images/icons8-exportieren-24%20(1).png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label fx:id="labelFilename1" layoutX="222.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="0.0Mb" textFill="#6b6969" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

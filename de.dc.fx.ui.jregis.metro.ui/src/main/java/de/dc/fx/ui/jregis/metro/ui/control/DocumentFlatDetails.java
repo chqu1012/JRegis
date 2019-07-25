@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.controlsfx.control.Notifications;
 
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
@@ -58,8 +59,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 		// TODO: Implement real content
 		// Fill files
-		for (int i = 0; i < 10; i++) {
-			vboxFiles.getChildren().add(new Button("aaaaaaaa"));
+		for (int i = 0; i < 10; i++) { 
+			AttachmentControl control = new AttachmentControl();
+			control.setAttachent(new Attachment("Hallo.zip", LocalDateTime.now(), LocalDateTime.now(), document.getId()));
+			vboxFiles.getChildren().add(control);
 		}
 		
 		// Fill References
