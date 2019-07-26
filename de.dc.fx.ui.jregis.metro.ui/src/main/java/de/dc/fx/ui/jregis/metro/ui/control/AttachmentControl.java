@@ -30,5 +30,6 @@ public class AttachmentControl extends BaseAttachmentControl {
 	public void setAttachent(Attachment attachment) {
 		labelFilename.setText(attachment.getName());
 		imageViewFileType.setImage(DocumentFileItem.getFileIcon(attachment.getName()));
+		tooltip.setText(attachment.getName());
 	}
 }
