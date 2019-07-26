@@ -7,6 +7,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.management.Notification;
+
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
@@ -31,6 +34,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
@@ -164,8 +168,15 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onMenuItemDeleteDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
+		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
+		if (selection!=null) {
+			String message = "Do you really want to delete \""+selection.getName()+"\"";
+			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection", "Delete selected document", message);
+			dialog.ifPresent(e->{
+				JRegisPlatform.getInstance(DocumentRepository.class).delete(selection);
+				Notifications.create().darkStyle().title("Delete selection").text(message).show();
+			});
+		}
 	}
 
 	@Override
