@@ -1,0 +1,23 @@
+.delete-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-löschen-24-gray.png');
+}
+
+.delete-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-löschen-24.png');
+}
+
+.delete-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-löschen-24-orange.png');
+}
+
+.export-image-view {
+     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-exportieren-24-gray.png');
+}
+
+.export-image-view:hover {
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-exportieren-24-blue.png');
+}
+
+.export-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-exportieren-24-darkblue.png');
+}
