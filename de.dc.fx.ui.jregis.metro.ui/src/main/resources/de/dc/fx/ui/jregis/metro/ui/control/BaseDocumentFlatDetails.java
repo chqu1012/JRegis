@@ -57,6 +57,12 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 	protected Label labelFilesCount;
 
 	@FXML
+	protected Label labelCommentCount;
+
+	@FXML
+	protected Label labelReferenceCount;
+
+	@FXML
 	protected TextArea textAreaComment;
 
 	@FXML

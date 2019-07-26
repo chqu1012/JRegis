@@ -171,10 +171,11 @@ public class MainApplication extends BaseMainApplication {
 		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 		if (selection!=null) {
 			String message = "Do you really want to delete \""+selection.getName()+"\"";
-			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection", "Delete selected document", message);
+			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection", "Delete selected document with ID: "+selection.getId(), message);
 			dialog.ifPresent(e->{
 				JRegisPlatform.getInstance(DocumentRepository.class).delete(selection);
 				Notifications.create().darkStyle().title("Delete selection").text(message).show();
+				masterDocumentData.remove(selection);
 			});
 		}
 	}
