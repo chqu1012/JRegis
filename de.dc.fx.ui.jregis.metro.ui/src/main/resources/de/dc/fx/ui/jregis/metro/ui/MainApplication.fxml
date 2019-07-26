@@ -72,94 +72,98 @@
                   </BorderPane>
                   <AnchorPane fx:id="paneDocumentTableView" style="-fx-background-color: #DBDFE2;">
                      <children>
-                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="80.0">
+                        <HBox fx:id="vboxDocumentOverviewContent" layoutX="20.0" layoutY="80.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
                            <children>
-                              <TableView fx:id="tableViewDocument" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onTableViewDocumentClicked" prefHeight="471.0" prefWidth="739.0" stylesheets="@css/MetroTableView.css" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
-                                <columns>
-                                  <TableColumn fx:id="columnId" prefWidth="95.0" text="#ID" />
-                                  <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="188.0" prefWidth="188.0" text="#NAME" />
-                                    <TableColumn fx:id="columnCategory" maxWidth="1.7976931348623157E308" minWidth="148.0" prefWidth="162.0" text="#CATEGORY" />
-                                    <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="160.0" text="#CREATED" />
-                                    <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="160.0" text="#UPDATE" />
-                                </columns>
-                                 <contextMenu>
-                                    <ContextMenu>
-                                      <items>
-                                          <MenuItem mnemonicParsing="false" onAction="#onMenuItemOpenDocumentAction" text="Open Directory" />
-                                        <MenuItem mnemonicParsing="false" onAction="#onMenuItemNewDocumentAction" text="New" />
-                                          <MenuItem mnemonicParsing="false" onAction="#onMenuItemEditDocumentAction" text="Edit" />
-                                          <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteDocumentAction" text="Delete" />
-                                      </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                              </TableView>
-                              <Label layoutX="23.0" layoutY="14.0" text="DOCUMENT TABLEVIEW" textFill="#727272" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="TOP_LEFT" layoutX="30.0" layoutY="41.0" prefHeight="63.0" prefWidth="729.0" text="All inserted document with attachments will shows in the table view. Documents can sorted by their attributes. Futher the user can combined the search by right clicking on the columns to accept the filter." textFill="#9e9a9a" wrapText="true" />
-                              <TextField layoutX="570.0" layoutY="85.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="20.0" />
-                              <Label layoutX="506.0" layoutY="89.0" text="Search:" AnchorPane.rightAnchor="215.0" />
-                              <Label fx:id="labelEntriesSize" layoutX="14.0" layoutY="583.0" prefHeight="17.0" prefWidth="165.0" text="Showing 1 of 100 entries" textFill="#727272" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="paneAddNewDocument" layoutX="779.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
-                           <children>
-                              <TextField fx:id="textDocumentName" layoutX="20.0" layoutY="109.0" prefHeight="25.0" prefWidth="190.0" promptText="Document Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="70.0" />
-                              <Label layoutX="20.0" layoutY="94.0" text="DOCUMENT NAME" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="textUrl" layoutX="15.0" layoutY="248.0" prefHeight="25.0" prefWidth="243.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="15.0" layoutY="233.0" text="URL" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="166.0" text="CATEGORY" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <HBox layoutX="20.0" layoutY="181.0" prefHeight="25.0" prefWidth="245.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0">
+                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0">
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </ComboBox>
-                                    <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
-                                    <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
-                                    <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
+                                    <TableView fx:id="tableViewDocument" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onTableViewDocumentClicked" prefHeight="471.0" prefWidth="739.0" stylesheets="@css/MetroTableView.css" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
+                                      <columns>
+                                        <TableColumn fx:id="columnId" prefWidth="95.0" text="#ID" />
+                                        <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="188.0" prefWidth="188.0" text="#NAME" />
+                                          <TableColumn fx:id="columnCategory" maxWidth="1.7976931348623157E308" minWidth="148.0" prefWidth="162.0" text="#CATEGORY" />
+                                          <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="160.0" text="#CREATED" />
+                                          <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="141.0" prefWidth="160.0" text="#UPDATE" />
+                                      </columns>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#onMenuItemOpenDocumentAction" text="Open Directory" />
+                                              <MenuItem mnemonicParsing="false" onAction="#onMenuItemNewDocumentAction" text="New" />
+                                                <MenuItem mnemonicParsing="false" onAction="#onMenuItemEditDocumentAction" text="Edit" />
+                                                <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteDocumentAction" text="Delete" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                    <Label layoutX="23.0" layoutY="14.0" text="DOCUMENT TABLEVIEW" textFill="#727272" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" layoutX="30.0" layoutY="41.0" prefHeight="63.0" prefWidth="729.0" text="All inserted document with attachments will shows in the table view. Documents can sorted by their attributes. Futher the user can combined the search by right clicking on the columns to accept the filter." textFill="#9e9a9a" wrapText="true" />
+                                    <TextField layoutX="570.0" layoutY="85.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="20.0" />
+                                    <Label layoutX="506.0" layoutY="89.0" text="Search:" AnchorPane.rightAnchor="215.0" />
+                                    <Label fx:id="labelEntriesSize" layoutX="14.0" layoutY="583.0" prefHeight="17.0" prefWidth="165.0" text="Showing 1 of 100 entries" textFill="#727272" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
                                  </children>
-                              </HBox>
-                              <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="20.0" layoutY="308.0" text="DESCRIPTION" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="buttonCreateDocument" layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
-                              <Hyperlink layoutX="182.0" layoutY="434.0" onAction="#onButtonCancelAction" text="Cancel" AnchorPane.rightAnchor="124.0" />
-                              <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="284.0" layoutY="109.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="22.0" />
-                              <Label layoutX="17.0" layoutY="9.0" text="ADD DOCUMENT FORMULAR" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="39.0" text="Section to create a document entry with all madatory fields. Document id will automatically generated." textFill="#9e9a9a" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                              <Label layoutX="24.0" layoutY="134.0" text="e.g. the name of the document entry" textFill="#ababab" AnchorPane.leftAnchor="20.0" />
-                              <Label layoutX="20.0" layoutY="206.0" text="e.g. category of the document" textFill="#ababab" />
-                              <Label layoutX="20.0" layoutY="273.0" text="e.g. maybe the source of the document can noticed " textFill="#ababab" />
-                              <Label layoutX="20.0" layoutY="387.0" text="e.g. all description about this document" textFill="#ababab" />
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneAddNewDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="575.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 4;">
+                                 <children>
+                                    <TextField fx:id="textDocumentName" layoutX="20.0" layoutY="109.0" prefHeight="25.0" prefWidth="190.0" promptText="Document Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="70.0" />
+                                    <Label layoutX="20.0" layoutY="94.0" text="DOCUMENT NAME" AnchorPane.leftAnchor="20.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="textUrl" layoutX="15.0" layoutY="248.0" prefHeight="25.0" prefWidth="243.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
+                                    <Label layoutX="15.0" layoutY="233.0" text="URL" AnchorPane.leftAnchor="20.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="166.0" text="CATEGORY" AnchorPane.leftAnchor="20.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox layoutX="20.0" layoutY="181.0" prefHeight="25.0" prefWidth="245.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <ComboBox fx:id="comboBoxCategory" prefHeight="25.0" prefWidth="207.0">
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </ComboBox>
+                                          <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
+                                          <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
+                                          <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
+                                       </children>
+                                    </HBox>
+                                    <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
+                                    <Label layoutX="20.0" layoutY="308.0" text="DESCRIPTION" AnchorPane.leftAnchor="20.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="buttonCreateDocument" layoutX="229.0" layoutY="433.0" mnemonicParsing="false" onAction="#onButtonCreateAction" prefHeight="25.0" prefWidth="109.0" text="Create" AnchorPane.rightAnchor="12.0" />
+                                    <Hyperlink layoutX="182.0" layoutY="434.0" onAction="#onButtonCancelAction" text="Cancel" AnchorPane.rightAnchor="124.0" />
+                                    <Button fx:id="buttonAddDocumentNameSuggestion" layoutX="284.0" layoutY="109.0" mnemonicParsing="false" onAction="#onButtonAddDocumentNameSuggestionAction" prefHeight="25.0" prefWidth="44.0" text="Add" AnchorPane.rightAnchor="22.0" />
+                                    <Label layoutX="17.0" layoutY="9.0" text="ADD DOCUMENT FORMULAR" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="39.0" text="Section to create a document entry with all madatory fields. Document id will automatically generated." textFill="#9e9a9a" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                                    <Label layoutX="24.0" layoutY="134.0" text="e.g. the name of the document entry" textFill="#ababab" AnchorPane.leftAnchor="20.0" />
+                                    <Label layoutX="20.0" layoutY="206.0" text="e.g. category of the document" textFill="#ababab" />
+                                    <Label layoutX="20.0" layoutY="273.0" text="e.g. maybe the source of the document can noticed " textFill="#ababab" />
+                                    <Label layoutX="20.0" layoutY="387.0" text="e.g. all description about this document" textFill="#ababab" />
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
+                        </HBox>
                         <Label layoutX="20.0" layoutY="14.0" text="DOCUMENT OVERVIEW" textFill="#838383">
                            <font>
                               <Font name="System Bold" size="14.0" />

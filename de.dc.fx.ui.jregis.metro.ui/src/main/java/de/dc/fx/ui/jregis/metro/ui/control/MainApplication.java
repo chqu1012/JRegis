@@ -11,7 +11,10 @@ import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
-
+import animatefx.animation.AnimationFX;
+import animatefx.animation.FadeOutRight;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideInRight;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
@@ -173,8 +176,10 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onMenuItemNewDocumentAction(ActionEvent event) {
-		textCreatedOn.setText(LocalDateTime.now().toString());
-		comboBoxCategory.getSelectionModel().selectFirst();
+		if (!vboxDocumentOverviewContent.getChildren().contains(paneAddNewDocument)) {
+			vboxDocumentOverviewContent.getChildren().add(paneAddNewDocument);
+			comboBoxCategory.getSelectionModel().selectFirst();
+		}
 	}
 
 	@Override
@@ -200,6 +205,7 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonCancelAction(ActionEvent event) {
+		vboxDocumentOverviewContent.getChildren().remove(paneAddNewDocument);
 	}
 
 	@Override

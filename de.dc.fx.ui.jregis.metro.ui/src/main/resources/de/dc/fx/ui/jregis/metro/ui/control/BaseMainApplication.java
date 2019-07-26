@@ -22,6 +22,9 @@ import javafx.scene.layout.StackPane;
 public abstract class BaseMainApplication extends BorderPane{
 
 	@FXML
+	protected HBox vboxDocumentOverviewContent;
+	
+	@FXML
 	protected Label labelEntriesSize;
 	
     @FXML
