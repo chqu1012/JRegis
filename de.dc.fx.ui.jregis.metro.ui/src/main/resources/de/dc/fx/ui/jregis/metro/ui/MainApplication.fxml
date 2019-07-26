@@ -141,7 +141,7 @@
                                           <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
+                                    <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />
                                     <Label layoutX="20.0" layoutY="308.0" text="DESCRIPTION" AnchorPane.leftAnchor="20.0">
                                        <font>
                                           <Font size="10.0" />
