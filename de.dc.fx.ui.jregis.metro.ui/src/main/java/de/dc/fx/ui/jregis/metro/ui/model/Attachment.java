@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 
 public class Attachment extends IdElement {
 
-	private long documentId;
+	private long historyId;
 
-	public Attachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long documentId) {
+	public Attachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long historyId) {
 		super(name, createdOn, updatedOn);
-		this.documentId = documentId;
+		this.historyId = historyId;
 	}
 
-	public long getDocumentId() {
-		return documentId;
+	public long getHistoryId() {
+		return historyId;
 	}
 
-	public void setDocumentId(long documentId) {
-		this.documentId = documentId;
+	public void setHistoryId(long historyId) {
+		this.historyId = historyId;
 	}
 }

@@ -16,6 +16,7 @@ import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -58,14 +59,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
 
-		// TODO: Implement real content
-		// Fill files
-		for (int i = 0; i < 10; i++) { 
-			AttachmentControl control = new AttachmentControl();
-			control.setAttachent(new Attachment("Hallo.zip", LocalDateTime.now(), LocalDateTime.now(), document.getId()));
-			vboxFiles.getChildren().add(control);
-		}
-		
 		// Fill References
 		for (int i = 0; i < 10; i++) {
 			vboxReferences.getChildren().add(new Button("sssssssss"));
@@ -73,7 +66,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
-		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(this::addHistory);
+		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(e->{
+			addAttachment(e);
+			addHistory(e);
+		});
 		
 		labelFilesCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
 		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
@@ -86,6 +82,16 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		labelDocumentId.setText(String.format("JREG-%05d", document.getId()));
 		
 		root.requestFocus();
+	}
+
+	private void addAttachment(History history) {
+		JRegisPlatform.getInstance(AttachmentRepository.class).findAll().stream()
+			.filter(e-> e.getHistoryId()==history.getId())
+			.forEach(e->{
+				Attachment attachment = new Attachment(e.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId());
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				history.getAttachments().add(attachment);
+			});
 	}
 
 	private void addHistory(History history) {
@@ -145,16 +151,19 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		Dragboard db = event.getDragboard();
 		boolean success = false;
 		if (db.hasFiles() && document!=null) {
-//			DialogUtil.openInput("Transaction Message Dialog", "Dragged files.", "Dragged Files into document folder.", "Dragged Files into document folder.", message ->{
-//				populateFilesData(db.getFiles());
-//			});
-			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
-			String fileNames = files.isPresent()? files.get() : "";
-			History history = new History("Dragged Files.", LocalDateTime.now(), LocalDateTime.now(), document.getId(), fileNames);
+			LocalDateTime timestamp = LocalDateTime.now();
+			History history = new History("Dragged Files.", timestamp, timestamp, document.getId(), "");
+			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			db.getFiles().stream().forEach(f->{
+				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, historyId);
+				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				history.getAttachments().add(attachment);
+			});
 			addHistory(history);
-			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			
 			success = true;
+			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
 			files.ifPresent(s->Notifications.create().title("Clipboard Notification").text("Import file(s): " + s + " sucessfully!").darkStyle().showInformation());
 		}
 		labelDraggingFilesArea.getStyleClass().clear();

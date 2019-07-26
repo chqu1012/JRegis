@@ -14,9 +14,9 @@ import javafx.scene.layout.VBox;
 
 public class DocumentHistoryItem extends AnchorPane {
 
-	@FXML 
+	@FXML
 	protected VBox fileContainer;
-	
+
 	@FXML
 	protected Label message;
 
@@ -25,12 +25,12 @@ public class DocumentHistoryItem extends AnchorPane {
 
 	@FXML
 	protected Tooltip tooltip;
-	
+
 	@FXML
 	protected ImageView tooltipImageView;
 
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/DocumentsHistoryItem.fxml";
-	
+
 	public DocumentHistoryItem() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
@@ -46,13 +46,10 @@ public class DocumentHistoryItem extends AnchorPane {
 	public void setHistory(History history, Consumer<String> executer) {
 		createdTimestamp.setText(history.getCreatedOn().toString());
 		message.setText(history.getName());
-		if (history.getFiles()!=null) {
-			String[] files = history.getFiles().split(",");
-			for (String file : files) {
-				DocumentFileItem item = new DocumentFileItem();
-				item.set(file, executer);
-				fileContainer.getChildren().add(item);
-			}
-		}
+		history.getAttachments().stream().forEach(e -> {
+			DocumentFileItem item = new DocumentFileItem();
+			item.set(e.getName(), executer);
+			fileContainer.getChildren().add(item);
+		});
 	}
 }

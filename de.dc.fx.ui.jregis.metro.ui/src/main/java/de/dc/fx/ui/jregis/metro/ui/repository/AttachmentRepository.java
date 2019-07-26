@@ -15,47 +15,51 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		String name = resultSet.getString("NAME");
 		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
-		long documentId = resultSet.getLong("DOCUMENT_ID");
+		long historyId = resultSet.getLong("HISTORY_ID");
 		
-		return new Attachment(name, createdOn, updatedOn, documentId );
+		return new Attachment(name, createdOn, updatedOn, historyId );
 	}
 
 	@Override
 	protected String findByIdStatement(long id) {
-		return "SELECT * FROM document_files WHERE id = "+id;
+		return "SELECT * FROM document_attachment WHERE id = "+id;
 	}
 
 	@Override
 	protected String findAllStatement() {
-		return "SELECT * FROM document_files ORDER BY name ASC";
+		return "SELECT * FROM document_attachment ORDER BY name ASC";
 	}
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document_files (name, document_id, created_on, updated_on) VALUES (?,?,?,?);";
+		return "INSERT INTO document_attachment (name, history_id, created_on, updated_on) VALUES (?,?,?,?);";
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE FROM document_files WHERE id = ?";
+		return "DELETE FROM document_attachment WHERE id = ?";
 	}
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO document_files KEY (ID) VALUES (?, ?, ?, ?);";
+		return "MERGE INTO document_attachment KEY (ID) VALUES (?, ?, ?, ?, ?);";
 	}
 
 	@Override
 	protected void prepareStatetmentForSave(Attachment c, PreparedStatement statement) throws SQLException {
 		statement.setString(1, c.getName());
-		statement.setLong(2, c.getDocumentId());
+		statement.setLong(2, c.getHistoryId());
 		statement.setTimestamp(3, Timestamp.valueOf(c.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(c.getUpdatedOn()));		
 	}
 
 	@Override
-	protected void prepareStatetmentForUpdate(Attachment t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getId());		
+	protected void prepareStatetmentForUpdate(Attachment c, PreparedStatement statement) throws SQLException {
+		statement.setLong(1, c.getId());		
+		statement.setString(2, c.getName());
+		statement.setLong(3, c.getHistoryId());
+		statement.setTimestamp(4, Timestamp.valueOf(c.getCreatedOn()));
+		statement.setTimestamp(5, Timestamp.valueOf(c.getUpdatedOn()));		
 	}
 
 	@Override
