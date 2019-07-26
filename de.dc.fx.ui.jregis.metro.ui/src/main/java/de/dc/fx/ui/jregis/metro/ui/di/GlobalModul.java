@@ -2,6 +2,8 @@ package de.dc.fx.ui.jregis.metro.ui.di;
 
 import com.google.inject.AbstractModule;
 
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
@@ -17,5 +19,6 @@ public class GlobalModul extends AbstractModule {
 		bind(HistoryRepository.class).asEagerSingleton();
 
 		bind(DocumentUtil.class).asEagerSingleton();
+		bind(IEventBroker.class).to(EventBroker.class).asEagerSingleton();
 	}
 }

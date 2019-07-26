@@ -5,14 +5,20 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 
+import com.google.common.eventbus.Subscribe;
+
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventContext;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
@@ -21,6 +27,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
@@ -36,7 +43,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	private Document document;
-
+	
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
 				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/DocumentFlatDetails.fxml"));
@@ -48,6 +55,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml ", exception);
 		}
+		
+		JRegisPlatform.getInstance(IEventBroker.class).register(this);
 	}
 
 	public void setSelection(Document document) {
@@ -97,6 +106,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 
 	private void addHistory(History history) {
+		
 		DocumentHistoryItem item = new DocumentHistoryItem();
 		item.setHistory(history, t -> {
 //		String path = parentPath+"/"+t;
@@ -187,5 +197,35 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			event.acceptTransferModes(TransferMode.COPY);
 		}
 		event.consume();		
+	}
+	
+	@Subscribe
+	public void deleteAttachment(IEventContext<Attachment> context) {
+		Attachment input = context.getInput();
+		if (context.getEventId().equals("/attachment/delete")) {
+			AttachmentControl toDeleteControl = null;
+			for (Node node : vboxFiles.getChildren()) {
+				if (node instanceof AttachmentControl) {
+					AttachmentControl attachmentControl = (AttachmentControl) node;
+					if (attachmentControl.getAttachment().equals(input)) {
+						toDeleteControl = attachmentControl;
+					}					
+				}
+			}
+			if (toDeleteControl!=null) {
+				vboxFiles.getChildren().remove(toDeleteControl);
+			}
+			vboxComment.getChildren().forEach(e-> {
+				if (e instanceof DocumentHistoryItem) {
+					DocumentHistoryItem item = (DocumentHistoryItem) e;
+					item.findAndDeactivateAttachment(input);
+				}
+			});
+			
+			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId(), "");
+			history.getAttachments().add(input);
+			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			addHistory(history);
+		}
 	}
 }

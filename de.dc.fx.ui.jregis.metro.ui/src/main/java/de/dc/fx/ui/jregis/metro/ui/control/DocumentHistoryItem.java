@@ -1,11 +1,15 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
+import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -29,6 +33,8 @@ public class DocumentHistoryItem extends AnchorPane {
 	@FXML
 	protected ImageView tooltipImageView;
 
+	private Map<Attachment, DocumentFileItem> attachmentLinks = new HashMap<>(); 
+	
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/DocumentsHistoryItem.fxml";
 
 	public DocumentHistoryItem() {
@@ -50,6 +56,15 @@ public class DocumentHistoryItem extends AnchorPane {
 			DocumentFileItem item = new DocumentFileItem();
 			item.set(e.getName(), executer);
 			fileContainer.getChildren().add(item);
+			
+			attachmentLinks.put(e, item);
 		});
+	}
+	
+	public void findAndDeactivateAttachment(Attachment attachment) {
+		DocumentFileItem item = attachmentLinks.get(attachment);
+		if (item!=null) {
+			item.setDisable(true);
+		}
 	}
 }
