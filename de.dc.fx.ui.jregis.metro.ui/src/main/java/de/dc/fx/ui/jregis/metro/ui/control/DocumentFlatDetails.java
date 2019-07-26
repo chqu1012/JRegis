@@ -113,12 +113,17 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
 
-		Optional<String> files = flowPaneFiles.getChildren().stream().map(e->((Hyperlink)e).getText()).reduce((s1,s2)->s1+","+s2);
-		String fileNames = files.isPresent()? files.get() : "";
-		
-		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId(),fileNames);
-		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId(),"");
+		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 
+		flowPaneFiles.getChildren().stream().forEach(e->{
+			LocalDateTime created = LocalDateTime.now();
+			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, historyId);
+			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+			vboxFiles.getChildren().add(new AttachmentControl(attachment));
+			history.getAttachments().add(attachment);
+		});
+		
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
 
 		addHistory(history);
