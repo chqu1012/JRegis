@@ -67,6 +67,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(e->{
+			// Workaround: Fix oherwise on each click attachments will be added
+			e.getAttachments().clear();
 			addAttachment(e);
 			addHistory(e);
 		});
