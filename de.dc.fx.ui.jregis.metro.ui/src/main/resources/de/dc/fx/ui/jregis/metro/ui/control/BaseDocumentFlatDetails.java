@@ -19,6 +19,24 @@ import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
+    @FXML
+    protected TextField textDownloadTransactionMessage;
+
+    @FXML
+    protected TextField textDownloadFileID;
+
+    @FXML
+    protected TextField textDownloadFilename;
+
+    @FXML
+    protected CheckBox checkBoxUsingDownloadFileId;
+
+    @FXML
+    protected TextField textDownloadTUrl;
+	
+	@FXML
+	protected AnchorPane downloadDialog;
+	
 	@FXML
 	protected AnchorPane clipboardHelperDialog;
 	
@@ -135,5 +153,14 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 	
 	@FXML
 	protected abstract void onLinkDeleteNewSuggestionAction(ActionEvent event);
+	
+    @FXML
+    protected abstract void onLinkDownloadDialogAcceptAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onLinkDownloadDialogCancelAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonDownloadDialogAction(ActionEvent event);
 
 }

@@ -4,12 +4,14 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
 
 import com.google.common.eventbus.Subscribe;
@@ -393,5 +395,37 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			
 			nameSuggestionList.remove(name);
 		}		
+	}
+
+	@Override
+	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
+		if (textDownloadTUrl.getText().isEmpty()) {
+			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
+			return; 
+		}else {
+			// TODO: Should be replaced by document folder
+			String path = "";
+			try {
+				FileUtils.copyURLToFile(new URL(textDownloadTUrl.getText()), new File(path), 10000, 10000);
+			} catch (IOException e) {
+				Notifications.create().darkStyle().text("Failed to download file from url "+textDownloadTUrl.getText()).title("Error on Downloading").showError();
+				return;
+			}
+		}
+
+		downloadDialog.setVisible(false);
+		downloadDialog.toBack();
+	}
+
+	@Override
+	protected void onLinkDownloadDialogCancelAction(ActionEvent event) {
+		downloadDialog.setVisible(false);
+		downloadDialog.toBack();
+	}
+
+	@Override
+	protected void onButtonDownloadDialogAction(ActionEvent event) {
+		downloadDialog.setVisible(true);
+		downloadDialog.toFront();
 	}
 }

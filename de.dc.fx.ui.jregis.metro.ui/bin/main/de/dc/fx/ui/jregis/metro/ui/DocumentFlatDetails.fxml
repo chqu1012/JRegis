@@ -22,6 +22,33 @@
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
+            <AnchorPane fx:id="downloadDialog" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="319.0" prefWidth="565.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <Label alignment="CENTER" layoutX="58.0" layoutY="26.0" prefHeight="37.0" prefWidth="840.0" style="-fx-background-color: #1C3749;" text="Download Weblink Dialog" textFill="#fcfcfc" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onLinkDownloadDialogAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Hyperlink layoutX="296.0" layoutY="259.0" onAction="#onLinkDownloadDialogCancelAction" text="Cancel" />
+                        <Label layoutX="70.0" layoutY="58.0" text="Transaction Message" />
+                        <TextField fx:id="textDownloadTransactionMessage" layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="402.0" text="Download Link from URL." />
+                        <TextField fx:id="textDownloadFileID" layoutX="71.0" layoutY="180.0" prefHeight="25.0" prefWidth="89.0" />
+                        <Label layoutX="71.0" layoutY="163.0" prefHeight="17.0" prefWidth="88.0" text="File ID" />
+                        <TextField fx:id="textDownloadFilename" layoutX="171.0" layoutY="180.0" prefHeight="25.0" prefWidth="301.0" text="Download01*" />
+                        <Label layoutX="172.0" layoutY="163.0" prefHeight="17.0" prefWidth="88.0" text="File Name" />
+                        <CheckBox fx:id="checkBoxUsingDownloadFileId" layoutX="71.0" layoutY="220.0" mnemonicParsing="false" text="Using File ID" />
+                        <Label layoutX="70.0" layoutY="111.0" text="URL" />
+                        <TextField fx:id="textDownloadTUrl" layoutX="70.0" layoutY="128.0" prefHeight="25.0" prefWidth="402.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
             <AnchorPane fx:id="clipboardHelperDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="689.0" prefWidth="944.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
@@ -158,7 +185,7 @@
                                           <Tooltip text="Add file from operation system" />
                                        </tooltip>
                                     </Button>
-                                    <Button mnemonicParsing="false">
+                                    <Button mnemonicParsing="false" onAction="#onButtonDownloadDialogAction">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
