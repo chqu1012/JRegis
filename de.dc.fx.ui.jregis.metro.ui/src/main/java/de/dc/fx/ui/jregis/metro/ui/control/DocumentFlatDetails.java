@@ -5,9 +5,7 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +18,10 @@ import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventContext;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
+import de.dc.fx.ui.jregis.metro.ui.model.AttachmentStatus;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.beans.binding.Bindings;
@@ -125,13 +125,18 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
 
-		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId(),"");
+		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId());
+		history.setStatus(HistoryStatus.ADD.getStatusValue());
+		
 		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 
 		flowPaneFiles.getChildren().stream().forEach(e->{
 			LocalDateTime created = LocalDateTime.now();
+			
 			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, historyId);
+			attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
 			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+			
 			vboxFiles.getChildren().add(new AttachmentControl(attachment));
 			history.getAttachments().add(attachment);
 		});
@@ -169,10 +174,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		boolean success = false;
 		if (db.hasFiles() && document!=null) {
 			LocalDateTime timestamp = LocalDateTime.now();
-			History history = new History("Dragged Files.", timestamp, timestamp, document.getId(), "");
+			History history = new History("Dragged Files.", timestamp, timestamp, document.getId());
+			history.setStatus(HistoryStatus.ADD.getStatusValue());
+			
 			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			db.getFiles().stream().forEach(f->{
 				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, historyId);
+				attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
+				
 				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 				vboxFiles.getChildren().add(new AttachmentControl(attachment));
 				history.getAttachments().add(attachment);
@@ -209,6 +218,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 					AttachmentControl attachmentControl = (AttachmentControl) node;
 					if (attachmentControl.getAttachment().equals(input)) {
 						toDeleteControl = attachmentControl;
+						JRegisPlatform.getInstance(AttachmentRepository.class).delete(input);
 					}					
 				}
 			}
@@ -222,7 +232,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				}
 			});
 			
-			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId(), "");
+			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId());
+			history.setStatus(HistoryStatus.DELETE.getStatusValue());
+			
 			history.getAttachments().add(input);
 			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			addHistory(history);

@@ -17,10 +17,13 @@ public class DocumentRepository extends BaseRepository<Document>{
 		String url = resultSet.getString("URL");
 		int categoryId = resultSet.getInt("CATEGORY_ID");
 		int id = resultSet.getInt("ID");
+		int status = resultSet.getInt("STATUS_ID");
 		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
 		
-		return new Document(id, name, createdOn, updatedOn, categoryId, description, url);
+		Document document = new Document(id, name, createdOn, updatedOn, categoryId, description, url);
+		document.setStatus(status);
+		return document;
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class DocumentRepository extends BaseRepository<Document>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document (category_id, description, name, created_on, updated_on, url) VALUES (?,?,?,?,?,?);";
+		return "INSERT INTO document (category_id, description, name, created_on, updated_on, url, status_id) VALUES (?,?,?,?,?,?,?);";
 	}
 
 	@Override
@@ -46,11 +49,12 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
 		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(6, "");
+		statement.setLong(7, t.getStatus());
 	}
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO document KEY (ID) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		return "MERGE INTO document KEY (ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	}
 
 	@Override
@@ -62,15 +66,17 @@ public class DocumentRepository extends BaseRepository<Document>{
 		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(6, "");
 		statement.setLong(7, t.getCategoryId());
+		statement.setLong(8, t.getStatus());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE FROM document WHERE id = ?";
+		return "UPDATE document SET status_id=? WHERE id = ?";
 	}
 	
 	@Override
 	protected void prepapreStatementForDelete(Document t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getId());
+		statement.setLong(1, t.getStatus());
+		statement.setLong(2, t.getId());
 	}
 }

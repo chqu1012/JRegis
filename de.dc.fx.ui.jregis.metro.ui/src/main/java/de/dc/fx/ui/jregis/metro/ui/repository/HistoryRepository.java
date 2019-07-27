@@ -7,18 +7,19 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 
 public class HistoryRepository extends BaseRepository<History>{
 
 	@Override
 	protected History map(ResultSet resultSet) throws SQLException {
 		String name = resultSet.getString("NAME");
-		String files = resultSet.getString("FILES");
 		Long id= resultSet.getLong("ID");
 		Long documentId= resultSet.getLong("DOCUMENT_ID");
 		LocalDateTime createdOn= resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn= resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
-		History history = new History(name, createdOn, updatedOn, documentId, files);
+		
+		History history = new History(name, createdOn, updatedOn, documentId);
 		history.setId(id);
 		return history;
 	}
@@ -35,16 +36,16 @@ public class HistoryRepository extends BaseRepository<History>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document_history (document_id, files, name, created_on, updated_on) VALUES (?,?,?,?,?);";
+		return "INSERT INTO document_history (document_id, name, created_on, updated_on, status_id) VALUES (?,?,?,?,?);";
 	}
 
 	@Override
 	protected void prepareStatetmentForSave(History t, PreparedStatement statement) throws SQLException {
 		statement.setLong(1, t.getDocumentId());
-		statement.setString(2, t.getFiles());
-		statement.setString(3, t.getName());
-		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setString(2, t.getName());
+		statement.setTimestamp(3, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(4, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setLong(5, t.getStatus());
 	}
 	
 	@Override
@@ -56,19 +57,20 @@ public class HistoryRepository extends BaseRepository<History>{
 	protected void prepareStatetmentForUpdate(History t, PreparedStatement statement) throws SQLException {
 		statement.setLong(1, t.getId());
 		statement.setLong(2, t.getDocumentId());
-		statement.setString(3, t.getFiles());
-		statement.setString(4, t.getName());
-		statement.setTimestamp(5, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+		statement.setString(3, t.getName());
+		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+		statement.setLong(6, t.getStatus());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE FROM document_history WHERE id = ?";
+		return "UPDATE document_history SET status_id=? WHERE id = ?";
 	}
 
 	@Override
 	protected void prepapreStatementForDelete(History t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getId());
+		statement.setLong(1, HistoryStatus.DELETE.getStatusValue());
+		statement.setLong(2, t.getId());
 	}
 }

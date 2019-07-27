@@ -10,6 +10,7 @@ import org.controlsfx.control.Notifications;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import de.dc.fx.ui.jregis.metro.ui.util.DocumentUtil;
@@ -73,7 +74,9 @@ public class DocumentClipboardPane extends BaseDocumentClipboardPane{
 		Notifications.create().title("Clipboard Notification").text("Save image to destination path: " + destinationPath + "/" + name).showInformation();	
 		
 		String message = transactionMessageText.getText();
-		History history = new History(message, LocalDateTime.now(), LocalDateTime.now(), selection.getId(), "");
+		History history = new History(message, LocalDateTime.now(), LocalDateTime.now(), selection.getId());
+		history.setStatus(HistoryStatus.ADD.getStatusValue());
+		
 		JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 		
 		documentClipboardPane.toBack();

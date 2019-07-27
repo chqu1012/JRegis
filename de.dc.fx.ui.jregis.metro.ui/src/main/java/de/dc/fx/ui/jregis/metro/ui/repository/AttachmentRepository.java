@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
+import de.dc.fx.ui.jregis.metro.ui.model.AttachmentStatus;
 
 public class AttachmentRepository extends BaseRepository<Attachment>{
 
@@ -16,8 +17,11 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
 		long historyId = resultSet.getLong("HISTORY_ID");
+		long statusId = resultSet.getLong("STATUS_ID");
 		
-		return new Attachment(name, createdOn, updatedOn, historyId );
+		Attachment attachment = new Attachment(name, createdOn, updatedOn, historyId );
+		attachment.setStatus(statusId);
+		return attachment;
 	}
 
 	@Override
@@ -32,17 +36,17 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO document_attachment (name, history_id, created_on, updated_on) VALUES (?,?,?,?);";
+		return "INSERT INTO document_attachment (name, history_id, created_on, updated_on, status_id) VALUES (?,?,?,?,?);";
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE FROM document_attachment WHERE id = ?";
+		return "UPDATE document_attachment SET status_id=? WHERE id = ?";
 	}
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO document_attachment KEY (ID) VALUES (?, ?, ?, ?, ?);";
+		return "MERGE INTO document_attachment KEY (ID) VALUES (?, ?, ?, ?, ?, ?);";
 	}
 
 	@Override
@@ -51,6 +55,7 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		statement.setLong(2, c.getHistoryId());
 		statement.setTimestamp(3, Timestamp.valueOf(c.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(c.getUpdatedOn()));		
+		statement.setLong(5, c.getStatus());		
 	}
 
 	@Override
@@ -60,11 +65,13 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		statement.setLong(3, c.getHistoryId());
 		statement.setTimestamp(4, Timestamp.valueOf(c.getCreatedOn()));
 		statement.setTimestamp(5, Timestamp.valueOf(c.getUpdatedOn()));		
+		statement.setLong(6, c.getStatus());		
 	}
 
 	@Override
 	protected void prepapreStatementForDelete(Attachment t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getId());		
+		statement.setLong(1, AttachmentStatus.DELETE.getStatusValue());		
+		statement.setLong(2, t.getId());		
 	}
 
 }

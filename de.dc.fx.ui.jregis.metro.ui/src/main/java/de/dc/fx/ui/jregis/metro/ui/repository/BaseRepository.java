@@ -135,14 +135,9 @@ public abstract class BaseRepository<T> {
 		PreparedStatement statement = null;
 		try {
 			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			if (cachedList.contains(t)) {
-				statement = connection.prepareStatement(updateStatement());
-				prepareStatetmentForUpdate(t, statement);
-			}else {
-				statement = connection.prepareStatement(saveStatement());
-				prepareStatetmentForSave(t, statement);
-				cachedList.add(t);
-			}
+			statement = connection.prepareStatement(saveStatement());
+			prepareStatetmentForSave(t, statement);
+			cachedList.add(t);
 			statement.execute();
 			
 			ResultSet rs = statement.getGeneratedKeys();
@@ -160,7 +155,31 @@ public abstract class BaseRepository<T> {
 		}
 		return -1;
 	}
-
+	
+	public long update(T t) {
+		PreparedStatement statement = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
+			statement = connection.prepareStatement(updateStatement());
+			prepareStatetmentForUpdate(t, statement);
+			statement.execute();
+			
+			ResultSet rs = statement.getGeneratedKeys();
+			while (rs.next()) {
+				return rs.getLong(1);
+			}
+		} catch (SQLException e) {
+			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
+			}
+		}
+		return -1;
+	}
+	
 	public void close() {
 		try {
 			connection.close();

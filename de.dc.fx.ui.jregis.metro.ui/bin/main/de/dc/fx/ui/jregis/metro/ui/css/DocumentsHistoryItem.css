@@ -30,3 +30,11 @@
 .content:selected{
 	-fx-border-color: #AABAC7;
 }
+
+.labelColor-add{
+	-fx-background-color: #004C84;
+}	
+
+.labelColor-delete{
+	-fx-background-color: #DD5246;
+}	

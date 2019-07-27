@@ -13,8 +13,9 @@ public class DBManager {
 			Server server = Server.createWebServer("-web", "-webAllowOthers",
 					"-webPort", "9081");
 			server.start();
-			String serverUrl = server.getURL()+":"+server.getPort();
+			String serverUrl = server.getURL();
 			Desktop.getDesktop().browse(new URI(serverUrl));
+			System.out.println(serverUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

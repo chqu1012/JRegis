@@ -15,10 +15,20 @@ public class IdElement {
 
 	protected LocalDateTime updatedOn;
 	
+	protected long status = 0;
+	
 	public IdElement(String name, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.name = name;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
+	}
+
+	public long getStatus() {
+		return status;
+	}
+
+	public void setStatus(long status) {
+		this.status = status;
 	}
 
 	public String getUpdatedOnAsString() {

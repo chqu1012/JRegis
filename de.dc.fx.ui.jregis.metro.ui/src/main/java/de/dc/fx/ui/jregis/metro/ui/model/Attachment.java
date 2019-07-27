@@ -17,5 +17,5 @@ public class Attachment extends IdElement {
 
 	public void setHistoryId(long historyId) {
 		this.historyId = historyId;
-	}
+	}	
 }

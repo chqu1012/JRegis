@@ -8,14 +8,11 @@ public class History extends IdElement {
 
 	private Long documentId;
 
-	private String files;
-
 	private List<Attachment> attachments = new ArrayList<>();
 
-	public History(String name, LocalDateTime createdOn, LocalDateTime updatedOn, Long documentId, String files) {
+	public History(String name, LocalDateTime createdOn, LocalDateTime updatedOn, Long documentId) {
 		super(name, createdOn, updatedOn);
 		this.documentId = documentId;
-		this.files = files;
 	}
 
 	public List<Attachment> getAttachments() {
@@ -34,11 +31,4 @@ public class History extends IdElement {
 		this.documentId = documentId;
 	}
 
-	public String getFiles() {
-		return files;
-	}
-
-	public void setFiles(String files) {
-		this.files = files;
-	}
 }

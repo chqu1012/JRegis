@@ -9,7 +9,6 @@ import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -32,6 +31,9 @@ public class DocumentHistoryItem extends AnchorPane {
 
 	@FXML
 	protected ImageView tooltipImageView;
+	
+	@FXML
+	protected Label labelColor;
 
 	private Map<Attachment, DocumentFileItem> attachmentLinks = new HashMap<>(); 
 	
@@ -59,6 +61,11 @@ public class DocumentHistoryItem extends AnchorPane {
 			
 			attachmentLinks.put(e, item);
 		});
+		
+		String style = history.getStatus()==0? "add" : "delete";
+		
+		labelColor.getStyleClass().clear();
+		labelColor.getStyleClass().add("labelColor-"+style);
 	}
 	
 	public void findAndDeactivateAttachment(Attachment attachment) {
