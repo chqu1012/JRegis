@@ -8,19 +8,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
-	protected CheckBox checkBoxShowDeletedComments;
+	protected AnchorPane clipboardHelperDialog;
 	
 	@FXML
+	protected CheckBox checkBoxShowDeletedComments;
+
+	@FXML
 	protected Label labelDraggingFilesArea;
-	
+
 	@FXML
 	protected VBox vboxDraggingFilesBox;
 
@@ -76,6 +82,21 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 	protected VBox vboxFiles;
 
 	@FXML
+	protected TextField textTransactionMessage;
+
+	@FXML
+	protected TextField textFileID;
+
+	@FXML
+	protected TextField textFilename;
+
+	@FXML
+	protected CheckBox checkBoxUsingFileId;
+
+	@FXML
+	protected ImageView imageViewClipboard;
+
+	@FXML
 	protected abstract void onLinkBackAction(ActionEvent event);
 
 	@FXML
@@ -92,8 +113,17 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
 	protected abstract void onVBoxDraggingFileBoxDragDropped(DragEvent event);
-	
+
 	@FXML
 	protected abstract void onCheckBoxShowDeletedCommentsAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onButtonClipboardHelperAcceptAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onLinkClipboardHelperCancelAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onButtonClipboardHelperAction(ActionEvent event);
 
 }

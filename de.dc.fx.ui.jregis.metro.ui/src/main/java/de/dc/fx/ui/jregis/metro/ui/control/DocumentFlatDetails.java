@@ -296,11 +296,31 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			history.getAttachments().add(input);
 			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			addHistory(history);
+			
+			historyList.add(history);
 		}
 	}
 
 	@Override
 	protected void onCheckBoxShowDeletedCommentsAction(ActionEvent event) {
 		populateHistoryList(documentProperty.get());		
+	}
+
+	@Override
+	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
+		clipboardHelperDialog.toBack();		
+		clipboardHelperDialog.setVisible(false);
+	}
+
+	@Override
+	protected void onLinkClipboardHelperCancelAction(ActionEvent event) {
+		clipboardHelperDialog.toBack();		
+		clipboardHelperDialog.setVisible(false);
+	}
+
+	@Override
+	protected void onButtonClipboardHelperAction(ActionEvent event) {
+		clipboardHelperDialog.setVisible(true);
+		clipboardHelperDialog.toFront();
 	}
 }

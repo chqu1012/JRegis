@@ -2810,3 +2810,15 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:E:/Repositor
 	at org.h2.mvstore.FileStore.open(FileStore.java:173)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:347)
 	... 53 more
+2019-07-27 15:52:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "
+Syntax error in SQL statement "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "; SQL statement:
+DELETE document_history HERE id = ? [42000-196]
+2019-07-27 15:53:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "
+Syntax error in SQL statement "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "; SQL statement:
+DELETE document_history HERE id = ? [42000-196]
+2019-07-27 15:53:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "
+Syntax error in SQL statement "DELETE DOCUMENT_HISTORY HERE ID[*] = ? "; SQL statement:
+DELETE document_history HERE id = ? [42000-196]
