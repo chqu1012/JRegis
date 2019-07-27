@@ -57,7 +57,7 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		statement.setLong(2, c.getHistoryId());
 		statement.setTimestamp(3, Timestamp.valueOf(c.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(c.getUpdatedOn()));		
-		statement.setLong(5, c.getStatus());		
+		statement.setLong(5, AttachmentStatus.ADD.getStatusValue());		
 	}
 
 	@Override

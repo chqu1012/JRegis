@@ -185,7 +185,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			LocalDateTime created = LocalDateTime.now();
 			
 			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, historyId);
-			attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
 			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 			
 			vboxFiles.getChildren().add(new AttachmentControl(attachment));
@@ -327,6 +326,20 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
 		clipboardHelperDialog.toBack();		
 		clipboardHelperDialog.setVisible(false);
+		
+		String name = textTransactionMessage.getText();
+		LocalDateTime createdOn = LocalDateTime.now();
+		History history = new History(name, createdOn , createdOn, documentProperty.get().getId());
+		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+
+		Attachment attachment = new Attachment(textFilename.getText()+".png", createdOn, createdOn, historyId);
+		history.getAttachments().add(attachment);
+		JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+		
+		Notifications.create().text("Added File "+attachment.getName()+" from Clipboard").title("File Clipboard").darkStyle().show();
+		
+		addHistory(history);
+		vboxFiles.getChildren().add(new AttachmentControl(attachment));
 	}
 
 	@Override

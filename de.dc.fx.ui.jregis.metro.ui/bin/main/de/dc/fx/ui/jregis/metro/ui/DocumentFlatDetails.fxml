@@ -22,6 +22,52 @@
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
+            <AnchorPane fx:id="clipboardHelperDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="689.0" prefWidth="944.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <Label alignment="CENTER" layoutX="58.0" layoutY="26.0" prefHeight="37.0" prefWidth="840.0" style="-fx-background-color: #1C3749;" text="Clipboard Helper Dialog" textFill="#fcfcfc" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Hyperlink layoutX="572.0" layoutY="608.0" onAction="#onLinkClipboardHelperCancelAction" text="Cancel" />
+                        <Label layoutX="199.0" layoutY="59.0" text="Transaction Message" />
+                        <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="76.0" prefHeight="25.0" prefWidth="402.0" text="Save clipboard image." />
+                        <TextField fx:id="textFileID" layoutX="200.0" layoutY="124.0" prefHeight="25.0" prefWidth="89.0" />
+                        <Label layoutX="200.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File ID" />
+                        <TextField fx:id="textFilename" layoutX="300.0" layoutY="124.0" prefHeight="25.0" prefWidth="301.0" text="Clipboard01*" />
+                        <Label layoutX="301.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File Name" />
+                        <CheckBox fx:id="checkBoxUsingFileId" layoutX="200.0" layoutY="156.0" mnemonicParsing="false" text="Using File ID" />
+                        <ScrollPane layoutX="191.0" layoutY="223.0" pannable="true" prefHeight="376.0" prefWidth="558.0">
+                           <content>
+                              <ImageView fx:id="imageViewClipboard" fitHeight="300.0" fitWidth="400.0" onMouseClicked="#onImageViewClipboardHelperClicked" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@images/icons8_Multiply_32px.png" />
+                                 </image>
+                              </ImageView>
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="198.0" layoutY="183.0" prefHeight="37.0" prefWidth="404.0" text="Doubble click in the middle of the image view to add a new clipboard image content" wrapText="true" />
+                        <Hyperlink layoutX="667.0" layoutY="125.0" onAction="#onLinkAddNewSuggestionAction" text="Add">
+                           <tooltip>
+                              <Tooltip text="Adding new suggestion to list" />
+                           </tooltip>
+                        </Hyperlink>
+                        <Hyperlink layoutX="697.0" layoutY="125.0" onAction="#onLinkDeleteNewSuggestionAction" text="Delete">
+                           <tooltip>
+                              <Tooltip text="Adding new suggestion to list" />
+                           </tooltip>
+                        </Hyperlink>
+                        <TextField disable="true" editable="false" layoutX="605.0" layoutY="124.0" prefHeight="25.0" prefWidth="58.0" text=".png" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
             <Label layoutX="20.0" layoutY="23.0" text="DOCUMENT DETAILS" textFill="#b9b9b9" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -201,51 +247,6 @@
                </children>
             </VBox>
             <Hyperlink layoutX="975.0" layoutY="14.0" onAction="#onLinkBackAction" text="Back" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0" />
-            <AnchorPane fx:id="clipboardHelperDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <children>
-                        <Label alignment="CENTER" layoutX="58.0" layoutY="26.0" prefHeight="37.0" prefWidth="840.0" style="-fx-background-color: #1C3749;" text="Clipboard Helper Dialog" textFill="#fcfcfc" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
-                        <Hyperlink layoutX="572.0" layoutY="608.0" onAction="#onLinkClipboardHelperCancelAction" text="Cancel" />
-                        <Label layoutX="199.0" layoutY="59.0" text="Transaction Message" />
-                        <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="76.0" prefHeight="25.0" prefWidth="402.0" text="Save clipboard image." />
-                        <TextField fx:id="textFileID" layoutX="200.0" layoutY="124.0" prefHeight="25.0" prefWidth="89.0" />
-                        <Label layoutX="200.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File ID" />
-                        <TextField fx:id="textFilename" layoutX="300.0" layoutY="124.0" prefHeight="25.0" prefWidth="301.0" />
-                        <Label layoutX="301.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File Name" />
-                        <CheckBox fx:id="checkBoxUsingFileId" layoutX="200.0" layoutY="156.0" mnemonicParsing="false" text="Using File ID" />
-                        <ScrollPane layoutX="191.0" layoutY="223.0" pannable="true" prefHeight="376.0" prefWidth="558.0">
-                           <content>
-                              <ImageView fx:id="imageViewClipboard" fitHeight="300.0" fitWidth="400.0" onMouseClicked="#onImageViewClipboardHelperClicked" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@images/icons8_Multiply_32px.png" />
-                                 </image>
-                              </ImageView>
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="198.0" layoutY="183.0" prefHeight="37.0" prefWidth="404.0" text="Doubble click in the middle of the image view to add a new clipboard image content" wrapText="true" />
-                        <Hyperlink layoutX="609.0" layoutY="125.0" onAction="#onLinkAddNewSuggestionAction" text="Add">
-                           <tooltip>
-                              <Tooltip text="Adding new suggestion to list" />
-                           </tooltip>
-                        </Hyperlink>
-                        <Hyperlink layoutX="639.0" layoutY="125.0" onAction="#onLinkDeleteNewSuggestionAction" text="Delete">
-                           <tooltip>
-                              <Tooltip text="Adding new suggestion to list" />
-                           </tooltip>
-                        </Hyperlink>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
          </children>
          <padding>
             <Insets bottom="20.0" />
