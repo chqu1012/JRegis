@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -125,5 +126,8 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
 	protected abstract void onButtonClipboardHelperAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onImageViewClipboardHelperClicked(MouseEvent event);
 
 }

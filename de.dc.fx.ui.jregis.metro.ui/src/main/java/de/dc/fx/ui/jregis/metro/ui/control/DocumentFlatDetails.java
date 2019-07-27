@@ -24,6 +24,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -41,6 +42,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -322,5 +324,22 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonClipboardHelperAction(ActionEvent event) {
 		clipboardHelperDialog.setVisible(true);
 		clipboardHelperDialog.toFront();
+		
+		ClipboardHelper.getImage().ifPresent(e->{
+			imageViewClipboard.setFitHeight(e.getHeight());
+			imageViewClipboard.setFitWidth(e.getWidth());
+			imageViewClipboard.setImage(e);
+		});
+	}
+
+	@Override
+	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
+		if (event.getClickCount()==2) {
+			ClipboardHelper.getImage().ifPresent(e->{
+				imageViewClipboard.setFitHeight(e.getHeight());
+				imageViewClipboard.setFitWidth(e.getWidth());
+				imageViewClipboard.setImage(e);
+			});
+		}
 	}
 }

@@ -36,18 +36,19 @@
                         </Label>
                         <Button layoutX="624.0" layoutY="528.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
                         <Hyperlink layoutX="572.0" layoutY="529.0" onAction="#onLinkClipboardHelperCancelAction" text="Cancel" />
-                        <Label layoutX="199.0" layoutY="90.0" text="Transaction Message" />
-                        <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="107.0" prefHeight="25.0" prefWidth="402.0" />
-                        <TextField fx:id="textFileID" layoutX="200.0" layoutY="155.0" prefHeight="25.0" prefWidth="89.0" />
-                        <Label layoutX="200.0" layoutY="138.0" prefHeight="17.0" prefWidth="88.0" text="File ID" />
-                        <TextField fx:id="textFilename" layoutX="300.0" layoutY="155.0" prefHeight="25.0" prefWidth="301.0" />
-                        <Label layoutX="301.0" layoutY="138.0" prefHeight="17.0" prefWidth="88.0" text="File Name" />
-                        <CheckBox fx:id="checkBoxUsingFileId" layoutX="616.0" layoutY="159.0" mnemonicParsing="false" text="Using File ID" />
-                        <ScrollPane layoutX="199.0" layoutY="189.0" prefHeight="334.0" prefWidth="403.0">
+                        <Label layoutX="199.0" layoutY="59.0" text="Transaction Message" />
+                        <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="76.0" prefHeight="25.0" prefWidth="402.0" text="Save clipboard image." />
+                        <TextField fx:id="textFileID" layoutX="200.0" layoutY="124.0" prefHeight="25.0" prefWidth="89.0" />
+                        <Label layoutX="200.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File ID" />
+                        <TextField fx:id="textFilename" layoutX="300.0" layoutY="124.0" prefHeight="25.0" prefWidth="301.0" />
+                        <Label layoutX="301.0" layoutY="107.0" prefHeight="17.0" prefWidth="88.0" text="File Name" />
+                        <CheckBox fx:id="checkBoxUsingFileId" layoutX="616.0" layoutY="128.0" mnemonicParsing="false" text="Using File ID" />
+                        <ScrollPane layoutX="199.0" layoutY="199.0" pannable="true" prefHeight="324.0" prefWidth="520.0">
                            <content>
-                              <ImageView fx:id="imageViewClipboard" fitHeight="308.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageViewClipboard" fitHeight="308.0" fitWidth="401.0" onMouseClicked="#onImageViewClipboardHelperClicked" pickOnBounds="true" preserveRatio="true" />
                            </content>
                         </ScrollPane>
+                        <Label layoutX="200.0" layoutY="153.0" prefHeight="37.0" prefWidth="404.0" text="Doubble click in the middle of the image view to add a new clipboard image content" wrapText="true" />
                      </children>
                   </AnchorPane>
                </children>
