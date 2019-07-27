@@ -117,6 +117,7 @@ public class MainApplication extends BaseMainApplication {
 				return new Category(name, null, null, -1);
 			}
 		});
+		comboBoxCategory.getSelectionModel().selectFirst();
 	}
 
 	private void initTableView() {

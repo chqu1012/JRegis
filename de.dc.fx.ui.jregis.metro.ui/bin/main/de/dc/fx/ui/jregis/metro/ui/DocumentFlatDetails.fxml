@@ -85,7 +85,7 @@
                               <HBox spacing="5.0">
                                  <children>
                                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                    <CheckBox fx:id="checkBoxShowDeletedComments" mnemonicParsing="false" onAction="#onCheckBoxShowDeletedCommentsAction" prefHeight="28.0" prefWidth="151.0" text="Hide delete comments" />
+                                    <CheckBox fx:id="checkBoxShowDeletedComments" mnemonicParsing="false" onAction="#onCheckBoxShowDeletedCommentsAction" prefHeight="28.0" prefWidth="151.0" selected="true" text="Hide delete comments" />
                                     <Button mnemonicParsing="false">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

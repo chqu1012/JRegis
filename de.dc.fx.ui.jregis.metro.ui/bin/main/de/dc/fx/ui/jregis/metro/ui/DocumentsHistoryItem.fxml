@@ -16,6 +16,6 @@
       </Label>
       <VBox fx:id="fileContainer" layoutX="10.0" layoutY="47.0" maxWidth="1.7976931348623157E308" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
       <Label fx:id="labelColor" layoutX="-4.0" layoutY="26.0" prefWidth="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ImageView fx:id="imageViewDelete" fitHeight="20.0" fitWidth="20.0" layoutX="324.0" layoutY="-57.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-delete" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" layoutX="324.0" layoutY="-57.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-delete" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </fx:root>

@@ -25,6 +25,9 @@ import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -45,9 +48,8 @@ import javafx.stage.Stage;
 public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	private Document document;
 	private boolean showDeletedHistories = false;
-	
+	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<Document>();
 	private ObservableList<History> historyList = FXCollections.observableArrayList();
 	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p-> true);
 	
@@ -68,10 +70,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		historyList.addAll(histories);
+		
+		documentProperty.addListener(this::onDocumentChanged);
 	}
-
-	public void setSelection(Document document) {
-		this.document = document;
+	
+	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
+			Document newValue) {
 		vboxReferences.getChildren().clear();
 		flowPaneFiles.getChildren().clear();
 		textAreaComment.clear();
@@ -81,22 +85,28 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			vboxReferences.getChildren().add(new Button("sssssssss"));
 		}
 		
-		populateHistoryList();
+		populateHistoryList(newValue);
 
 		labelFilesCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
 		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
 		labelReferenceCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
 		
-		labelCreatedOn.setText(document.getCreatedOnAsString());
-		labelUpdatedOn.setText(document.getUpdatedOnAsString());
-		labelDocumentDescription.setText(document.getDescription());
-		labelDocumentName.setText(document.getName());
-		labelDocumentId.setText(String.format("JREG-%05d", document.getId()));
+		labelCreatedOn.setText(newValue.getCreatedOnAsString());
+		labelUpdatedOn.setText(newValue.getUpdatedOnAsString());
+		labelDocumentDescription.setText(newValue.getDescription());
+		labelDocumentName.setText(newValue.getName());
+		labelDocumentId.setText(String.format("JREG-%05d", newValue.getId()));
 		
 		root.requestFocus();
 	}
+
+	public void setSelection(Document document) {
+		documentProperty.set(document);
+	}
 	
-	private void populateHistoryList() {
+	private void populateHistoryList(Document document) {
+		showDeletedHistories = checkBoxShowDeletedComments.isSelected();
+		
 		vboxFiles.getChildren().clear();
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
@@ -145,7 +155,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		String comment = textAreaComment.getText();
 		textAreaComment.clear();
 
-		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), document.getId());
+		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), documentProperty.get().getId());
 		history.setStatus(HistoryStatus.ADD.getStatusValue());
 		
 		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
@@ -192,9 +202,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
 		Dragboard db = event.getDragboard();
 		boolean success = false;
-		if (db.hasFiles() && document!=null) {
+		if (db.hasFiles() && documentProperty.get()!=null) {
 			LocalDateTime timestamp = LocalDateTime.now();
-			History history = new History("Dragged Files.", timestamp, timestamp, document.getId());
+			History history = new History("Dragged Files.", timestamp, timestamp, documentProperty.get().getId());
 			history.setStatus(HistoryStatus.ADD.getStatusValue());
 			
 			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
@@ -252,7 +262,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				}
 			});
 			
-			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId());
+			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), documentProperty.get().getId());
 			history.setStatus(HistoryStatus.DELETE.getStatusValue());
 			
 			history.getAttachments().add(input);
@@ -263,7 +273,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onCheckBoxShowDeletedCommentsAction(ActionEvent event) {
-		showDeletedHistories = checkBoxShowDeletedComments.isSelected();
-		populateHistoryList();		
+		populateHistoryList(documentProperty.get());		
 	}
 }
