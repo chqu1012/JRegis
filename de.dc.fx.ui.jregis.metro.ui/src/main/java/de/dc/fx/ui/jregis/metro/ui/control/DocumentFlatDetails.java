@@ -25,6 +25,9 @@ import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -43,6 +46,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	private Document document;
+	private boolean showDeletedHistories = false;
+	
+	private ObservableList<History> historyList = FXCollections.observableArrayList();
+	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p-> true);
 	
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -64,9 +71,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		vboxReferences.getChildren().clear();
 		flowPaneFiles.getChildren().clear();
 		textAreaComment.clear();
-		vboxFiles.getChildren().clear();
-		vboxComment.getChildren().clear();
-		vboxComment.getChildren().add(vboxCommentEditBox);
 
 		// Fill References
 		for (int i = 0; i < 10; i++) {
@@ -75,12 +79,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
-		histories.stream().filter(e -> e.getDocumentId() == document.getId()).forEach(e->{
-			// Workaround: Fix oherwise on each click attachments will be added
-			e.getAttachments().clear();
-			addAttachment(e);
-			addHistory(e);
-		});
+		historyList.addAll(histories);
+		populateHistoryList();
 		
 		labelFilesCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
 		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
@@ -94,6 +94,27 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		
 		root.requestFocus();
 	}
+	
+	private void populateHistoryList() {
+		vboxFiles.getChildren().clear();
+		vboxComment.getChildren().clear();
+		vboxComment.getChildren().add(vboxCommentEditBox);
+		
+		filteredHistory.stream()
+		.filter(e ->{ 
+			boolean filterCriteria = e.getDocumentId() == document.getId();
+			if (showDeletedHistories) {
+				filterCriteria = filterCriteria && e.getStatus()==HistoryStatus.ADD.getStatusValue();
+			}
+			return filterCriteria;
+		})
+		.forEach(e->{
+			// Workaround: Fix oherwise on each click attachments will be added
+			e.getAttachments().clear();
+			addAttachment(e);
+			addHistory(e);
+		});
+	}
 
 	private void addAttachment(History history) {
 		JRegisPlatform.getInstance(AttachmentRepository.class).findAll().stream()
@@ -106,7 +127,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 
 	private void addHistory(History history) {
-		
 		DocumentHistoryItem item = new DocumentHistoryItem();
 		item.setHistory(history, t -> {
 //		String path = parentPath+"/"+t;
@@ -239,5 +259,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			addHistory(history);
 		}
+	}
+
+	@Override
+	protected void onCheckBoxShowDeletedCommentsAction(ActionEvent event) {
+		showDeletedHistories = checkBoxShowDeletedComments.isSelected();
+		populateHistoryList();		
 	}
 }
