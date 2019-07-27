@@ -120,6 +120,7 @@ public abstract class BaseRepository<T> {
 			statement.execute();
 			
 			cachedList.remove(t);
+			log.log(Level.ALL, "Delete attachment: " + deleteStatement());
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
 		} finally {
@@ -144,6 +145,7 @@ public abstract class BaseRepository<T> {
 			while (rs.next()) {
 				return rs.getLong(1);
 			}
+			log.log(Level.ALL, "Save attachment: " + saveStatement());
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
 		} finally {
@@ -168,8 +170,9 @@ public abstract class BaseRepository<T> {
 			while (rs.next()) {
 				return rs.getLong(1);
 			}
+			log.log(Level.ALL, "Update attachment: " + updateStatement());
 		} catch (SQLException e) {
-			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
+			log.log(Level.SEVERE, "Failed to query: " + updateStatement(), e);
 		} finally {
 			try {
 				connection.close();

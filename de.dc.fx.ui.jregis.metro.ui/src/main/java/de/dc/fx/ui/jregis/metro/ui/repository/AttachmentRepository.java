@@ -18,9 +18,11 @@ public class AttachmentRepository extends BaseRepository<Attachment>{
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
 		long historyId = resultSet.getLong("HISTORY_ID");
 		long statusId = resultSet.getLong("STATUS_ID");
+		long id = resultSet.getLong("ID");
 		
 		Attachment attachment = new Attachment(name, createdOn, updatedOn, historyId );
 		attachment.setStatus(statusId);
+		attachment.setId(id);
 		return attachment;
 	}
 

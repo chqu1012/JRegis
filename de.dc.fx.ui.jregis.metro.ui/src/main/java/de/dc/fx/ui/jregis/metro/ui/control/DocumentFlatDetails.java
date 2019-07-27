@@ -98,10 +98,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	private void addAttachment(History history) {
 		JRegisPlatform.getInstance(AttachmentRepository.class).findAll().stream()
 			.filter(e-> e.getHistoryId()==history.getId())
+			.filter(e-> e.getStatus()==AttachmentStatus.ADD.getStatusValue())
 			.forEach(e->{
-				Attachment attachment = new Attachment(e.getName(), LocalDateTime.now(), LocalDateTime.now(), document.getId());
-				vboxFiles.getChildren().add(new AttachmentControl(attachment));
-				history.getAttachments().add(attachment);
+				vboxFiles.getChildren().add(new AttachmentControl(e));
+				history.getAttachments().add(e);
 			});
 	}
 

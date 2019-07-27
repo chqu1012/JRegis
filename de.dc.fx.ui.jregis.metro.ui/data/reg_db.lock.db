@@ -1,6 +1,6 @@
 #FileLock
-#Fri Jul 26 09:24:11 CEST 2019
+#Sat Jul 27 12:38:32 CEST 2019
 hostName=192.168.0.157
-id=16c2d2a70f2afe6296cb7c954ae1b5573287b4348ab
+id=16c3302af73b6c258374d562a0c516cae2040e60cdd
 method=file
-server=192.168.0.157\:59190
+server=192.168.0.157\:60666
