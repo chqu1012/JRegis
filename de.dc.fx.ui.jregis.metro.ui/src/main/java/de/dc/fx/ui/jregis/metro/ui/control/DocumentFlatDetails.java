@@ -96,12 +96,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		labelDocumentDescription.setText(newValue.getDescription());
 		labelDocumentName.setText(newValue.getName());
 		labelDocumentId.setText(String.format("JREG-%05d", newValue.getId()));
-		
-		root.requestFocus();
 	}
 
 	public void setSelection(Document document) {
 		documentProperty.set(document);
+		
+		// Used focus for handle escape key
+		root.requestFocus();
 	}
 	
 	private void populateHistoryList(Document document) {
