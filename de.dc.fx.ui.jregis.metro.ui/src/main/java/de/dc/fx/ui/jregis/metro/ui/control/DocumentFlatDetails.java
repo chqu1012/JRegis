@@ -23,8 +23,10 @@ import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
+import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -54,9 +56,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	private boolean showDeletedHistories = false;
+	
 	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<Document>();
+	
 	private ObservableList<History> historyList = FXCollections.observableArrayList();
 	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p-> true);
+	
+	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
+	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p-> true);
 	
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -77,7 +84,15 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		historyList.addAll(histories);
 		
 		documentProperty.addListener(this::onDocumentChanged);
-	}
+	
+		List<String> fileNames = JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).findAll();
+		nameSuggestionList.addAll(fileNames);
+		
+		new AutoCompletionTextFieldBinding<>(textFilename, param -> {
+			filteredNameSuggestion.setPredicate(p->p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			return filteredNameSuggestion;
+		});
+	}		
 	
 	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
 			Document newValue) {
@@ -341,5 +356,29 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				imageViewClipboard.setImage(e);
 			});
 		}
+	}
+
+	@Override
+	protected void onLinkAddNewSuggestionAction(ActionEvent event) {
+		if (textFilename.getText().isEmpty()) {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle().showWarning();
+		}else {
+			String name = textFilename.getText();
+			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).save(name);
+			
+			nameSuggestionList.add(name);
+		}
+	}
+
+	@Override
+	protected void onLinkDeleteNewSuggestionAction(ActionEvent event) {
+		if (textFilename.getText().isEmpty()) {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle().showWarning();
+		}else {
+			String name = textFilename.getText();
+			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).delete(name);
+			
+			nameSuggestionList.remove(name);
+		}		
 	}
 }

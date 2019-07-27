@@ -50,7 +50,6 @@ public class MainApplication extends BaseMainApplication {
 	private FilteredList<Document> filteredDocumentData = new FilteredList<>(masterDocumentData, p -> true);
 	
 	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
-	private DocumentDetails documentDetails = new DocumentDetails();
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	
 	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
@@ -78,7 +77,6 @@ public class MainApplication extends BaseMainApplication {
 		initControls();
 		initBindings();
 		
-		mainStackPane.getChildren().add(documentDetails);
 		mainStackPane.getChildren().add(documentFlatDetails);
 		paneDocumentTableView.toFront();
 	}

@@ -129,5 +129,11 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
 	protected abstract void onImageViewClipboardHelperClicked(MouseEvent event);
+	
+	@FXML
+	protected abstract void onLinkAddNewSuggestionAction(ActionEvent event);
+	
+	@FXML
+	protected abstract void onLinkDeleteNewSuggestionAction(ActionEvent event);
 
 }
