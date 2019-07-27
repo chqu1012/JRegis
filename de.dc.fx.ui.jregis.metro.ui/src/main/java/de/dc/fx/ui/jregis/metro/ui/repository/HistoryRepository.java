@@ -18,8 +18,10 @@ public class HistoryRepository extends BaseRepository<History>{
 		Long documentId= resultSet.getLong("DOCUMENT_ID");
 		LocalDateTime createdOn= resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn= resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		Long statusId = resultSet.getLong("STATUS_ID");
 		
 		History history = new History(name, createdOn, updatedOn, documentId);
+		history.setStatus(statusId);
 		history.setId(id);
 		return history;
 	}

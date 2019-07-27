@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -62,7 +63,7 @@ public class DocumentHistoryItem extends AnchorPane {
 			attachmentLinks.put(e, item);
 		});
 		
-		String style = history.getStatus()==0? "add" : "delete";
+		String style = history.getStatus()==HistoryStatus.ADD.getStatusValue()? "add" : "delete";
 		
 		labelColor.getStyleClass().clear();
 		labelColor.getStyleClass().add("labelColor-"+style);
