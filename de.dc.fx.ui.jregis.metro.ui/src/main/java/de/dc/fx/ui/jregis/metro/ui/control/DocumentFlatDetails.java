@@ -64,6 +64,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		}
 		
 		JRegisPlatform.getInstance(IEventBroker.class).register(this);
+		
+		// Fill Histories
+		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
+		historyList.addAll(histories);
 	}
 
 	public void setSelection(Document document) {
@@ -76,12 +80,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		for (int i = 0; i < 10; i++) {
 			vboxReferences.getChildren().add(new Button("sssssssss"));
 		}
-
-		// Fill Histories
-		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
-		historyList.addAll(histories);
-		populateHistoryList();
 		
+		populateHistoryList();
+
 		labelFilesCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
 		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
 		labelReferenceCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
@@ -100,15 +101,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
 		
-		filteredHistory.stream()
-		.filter(e ->{ 
+		filteredHistory.setPredicate(e->{
 			boolean filterCriteria = e.getDocumentId() == document.getId();
 			if (showDeletedHistories) {
-				filterCriteria = filterCriteria && e.getStatus()==HistoryStatus.ADD.getStatusValue();
+				filterCriteria = filterCriteria && e.getStatus() == HistoryStatus.ADD.getStatusValue();
 			}
 			return filterCriteria;
-		})
-		.forEach(e->{
+		});
+		filteredHistory.stream().forEach(e->{
 			// Workaround: Fix oherwise on each click attachments will be added
 			e.getAttachments().clear();
 			addAttachment(e);
