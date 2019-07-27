@@ -21,7 +21,7 @@
       <Label fx:id="labelColor" layoutX="-4.0" layoutY="26.0" prefWidth="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <HBox layoutX="421.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <ImageView fx:id="imageViewZip" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-zip">
+            <ImageView fx:id="imageViewZip" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewZipClicked" pickOnBounds="true" preserveRatio="true" styleClass="image-view-zip">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -29,7 +29,7 @@
                   <Image url="@images/icons8-zip-24-gray.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-delete">
+            <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewDeleteClicked" pickOnBounds="true" preserveRatio="true" styleClass="image-view-delete">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

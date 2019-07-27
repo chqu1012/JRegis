@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.History;
-import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 
 public class HistoryRepository extends BaseRepository<History>{
 
@@ -67,12 +66,11 @@ public class HistoryRepository extends BaseRepository<History>{
 
 	@Override
 	protected String deleteStatement() {
-		return "UPDATE document_history SET status_id=? WHERE id = ?";
+		return "DELETE document_history WHERE id = ?";
 	}
 
 	@Override
 	protected void prepapreStatementForDelete(History t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, HistoryStatus.DELETE.getStatusValue());
-		statement.setLong(2, t.getId());
+		statement.setLong(1, t.getId());
 	}
 }

@@ -47,6 +47,9 @@ import javafx.stage.Stage;
 
 public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
+	public static final String ID_DELETE_ATTACHMENT = "/attachment/delete";
+	public static final String ID_DELETE_HISTORY = "/history/delete";
+	
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	private boolean showDeletedHistories = false;
 	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<Document>();
@@ -239,10 +242,34 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		event.consume();		
 	}
 	
+	@Subscribe 
+	public void deleteHistory(IEventContext<History> context) {
+		if (context.getEventId().equals(ID_DELETE_HISTORY)) {
+			History input = context.getInput();
+			DocumentHistoryItem toDeleteItem = null;
+			for (Node node : vboxComment.getChildren()) {
+				if (node instanceof DocumentHistoryItem) {
+					DocumentHistoryItem item = (DocumentHistoryItem) node;
+					if(item.isHistory(input)){
+						toDeleteItem = item;
+					}
+				}
+			}
+			
+			if (toDeleteItem!=null) {
+				vboxComment.getChildren().remove(toDeleteItem);
+			}
+			
+			JRegisPlatform.getInstance(HistoryRepository.class).delete(input);
+			
+			Notifications.create().title("Delete").text("Delete Comment with ID: "+input.getId()).darkStyle().show();
+		}
+	}
+	
 	@Subscribe
 	public void deleteAttachment(IEventContext<Attachment> context) {
-		Attachment input = context.getInput();
-		if (context.getEventId().equals("/attachment/delete")) {
+		if (context.getEventId().equals(ID_DELETE_ATTACHMENT)) {
+			Attachment input = context.getInput();
 			AttachmentControl toDeleteControl = null;
 			for (Node node : vboxFiles.getChildren()) {
 				if (node instanceof AttachmentControl) {
