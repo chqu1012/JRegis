@@ -11,6 +11,19 @@ import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 public class HistoryService {
 
 	/**
+	 * Create a history with aggregated attachments.
+	 * @param context
+	 * @param attachments
+	 * @return
+	 */
+	public History create(DocumentContext context, String... attachments) {
+		History history = create(context);
+		AttachmentService attachmentService = JRegisPlatform.getInstance(AttachmentService.class);
+		attachmentService.create(history, attachments);
+		return history;
+	}
+	
+	/**
 	 * Create a new history item in database.
 	 * @param context
 	 * @return

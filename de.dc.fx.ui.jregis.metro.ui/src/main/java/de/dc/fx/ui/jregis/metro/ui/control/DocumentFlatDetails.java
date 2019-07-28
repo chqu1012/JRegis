@@ -2,7 +2,6 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 
 import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -27,6 +26,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.service.AttachmentService;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
@@ -41,7 +41,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -146,7 +145,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			Document newValue) {
 		vboxReferences.getChildren().clear();
 		flowPaneFiles.getChildren().clear();
-
+		vboxFiles.getChildren().clear();
+		
 		context.documentComment.set("");
 
 		// Fill References
@@ -215,8 +215,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
 
 		flowPaneFiles.getChildren().stream().forEach(e -> {
-			LocalDateTime created = LocalDateTime.now();
-
 			try {
 				JRegisPlatform.getInstance(DocumentFolderService.class).copyFile(context.current.get(),
 						e.getAccessibleText());
@@ -226,8 +224,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				return;
 			}
 
-			Attachment attachment = new Attachment(((Hyperlink) e).getText(), created, created, history.getId());
-			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+			Attachment attachment = JRegisPlatform.getInstance(AttachmentService.class).create(history, ((Hyperlink) e).getText());
 
 			vboxFiles.getChildren().add(new AttachmentControl(attachment));
 			history.getAttachments().add(attachment);
@@ -282,9 +279,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			db.getFiles().stream().forEach(f -> {
 				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, history.getId());
 
-				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f,
-						new File(destination, f.getName()));
-				
+				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f, new File(destination, f.getName()));
 				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 				
 				vboxFiles.getChildren().add(new AttachmentControl(attachment));
