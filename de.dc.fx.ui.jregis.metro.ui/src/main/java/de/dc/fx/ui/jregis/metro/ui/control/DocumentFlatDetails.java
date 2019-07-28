@@ -362,12 +362,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				}
 			});
 
-			History history = new History("Delete selected file " + input.getName(), LocalDateTime.now(),
-					LocalDateTime.now(), this.context.current.get().getId());
-			history.setStatus(HistoryStatus.DELETE.getStatusValue());
+			this.context.documentComment.set("Delete selected file " + input.getName());
+			History history = JRegisPlatform.getInstance(HistoryService.class).delete(this.context);
 
 			history.getAttachments().add(input);
-			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			addHistory(history);
 
 			historyList.add(history);
@@ -387,7 +385,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		String filename = textFilename.getText() + ".png";
 		Image image = imageViewClipboard.getImage();
 
-		context.documentComment.set(textTransactionMessage.getText());
+		context.documentComment.set(context.clipboardTransactionMessage.get());
 		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
 		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context.current.get(), filename, image);
 
@@ -459,7 +457,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
-		if (textDownloadTUrl.getText().isEmpty()) {
+		if (context.downloadUrl.get().isEmpty()) {
 			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
 			return;
 		} else {
@@ -500,16 +498,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onButtonDownloadDialogAction(ActionEvent event) {
-		String content = ClipboardHelper.getString();
-		textDownloadTUrl.setText(content);
-
+		context.downloadUrl.set(ClipboardHelper.getString());
+		
 		downloadDialog.setVisible(true);
 		downloadDialog.toFront();
 	}
 
 	@Override
 	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
-		String content = ClipboardHelper.getString();
-		textDownloadTUrl.setText(content);
+		context.downloadUrl.set(ClipboardHelper.getString());
 	}
 }

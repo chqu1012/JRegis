@@ -47,7 +47,7 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setString(2, t.getName());
 		statement.setTimestamp(3, Timestamp.valueOf(t.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(t.getUpdatedOn()));
-		statement.setLong(5, HistoryStatus.ADD.getStatusValue());
+		statement.setLong(5, t.getStatus());
 	}
 	
 	@Override
