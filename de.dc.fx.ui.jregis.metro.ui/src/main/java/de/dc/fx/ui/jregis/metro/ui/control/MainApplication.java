@@ -21,12 +21,14 @@ import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
@@ -210,7 +212,14 @@ public class MainApplication extends BaseMainApplication {
 		if (event.getClickCount()==2) {
 			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 			if (selection!=null) {
-				documentFlatDetails.setSelection(selection);
+				Task<Void> task = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						Platform.runLater(() -> documentFlatDetails.setSelection(selection));
+						return null;
+					}
+				};
+				new Thread(task).start();
 				documentFlatDetails.toFront();
 			}
 		}

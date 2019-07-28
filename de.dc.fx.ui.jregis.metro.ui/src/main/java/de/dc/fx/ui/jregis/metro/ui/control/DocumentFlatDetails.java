@@ -174,7 +174,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	private void populateHistoryList(Document document) {
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
-
+		vboxFiles.getChildren().clear();
+		
 		filteredHistory.setPredicate(e -> {
 			boolean filterCriteria = e.getDocumentId() == document.getId();
 			if (checkBoxShowDeletedComments.isSelected()) {
