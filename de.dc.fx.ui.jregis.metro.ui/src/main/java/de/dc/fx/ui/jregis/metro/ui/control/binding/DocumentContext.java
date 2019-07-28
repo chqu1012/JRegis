@@ -35,7 +35,7 @@ public class DocumentContext {
 	public BooleanProperty usingDownloadFileId = new SimpleBooleanProperty(true);
 	public StringProperty downloadTransactionMessage = new SimpleStringProperty("Download from url.");
 	public StringProperty downloadFileID = new SimpleStringProperty("");
-	public StringProperty downloadFileName = new SimpleStringProperty("Download*");
+	public StringProperty downloadFileName = new SimpleStringProperty("NewDownload");
 	public StringProperty downloadUrl = new SimpleStringProperty("");
 	public ObjectProperty<Object> downloadContent = new SimpleObjectProperty<>();
 
@@ -43,7 +43,7 @@ public class DocumentContext {
 	public BooleanProperty usingClipboardFileId = new SimpleBooleanProperty(true);
 	public StringProperty clipboardTransactionMessage = new SimpleStringProperty("Save clipboard image.");
 	public StringProperty clipboardFileID = new SimpleStringProperty("");
-	public StringProperty clipboardFileName = new SimpleStringProperty("Clipboard*");
+	public StringProperty clipboardFileName = new SimpleStringProperty("NewClipboard");
 	public StringProperty clipboardFilePath = new SimpleStringProperty("");
 	public ObjectProperty<Image> clipboardImageContent = new SimpleObjectProperty<>();
 }

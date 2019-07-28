@@ -112,10 +112,13 @@ public class MainApplication extends BaseMainApplication {
 			
 			@Override
 			public Category fromString(String name) {
+				Optional<Category> optionalCategory = masterCategoryData.stream().filter(p-> p.getName().equals(name)).findFirst();
+				if (optionalCategory.isPresent()) {
+					return optionalCategory.get();
+				}
 				return new Category(name, null, null, -1);
 			}
 		});
-		comboBoxCategory.getSelectionModel().selectFirst();
 	}
 
 	private void initTableView() {

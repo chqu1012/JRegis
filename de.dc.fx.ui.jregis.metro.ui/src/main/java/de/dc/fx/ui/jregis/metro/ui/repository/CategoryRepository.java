@@ -16,8 +16,11 @@ public class CategoryRepository extends BaseRepository<Category> {
 		int parentId = resultSet.getInt("PARENT_ID");
 		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
 		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		long id = resultSet.getLong("ID");
 		
-		return new Category(name, createdOn, updatedOn, parentId);
+		Category category = new Category(name, createdOn, updatedOn, parentId);
+		category.setId(id);
+		return category;
 	}
 
 	@Override

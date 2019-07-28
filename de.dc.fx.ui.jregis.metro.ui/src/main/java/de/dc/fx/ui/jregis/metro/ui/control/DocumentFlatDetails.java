@@ -151,7 +151,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 		// Fill References
 		for (int i = 0; i < 10; i++) {
-			vboxReferences.getChildren().add(new Button("sssssssss"));
+//			vboxReferences.getChildren().add(new Button("sssssssss"));
 		}
 
 		populateHistoryList(newValue);
@@ -243,7 +243,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		FileChooser chooser = new FileChooser();
 		List<File> files = chooser.showOpenMultipleDialog(new Stage());
 		if (files != null) {
-			flowPaneFiles.getChildren().clear();
 			files.stream().forEach(e -> {
 				Hyperlink link = new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())));
 				link.setAccessibleText(e.getAbsolutePath());
@@ -382,10 +381,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
 		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context);
 
-		Attachment attachment = new Attachment(context.clipboardFileName.get()+".png", LocalDateTime.now(), LocalDateTime.now(), history.getId());
-		history.getAttachments().add(attachment);
-		JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-
+		Attachment attachment = JRegisPlatform.getInstance(AttachmentService.class).create(history, context.clipboardFileName.get()+".png");
+		
 		Notifications.create().text("Added File " + attachment.getName() + " from Clipboard").title("File Clipboard")
 				.darkStyle().show();
 
