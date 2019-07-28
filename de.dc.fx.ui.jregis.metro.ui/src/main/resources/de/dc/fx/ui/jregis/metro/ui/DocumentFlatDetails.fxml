@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onScrollPaneKeyPressed" pannable="true" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onScrollPaneKeyPressed" pannable="true" styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
@@ -45,6 +45,11 @@
                         <CheckBox fx:id="checkBoxUsingDownloadFileId" layoutX="71.0" layoutY="220.0" mnemonicParsing="false" text="Using File ID" />
                         <Label layoutX="70.0" layoutY="111.0" text="URL" />
                         <TextField fx:id="textDownloadTUrl" layoutX="70.0" layoutY="128.0" prefHeight="25.0" prefWidth="402.0" />
+                        <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
+                           <image>
+                              <Image url="@images/icons8-inhalte-einfügen-24.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </children>

@@ -1,0 +1,15 @@
+.scroll-main-pane:focused{
+  -fx-background-insets: 0, 0, 1, 2;
+}
+
+.download-clipboard-image-view {
+     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-inhalte-einfügen-24-gray.png');
+}
+
+.download-clipboard-image-view:hover {
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-inhalte-einfügen-24.png');
+}
+
+.download-clipboard-image-view:pressed{
+     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-inhalte-einfügen-24-gray.png');
+}
