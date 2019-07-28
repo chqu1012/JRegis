@@ -29,6 +29,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
+import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
@@ -162,11 +163,16 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private void addHistory(History history) {
 		DocumentHistoryItem item = new DocumentHistoryItem();
-		item.setHistory(history, t -> {
-//		String path = parentPath+"/"+t;
-//		openFileExecuter.accept(path);
-		});
+		item.setHistory(history, t -> openFile(t));
 		vboxComment.getChildren().add(item);
+	}
+
+	private void openFile(String t) {
+		try {
+			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(documentProperty.get(), t);
+		} catch (Exception e) {
+			Notifications.create().darkStyle().text("File "+t+" not available!").title("File Error").showError();
+		}
 	}
 
 	@Override
@@ -177,22 +183,27 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	@Override
 	protected void onButtonSubmitComment(ActionEvent event) {
 		String comment = textAreaComment.getText();
-		textAreaComment.clear();
-
-		History history = new History(comment, LocalDateTime.now(), LocalDateTime.now(), documentProperty.get().getId());
-		history.setStatus(HistoryStatus.ADD.getStatusValue());
+		History history = JRegisPlatform.getInstance(HistoryService.class).create(documentProperty.get(), comment);
 		
-		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
-
 		flowPaneFiles.getChildren().stream().forEach(e->{
 			LocalDateTime created = LocalDateTime.now();
 			
-			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, historyId);
+			try {
+				JRegisPlatform.getInstance(DocumentFolderService.class).copyFile(documentProperty.get(), e.getAccessibleText());
+			} catch (IOException e1) {
+				Notifications.create().darkStyle().text("Failed to copy file "+e.getAccessibleText()).title("File Copy Error!").show();
+				return;
+			}
+			
+			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, history.getId());
 			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 			
 			vboxFiles.getChildren().add(new AttachmentControl(attachment));
 			history.getAttachments().add(attachment);
 		});
+		
+		textAreaComment.clear();
+		flowPaneFiles.getChildren().clear();
 		
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
 
@@ -205,8 +216,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		List<File> files = chooser.showOpenMultipleDialog(new Stage());
 		if (files != null) {
 			flowPaneFiles.getChildren().clear();
-			files.stream().forEach(e -> flowPaneFiles.getChildren()
-					.add(new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())))));
+			files.stream().forEach(e -> {
+				Hyperlink link = new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())));
+				link.setAccessibleText(e.getAbsolutePath());
+				flowPaneFiles.getChildren().add(link);
+			});
 		}
 
 		if (textAreaComment.getText().isEmpty()) {
@@ -416,12 +430,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
 			return; 
 		}else {
-			File documentFolder = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(documentProperty.get());
-			String path = documentFolder.getAbsolutePath()+"/"+textDownloadFilename.getText();
 			try {
-				File file = new File(path);
-				FileUtils.copyURLToFile(new URL(textDownloadTUrl.getText()), file, 10000, 10000);
-				Notifications.create().darkStyle().text("Download url to "+path).title("Download Finished").onAction(new EventHandler<ActionEvent>() {
+				String url = textDownloadTUrl.getText();
+				File file = JRegisPlatform.getInstance(DocumentFolderService.class).downloadFile(documentProperty.get(), url, textDownloadFilename.getText());
+				Notifications.create().darkStyle().text("Download url to "+url).title("Download Finished").onAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
 						try {
@@ -431,6 +443,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 						}
 					}
 				}).showInformation();
+				
+				// TODO: Add History UI entry
 			} catch (IOException e) {
 				Notifications.create().darkStyle().text("Failed to download file from url "+textDownloadTUrl.getText()).title("Error on Downloading").showError();
 				return;

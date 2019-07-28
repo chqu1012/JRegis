@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.History;
+import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 
 public class HistoryRepository extends BaseRepository<History>{
 
@@ -46,7 +47,7 @@ public class HistoryRepository extends BaseRepository<History>{
 		statement.setString(2, t.getName());
 		statement.setTimestamp(3, Timestamp.valueOf(t.getCreatedOn()));
 		statement.setTimestamp(4, Timestamp.valueOf(t.getUpdatedOn()));
-		statement.setLong(5, t.getStatus());
+		statement.setLong(5, HistoryStatus.ADD.getStatusValue());
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
+import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
 
 
 public class GlobalModul extends AbstractModule {
@@ -23,6 +24,8 @@ public class GlobalModul extends AbstractModule {
 		bind(AttachmentRepository.class).asEagerSingleton();
 		bind(DocumentNameRepository.class).asEagerSingleton();
 		bind(ClipboardNameSuggestionRepository.class).asEagerSingleton();
+		
+		bind(HistoryService.class).asEagerSingleton();
 		
 		bind(DocumentFolderService.class).asEagerSingleton();
 		bind(IEventBroker.class).to(EventBroker.class).asEagerSingleton();
