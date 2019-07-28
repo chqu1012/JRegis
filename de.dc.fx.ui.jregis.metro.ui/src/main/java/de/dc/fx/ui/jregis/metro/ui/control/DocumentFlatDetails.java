@@ -171,7 +171,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 
 	private void populateHistoryList(Document document) {
-		vboxFiles.getChildren().clear();
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
 
@@ -270,22 +269,23 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
 		Dragboard db = event.getDragboard();
 		boolean success = false;
-		if (db.hasFiles() && context.current.get() != null) {
+		if (db.hasFiles()) {
 			LocalDateTime timestamp = LocalDateTime.now();
-			History history = new History("Dragged Files.", timestamp, timestamp, context.current.get().getId());
-			history.setStatus(HistoryStatus.ADD.getStatusValue());
 
-			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			context.documentComment.set("Dragged Files.");
+			History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
+			
 			String destination = JRegisPlatform.getInstance(DocumentFolderService.class)
 					.getFolderBy(context.current.get()).getAbsolutePath();
 
 			db.getFiles().stream().forEach(f -> {
-				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, historyId);
-				attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
+				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, history.getId());
 
 				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f,
-						new File(destination + "/" + f.getName()));
+						new File(destination, f.getName()));
+				
 				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+				
 				vboxFiles.getChildren().add(new AttachmentControl(attachment));
 				history.getAttachments().add(attachment);
 			});
@@ -294,13 +294,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			success = true;
 			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2) -> e1 + "," + e2);
 			files.ifPresent(s -> Notifications.create().title("Clipboard Notification")
-					.text("Import file(s): " + s + " sucessfully!").onAction(e -> {
-						try {
-							Desktop.getDesktop().open(new File(destination));
-						} catch (IOException e3) {
-							e3.printStackTrace();
-						}
-					}).darkStyle().showInformation());
+					.text("Import file(s): " + s + " sucessfully!")
+					.onAction(e -> onOpenFileChanged(null, null, destination))
+					.darkStyle().showInformation());
 		}
 		labelDraggingFilesArea.getStyleClass().clear();
 		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
@@ -470,15 +466,20 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			try {
 				File file = JRegisPlatform.getInstance(DocumentFolderService.class).downloadFile(context);
 				Notifications.create().darkStyle().text("Download url to " + context.downloadUrl.get())
-						.title("Download Finished").onAction(event1 -> {
-							try {
-								Desktop.getDesktop().open(file.getParentFile());
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}).showInformation();
+						.title("Download Finished").onAction(e1 -> onOpenFileChanged(null, null, file.getParent()))
+						.showInformation();
 
-				// TODO: Add History UI entry
+				context.documentComment.set(context.downloadTransactionMessage.get());
+				History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
+				
+				Attachment attachment = new Attachment(context.downloadFileName.get(), LocalDateTime.now(), LocalDateTime.now(), history.getId());
+				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+				
+				history.getAttachments().add(attachment);
+				
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				
+				addHistory(history);
 			} catch (IOException e) {
 				Notifications.create().darkStyle()
 						.text("Failed to download file from url " + textDownloadTUrl.getText())

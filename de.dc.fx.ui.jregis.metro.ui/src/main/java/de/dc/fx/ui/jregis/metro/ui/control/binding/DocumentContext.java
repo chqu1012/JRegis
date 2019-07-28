@@ -1,7 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.control.binding;
 
-import java.io.File;
-
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -9,8 +7,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.image.Image;
 
 public class DocumentContext {
@@ -37,9 +33,9 @@ public class DocumentContext {
 	
 	// Webdownload Dialog
 	public BooleanProperty usingDownloadFileId = new SimpleBooleanProperty(true);
-	public StringProperty downloadTransactionMessage = new SimpleStringProperty("");
+	public StringProperty downloadTransactionMessage = new SimpleStringProperty("Download from url.");
 	public StringProperty downloadFileID = new SimpleStringProperty("");
-	public StringProperty downloadFileName = new SimpleStringProperty("");
+	public StringProperty downloadFileName = new SimpleStringProperty("Download*");
 	public StringProperty downloadUrl = new SimpleStringProperty("");
 	public ObjectProperty<Object> downloadContent = new SimpleObjectProperty<>();
 

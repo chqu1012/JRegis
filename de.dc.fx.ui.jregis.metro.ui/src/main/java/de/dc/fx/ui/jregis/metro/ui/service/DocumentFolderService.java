@@ -25,6 +25,10 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 	public void copyImageTo(Document document, String filename, Image image) {
 		ImageHelper.saveToFile(getFolderBy(document) + "/" + filename, image);
 	}
+
+	public void copyFile(Document document, File file) {
+		copyFile(document, file.getAbsoluteFile());
+	}
 	
 	public void copyFile(Document document, String filePath) throws IOException {
 		FileUtils.copyFileToDirectory(new File(filePath), getFolderBy(document));
