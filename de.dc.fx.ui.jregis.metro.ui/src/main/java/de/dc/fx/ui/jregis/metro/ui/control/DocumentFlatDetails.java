@@ -127,6 +127,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		textFilename.textProperty().bindBidirectional(context.clipboardFileName);
 		textFileID.textProperty().bindBidirectional(context.clipboardFileID);
 		textTransactionMessage.textProperty().bindBidirectional(context.clipboardTransactionMessage);
+		imageViewClipboard.imageProperty().bindBidirectional(context.clipboardImageContent);
 		
 		// Add Listeners
 		context.current.addListener(this::onDocumentChanged);
@@ -382,14 +383,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		clipboardHelperDialog.toBack();
 		clipboardHelperDialog.setVisible(false);
 
-		String filename = textFilename.getText() + ".png";
-		Image image = imageViewClipboard.getImage();
-
 		context.documentComment.set(context.clipboardTransactionMessage.get());
 		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
-		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context.current.get(), filename, image);
+		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context);
 
-		Attachment attachment = new Attachment(filename, LocalDateTime.now(), LocalDateTime.now(), history.getId());
+		Attachment attachment = new Attachment(context.clipboardFileName.get()+".png", LocalDateTime.now(), LocalDateTime.now(), history.getId());
 		history.getAttachments().add(attachment);
 		JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 
@@ -414,7 +412,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		ClipboardHelper.getImage().ifPresent(e -> {
 			imageViewClipboard.setFitHeight(e.getHeight());
 			imageViewClipboard.setFitWidth(e.getWidth());
-			imageViewClipboard.setImage(e);
+			context.clipboardImageContent.set(e);
 		});
 	}
 
@@ -424,7 +422,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			ClipboardHelper.getImage().ifPresent(e -> {
 				imageViewClipboard.setFitHeight(e.getHeight());
 				imageViewClipboard.setFitWidth(e.getWidth());
-				imageViewClipboard.setImage(e);
+				context.clipboardImageContent.set(e);
 			});
 		}
 	}

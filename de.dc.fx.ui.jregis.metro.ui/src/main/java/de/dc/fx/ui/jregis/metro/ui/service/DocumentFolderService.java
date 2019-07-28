@@ -22,6 +22,13 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 		return "document";
 	}
 	
+	public void copyImageTo(DocumentContext context) {
+		Image image = context.clipboardImageContent.get();
+		String filename = context.clipboardFileName.get()+".png";
+		Document document = context.current.get();
+		copyImageTo(document, filename,image);
+	}
+	
 	public void copyImageTo(Document document, String filename, Image image) {
 		ImageHelper.saveToFile(getFolderBy(document) + "/" + filename, image);
 	}
