@@ -3,6 +3,7 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,6 +20,9 @@ import javafx.scene.layout.VBox;
 
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
+	@FXML
+	protected Button buttonDownloadDialogAccept;
+	
     @FXML
     protected TextField textDownloadTransactionMessage;
 
@@ -162,5 +166,8 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
     @FXML
     protected abstract void onButtonDownloadDialogAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onImageViewDownloadClipboardClicked(MouseEvent event);
 
 }

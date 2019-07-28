@@ -16,9 +16,9 @@ import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -72,6 +72,7 @@ public class DocumentHistoryItem extends AnchorPane {
 	
 	public void setHistory(History history, Consumer<String> executer) {
 		this.history = history;
+		
 		createdTimestamp.setText(history.getCreatedOn().toString());
 		message.setText(history.getName());
 		history.getAttachments().stream().forEach(e -> {

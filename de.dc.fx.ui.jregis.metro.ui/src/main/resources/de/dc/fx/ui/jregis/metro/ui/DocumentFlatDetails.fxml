@@ -34,7 +34,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onLinkDownloadDialogAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Button fx:id="buttonDownloadDialogAccept" layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onLinkDownloadDialogAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
                         <Hyperlink layoutX="296.0" layoutY="259.0" onAction="#onLinkDownloadDialogCancelAction" text="Cancel" />
                         <Label layoutX="70.0" layoutY="58.0" text="Transaction Message" />
                         <TextField fx:id="textDownloadTransactionMessage" layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="402.0" text="Download Link from URL." />
@@ -45,7 +45,7 @@
                         <CheckBox fx:id="checkBoxUsingDownloadFileId" layoutX="71.0" layoutY="220.0" mnemonicParsing="false" text="Using File ID" />
                         <Label layoutX="70.0" layoutY="111.0" text="URL" />
                         <TextField fx:id="textDownloadTUrl" layoutX="70.0" layoutY="128.0" prefHeight="25.0" prefWidth="402.0" />
-                        <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
+                        <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" onMouseClicked="#onImageViewDownloadClipboardClicked" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
                            <image>
                               <Image url="@images/icons8-inhalte-einfügen-24.png" />
                            </image>

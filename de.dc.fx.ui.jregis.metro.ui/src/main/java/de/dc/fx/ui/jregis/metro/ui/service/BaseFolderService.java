@@ -1,11 +1,11 @@
-package de.dc.fx.ui.jregis.metro.ui.util;
+package de.dc.fx.ui.jregis.metro.ui.service;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-public abstract class BaseFolderUtil<T> {
+public abstract class BaseFolderService<T> {
 	
 	public static final File rootFolder = new File("");
 	public static final File contentFolder = new File(rootFolder.getAbsoluteFile() + "/content");

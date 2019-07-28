@@ -2,6 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 
 import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
@@ -37,6 +39,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -57,9 +60,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	public static final String ID_DELETE_HISTORY = "/history/delete";
 	
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	private boolean showDeletedHistories = false;
-	
-	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<Document>();
+	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<>();
 	
 	private ObservableList<History> historyList = FXCollections.observableArrayList();
 	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p-> true);
@@ -94,6 +95,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			filteredNameSuggestion.setPredicate(p->p.toLowerCase().contains(param.getUserText().toLowerCase()));
 			return filteredNameSuggestion;
 		});
+		
+		buttonDownloadDialogAccept.disableProperty().bind(textDownloadTUrl.textProperty().isEmpty());
 	}		
 	
 	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
@@ -128,15 +131,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 	
 	private void populateHistoryList(Document document) {
-		showDeletedHistories = checkBoxShowDeletedComments.isSelected();
-		
 		vboxFiles.getChildren().clear();
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
 		
 		filteredHistory.setPredicate(e->{
 			boolean filterCriteria = e.getDocumentId() == document.getId();
-			if (showDeletedHistories) {
+			if (checkBoxShowDeletedComments.isSelected()) {
 				filterCriteria = filterCriteria && e.getStatus() == HistoryStatus.ADD.getStatusValue();
 			}
 			return filterCriteria;
@@ -403,10 +404,21 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
 			return; 
 		}else {
-			// TODO: Should be replaced by document folder
-			String path = "";
+			File documentFolder = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(documentProperty.get());
+			String path = documentFolder.getAbsolutePath()+"/"+textDownloadFilename.getText();
 			try {
-				FileUtils.copyURLToFile(new URL(textDownloadTUrl.getText()), new File(path), 10000, 10000);
+				File file = new File(path);
+				FileUtils.copyURLToFile(new URL(textDownloadTUrl.getText()), file, 10000, 10000);
+				Notifications.create().darkStyle().text("Download url to "+path).title("Download Finished").onAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						try {
+							Desktop.getDesktop().open(file.getParentFile());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}).showInformation();
 			} catch (IOException e) {
 				Notifications.create().darkStyle().text("Failed to download file from url "+textDownloadTUrl.getText()).title("Error on Downloading").showError();
 				return;
@@ -425,7 +437,16 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onButtonDownloadDialogAction(ActionEvent event) {
+		String content = ClipboardHelper.getString();
+		textDownloadTUrl.setText(content);
+		
 		downloadDialog.setVisible(true);
 		downloadDialog.toFront();
+	}
+
+	@Override
+	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
+		String content = ClipboardHelper.getString();
+		textDownloadTUrl.setText(content);
 	}
 }

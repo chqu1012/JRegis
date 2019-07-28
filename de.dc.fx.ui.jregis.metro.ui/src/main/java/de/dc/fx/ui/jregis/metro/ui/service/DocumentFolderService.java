@@ -1,11 +1,11 @@
-package de.dc.fx.ui.jregis.metro.ui.util;
+package de.dc.fx.ui.jregis.metro.ui.service;
 
 import java.io.File;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 
-public class DocumentUtil extends BaseFolderUtil<Document>{
+public class DocumentFolderService extends BaseFolderService<Document>{
 
 	public Document lastSelectedDocument;
 	
