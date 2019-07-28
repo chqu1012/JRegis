@@ -114,7 +114,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		labelUpdatedOn.textProperty().bind(context.documentUpdatedOn);
 		
 		// Counters
-		// TODO: Counters
+		labelFilesCount.textProperty().bind(context.countFile);
+		labelCommentCount.textProperty().bind(context.countComment);
+		labelReferenceCount.textProperty().bind(context.countReference);
+		
+		context.countFile.bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
+		context.countComment.bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
+		context.countReference.bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
 	}
 
 	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
@@ -130,10 +136,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		
 		populateHistoryList(newValue);
 
-		labelFilesCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
-		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
-		labelReferenceCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
-		
 		// Set document properties
 		context.documentCreatedOn.set(newValue.getCreatedOnAsString());
 		context.documentUpdatedOn.set(newValue.getUpdatedOnAsString());
