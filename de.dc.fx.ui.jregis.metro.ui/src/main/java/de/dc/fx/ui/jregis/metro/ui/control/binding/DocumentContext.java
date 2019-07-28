@@ -1,0 +1,48 @@
+package de.dc.fx.ui.jregis.metro.ui.control.binding;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
+
+public class DocumentContext {
+
+	// Document properties
+	public StringProperty documentComment = new SimpleStringProperty("");
+	public StringProperty documentName = new SimpleStringProperty("");
+	public StringProperty documentId = new SimpleStringProperty("");
+	public StringProperty documentDescription = new SimpleStringProperty("");
+	public StringProperty documentCreatedOn = new SimpleStringProperty("");
+	public StringProperty documentUpdatedOn = new SimpleStringProperty("");
+	public StringProperty documentEditor = new SimpleStringProperty("");
+
+	// Counters
+	public StringProperty countComment = new SimpleStringProperty("");
+	public StringProperty countFile = new SimpleStringProperty("");
+	public StringProperty countReference = new SimpleStringProperty("");
+	
+	public BooleanProperty showDeletedComments = new SimpleBooleanProperty(true);
+	public BooleanProperty disableSubmitButton = new SimpleBooleanProperty(true);
+	
+	// Webdownload Dialog
+	public BooleanProperty disableDownloadDialogAccectButton = new SimpleBooleanProperty(true);
+	public BooleanProperty usingDownloadFileId = new SimpleBooleanProperty(true);
+	public StringProperty downloadTransactionMessage = new SimpleStringProperty("");
+	public StringProperty downloadFileID = new SimpleStringProperty("");
+	public StringProperty downloadFileName = new SimpleStringProperty("");
+	public StringProperty downloadUrl = new SimpleStringProperty("");
+	public ObjectProperty<Object> downloadContent = new SimpleObjectProperty<>();
+
+	// ClipboardHelper Dialog
+	public BooleanProperty disableClipboardDialogAccectButton = new SimpleBooleanProperty(true);
+	public BooleanProperty usingClipboardFileId = new SimpleBooleanProperty(true);
+	public StringProperty clipboardTransactionMessage = new SimpleStringProperty("");
+	public StringProperty clipboardFileID = new SimpleStringProperty("");
+	public StringProperty clipboardFileName = new SimpleStringProperty("");
+	public ObjectProperty<Image> clipboardImageContent = new SimpleObjectProperty<>();
+}

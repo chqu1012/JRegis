@@ -21,6 +21,9 @@ import javafx.scene.layout.VBox;
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
+	protected Button ButtonClipboardHelperAccept;
+
+	@FXML
 	protected Button buttonDownloadDialogAccept;
 	
     @FXML

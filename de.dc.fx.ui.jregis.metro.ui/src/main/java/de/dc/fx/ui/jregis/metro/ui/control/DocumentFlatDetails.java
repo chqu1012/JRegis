@@ -5,18 +5,17 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventContext;
@@ -45,6 +44,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -68,6 +68,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	
 	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
 	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p-> true);
+	
+	private DocumentContext context = new DocumentContext();
 	
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -98,8 +100,23 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		});
 		
 		buttonDownloadDialogAccept.disableProperty().bind(textDownloadTUrl.textProperty().isEmpty());
+		
+		initBindings();
 	}		
 	
+	private void initBindings() {
+		// Document Properties
+		textAreaComment.textProperty().bindBidirectional(context.documentComment);
+		labelDocumentName.textProperty().bind(context.documentName);
+		labelDocumentId.textProperty().bind(context.documentId);
+		labelDocumentDescription.textProperty().bind(context.documentDescription);
+		labelCreatedOn.textProperty().bind(context.documentCreatedOn);
+		labelUpdatedOn.textProperty().bind(context.documentUpdatedOn);
+		
+		// Counters
+		// TODO: Counters
+	}
+
 	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
 			Document newValue) {
 		vboxReferences.getChildren().clear();
@@ -117,11 +134,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		labelCommentCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
 		labelReferenceCount.textProperty().bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
 		
-		labelCreatedOn.setText(newValue.getCreatedOnAsString());
-		labelUpdatedOn.setText(newValue.getUpdatedOnAsString());
-		labelDocumentDescription.setText(newValue.getDescription());
-		labelDocumentName.setText(newValue.getName());
-		labelDocumentId.setText(String.format("JREG-%05d", newValue.getId()));
+		// Set document properties
+		context.documentCreatedOn.set(newValue.getCreatedOnAsString());
+		context.documentUpdatedOn.set(newValue.getUpdatedOnAsString());
+		context.documentDescription.set(newValue.getDescription());
+		context.documentId.set(String.format("JREG-%05d", newValue.getId()));
+		context.documentName.set(newValue.getName());
 	}
 
 	public void setSelection(Document document) {
@@ -357,11 +375,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		clipboardHelperDialog.setVisible(false);
 		
 		String name = textTransactionMessage.getText();
-		LocalDateTime createdOn = LocalDateTime.now();
-		History history = new History(name, createdOn , createdOn, documentProperty.get().getId());
-		long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
-
-		Attachment attachment = new Attachment(textFilename.getText()+".png", createdOn, createdOn, historyId);
+		String filename = textFilename.getText()+".png";
+		Image image = imageViewClipboard.getImage();
+		
+		History history = JRegisPlatform.getInstance(HistoryService.class).create(documentProperty.get(), name);
+		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(documentProperty.get(), filename, image);
+		
+		Attachment attachment = new Attachment(filename, LocalDateTime.now(), LocalDateTime.now(), history.getId());
 		history.getAttachments().add(attachment);
 		JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 		

@@ -10,6 +10,8 @@ import org.apache.commons.io.FileUtils;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
+import de.dc.fx.ui.jregis.metro.ui.util.ImageHelper;
+import javafx.scene.image.Image;
 
 public class DocumentFolderService extends BaseFolderService<Document>{
 
@@ -18,6 +20,10 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 	@Override
 	protected String resFolderName() {
 		return "document";
+	}
+	
+	public void copyImageTo(Document document, String filename, Image image) {
+		ImageHelper.saveToFile(getFolderBy(document) + "/" + filename, image);
 	}
 	
 	public void copyFile(Document document, String filePath) throws IOException {
