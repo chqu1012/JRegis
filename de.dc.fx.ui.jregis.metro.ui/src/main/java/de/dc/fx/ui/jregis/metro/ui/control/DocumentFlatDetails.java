@@ -231,10 +231,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			history.setStatus(HistoryStatus.ADD.getStatusValue());
 			
 			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			String destination = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(documentProperty.get()).getAbsolutePath();
+
 			db.getFiles().stream().forEach(f->{
 				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, historyId);
 				attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
 				
+				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f, new File(destination + "/" + f.getName()));
 				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 				vboxFiles.getChildren().add(new AttachmentControl(attachment));
 				history.getAttachments().add(attachment);
@@ -243,7 +246,16 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			
 			success = true;
 			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
-			files.ifPresent(s->Notifications.create().title("Clipboard Notification").text("Import file(s): " + s + " sucessfully!").darkStyle().showInformation());
+			files.ifPresent(s->Notifications.create().title("Clipboard Notification").
+					text("Import file(s): " + s + " sucessfully!").
+					onAction(e->{
+						try {
+							Desktop.getDesktop().open(new File(destination));
+						} catch (IOException e3) {
+							e3.printStackTrace();
+						}
+					}).
+					darkStyle().showInformation());
 		}
 		labelDraggingFilesArea.getStyleClass().clear();
 		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
