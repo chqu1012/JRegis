@@ -7,17 +7,12 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.management.Notification;
-
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
-import animatefx.animation.AnimationFX;
-import animatefx.animation.FadeOutRight;
-import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideInRight;
+
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
@@ -50,11 +45,14 @@ public class MainApplication extends BaseMainApplication {
 	private FilteredList<Document> filteredDocumentData = new FilteredList<>(masterDocumentData, p -> true);
 	
 	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
-	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	
 	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
 	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
 	
+	// Pages
+	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
+	private PreferencePage preferencePage = new PreferencePage();
+
 	@Inject CategoryRepository categoryRepository;
 	
 	public MainApplication() {
@@ -77,6 +75,7 @@ public class MainApplication extends BaseMainApplication {
 		initControls();
 		initBindings();
 		
+		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(documentFlatDetails);
 		paneDocumentTableView.toFront();
 	}
@@ -284,5 +283,15 @@ public class MainApplication extends BaseMainApplication {
 		String name = textDocumentName.getText();		
 		JRegisPlatform.getInstance(DocumentNameRepository.class).save(name);
 		masterSuggestionData.add(name);
+	}
+
+	@Override
+	protected void onNavigationPreferencesClicked(MouseEvent event) {
+		preferencePage.toFront();
+	}
+
+	@Override
+	protected void onNavigationDocumentClicked(MouseEvent event) {
+		paneDocumentTableView.toFront();
 	}
 }

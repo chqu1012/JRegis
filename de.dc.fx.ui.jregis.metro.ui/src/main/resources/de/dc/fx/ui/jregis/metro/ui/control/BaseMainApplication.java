@@ -143,4 +143,10 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onButtonAddDocumentNameSuggestionAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onNavigationPreferencesClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onNavigationDocumentClicked(MouseEvent event);
 }
