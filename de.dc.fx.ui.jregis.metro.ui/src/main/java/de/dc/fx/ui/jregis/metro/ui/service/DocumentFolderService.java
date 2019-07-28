@@ -3,11 +3,11 @@ package de.dc.fx.ui.jregis.metro.ui.service;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 
+import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.util.ImageHelper;
@@ -30,16 +30,21 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 		FileUtils.copyFileToDirectory(new File(filePath), getFolderBy(document));
 	}
 
-	public File downloadFile(Document document, String url, String filename) throws MalformedURLException, IOException {
-		String destination = getFolderPathBy(document);
-		File file = new File(destination, filename);
-		FileUtils.copyURLToFile(new URL(url), file, 10000, 10000);
+	public File downloadFile(DocumentContext context) throws IOException {
+		String destination = getFolderPathBy(context.current.get());
+		File file = new File(destination, context.downloadFileName.get());
+		FileUtils.copyURLToFile(new URL(context.downloadUrl.get()), file, 10000, 10000);
 		return file;
 	}
 	
 	public File openFile(Document document, String filename) throws Exception {
 		String destination = getFolderPathBy(document);
 		File file = new File(destination, filename);
+		Desktop.getDesktop().open(file);
+		return file;
+	}
+
+	public File openFile(File file) throws Exception {
 		Desktop.getDesktop().open(file);
 		return file;
 	}

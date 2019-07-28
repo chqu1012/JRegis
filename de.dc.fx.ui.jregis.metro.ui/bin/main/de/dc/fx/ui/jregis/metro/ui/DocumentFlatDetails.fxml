@@ -66,7 +66,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Button fx:id="buttonClipboardHelperAccept" layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
                         <Hyperlink layoutX="572.0" layoutY="608.0" onAction="#onLinkClipboardHelperCancelAction" text="Cancel" />
                         <Label layoutX="199.0" layoutY="59.0" text="Transaction Message" />
                         <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="76.0" prefHeight="25.0" prefWidth="402.0" text="Save clipboard image." />

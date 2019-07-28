@@ -32,14 +32,11 @@ import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -59,18 +56,17 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	public static final String ID_DELETE_ATTACHMENT = "/attachment/delete";
 	public static final String ID_DELETE_HISTORY = "/history/delete";
-	
+
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	private ObjectProperty<Document> documentProperty = new SimpleObjectProperty<>();
-	
+
 	private ObservableList<History> historyList = FXCollections.observableArrayList();
-	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p-> true);
-	
+	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p -> true);
+
 	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
-	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p-> true);
-	
+	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p -> true);
+
 	private DocumentContext context = new DocumentContext();
-	
+
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
 				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/DocumentFlatDetails.fxml"));
@@ -82,28 +78,24 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml ", exception);
 		}
-		
+
 		JRegisPlatform.getInstance(IEventBroker.class).register(this);
-		
+
 		// Fill Histories
 		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
 		historyList.addAll(histories);
-		
-		documentProperty.addListener(this::onDocumentChanged);
-	
+
 		List<String> fileNames = JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).findAll();
 		nameSuggestionList.addAll(fileNames);
-		
+
 		new AutoCompletionTextFieldBinding<>(textFilename, param -> {
-			filteredNameSuggestion.setPredicate(p->p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			filteredNameSuggestion.setPredicate(p -> p.toLowerCase().contains(param.getUserText().toLowerCase()));
 			return filteredNameSuggestion;
 		});
-		
-		buttonDownloadDialogAccept.disableProperty().bind(textDownloadTUrl.textProperty().isEmpty());
-		
+
 		initBindings();
-	}		
-	
+	}
+
 	private void initBindings() {
 		// Document Properties
 		textAreaComment.textProperty().bindBidirectional(context.documentComment);
@@ -112,28 +104,55 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		labelDocumentDescription.textProperty().bind(context.documentDescription);
 		labelCreatedOn.textProperty().bind(context.documentCreatedOn);
 		labelUpdatedOn.textProperty().bind(context.documentUpdatedOn);
-		
+
+		textAreaComment.textProperty().bindBidirectional(context.documentComment);
+
 		// Counters
 		labelFilesCount.textProperty().bind(context.countFile);
 		labelCommentCount.textProperty().bind(context.countComment);
 		labelReferenceCount.textProperty().bind(context.countReference);
-		
 		context.countFile.bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
 		context.countComment.bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
 		context.countReference.bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
+
+		// Webdownload Dialog
+		buttonDownloadDialogAccept.disableProperty().bind(context.downloadFileName.isEmpty());
+		textDownloadFileID.textProperty().bindBidirectional(context.downloadFileID);
+		textDownloadFilename.textProperty().bindBidirectional(context.downloadFileName);
+		textDownloadTransactionMessage.textProperty().bindBidirectional(context.downloadTransactionMessage);
+		textDownloadTUrl.textProperty().bindBidirectional(context.downloadUrl);
+
+		// Clipboard Dialog
+		buttonClipboardHelperAccept.disableProperty().bind(context.clipboardFileName.isEmpty());
+		textFilename.textProperty().bindBidirectional(context.clipboardFileName);
+		textFileID.textProperty().bindBidirectional(context.clipboardFileID);
+		textTransactionMessage.textProperty().bindBidirectional(context.clipboardTransactionMessage);
+		
+		// Add Listeners
+		context.current.addListener(this::onDocumentChanged);
+		context.toOpenFile.addListener(this::onOpenFileChanged);
 	}
 
-	private void onDocumentChanged(ObservableValue<? extends Document> observable, Document oldValue,
+	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
+		try {
+			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
+		} catch (Exception e) {
+			Notifications.create().darkStyle().text("File " + newValue + " not available!").title("File Error").showError();
+		}
+	}
+
+	private void onDocumentChanged(ObservableValue<? extends Document> obs, Document oldValue,
 			Document newValue) {
 		vboxReferences.getChildren().clear();
 		flowPaneFiles.getChildren().clear();
-		textAreaComment.clear();
+
+		context.documentComment.set("");
 
 		// Fill References
 		for (int i = 0; i < 10; i++) {
 			vboxReferences.getChildren().add(new Button("sssssssss"));
 		}
-		
+
 		populateHistoryList(newValue);
 
 		// Set document properties
@@ -145,25 +164,25 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 
 	public void setSelection(Document document) {
-		documentProperty.set(document);
-		
+		context.current.set(document);
+
 		// Used focus for handle escape key
 		root.requestFocus();
 	}
-	
+
 	private void populateHistoryList(Document document) {
 		vboxFiles.getChildren().clear();
 		vboxComment.getChildren().clear();
 		vboxComment.getChildren().add(vboxCommentEditBox);
-		
-		filteredHistory.setPredicate(e->{
+
+		filteredHistory.setPredicate(e -> {
 			boolean filterCriteria = e.getDocumentId() == document.getId();
 			if (checkBoxShowDeletedComments.isSelected()) {
 				filterCriteria = filterCriteria && e.getStatus() == HistoryStatus.ADD.getStatusValue();
 			}
 			return filterCriteria;
 		});
-		filteredHistory.stream().forEach(e->{
+		filteredHistory.stream().forEach(e -> {
 			// Workaround: Fix oherwise on each click attachments will be added
 			e.getAttachments().clear();
 			addAttachment(e);
@@ -173,26 +192,17 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private void addAttachment(History history) {
 		JRegisPlatform.getInstance(AttachmentRepository.class).findAll().stream()
-			.filter(e-> e.getHistoryId()==history.getId())
-			.filter(e-> e.getStatus()==AttachmentStatus.ADD.getStatusValue())
-			.forEach(e->{
-				vboxFiles.getChildren().add(new AttachmentControl(e));
-				history.getAttachments().add(e);
-			});
+				.filter(e -> e.getHistoryId() == history.getId())
+				.filter(e -> e.getStatus() == AttachmentStatus.ADD.getStatusValue()).forEach(e -> {
+					vboxFiles.getChildren().add(new AttachmentControl(e));
+					history.getAttachments().add(e);
+				});
 	}
 
 	private void addHistory(History history) {
 		DocumentHistoryItem item = new DocumentHistoryItem();
-		item.setHistory(history, t -> openFile(t));
+		item.setHistory(history, t -> context.toOpenFile.set(t));
 		vboxComment.getChildren().add(item);
-	}
-
-	private void openFile(String t) {
-		try {
-			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(documentProperty.get(), t);
-		} catch (Exception e) {
-			Notifications.create().darkStyle().text("File "+t+" not available!").title("File Error").showError();
-		}
 	}
 
 	@Override
@@ -202,29 +212,30 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onButtonSubmitComment(ActionEvent event) {
-		String comment = textAreaComment.getText();
-		History history = JRegisPlatform.getInstance(HistoryService.class).create(documentProperty.get(), comment);
-		
-		flowPaneFiles.getChildren().stream().forEach(e->{
+		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
+
+		flowPaneFiles.getChildren().stream().forEach(e -> {
 			LocalDateTime created = LocalDateTime.now();
-			
+
 			try {
-				JRegisPlatform.getInstance(DocumentFolderService.class).copyFile(documentProperty.get(), e.getAccessibleText());
+				JRegisPlatform.getInstance(DocumentFolderService.class).copyFile(context.current.get(),
+						e.getAccessibleText());
 			} catch (IOException e1) {
-				Notifications.create().darkStyle().text("Failed to copy file "+e.getAccessibleText()).title("File Copy Error!").show();
+				Notifications.create().darkStyle().text("Failed to copy file " + e.getAccessibleText())
+						.title("File Copy Error!").show();
 				return;
 			}
-			
-			Attachment attachment = new Attachment(((Hyperlink)e).getText(), created, created, history.getId());
+
+			Attachment attachment = new Attachment(((Hyperlink) e).getText(), created, created, history.getId());
 			JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-			
+
 			vboxFiles.getChildren().add(new AttachmentControl(attachment));
 			history.getAttachments().add(attachment);
 		});
-		
+
 		textAreaComment.clear();
 		flowPaneFiles.getChildren().clear();
-		
+
 		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
 
 		addHistory(history);
@@ -254,47 +265,47 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			root.toBack();
 		}
 	}
-	
+
 	@Override
 	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
 		Dragboard db = event.getDragboard();
 		boolean success = false;
-		if (db.hasFiles() && documentProperty.get()!=null) {
+		if (db.hasFiles() && context.current.get() != null) {
 			LocalDateTime timestamp = LocalDateTime.now();
-			History history = new History("Dragged Files.", timestamp, timestamp, documentProperty.get().getId());
+			History history = new History("Dragged Files.", timestamp, timestamp, context.current.get().getId());
 			history.setStatus(HistoryStatus.ADD.getStatusValue());
-			
-			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
-			String destination = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(documentProperty.get()).getAbsolutePath();
 
-			db.getFiles().stream().forEach(f->{
+			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			String destination = JRegisPlatform.getInstance(DocumentFolderService.class)
+					.getFolderBy(context.current.get()).getAbsolutePath();
+
+			db.getFiles().stream().forEach(f -> {
 				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, historyId);
 				attachment.setStatus(AttachmentStatus.ADD.getStatusValue());
-				
-				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f, new File(destination + "/" + f.getName()));
+
+				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f,
+						new File(destination + "/" + f.getName()));
 				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 				vboxFiles.getChildren().add(new AttachmentControl(attachment));
 				history.getAttachments().add(attachment);
 			});
 			addHistory(history);
-			
+
 			success = true;
-			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2)->e1+","+e2);
-			files.ifPresent(s->Notifications.create().title("Clipboard Notification").
-					text("Import file(s): " + s + " sucessfully!").
-					onAction(e->{
+			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2) -> e1 + "," + e2);
+			files.ifPresent(s -> Notifications.create().title("Clipboard Notification")
+					.text("Import file(s): " + s + " sucessfully!").onAction(e -> {
 						try {
 							Desktop.getDesktop().open(new File(destination));
 						} catch (IOException e3) {
 							e3.printStackTrace();
 						}
-					}).
-					darkStyle().showInformation());
+					}).darkStyle().showInformation());
 		}
 		labelDraggingFilesArea.getStyleClass().clear();
 		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
 		event.setDropCompleted(success);
-		event.consume();		
+		event.consume();
 	}
 
 	@Override
@@ -304,10 +315,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		if (event.getDragboard().hasFiles()) {
 			event.acceptTransferModes(TransferMode.COPY);
 		}
-		event.consume();		
+		event.consume();
 	}
-	
-	@Subscribe 
+
+	@Subscribe
 	public void deleteHistory(IEventContext<History> context) {
 		if (context.getEventId().equals(ID_DELETE_HISTORY)) {
 			History input = context.getInput();
@@ -315,22 +326,22 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			for (Node node : vboxComment.getChildren()) {
 				if (node instanceof DocumentHistoryItem) {
 					DocumentHistoryItem item = (DocumentHistoryItem) node;
-					if(item.isHistory(input)){
+					if (item.isHistory(input)) {
 						toDeleteItem = item;
 					}
 				}
 			}
-			
-			if (toDeleteItem!=null) {
+
+			if (toDeleteItem != null) {
 				vboxComment.getChildren().remove(toDeleteItem);
 			}
-			
+
 			JRegisPlatform.getInstance(HistoryRepository.class).delete(input);
-			
-			Notifications.create().title("Delete").text("Delete Comment with ID: "+input.getId()).darkStyle().show();
+
+			Notifications.create().title("Delete").text("Delete Comment with ID: " + input.getId()).darkStyle().show();
 		}
 	}
-	
+
 	@Subscribe
 	public void deleteAttachment(IEventContext<Attachment> context) {
 		if (context.getEventId().equals(ID_DELETE_ATTACHMENT)) {
@@ -342,60 +353,62 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 					if (attachmentControl.getAttachment().equals(input)) {
 						toDeleteControl = attachmentControl;
 						JRegisPlatform.getInstance(AttachmentRepository.class).delete(input);
-					}					
+					}
 				}
 			}
-			if (toDeleteControl!=null) {
+			if (toDeleteControl != null) {
 				vboxFiles.getChildren().remove(toDeleteControl);
 			}
-			vboxComment.getChildren().forEach(e-> {
+			vboxComment.getChildren().forEach(e -> {
 				if (e instanceof DocumentHistoryItem) {
 					DocumentHistoryItem item = (DocumentHistoryItem) e;
 					item.findAndDeactivateAttachment(input);
 				}
 			});
-			
-			History history = new History("Delete selected file "+input.getName(), LocalDateTime.now(), LocalDateTime.now(), documentProperty.get().getId());
+
+			History history = new History("Delete selected file " + input.getName(), LocalDateTime.now(),
+					LocalDateTime.now(), this.context.current.get().getId());
 			history.setStatus(HistoryStatus.DELETE.getStatusValue());
-			
+
 			history.getAttachments().add(input);
 			JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			addHistory(history);
-			
+
 			historyList.add(history);
 		}
 	}
 
 	@Override
 	protected void onCheckBoxShowDeletedCommentsAction(ActionEvent event) {
-		populateHistoryList(documentProperty.get());		
+		populateHistoryList(context.current.get());
 	}
 
 	@Override
 	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
-		clipboardHelperDialog.toBack();		
+		clipboardHelperDialog.toBack();
 		clipboardHelperDialog.setVisible(false);
-		
-		String name = textTransactionMessage.getText();
-		String filename = textFilename.getText()+".png";
+
+		String filename = textFilename.getText() + ".png";
 		Image image = imageViewClipboard.getImage();
-		
-		History history = JRegisPlatform.getInstance(HistoryService.class).create(documentProperty.get(), name);
-		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(documentProperty.get(), filename, image);
-		
+
+		context.documentComment.set(textTransactionMessage.getText());
+		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
+		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context.current.get(), filename, image);
+
 		Attachment attachment = new Attachment(filename, LocalDateTime.now(), LocalDateTime.now(), history.getId());
 		history.getAttachments().add(attachment);
 		JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-		
-		Notifications.create().text("Added File "+attachment.getName()+" from Clipboard").title("File Clipboard").darkStyle().show();
-		
+
+		Notifications.create().text("Added File " + attachment.getName() + " from Clipboard").title("File Clipboard")
+				.darkStyle().show();
+
 		addHistory(history);
 		vboxFiles.getChildren().add(new AttachmentControl(attachment));
 	}
 
 	@Override
 	protected void onLinkClipboardHelperCancelAction(ActionEvent event) {
-		clipboardHelperDialog.toBack();		
+		clipboardHelperDialog.toBack();
 		clipboardHelperDialog.setVisible(false);
 	}
 
@@ -403,8 +416,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonClipboardHelperAction(ActionEvent event) {
 		clipboardHelperDialog.setVisible(true);
 		clipboardHelperDialog.toFront();
-		
-		ClipboardHelper.getImage().ifPresent(e->{
+
+		ClipboardHelper.getImage().ifPresent(e -> {
 			imageViewClipboard.setFitHeight(e.getHeight());
 			imageViewClipboard.setFitWidth(e.getWidth());
 			imageViewClipboard.setImage(e);
@@ -413,8 +426,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
-		if (event.getClickCount()==2) {
-			ClipboardHelper.getImage().ifPresent(e->{
+		if (event.getClickCount() == 2) {
+			ClipboardHelper.getImage().ifPresent(e -> {
 				imageViewClipboard.setFitHeight(e.getHeight());
 				imageViewClipboard.setFitWidth(e.getWidth());
 				imageViewClipboard.setImage(e);
@@ -425,11 +438,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	@Override
 	protected void onLinkAddNewSuggestionAction(ActionEvent event) {
 		if (textFilename.getText().isEmpty()) {
-			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle().showWarning();
-		}else {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
+					.showWarning();
+		} else {
 			String name = textFilename.getText();
 			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).save(name);
-			
+
 			nameSuggestionList.add(name);
 		}
 	}
@@ -437,38 +451,38 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	@Override
 	protected void onLinkDeleteNewSuggestionAction(ActionEvent event) {
 		if (textFilename.getText().isEmpty()) {
-			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle().showWarning();
-		}else {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
+					.showWarning();
+		} else {
 			String name = textFilename.getText();
 			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).delete(name);
-			
+
 			nameSuggestionList.remove(name);
-		}		
+		}
 	}
 
 	@Override
 	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
 		if (textDownloadTUrl.getText().isEmpty()) {
 			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
-			return; 
-		}else {
+			return;
+		} else {
 			try {
-				String url = textDownloadTUrl.getText();
-				File file = JRegisPlatform.getInstance(DocumentFolderService.class).downloadFile(documentProperty.get(), url, textDownloadFilename.getText());
-				Notifications.create().darkStyle().text("Download url to "+url).title("Download Finished").onAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						try {
-							Desktop.getDesktop().open(file.getParentFile());
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}).showInformation();
-				
+				File file = JRegisPlatform.getInstance(DocumentFolderService.class).downloadFile(context);
+				Notifications.create().darkStyle().text("Download url to " + context.downloadUrl.get())
+						.title("Download Finished").onAction(event1 -> {
+							try {
+								Desktop.getDesktop().open(file.getParentFile());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}).showInformation();
+
 				// TODO: Add History UI entry
 			} catch (IOException e) {
-				Notifications.create().darkStyle().text("Failed to download file from url "+textDownloadTUrl.getText()).title("Error on Downloading").showError();
+				Notifications.create().darkStyle()
+						.text("Failed to download file from url " + textDownloadTUrl.getText())
+						.title("Error on Downloading").showError();
 				return;
 			}
 		}
@@ -487,7 +501,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonDownloadDialogAction(ActionEvent event) {
 		String content = ClipboardHelper.getString();
 		textDownloadTUrl.setText(content);
-		
+
 		downloadDialog.setVisible(true);
 		downloadDialog.toFront();
 	}
