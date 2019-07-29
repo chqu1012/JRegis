@@ -17,7 +17,7 @@
                   <Image url="@images/icons8_Overview_64px.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelFilename" layoutX="47.0" layoutY="7.0" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="157.0" text="Filename.zip" textFill="#6b6969" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="88.0">
+            <Label fx:id="labelFilename" layoutX="47.0" layoutY="7.0" maxWidth="1.7976931348623157E308" onMouseClicked="#onLabelFilenameClicked" prefHeight="17.0" prefWidth="157.0" text="Filename.zip" textFill="#6b6969" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="88.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

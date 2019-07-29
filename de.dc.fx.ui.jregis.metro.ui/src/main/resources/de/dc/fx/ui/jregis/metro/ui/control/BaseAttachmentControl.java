@@ -23,4 +23,7 @@ public abstract class BaseAttachmentControl extends AnchorPane {
     @FXML
     protected abstract void onImageIconDeleteClicked(MouseEvent event);
 
+    @FXML
+    protected abstract void onLabelFilenameClicked(MouseEvent event);
+
 }

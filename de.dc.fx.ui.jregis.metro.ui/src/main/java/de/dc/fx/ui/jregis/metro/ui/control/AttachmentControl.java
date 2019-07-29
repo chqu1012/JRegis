@@ -11,11 +11,10 @@ import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
-import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 
 public class AttachmentControl extends BaseAttachmentControl {
@@ -61,5 +60,10 @@ public class AttachmentControl extends BaseAttachmentControl {
 			}
 		});
 		
+	}
+
+	@Override
+	protected void onLabelFilenameClicked(MouseEvent event) {
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/open/file/attachment", labelFilename.getText()));		
 	}
 }

@@ -271,6 +271,11 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <ImageView fx:id="imageViewOpenFolder" fitHeight="24.0" fitWidth="24.0" layoutX="217.0" layoutY="16.0" onMouseClicked="#onImageViewOpenFolder" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <image>
+                              <Image url="@images/icons8_Open_32px_3.png" />
+                           </image>
+                        </ImageView>
                      </children>
                      <padding>
                         <Insets bottom="20.0" />

@@ -21,6 +21,9 @@ import javafx.scene.layout.VBox;
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
+	protected ImageView imageViewOpenFolder;
+	
+	@FXML
 	protected Button buttonClipboardHelperAccept;
 
 	@FXML
@@ -172,5 +175,8 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
     @FXML
     protected abstract void onImageViewDownloadClipboardClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onImageViewOpenFolder(MouseEvent event);
 
 }

@@ -499,4 +499,10 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
 		context.downloadUrl.set(ClipboardHelper.getString());
 	}
+
+	@Override
+	protected void onImageViewOpenFolder(MouseEvent event) {
+		File folder = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(context.current.get());
+		context.toOpenFile.set(folder.getAbsolutePath());
+	}
 }
