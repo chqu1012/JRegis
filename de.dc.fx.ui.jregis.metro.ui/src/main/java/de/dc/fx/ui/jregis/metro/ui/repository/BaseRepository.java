@@ -17,10 +17,10 @@ public abstract class BaseRepository<T> {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
-	private Connection connection;
-
 	private List<T> cachedList = new ArrayList<>();
 
+	private static final String JDBC_URL = "jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;";
+	
 	public BaseRepository() {
 		try {
 			Class.forName("org.h2.Driver");
@@ -45,46 +45,27 @@ public abstract class BaseRepository<T> {
 
 	public List<T> forceFindAll() {
 		List<T> tempList = new ArrayList<>();
-		PreparedStatement statement;
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(findAllStatement() + orderBy());
-			ResultSet resultSet = statement.executeQuery();
+		try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA");
+				PreparedStatement statement = connection.prepareStatement(findAllStatement() + orderBy());
+				ResultSet resultSet = statement.executeQuery()) {
 			while (resultSet.next()) {
 				tempList.add(map(resultSet));
 			}
-			statement.close();
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + findAllStatement(), e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
-			}
 		}
 		return tempList;
 	}
 
 	public T forceFindBy(long id) {
-		PreparedStatement statement;
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(findByIdStatement(id));
-			ResultSet resultSet = statement.executeQuery();
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, "SA","SA");
+				PreparedStatement statement = conn.prepareStatement(findByIdStatement(id));
+				ResultSet resultSet = statement.executeQuery();) {
 			if (resultSet.next()) {
-				T result = map(resultSet);
-				statement.close();
-				return result;
+				return map(resultSet);
 			}
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + findByIdStatement(id), e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
-			}
 		}
 		return null;
 	}
@@ -96,7 +77,7 @@ public abstract class BaseRepository<T> {
 	protected abstract String findAllStatement();
 
 	protected abstract String saveStatement();
-	
+
 	protected abstract String deleteStatement();
 
 	protected abstract String updateStatement();
@@ -106,41 +87,30 @@ public abstract class BaseRepository<T> {
 	protected abstract void prepareStatetmentForUpdate(T t, PreparedStatement statement) throws SQLException;
 
 	protected abstract void prepapreStatementForDelete(T t, PreparedStatement statement) throws SQLException;
-	
+
 	public String orderBy() {
 		return StringUtils.EMPTY;
 	}
 
 	public void delete(T t) {
-		PreparedStatement statement = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(deleteStatement());
+		try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA"); 
+				PreparedStatement statement = connection.prepareStatement(deleteStatement())) {
 			prepapreStatementForDelete(t, statement);
 			statement.execute();
-			
 			cachedList.remove(t);
 			log.log(Level.ALL, "Delete attachment: " + deleteStatement());
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
-			}
 		}
 	}
-	
+
 	public long save(T t) {
-		PreparedStatement statement = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(saveStatement());
+		try (Connection connection = DriverManager.getConnection(JDBC_URL, "SA", "SA"); 
+				PreparedStatement statement = connection.prepareStatement(saveStatement())) {
 			prepareStatetmentForSave(t, statement);
 			cachedList.add(t);
 			statement.execute();
-			
+
 			ResultSet rs = statement.getGeneratedKeys();
 			while (rs.next()) {
 				return rs.getLong(1);
@@ -148,24 +118,16 @@ public abstract class BaseRepository<T> {
 			log.log(Level.ALL, "Save attachment: " + saveStatement());
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + saveStatement(), e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
-			}
 		}
 		return -1;
 	}
-	
+
 	public long update(T t) {
-		PreparedStatement statement = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;", "SA", "SA");
-			statement = connection.prepareStatement(updateStatement());
+		try (Connection connection = DriverManager.getConnection(JDBC_URL, "SA", "SA"); 
+				PreparedStatement statement = connection.prepareStatement(updateStatement())) {
 			prepareStatetmentForUpdate(t, statement);
 			statement.execute();
-			
+
 			ResultSet rs = statement.getGeneratedKeys();
 			while (rs.next()) {
 				return rs.getLong(1);
@@ -173,21 +135,7 @@ public abstract class BaseRepository<T> {
 			log.log(Level.ALL, "Update attachment: " + updateStatement());
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, "Failed to query: " + updateStatement(), e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, "Failed to create H2 connection!", e);
-			}
 		}
 		return -1;
-	}
-	
-	public void close() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			log.log(Level.SEVERE, "Failed to close H2 connection!", e);
-		}
 	}
 }
