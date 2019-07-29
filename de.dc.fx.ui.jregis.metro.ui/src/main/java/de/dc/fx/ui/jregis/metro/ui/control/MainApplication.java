@@ -57,6 +57,8 @@ public class MainApplication extends BaseMainApplication {
 	private PreferencePage preferencePage = new PreferencePage();
 
 	@Inject CategoryRepository categoryRepository;
+
+	private TableFilter<Document> tableFilter;
 	
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
@@ -139,7 +141,8 @@ public class MainApplication extends BaseMainApplication {
 		
 		tableViewDocument.setItems(filteredDocumentData);
 		
-		TableFilter.forTableView(tableViewDocument).apply().setSearchStrategy((input,target) -> {
+		tableFilter = TableFilter.forTableView(tableViewDocument).apply();
+		tableFilter.setSearchStrategy((input,target) -> {
 		    try {
 		        return target.toLowerCase().contains(input.toLowerCase());
 		    } catch (Exception e) {
@@ -322,5 +325,11 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onNavigationDocumentClicked(MouseEvent event) {
 		paneDocumentTableView.toFront();
+	}
+
+	@Override
+	protected void onMenuItemShowAllAction(MouseEvent event) {
+		tableFilter.resetFilter();
+		filteredDocumentData.setPredicate(p->true);
 	}
 }
