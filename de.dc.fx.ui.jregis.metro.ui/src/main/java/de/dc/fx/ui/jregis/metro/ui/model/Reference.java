@@ -8,9 +8,9 @@ public class Reference extends IdElement {
 	private long firstId;
 	private long secondId;
 
-	public Reference(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long referenceTypeId, long firstId,
+	public Reference(LocalDateTime createdOn, LocalDateTime updatedOn, long referenceTypeId, long firstId,
 			long secondId) {
-		super(name, createdOn, updatedOn);
+		super("", createdOn, updatedOn);
 		this.referenceTypeId = referenceTypeId;
 		this.firstId = firstId;
 		this.secondId = secondId;
