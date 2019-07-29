@@ -48,6 +48,12 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 		return file;
 	}
 	
+	public File openFolder(Document document) throws Exception {
+		File folder = getFolderBy(document);
+		Desktop.getDesktop().open(folder);
+		return folder;
+	}
+	
 	public File openFile(Document document, String filename) throws Exception {
 		String destination = getFolderPathBy(document);
 		File file = new File(destination, filename);

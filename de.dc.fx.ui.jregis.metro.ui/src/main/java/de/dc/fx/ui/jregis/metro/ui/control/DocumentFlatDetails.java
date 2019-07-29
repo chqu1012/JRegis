@@ -40,7 +40,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -145,7 +144,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		try {
 			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
 		} catch (Exception e) {
-			Notifications.create().darkStyle().text("File " + newValue + " not available!").title("File Error").showError();
+			Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
 		}
 	}
 
@@ -479,7 +478,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 				addHistory(history);
 			} catch (IOException e) {
 				Notifications.create().darkStyle()
-						.text("Failed to download file from url " + textDownloadTUrl.getText())
+						.text(e.getLocalizedMessage())
 						.title("Error on Downloading").showError();
 				return;
 			}
@@ -510,7 +509,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	@Override
 	protected void onImageViewOpenFolder(MouseEvent event) {
-		File folder = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderBy(context.current.get());
-		context.toOpenFile.set(folder.getAbsolutePath());
+		try {
+			JRegisPlatform.getInstance(DocumentFolderService.class).openFolder(context.current.get());
+		} catch (Exception e) {
+			Notifications.create().darkStyle()
+			.text(e.getLocalizedMessage())
+			.title("Failed to open folder!").showError();
+		}
 	}
 }
