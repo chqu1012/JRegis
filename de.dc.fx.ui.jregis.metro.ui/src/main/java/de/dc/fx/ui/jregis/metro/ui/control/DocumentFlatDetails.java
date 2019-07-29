@@ -16,6 +16,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventContext;
 import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
@@ -133,6 +134,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		context.toOpenFile.addListener(this::onOpenFileChanged);
 	}
 
+	@Subscribe
+	public void openFileAttachment(EventContext<String> context) {
+		if (context.getEventId().contentEquals("/open/file/attachment")) {
+			onOpenFileChanged(null, null, context.getInput());
+		}
+	}
+	
 	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
 		try {
 			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
