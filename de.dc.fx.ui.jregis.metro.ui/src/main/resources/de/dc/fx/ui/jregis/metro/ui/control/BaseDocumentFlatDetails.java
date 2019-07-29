@@ -21,35 +21,59 @@ import javafx.scene.layout.VBox;
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
+	protected AnchorPane referenceDialog;
+
+	@FXML
+	protected TextField texytToReferencedDocument;
+
+	@FXML
+	protected Label labelAllAvailableDocumentsCounter;
+
+	@FXML
+	protected Label labelReferencedDocumentCounter;
+
+	@FXML
+	protected TextField textSearchForAvailableDocuments;
+
+	@FXML
+	protected TextField textSearchForReferencedDocuments;
+
+	@FXML
+	protected ListView<?> listViewAllAvailableDocuments;
+
+	@FXML
+	protected ListView<?> listViewReferencedDocuments;
+
+	@FXML
 	protected ImageView imageViewOpenFolder;
-	
+
 	@FXML
 	protected Button buttonClipboardHelperAccept;
 
 	@FXML
 	protected Button buttonDownloadDialogAccept;
-	
-    @FXML
-    protected TextField textDownloadTransactionMessage;
 
-    @FXML
-    protected TextField textDownloadFileID;
+	@FXML
+	protected TextField textDownloadTransactionMessage;
 
-    @FXML
-    protected TextField textDownloadFilename;
+	@FXML
+	protected TextField textDownloadFileID;
 
-    @FXML
-    protected CheckBox checkBoxUsingDownloadFileId;
+	@FXML
+	protected TextField textDownloadFilename;
 
-    @FXML
-    protected TextField textDownloadTUrl;
-	
+	@FXML
+	protected CheckBox checkBoxUsingDownloadFileId;
+
+	@FXML
+	protected TextField textDownloadTUrl;
+
 	@FXML
 	protected AnchorPane downloadDialog;
-	
+
 	@FXML
 	protected AnchorPane clipboardHelperDialog;
-	
+
 	@FXML
 	protected CheckBox checkBoxShowDeletedComments;
 
@@ -157,26 +181,46 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
 	protected abstract void onImageViewClipboardHelperClicked(MouseEvent event);
-	
+
 	@FXML
 	protected abstract void onLinkAddNewSuggestionAction(ActionEvent event);
-	
+
 	@FXML
 	protected abstract void onLinkDeleteNewSuggestionAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onLinkDownloadDialogAcceptAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onLinkDownloadDialogCancelAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onButtonDownloadDialogAction(ActionEvent event);
+
+	@FXML
+	protected abstract void onImageViewDownloadClipboardClicked(MouseEvent event);
+
+	@FXML
+	protected abstract void onImageViewOpenFolder(MouseEvent event);
 	
     @FXML
-    protected abstract void onLinkDownloadDialogAcceptAction(ActionEvent event);
+    protected abstract void onButtonReferenceDialogApply(ActionEvent event);
 
     @FXML
-    protected abstract void onLinkDownloadDialogCancelAction(ActionEvent event);
+    protected abstract void onButtonSelectAllDocument(ActionEvent event);
 
     @FXML
-    protected abstract void onButtonDownloadDialogAction(ActionEvent event);
+    protected abstract void onButtonSelectDocument(ActionEvent event);
 
     @FXML
-    protected abstract void onImageViewDownloadClipboardClicked(MouseEvent event);
+    protected abstract void onButtonUnselectAllDocument(ActionEvent event);
 
     @FXML
-    protected abstract void onImageViewOpenFolder(MouseEvent event);
+    protected abstract void onButtonUnselectDocument(ActionEvent event);
 
+    @FXML
+    protected abstract void onLinkCancelReferenceDialog(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonOpenReferenceDialog(ActionEvent event);
 }

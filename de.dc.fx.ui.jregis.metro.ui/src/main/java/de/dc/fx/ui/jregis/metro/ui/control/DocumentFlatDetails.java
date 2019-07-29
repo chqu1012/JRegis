@@ -517,4 +517,46 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			.title("Failed to open folder!").showError();
 		}
 	}
+
+	@Override
+	protected void onButtonReferenceDialogApply(ActionEvent event) {
+		referenceDialog.setVisible(false);
+		referenceDialog.toBack();
+	}
+
+	@Override
+	protected void onButtonSelectAllDocument(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onButtonSelectDocument(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onButtonUnselectAllDocument(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onButtonUnselectDocument(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onLinkCancelReferenceDialog(ActionEvent event) {
+		referenceDialog.setVisible(false);
+		referenceDialog.toBack();		
+	}
+
+	@Override
+	protected void onButtonOpenReferenceDialog(ActionEvent event) {
+		referenceDialog.toFront();
+		referenceDialog.setVisible(true);
+	}
 }

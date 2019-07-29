@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -22,6 +23,38 @@
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
+            <AnchorPane fx:id="referenceDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <children>
+              <AnchorPane layoutX="342.0" layoutY="311.0" prefHeight="449.0" prefWidth="702.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
+                 <children>
+                    <Label alignment="CENTER" layoutX="98.0" layoutY="14.0" prefHeight="30.0" prefWidth="702.0" style="-fx-background-color: black;" text="Reference Dialog" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    <Label layoutX="99.0" layoutY="49.0" text="To Referenced Document" />
+                    <TextField fx:id="texytToReferencedDocument" disable="true" editable="false" layoutX="97.0" layoutY="66.0" prefHeight="25.0" prefWidth="501.0" />
+                    <Label layoutX="100.0" layoutY="145.0" text="All available documents" />
+                    <Label layoutX="399.0" layoutY="145.0" text="Referenced Documents" />
+                    <Label fx:id="labelAllAvailableDocumentsCounter" layoutX="230.0" layoutY="145.0" text="(0)" />
+                    <Label fx:id="labelReferencedDocumentCounter" layoutX="526.0" layoutY="145.0" text="(0)" />
+                    <VBox layoutX="310.0" layoutY="194.0" spacing="5.0">
+                       <children>
+                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonSelectDocument" text="Select" />
+                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonUnselectDocument" text="Unselect" />
+                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonSelectAllDocument" text="Select All" />
+                          <Button mnemonicParsing="false" onAction="#onButtonUnselectAllDocument" text="Unselect All" />
+                       </children>
+                    </VBox>
+                    <TextField fx:id="textSearchForAvailableDocuments" layoutX="99.0" layoutY="118.0" prefHeight="25.0" prefWidth="201.0" promptText="Search for documents" />
+                    <TextField fx:id="textSearchForReferencedDocuments" layoutX="399.0" layoutY="118.0" prefHeight="25.0" prefWidth="201.0" promptText="Search for documents" />
+                    <Hyperlink layoutX="517.0" layoutY="396.0" onAction="#onLinkCancelReferenceDialog" text="Cancel" />
+                    <Button layoutX="561.0" layoutY="395.0" mnemonicParsing="false" onAction="#onButtonReferenceDialogApply" prefHeight="25.0" prefWidth="97.0" text="Apply" />
+                        <ListView fx:id="listViewAllAvailableDocuments" layoutX="100.0" layoutY="162.0" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="listViewReferencedDocuments" layoutX="400.0" layoutY="162.0" prefHeight="200.0" prefWidth="200.0" />
+                 </children>
+                 <effect>
+                    <DropShadow />
+                 </effect>
+              </AnchorPane>
+           </children>
+        </AnchorPane>
             <AnchorPane fx:id="downloadDialog" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="319.0" prefWidth="565.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
@@ -249,6 +282,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <Button layoutX="121.0" layoutY="5.0" mnemonicParsing="false" onAction="#onButtonOpenReferenceDialog" text="Open ReferenceDialog" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" />
