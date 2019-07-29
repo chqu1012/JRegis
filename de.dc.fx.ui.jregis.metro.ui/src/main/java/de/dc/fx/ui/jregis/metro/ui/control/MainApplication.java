@@ -24,6 +24,7 @@ import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -144,6 +145,25 @@ public class MainApplication extends BaseMainApplication {
 		    } catch (Exception e) {
 		        return false;
 		    }
+		});
+		
+		textSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredDocumentData.setPredicate(p->{
+				if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+				String searchContent = newValue.toLowerCase();
+				if (p.getName().toLowerCase().contains(searchContent)) {
+					return true;
+				}else if (String.valueOf(p.getId()).contains(searchContent)) {
+					return true;
+				}else if (p.getCreatedOnAsString()!=null && p.getCreatedOnAsString().contains(searchContent)) {
+					return true;
+				}else if (p.getUpdatedOnAsString()!=null && p.getUpdatedOnAsString().contains(searchContent)) {
+					return true;
+				}
+				return false;
+			});
 		});
 	}
 

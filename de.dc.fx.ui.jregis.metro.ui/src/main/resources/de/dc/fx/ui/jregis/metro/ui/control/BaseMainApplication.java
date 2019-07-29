@@ -22,6 +22,9 @@ import javafx.scene.layout.StackPane;
 public abstract class BaseMainApplication extends BorderPane{
 
 	@FXML
+	protected TextField textSearch;
+	
+	@FXML
 	protected HBox vboxDocumentOverviewContent;
 	
 	@FXML

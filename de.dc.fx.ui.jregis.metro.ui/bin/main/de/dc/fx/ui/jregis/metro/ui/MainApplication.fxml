@@ -92,7 +92,7 @@
                                        </font>
                                     </Label>
                                     <Label alignment="TOP_LEFT" layoutX="30.0" layoutY="41.0" prefHeight="63.0" prefWidth="729.0" text="All inserted document with attachments will shows in the table view. Documents can sorted by their attributes. Futher the user can combined the search by right clicking on the columns to accept the filter." textFill="#9e9a9a" wrapText="true" />
-                                    <TextField layoutX="570.0" layoutY="85.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="20.0" />
+                                    <TextField fx:id="textSearch" layoutX="570.0" layoutY="85.0" prefHeight="25.0" prefWidth="185.0" AnchorPane.rightAnchor="20.0" />
                                     <Label layoutX="506.0" layoutY="89.0" text="Search:" AnchorPane.rightAnchor="215.0" />
                                     <Label fx:id="labelEntriesSize" layoutX="14.0" layoutY="583.0" prefHeight="17.0" prefWidth="165.0" text="Showing 1 of 100 entries" textFill="#727272" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0">
                                        <font>
