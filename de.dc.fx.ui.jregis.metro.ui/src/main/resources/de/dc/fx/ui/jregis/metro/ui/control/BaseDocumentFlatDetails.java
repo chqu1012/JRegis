@@ -223,4 +223,7 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
     @FXML
     protected abstract void onButtonOpenReferenceDialog(ActionEvent event);
+    
+    @FXML
+    protected abstract void onReferenceDialogKeyPressed(KeyEvent event);
 }

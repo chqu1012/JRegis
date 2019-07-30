@@ -559,4 +559,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		referenceDialog.toFront();
 		referenceDialog.setVisible(true);
 	}
+	
+	@Override
+	protected void onReferenceDialogKeyPressed(KeyEvent event) {
+		if (event.getCode().equals(KeyCode.ESCAPE)) {
+			onLinkCancelReferenceDialog(null);
+		}
+	}
 }
