@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
 
@@ -45,7 +46,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -199,10 +199,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		context.documentComment.set("");
 
 		// Fill References
-		for (int i = 0; i < 10; i++) {
-//			vboxReferences.getChildren().add(new Button("sssssssss"));
-		}
-
+		List<Reference> references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
+		references = references.stream().filter(e-> e.getFirstId()==context.current.get().getId()).collect(Collectors.toList());
+		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, false)));
+		// Parent References
+		references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
+		references = references.stream().filter(e-> e.getSecondId()==context.current.get().getId()).collect(Collectors.toList());
+		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, true)));
+ 
 		populateHistoryList(newValue);
 
 		// Set document properties

@@ -3,8 +3,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
-public abstract class BaseReferenceControl {
+public abstract class BaseReferenceControl extends AnchorPane{
 
     @FXML
     protected Label labelDocumentName;
