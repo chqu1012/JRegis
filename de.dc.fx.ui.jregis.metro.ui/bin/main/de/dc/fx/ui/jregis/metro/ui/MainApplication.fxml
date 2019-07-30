@@ -72,8 +72,8 @@
                                         <TableColumn fx:id="columnId" prefWidth="129.0" text="#ID" />
                                         <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="154.0" prefWidth="244.0" text="#NAME" />
                                           <TableColumn fx:id="columnCategory" maxWidth="1.7976931348623157E308" minWidth="119.0" prefWidth="143.0" text="#CATEGORY" />
-                                          <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="123.0" prefWidth="123.0" text="#CREATED" />
-                                          <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="126.0" prefWidth="126.0" text="#UPDATE" />
+                                          <TableColumn fx:id="columnCreated" maxWidth="1.7976931348623157E308" minWidth="125.0" prefWidth="160.0" text="#CREATED" />
+                                          <TableColumn fx:id="columnUpdated" maxWidth="1.7976931348623157E308" minWidth="125.0" prefWidth="160.0" text="#UPDATE" />
                                       </columns>
                                        <contextMenu>
                                           <ContextMenu>

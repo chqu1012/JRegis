@@ -176,7 +176,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 
 	@Subscribe
-	public void openFileAttachment(EventContext<String> context) {
+	public void setDocumentViaEventBroker(EventContext<Document> context) {
+		if (context.getEventId().equals("/set/current/doccument")) {
+			setSelection(context.getInput());
+		}
+	}
+	
+	@Subscribe
+	public void openFileAttachmentViaEventBroker(EventContext<String> context) {
 		if (context.getEventId().contentEquals("/open/file/attachment")) {
 			onOpenFileChanged(null, null, context.getInput());
 		}
