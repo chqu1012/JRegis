@@ -121,29 +121,17 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		listViewReferencedDocuments.setCellFactory(param -> new ReferenceListCellFeature());
 		
 		textSearchForAvailableDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
-			if (newValue==null || newValue.isEmpty()) {
-				return true;
-			}
-			if (String.valueOf(p.getId()).contains(newValue)) {
-				return true;
-			}
-			else if (p.getName().toLowerCase().contains(newValue.toLowerCase())) {
-				return true;
-			}
-			return false;
+			boolean isNewValueEmpty = newValue==null || newValue.isEmpty();
+			boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
+			boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
+			return isNewValueEmpty || isNameEquals || isIdEquals;
 		}));
 		
 		textSearchForReferencedDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
-			if (newValue==null || newValue.isEmpty()) {
-				return true;
-			}
-			if (String.valueOf(p.getId()).contains(newValue)) {
-				return true;
-			}
-			else if (p.getName().toLowerCase().contains(newValue.toLowerCase())) {
-				return true;
-			}
-			return false;
+			boolean isNewValueEmpty = newValue==null || newValue.isEmpty();
+			boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
+			boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
+			return isNewValueEmpty || isNameEquals || isIdEquals;
 		}));
 	}
 	
