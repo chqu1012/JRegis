@@ -136,7 +136,7 @@ public abstract class BaseMainApplication extends BorderPane{
     protected abstract void onTableViewDocumentClicked(MouseEvent event);
 
     @FXML
-    protected abstract void onMenuItemShowAllAction(MouseEvent event);
+    protected abstract void onMenuItemShowAllAction(ActionEvent event);
     
     @FXML
     protected abstract void onButtonAddCategoryAction(ActionEvent event);

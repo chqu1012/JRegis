@@ -126,7 +126,7 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initTableView() {
-		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(e.getId()));
+		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(String.format("JREG-%05d", e.getId())));
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
 		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnAsString()));
 		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnAsString()));
@@ -328,7 +328,7 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	@Override
-	protected void onMenuItemShowAllAction(MouseEvent event) {
+	protected void onMenuItemShowAllAction(ActionEvent event) {
 		tableFilter.resetFilter();
 		filteredDocumentData.setPredicate(p->true);
 	}
