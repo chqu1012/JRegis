@@ -129,7 +129,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			return isNewValueEmpty || isNameEquals || isIdEquals;
 		}));
 		
-		textSearchForReferencedDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
+		textSearchForReferencedDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferencedList.setPredicate(p->{
 			boolean isNewValueEmpty = newValue==null || newValue.isEmpty();
 			boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
 			boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);

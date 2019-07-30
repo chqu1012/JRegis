@@ -276,7 +276,10 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <VBox fx:id="vboxReferences" layoutX="20.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
+                        <VBox fx:id="vboxReferences" layoutX="20.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding></VBox>
                         <Label fx:id="labelReferenceCount" layoutX="96.0" layoutY="8.0" text="(0)" textFill="#a4a4a4">
                            <font>
                               <Font name="System Bold" size="14.0" />
