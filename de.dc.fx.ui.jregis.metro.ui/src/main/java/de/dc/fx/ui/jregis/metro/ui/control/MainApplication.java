@@ -55,6 +55,7 @@ public class MainApplication extends BaseMainApplication {
 	// Pages
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
+	private UserManagementPage userManagementPage = new UserManagementPage();
 
 	@Inject CategoryRepository categoryRepository;
 
@@ -81,6 +82,7 @@ public class MainApplication extends BaseMainApplication {
 		initBindings();
 		
 		mainStackPane.getChildren().add(preferencePage);
+		mainStackPane.getChildren().add(userManagementPage);
 		mainStackPane.getChildren().add(documentFlatDetails);
 		paneDocumentTableView.toFront();
 	}
@@ -331,5 +333,10 @@ public class MainApplication extends BaseMainApplication {
 	protected void onMenuItemShowAllAction(ActionEvent event) {
 		tableFilter.resetFilter();
 		filteredDocumentData.setPredicate(p->true);
+	}
+
+	@Override
+	protected void onNavigationUserManagementClicked(MouseEvent event) {
+		userManagementPage.toFront();
 	}
 }

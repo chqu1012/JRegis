@@ -5,6 +5,7 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -75,6 +76,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	private ObservableList<Document> referencedList = FXCollections.observableArrayList();
 	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
 
+	private List<Reference> referencesRegistry = new ArrayList<>();
 	
 	private DocumentContext context = new DocumentContext();
 
@@ -202,6 +204,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		vboxReferences.getChildren().clear();
 		flowPaneFiles.getChildren().clear();
 		vboxFiles.getChildren().clear();
+		referencesRegistry.clear();
 		
 		context.documentComment.set("");
 
@@ -212,8 +215,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		// Parent References
 		references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
 		references = references.stream().filter(e-> e.getSecondId()==context.current.get().getId()).collect(Collectors.toList());
-		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, true)));
- 
+		references.forEach(e->{
+			referencesRegistry.add(e);
+			vboxReferences.getChildren().add(new ReferenceControl(e, true));
+		});
+		
 		populateHistoryList(newValue);
 
 		// Set document properties

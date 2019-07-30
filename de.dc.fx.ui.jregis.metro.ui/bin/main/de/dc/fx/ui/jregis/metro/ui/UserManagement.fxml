@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBDFE2;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="20.0" layoutY="14.0" text="USER MANAGEMENT" textFill="#8a8181">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="34.0" prefHeight="35.0" prefWidth="960.0" text="User administration is an important task of the administrator. They set up users and user IDs and assign or revoke access rights to IT systems or applications. User administration can take place directly locally in the affected system or via an externally connected, centralized database solution." textFill="#8a8a8a" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <AnchorPane fx:id="paneTableView" layoutX="20.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 5;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <TableView fx:id="tableView" layoutX="21.0" layoutY="47.0" prefHeight="433.0" prefWidth="920.0" stylesheets="@css/MetroTableView.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+              <columns>
+                <TableColumn fx:id="columnId" prefWidth="75.0" text="#ID" />
+                <TableColumn fx:id="columnName" prefWidth="224.0" text="#NAME" />
+                  <TableColumn fx:id="columnCreated" prefWidth="224.0" text="#CREATED" />
+                  <TableColumn fx:id="columnRole" prefWidth="167.0" text="#ROLE" />
+                  <TableColumn fx:id="columnStatus" prefWidth="167.0" text="#STATUS" />
+                  <TableColumn fx:id="columnAction" prefWidth="167.0" text="#ACTION" />
+              </columns>
+            </TableView>
+            <HBox layoutX="585.0" layoutY="14.0" prefHeight="25.0" prefWidth="360.0" spacing="5.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <children>
+                  <Label maxHeight="1.7976931348623157E308" text="Status" />
+                  <ComboBox fx:id="comboBoxStatus" prefHeight="25.0" prefWidth="121.0" />
+                  <Label maxHeight="1.7976931348623157E308" text="Name" />
+                  <TextField fx:id="textSearch" prefHeight="25.0" prefWidth="159.0" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

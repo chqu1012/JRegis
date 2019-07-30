@@ -228,7 +228,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="253.0" text="User Management" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationUserManagementClicked" prefHeight="43.0" prefWidth="253.0" text="User Management" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
