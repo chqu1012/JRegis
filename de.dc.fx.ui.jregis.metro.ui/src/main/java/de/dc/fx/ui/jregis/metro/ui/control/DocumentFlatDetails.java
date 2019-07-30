@@ -25,10 +25,12 @@ import de.dc.fx.ui.jregis.metro.ui.model.AttachmentStatus;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
+import de.dc.fx.ui.jregis.metro.ui.model.Reference;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.repository.ReferenceRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.AttachmentService;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
@@ -562,6 +564,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onButtonReferenceDialogApply(ActionEvent event) {
 		referenceDialog.setVisible(false);
 		referenceDialog.toBack();
+		
+		LocalDateTime createdOn = LocalDateTime.now();
+		long firstId = context.current.get().getId();
+
+		referencedList.forEach(e->{
+			long secondId = e.getId();
+			JRegisPlatform.getInstance(ReferenceRepository.class).save(new Reference(createdOn , createdOn, 0, firstId, secondId));
+		});
 	}
 
 	@Override
