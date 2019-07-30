@@ -15,6 +15,7 @@ import org.controlsfx.control.Notifications;
 import com.google.common.eventbus.Subscribe;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
+import de.dc.fx.ui.jregis.metro.ui.control.features.ReferenceListCellFeature;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
@@ -26,6 +27,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.History;
 import de.dc.fx.ui.jregis.metro.ui.model.HistoryStatus;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
+import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.AttachmentService;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
@@ -41,6 +43,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -64,6 +67,13 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
 	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p -> true);
 
+	private ObservableList<Document> referenceAllAvailableList = FXCollections.observableArrayList();
+	private FilteredList<Document> fiteredReferenceAllAvailableList = new FilteredList<>(referenceAllAvailableList, p -> true);
+
+	private ObservableList<Document> referencedList = FXCollections.observableArrayList();
+	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
+
+	
 	private DocumentContext context = new DocumentContext();
 
 	public DocumentFlatDetails() {
@@ -93,8 +103,50 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		});
 
 		initBindings();
+		initReferenceDialog();
 	}
 
+	private void initReferenceDialog() {
+		//texytToReferencedDocument.textProperty().bind(Bindings.format("JREG-%05d: %s", context.current.get().getId(), context.current.get().getName()));
+		
+		referenceAllAvailableList.addAll(JRegisPlatform.getInstance(DocumentRepository.class).findAll());
+		
+		listViewAllAvailableDocuments.setItems(fiteredReferenceAllAvailableList);
+		listViewReferencedDocuments.setItems(fiteredReferencedList);
+		
+		labelAllAvailableDocumentsCounter.textProperty().bind(Bindings.format("(%d)", Bindings.size(fiteredReferenceAllAvailableList)));
+		labelReferencedDocumentCounter.textProperty().bind(Bindings.format("(%d)", Bindings.size(fiteredReferencedList)));
+		
+		listViewAllAvailableDocuments.setCellFactory(param -> new ReferenceListCellFeature());
+		listViewReferencedDocuments.setCellFactory(param -> new ReferenceListCellFeature());
+		
+		textSearchForAvailableDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
+			if (newValue==null || newValue.isEmpty()) {
+				return true;
+			}
+			if (String.valueOf(p.getId()).contains(newValue)) {
+				return true;
+			}
+			else if (p.getName().toLowerCase().contains(newValue.toLowerCase())) {
+				return true;
+			}
+			return false;
+		}));
+		
+		textSearchForReferencedDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
+			if (newValue==null || newValue.isEmpty()) {
+				return true;
+			}
+			if (String.valueOf(p.getId()).contains(newValue)) {
+				return true;
+			}
+			else if (p.getName().toLowerCase().contains(newValue.toLowerCase())) {
+				return true;
+			}
+			return false;
+		}));
+	}
+	
 	private void initBindings() {
 		// Document Properties
 		textAreaComment.textProperty().bindBidirectional(context.documentComment);
@@ -564,6 +616,24 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	protected void onReferenceDialogKeyPressed(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ESCAPE)) {
 			onLinkCancelReferenceDialog(null);
+		}
+	}
+
+	@Override
+	protected void onListViewAllAvailableDocuments(MouseEvent event) {
+		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
+		if (selection!=null && event.getClickCount()==2) {
+			referencedList.add(selection);
+			referenceAllAvailableList.remove(selection);
+		}		
+	}
+
+	@Override
+	protected void onListViewReferencedDocuments(MouseEvent event) {
+		Document selection = listViewReferencedDocuments.getSelectionModel().getSelectedItem();
+		if (selection!=null && event.getClickCount()==2) {
+			referenceAllAvailableList.add(selection);
+			referencedList.remove(selection);
 		}
 	}
 }
