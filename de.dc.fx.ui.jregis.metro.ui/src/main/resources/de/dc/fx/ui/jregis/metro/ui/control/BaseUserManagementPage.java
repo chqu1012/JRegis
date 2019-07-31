@@ -1,41 +1,92 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public abstract class BaseUserManagementPage extends AnchorPane{
+public abstract class BaseUserManagementPage extends AnchorPane {
 
-    @FXML
-    protected AnchorPane paneTableView;
+	@FXML
+	protected AnchorPane addUserDialog;
+	
+	@FXML
+	protected AnchorPane paneTableView;
 
-    @FXML
-    protected TableView<?> tableView;
+	@FXML
+	protected TableView<?> tableView;
 
-    @FXML
-    protected TableColumn<?, ?> columnId;
+	@FXML
+	protected TableColumn<?, ?> columnId;
 
-    @FXML
-    protected TableColumn<?, ?> columnName;
+	@FXML
+	protected TableColumn<?, ?> columnName;
 
-    @FXML
-    protected TableColumn<?, ?> columnCreated;
+	@FXML
+	protected TableColumn<?, ?> columnCreated;
 
-    @FXML
-    protected TableColumn<?, ?> columnRole;
+	@FXML
+	protected TableColumn<?, ?> columnRole;
 
-    @FXML
-    protected TableColumn<?, ?> columnStatus;
+	@FXML
+	protected TableColumn<?, ?> columnStatus;
 
-    @FXML
-    protected TableColumn<?, ?> columnAction;
+	@FXML
+	protected TableColumn<?, ?> columnAction;
 
-    @FXML
-    protected ComboBox<?> comboBoxStatus;
+	@FXML
+	protected ComboBox<?> comboBoxStatus;
 
-    @FXML
-    protected TextField textSearch;
+	@FXML
+	protected TextField textSearch;
+
+	@FXML
+	protected TextField textFirstname;
+
+	@FXML
+	protected TextField textLastname;
+
+	@FXML
+	protected TextField textMobile;
+
+	@FXML
+	protected TextField textAddress;
+
+	@FXML
+	protected TextField textCity;
+
+	@FXML
+	protected TextField textState;
+
+	@FXML
+	protected TextField textCountry;
+
+	@FXML
+	protected TextField textEmail;
+
+	@FXML
+	protected TextField textUsername;
+
+	@FXML
+	protected CheckBox checkBoxCondition;
+
+	@FXML
+	protected Button buttonCreateUser;
+
+	@FXML
+	protected TextField textPassword;
+
+	@FXML
+	protected TextField textBirthday;
+
+	@FXML
+	protected abstract void onButtonCreateUser(ActionEvent event);
+
+	@FXML
+	protected abstract void onButtonOpenAddDIalog(ActionEvent event);
 
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 
 public class UserManagementPage extends BaseUserManagementPage {
@@ -21,5 +22,18 @@ public class UserManagementPage extends BaseUserManagementPage {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
 		}
+	}
+
+	@Override
+	protected void onButtonCreateUser(ActionEvent event) {
+		addUserDialog.setVisible(false);
+		addUserDialog.toBack();
+	}
+
+	@Override
+	protected void onButtonOpenAddDIalog(ActionEvent event) {
+		addUserDialog.setVisible(true);
+		addUserDialog.toFront();
+		
 	}
 }
