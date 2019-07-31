@@ -10,6 +10,7 @@ import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.HistoryRepository;
+import de.dc.fx.ui.jregis.metro.ui.repository.RoleRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.UserRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
@@ -26,6 +27,7 @@ public class GlobalModul extends AbstractModule {
 		bind(DocumentNameRepository.class).asEagerSingleton();
 		bind(ClipboardNameSuggestionRepository.class).asEagerSingleton();
 		bind(UserRepository.class).asEagerSingleton();
+		bind(RoleRepository.class).asEagerSingleton();
 		
 		bind(HistoryService.class).asEagerSingleton();
 		

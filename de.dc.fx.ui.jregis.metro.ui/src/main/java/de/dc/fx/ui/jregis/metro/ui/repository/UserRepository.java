@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import de.dc.fx.ui.jregis.metro.ui.model.User;
 
@@ -11,21 +12,28 @@ public class UserRepository extends BaseRepository<User> {
 
 	@Override
 	protected User map(ResultSet resultSet) throws SQLException{
-		User user = new User();
-		user.setAddress(resultSet.getString("ADDRESS"));
-		user.setBirthday(resultSet.getTimestamp("BIRTHDAY").toLocalDateTime());
-		user.setCity(resultSet.getString("CITY"));
-		user.setCountry(resultSet.getString("COUNTRY"));
-		user.setCreatedOn(resultSet.getTimestamp("CREATED_ON").toLocalDateTime());
-		user.setEmail(resultSet.getString("EMAIL"));
-		user.setFirstname(resultSet.getString("FIRSTNAME"));
-		user.setId(resultSet.getLong("ID"));
-		user.setLastname(resultSet.getString("LASTNAME"));
-		user.setMobile(resultSet.getString("MOBILE"));
-		user.setPassword(resultSet.getString("PASSWORD"));
-		user.setState(resultSet.getString("STATE"));
-		user.setUpdatedOn(resultSet.getTimestamp("UPDATED_ON").toLocalDateTime());
-		user.setUsername(resultSet.getString("USERNAME"));
+		String address = resultSet.getString("ADDRESS");
+		LocalDateTime createdOn = resultSet.getTimestamp("CREATED_ON").toLocalDateTime();
+		String city = resultSet.getString("CITY");
+		String country = resultSet.getString("COUNTRY");
+		LocalDateTime birthday = resultSet.getTimestamp("BIRTHDAY").toLocalDateTime();
+		String email = resultSet.getString("EMAIL");
+		String firstname = resultSet.getString("FIRSTNAME");
+		long id = resultSet.getLong("ID");
+		String lastname = resultSet.getString("LASTNAME");
+		String mobile = resultSet.getString("MOBILE");
+		String password = resultSet.getString("PASSWORD");
+		String state = resultSet.getString("STATE");
+		LocalDateTime updatedOn = resultSet.getTimestamp("UPDATED_ON").toLocalDateTime();
+		String username = resultSet.getString("USERNAME");
+		String name = resultSet.getString("NAME");
+		long roleId = resultSet.getLong("ROLE_ID");
+		long statusId = resultSet.getLong("STATUS_ID");
+		
+		User user = new User(name , createdOn, updatedOn, username, password, firstname, lastname, email, address, city, state, country, mobile, birthday);
+		user.setRoleId(roleId);
+		user.setStatus(statusId);
+		user.setId(id);
 		return user;
 	}
 
@@ -41,7 +49,7 @@ public class UserRepository extends BaseRepository<User> {
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO user (address, birthday, city, country, createdOn, email, firstname, lastname, mobile, password, state, updatedOn, username) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		return "INSERT INTO user (address, birthday, city, country, created_on, email, firstname, lastname, mobile, password, state, updated_on, username, name, role_id, status_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 	}
 
 	@Override
@@ -59,11 +67,14 @@ public class UserRepository extends BaseRepository<User> {
 		statement.setString(11, t.getState());
 		statement.setTimestamp(12, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(13, t.getUsername());
+		statement.setString(14, t.getName());
+		statement.setLong(15, t.getRoleId());
+		statement.setLong(16, t.getStatus());
 	}
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO user KEY (ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		return "MERGE INTO user KEY (ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 	}
 
 	@Override
@@ -82,6 +93,9 @@ public class UserRepository extends BaseRepository<User> {
 		statement.setString(12, t.getState());
 		statement.setTimestamp(13, Timestamp.valueOf(t.getUpdatedOn()));
 		statement.setString(14, t.getUsername());
+		statement.setString(15, t.getName());
+		statement.setLong(16, t.getRoleId());
+		statement.setLong(17, t.getStatus());
 	}
 
 	@Override

@@ -1,4 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
+import de.dc.fx.ui.jregis.metro.ui.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,25 +19,25 @@ public abstract class BaseUserManagementPage extends AnchorPane {
 	protected AnchorPane paneTableView;
 
 	@FXML
-	protected TableView<?> tableView;
+	protected TableView<User> tableView;
 
 	@FXML
-	protected TableColumn<?, ?> columnId;
+	protected TableColumn<User, String> columnId;
 
 	@FXML
-	protected TableColumn<?, ?> columnName;
+	protected TableColumn<User, String> columnName;
 
 	@FXML
-	protected TableColumn<?, ?> columnCreated;
+	protected TableColumn<User, String> columnCreated;
 
 	@FXML
-	protected TableColumn<?, ?> columnRole;
+	protected TableColumn<User, String> columnRole;
 
 	@FXML
-	protected TableColumn<?, ?> columnStatus;
+	protected TableColumn<User, String> columnStatus;
 
 	@FXML
-	protected TableColumn<?, ?> columnAction;
+	protected TableColumn<User, String> columnAction;
 
 	@FXML
 	protected ComboBox<?> comboBoxStatus;

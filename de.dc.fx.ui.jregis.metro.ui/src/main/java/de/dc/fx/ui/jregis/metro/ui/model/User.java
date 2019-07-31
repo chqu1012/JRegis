@@ -2,9 +2,8 @@ package de.dc.fx.ui.jregis.metro.ui.model;
 
 import java.time.LocalDateTime;
 
-public class User{
+public class User extends IdElement {
 
-	private long id;
 	private String username;
 	private String password;
 	private String firstname;
@@ -16,15 +15,23 @@ public class User{
 	private String country;
 	private String mobile;
 	private LocalDateTime birthday;
-	private LocalDateTime createdOn;
-	private LocalDateTime updatedOn;
+	private long roleId;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public User(String name, LocalDateTime createdOn, LocalDateTime updatedOn, String username, String password,
+			String firstname, String lastname, String email, String address, String city, String state, String country,
+			String mobile, LocalDateTime birthday) {
+		super(name, createdOn, updatedOn);
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.mobile = mobile;
+		this.birthday = birthday;
 	}
 
 	public String getUsername() {
@@ -129,6 +136,14 @@ public class User{
 
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	public long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(long roleId) {
+		this.roleId = roleId;
 	}
 
 }
