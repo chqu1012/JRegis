@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import de.dc.fx.ui.jregis.metro.ui.model.IdElement;
 
@@ -23,6 +24,14 @@ public abstract class IdRepository<T extends IdElement> extends BaseRepository<T
 		return map(id, name, createdOn, updatedOn);
 	}
 
+	@Override
+	public Optional<T> findById(long id) {
+		if (!cachedList.isEmpty()) {
+			return cachedList.stream().filter(e->e.getId()==id).findFirst();
+		}
+		return super.findById(id);
+	}
+	
 	@Override
 	protected String findByIdStatement(long id) {
 		return "SELECT * FROM "+table()+" WHERE id="+id;

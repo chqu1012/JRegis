@@ -11,7 +11,6 @@
 
 .table-view{
     -fx-cell-focus-inner-border: light_accent_color; /* focused */
-
     -fx-background-color: transparent, transparent;
 
     -fx-padding: 0;
@@ -68,7 +67,6 @@
 /****** Table View "body"  ******/
 
 .table-row-cell {
-    -fx-background-color: white;
     -fx-background-insets: 0;
 }
 
@@ -81,11 +79,9 @@
 }
 
 .table-cell:last-visible {
-    -fx-border-color: transparent transparent transparent transparent;
 }
 
 .table-cell:filled:hover {
-    -fx-background-color: light_accent_color;
 }
 
 .table-cell .text {
@@ -98,13 +94,13 @@
 
 /* Selected cell */
 .table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected .text{
-    -fx-fill: selected_text_color;
 }
 
 /* - when focused */
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected{
     -fx-background: accent_color;
     -fx-border-color: #034f95;
+    -fx-text-fill: white;
 }
 
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected:hover{
@@ -119,6 +115,7 @@
 
 /* - when focused and selected */
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected{
+    -fx-text-fill: white;
     -fx-border-color: #034f95;
 }
 

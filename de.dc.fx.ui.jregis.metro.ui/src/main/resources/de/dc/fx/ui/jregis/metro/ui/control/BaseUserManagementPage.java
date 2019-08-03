@@ -25,7 +25,7 @@ public abstract class BaseUserManagementPage extends AnchorPane {
 	protected TableColumn<User, String> columnId;
 
 	@FXML
-	protected TableColumn<User, String> columnName;
+	protected TableColumn<User, User> columnName;
 
 	@FXML
 	protected TableColumn<User, String> columnCreated;
@@ -89,5 +89,8 @@ public abstract class BaseUserManagementPage extends AnchorPane {
 
 	@FXML
 	protected abstract void onButtonOpenAddDIalog(ActionEvent event);
+
+	@FXML
+	protected abstract void onLinkCancelCreateUser(ActionEvent event);
 
 }

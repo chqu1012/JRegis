@@ -1,6 +1,10 @@
 package de.dc.fx.ui.jregis.metro.ui.control.binding;
 
+import java.time.LocalDateTime;
+
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class UserContext {
@@ -15,5 +19,6 @@ public class UserContext {
 	public Property<String> state = new SimpleStringProperty("");
 	public Property<String> country = new SimpleStringProperty("");
 	public Property<String> mobile = new SimpleStringProperty("");
+	public ObjectProperty<LocalDateTime> birthday = new SimpleObjectProperty<>();
 
 }

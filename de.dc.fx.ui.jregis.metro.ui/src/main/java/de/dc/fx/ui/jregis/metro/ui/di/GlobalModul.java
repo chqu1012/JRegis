@@ -2,6 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.di;
 
 import com.google.inject.AbstractModule;
 
+import de.dc.fx.ui.jregis.metro.ui.control.UserManagementPage;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
@@ -33,5 +34,7 @@ public class GlobalModul extends AbstractModule {
 		
 		bind(DocumentFolderService.class).asEagerSingleton();
 		bind(IEventBroker.class).to(EventBroker.class).asEagerSingleton();
+		
+		bind(UserManagementPage.class).asEagerSingleton();
 	}
 }

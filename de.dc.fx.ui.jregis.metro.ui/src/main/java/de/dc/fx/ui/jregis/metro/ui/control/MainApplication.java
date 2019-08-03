@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
+
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.table.TableFilter;
 
@@ -40,36 +42,38 @@ import javafx.util.StringConverter;
 public class MainApplication extends BaseMainApplication {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	
+
 	private static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/MainApplication.fxml";
 
 	private ObservableList<Document> masterDocumentData = FXCollections.observableArrayList();
 	private FilteredList<Document> filteredDocumentData = new FilteredList<>(masterDocumentData, p -> true);
-	
+
 	private ObservableList<Category> masterCategoryData = FXCollections.observableArrayList();
-	
+
 	private ObservableList<String> masterSuggestionData = FXCollections.observableArrayList();
-	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p->true);
-	
+	private FilteredList<String> filteredSuggestionData = new FilteredList<>(masterSuggestionData, p -> true);
+
 	// Pages
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
-	private UserManagementPage userManagementPage = new UserManagementPage();
+//	private UserManagementPage userManagementPage = new UserManagementPage();
 
-	@Inject CategoryRepository categoryRepository;
+	@Inject
+	UserManagementPage userManagementPage;
+	@Inject
+	CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
-	
+
 	public MainApplication() {
-		FXMLLoader fxmlLoader = new FXMLLoader(
-				getClass().getResource(FXML));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
 		try {
 			fxmlLoader.load();
 		} catch (IOException exception) {
-			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
+			log.log(Level.SEVERE, "Failed to load fxml " + FXML, exception);
 		}
 	}
 
@@ -79,9 +83,9 @@ public class MainApplication extends BaseMainApplication {
 		initCategoryComboBox();
 		initControls();
 		initBindings();
-		
+
 		mainStackPane.getChildren().add(preferencePage);
-		mainStackPane.getChildren().add(userManagementPage);
+		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
 		mainStackPane.getChildren().add(documentFlatDetails);
 		paneDocumentTableView.toFront();
 	}
@@ -90,19 +94,20 @@ public class MainApplication extends BaseMainApplication {
 		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
 		List<Category> categories = categoryRepository.findAll();
 		masterCategoryData.addAll(categories);
-		
+
 		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
 		List<Document> documents = documentRepository.findAll();
 		masterDocumentData.addAll(documents);
-		
+
 		DocumentNameRepository documentNameRepository = JRegisPlatform.getInstance(DocumentNameRepository.class);
 		List<String> documentNames = documentNameRepository.findAll();
 		masterSuggestionData.addAll(documentNames);
+
 	}
 
 	private void initControls() {
 		new AutoCompletionTextFieldBinding<>(textDocumentName, param -> {
-			filteredSuggestionData.setPredicate(p->p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			filteredSuggestionData.setPredicate(p -> p.toLowerCase().contains(param.getUserText().toLowerCase()));
 			return filteredSuggestionData;
 		});
 	}
@@ -114,10 +119,11 @@ public class MainApplication extends BaseMainApplication {
 			public String toString(Category c) {
 				return c.getName();
 			}
-			
+
 			@Override
 			public Category fromString(String name) {
-				Optional<Category> optionalCategory = masterCategoryData.stream().filter(p-> p.getName().equals(name)).findFirst();
+				Optional<Category> optionalCategory = masterCategoryData.stream().filter(p -> p.getName().equals(name))
+						.findFirst();
 				if (optionalCategory.isPresent()) {
 					return optionalCategory.get();
 				}
@@ -138,10 +144,10 @@ public class MainApplication extends BaseMainApplication {
 				return new SimpleObjectProperty<>(category.get().getName());
 			}
 			return new SimpleObjectProperty<>("");
-		});		
-		
+		});
+
 		tableViewDocument.setItems(filteredDocumentData);
-		
+
 		tableFilter = TableFilter.forTableView(tableViewDocument).apply();
 		tableFilter.setSearchStrategy((input,target) -> {
 		    try {
@@ -150,20 +156,20 @@ public class MainApplication extends BaseMainApplication {
 		        return false;
 		    }
 		});
-		
+
 		textSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredDocumentData.setPredicate(p->{
+			filteredDocumentData.setPredicate(p -> {
 				if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+					return true;
+				}
 				String searchContent = newValue.toLowerCase();
 				if (p.getName().toLowerCase().contains(searchContent)) {
 					return true;
-				}else if (String.valueOf(p.getId()).contains(searchContent)) {
+				} else if (String.valueOf(p.getId()).contains(searchContent)) {
 					return true;
-				}else if (p.getCreatedOnAsString()!=null && p.getCreatedOnAsString().contains(searchContent)) {
+				} else if (p.getCreatedOnAsString() != null && p.getCreatedOnAsString().contains(searchContent)) {
 					return true;
-				}else if (p.getUpdatedOnAsString()!=null && p.getUpdatedOnAsString().contains(searchContent)) {
+				} else if (p.getUpdatedOnAsString() != null && p.getUpdatedOnAsString().contains(searchContent)) {
 					return true;
 				}
 				return false;
@@ -173,7 +179,8 @@ public class MainApplication extends BaseMainApplication {
 
 	private void initBindings() {
 		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
-		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries", Bindings.size(filteredDocumentData), Bindings.size(masterDocumentData)));
+		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries",
+				Bindings.size(filteredDocumentData), Bindings.size(masterDocumentData)));
 		buttonCreateDocument.disableProperty().bind(textDocumentName.textProperty().isEmpty());
 	}
 
@@ -196,10 +203,11 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onMenuItemDeleteDocumentAction(ActionEvent event) {
 		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
-		if (selection!=null) {
-			String message = "Do you really want to delete \""+selection.getName()+"\"";
-			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection", "Delete selected document with ID: "+selection.getId(), message);
-			dialog.ifPresent(e->{
+		if (selection != null) {
+			String message = "Do you really want to delete \"" + selection.getName() + "\"";
+			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection",
+					"Delete selected document with ID: " + selection.getId(), message);
+			dialog.ifPresent(e -> {
 				JRegisPlatform.getInstance(DocumentRepository.class).delete(selection);
 				Notifications.create().darkStyle().title("Delete selection").text(message).show();
 				masterDocumentData.remove(selection);
@@ -233,9 +241,9 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onTableViewDocumentClicked(MouseEvent event) {
-		if (event.getClickCount()==2) {
+		if (event.getClickCount() == 2) {
 			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
-			if (selection!=null) {
+			if (selection != null) {
 				Task<Void> task = new Task<Void>() {
 					@Override
 					protected Void call() throws Exception {
@@ -260,14 +268,14 @@ public class MainApplication extends BaseMainApplication {
 		String description = textDescription.getText();
 		LocalDateTime createdOn = LocalDateTime.now();
 		String url = textUrl.getText();
-		
+
 		Document document = new Document(name, createdOn, createdOn, -1, description, url);
 
 		Category category = comboBoxCategory.getSelectionModel().getSelectedItem();
-		if (category!=null) {
+		if (category != null) {
 			document.setCategoryId(category.getId());
 		}
-		
+
 		long newDocumentId = JRegisPlatform.getInstance(DocumentRepository.class).save(document);
 		document.setId(newDocumentId);
 		masterDocumentData.add(document);
@@ -275,13 +283,13 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonAddCategoryAction(ActionEvent event) {
-		DialogUtil.openInput("New Category", "Category*","Create new Category", "", e->{
+		DialogUtil.openInput("New Category", "Category*", "Create new Category", "", e -> {
 			LocalDateTime createdOn = LocalDateTime.now();
 			Category category = new Category(e, createdOn, createdOn, -1);
 			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
 			category.setId(newId);
 			masterCategoryData.add(category);
-			
+
 			comboBoxCategory.getSelectionModel().select(category);
 		});
 	}
@@ -290,7 +298,7 @@ public class MainApplication extends BaseMainApplication {
 	protected void onButtonEditCategoryAction(ActionEvent event) {
 		Category selection = comboBoxCategory.getSelectionModel().getSelectedItem();
 		if (selection != null) {
-			DialogUtil.openInput("Edit Category", selection.getName(),"Edit Category", "", e->{
+			DialogUtil.openInput("Edit Category", selection.getName(), "Edit Category", "", e -> {
 				selection.setName(e);
 				long newId = categoryRepository.save(selection);
 				selection.setId(newId);
@@ -313,7 +321,7 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonAddDocumentNameSuggestionAction(ActionEvent event) {
-		String name = textDocumentName.getText();		
+		String name = textDocumentName.getText();
 		JRegisPlatform.getInstance(DocumentNameRepository.class).save(name);
 		masterSuggestionData.add(name);
 	}
@@ -331,7 +339,7 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onMenuItemShowAllAction(ActionEvent event) {
 		tableFilter.resetFilter();
-		filteredDocumentData.setPredicate(p->true);
+		filteredDocumentData.setPredicate(p -> true);
 	}
 
 	@Override

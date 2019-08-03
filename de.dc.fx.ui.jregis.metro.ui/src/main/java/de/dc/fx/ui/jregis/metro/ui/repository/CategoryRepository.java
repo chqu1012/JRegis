@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 
@@ -23,6 +24,14 @@ public class CategoryRepository extends BaseRepository<Category> {
 		return category;
 	}
 
+	@Override
+	public Optional<Category> findById(long id) {
+		if (!cachedList.isEmpty()) {
+			return cachedList.stream().filter(e->e.getId()==id).findFirst();
+		}
+		return super.findById(id);
+	}
+	
 	@Override
 	protected String findByIdStatement(long id) {
 		return "SELECT * FROM document_category WHERE id=" + id;

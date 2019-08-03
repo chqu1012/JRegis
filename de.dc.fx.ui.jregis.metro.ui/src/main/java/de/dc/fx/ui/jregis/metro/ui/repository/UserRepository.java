@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
+import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.User;
 
 public class UserRepository extends BaseRepository<User> {
@@ -36,6 +38,14 @@ public class UserRepository extends BaseRepository<User> {
 		user.setId(id);
 		return user;
 	}
+	
+	@Override
+	public Optional<User> findById(long id) {
+		if (!cachedList.isEmpty()) {
+			return cachedList.stream().filter(e->e.getId()==id).findFirst();
+		}
+		return super.findById(id);
+	}
 
 	@Override
 	protected String findAllStatement() {
@@ -55,7 +65,7 @@ public class UserRepository extends BaseRepository<User> {
 	@Override
 	protected void prepareStatetmentForSave(User t, PreparedStatement statement) throws SQLException {
 		statement.setString(1, t.getAddress());
-		statement.setTimestamp(2, Timestamp.valueOf(t.getBirthday()));
+		statement.setTimestamp(2, Timestamp.valueOf(t.getBirthday()==null?LocalDateTime.now():t.getBirthday()));
 		statement.setString(3, t.getCity());
 		statement.setString(4, t.getCountry());
 		statement.setTimestamp(5, Timestamp.valueOf(t.getCreatedOn()));

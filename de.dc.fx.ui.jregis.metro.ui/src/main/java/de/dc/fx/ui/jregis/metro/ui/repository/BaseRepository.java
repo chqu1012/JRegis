@@ -17,7 +17,7 @@ public abstract class BaseRepository<T> {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
-	private List<T> cachedList = new ArrayList<>();
+	protected List<T> cachedList = new ArrayList<>();
 
 	private static final String JDBC_URL = "jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;";
 	
@@ -33,6 +33,7 @@ public abstract class BaseRepository<T> {
 		if (cachedList.isEmpty()) {
 			return Optional.ofNullable(forceFindBy(id));
 		}
+		// TODO: Bug only works with IdElements
 		return Optional.ofNullable(forceFindBy(id));
 	}
 

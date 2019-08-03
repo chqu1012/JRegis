@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 
@@ -24,6 +25,14 @@ public class DocumentRepository extends BaseRepository<Document>{
 		Document document = new Document(id, name, createdOn, updatedOn, categoryId, description, url);
 		document.setStatus(status);
 		return document;
+	}
+	
+	@Override
+	public Optional<Document> findById(long id) {
+		if (!cachedList.isEmpty()) {
+			return cachedList.stream().filter(e->e.getId()==id).findFirst();
+		}
+		return super.findById(id);
 	}
 
 	@Override

@@ -1,20 +1,20 @@
 package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.management.Notification;
 
 import org.controlsfx.control.Notifications;
 
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.UserContext;
+import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnUsername;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.User;
 import de.dc.fx.ui.jregis.metro.ui.repository.UserRepository;
+import de.dc.fx.ui.jregis.metro.ui.service.UserService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class UserManagementPage extends BaseUserManagementPage {
 
@@ -35,7 +36,8 @@ public class UserManagementPage extends BaseUserManagementPage {
 	
 	private UserContext context = new UserContext();
 	
-	public UserManagementPage() {
+	@Inject
+	public UserManagementPage(UserService userService) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -70,10 +72,13 @@ public class UserManagementPage extends BaseUserManagementPage {
 		
 		setupCellValueFactory(columnCreated, e-> new SimpleObjectProperty<>(e.getCreatedOnAsString()));
 		setupCellValueFactory(columnId, e-> new SimpleObjectProperty<>(String.valueOf(e.getId())));
-		setupCellValueFactory(columnName, e-> new SimpleObjectProperty<>(e.getUsername()));
+		columnName.setCellValueFactory(param -> new SimpleObjectProperty<User>(param.getValue()));
+		columnName.setCellFactory(e-> new ColumnUsername());
 		setupCellValueFactory(columnRole, e-> new SimpleObjectProperty<>(String.valueOf(e.getRoleId())));
 		setupCellValueFactory(columnStatus, e-> new SimpleObjectProperty<>(String.valueOf(e.getStatus())));
 		tableView.setItems(filteredMasterData);
+		
+		masterData.addAll(userService.findAll());
 	}
 
 	public static <T, U> void setupCellValueFactory(TableColumn<T, U> column, Function<T, ObservableValue<U>> mapper) {
@@ -82,27 +87,10 @@ public class UserManagementPage extends BaseUserManagementPage {
 	
 	@Override
 	protected void onButtonCreateUser(ActionEvent event) {
-		String name = "";
-		LocalDateTime createdOn = LocalDateTime.now();
-		LocalDateTime updatedOn = LocalDateTime.now();
-		String username = textUsername.getText();
-		String password = textPassword.getText();
-		String firstname = textFirstname.getText();
-		String lastname = textLastname.getText();
-		String email = textEmail.getText();
-		String address = textAddress.getText();
-		String city = textCity.getText();
-		String state = textState.getText();
-		String country = textCountry.getText();
-		String mobile = textMobile.getText();
-		LocalDateTime birthday = LocalDateTime.now();
-		User user = new User(name, createdOn, updatedOn, username, password, firstname, lastname, email, address, city, state, country, mobile, birthday);
-		user.setRoleId(0);
-		JRegisPlatform.getInstance(UserRepository.class).save(user);
+		User user = JRegisPlatform.getInstance(UserService.class).create(context);
 		
 		masterData.add(user);
-		
-		Notifications.create().darkStyle().title("New User created!").text("Create new user "+username).show();
+		Notifications.create().darkStyle().title("New User created!").text("Create new user "+context.username.getValue()).show();
 		
 		addUserDialog.setVisible(false);
 		addUserDialog.toBack();
@@ -112,6 +100,11 @@ public class UserManagementPage extends BaseUserManagementPage {
 	protected void onButtonOpenAddDIalog(ActionEvent event) {
 		addUserDialog.setVisible(true);
 		addUserDialog.toFront();
-		
+	}
+
+	@Override
+	protected void onLinkCancelCreateUser(ActionEvent event) {
+		addUserDialog.setVisible(false);
+		addUserDialog.toBack();
 	}
 }

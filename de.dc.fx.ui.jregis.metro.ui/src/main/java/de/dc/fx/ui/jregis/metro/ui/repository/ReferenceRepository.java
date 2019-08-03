@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
+import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Reference;
 
 public class ReferenceRepository extends BaseRepository<Reference> {
@@ -24,6 +26,14 @@ public class ReferenceRepository extends BaseRepository<Reference> {
 		return reference;
 	}
 
+	@Override
+	public Optional<Reference> findById(long id) {
+		if (!cachedList.isEmpty()) {
+			return cachedList.stream().filter(e->e.getId()==id).findFirst();
+		}
+		return super.findById(id);
+	}
+	
 	@Override
 	protected String findByIdStatement(long id) {
 		return "SELECT * FROM reference WHERE id=" + id;
