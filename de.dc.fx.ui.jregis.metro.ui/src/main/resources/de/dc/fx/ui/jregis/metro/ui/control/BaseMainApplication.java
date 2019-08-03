@@ -31,7 +31,7 @@ public abstract class BaseMainApplication extends BorderPane{
 	protected Label labelEntriesSize;
 	
     @FXML
-    protected TableColumn<Document, String> columnId;
+    protected TableColumn<Document, Document> columnId;
 
     @FXML
     protected TableColumn<Document, String> columnName;

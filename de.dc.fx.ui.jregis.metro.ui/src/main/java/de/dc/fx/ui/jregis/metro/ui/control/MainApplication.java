@@ -15,6 +15,7 @@ import org.controlsfx.control.table.TableFilter;
 import com.google.common.base.Function;
 import com.google.inject.Inject;
 
+import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnJRegisIdFeature;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
@@ -35,6 +36,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
@@ -56,12 +58,10 @@ public class MainApplication extends BaseMainApplication {
 	// Pages
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
-//	private UserManagementPage userManagementPage = new UserManagementPage();
 
-	@Inject
-	UserManagementPage userManagementPage;
-	@Inject
-	CategoryRepository categoryRepository;
+	@Inject UserManagementPage userManagementPage;
+	
+	@Inject CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
 
@@ -133,7 +133,9 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initTableView() {
-		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(String.format("JREG-%05d", e.getId())));
+//		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(String.format("JREG-%05d", e.getId())));
+		columnId.setCellValueFactory(e-> new SimpleObjectProperty<>(e.getValue()));
+		columnId.setCellFactory(e-> new ColumnJRegisIdFeature());
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
 		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnAsString()));
 		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnAsString()));
@@ -208,9 +210,11 @@ public class MainApplication extends BaseMainApplication {
 			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection",
 					"Delete selected document with ID: " + selection.getId(), message);
 			dialog.ifPresent(e -> {
-				JRegisPlatform.getInstance(DocumentRepository.class).delete(selection);
-				Notifications.create().darkStyle().title("Delete selection").text(message).show();
-				masterDocumentData.remove(selection);
+				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
+					JRegisPlatform.getInstance(DocumentRepository.class).delete(selection);
+					Notifications.create().darkStyle().title("Delete selection").text(message).show();
+					masterDocumentData.remove(selection);
+				}
 			});
 		}
 	}
