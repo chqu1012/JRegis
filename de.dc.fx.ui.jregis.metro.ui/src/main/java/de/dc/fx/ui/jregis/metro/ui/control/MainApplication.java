@@ -133,7 +133,6 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initTableView() {
-//		setupCellValueFactory(columnId, e -> new SimpleObjectProperty(String.format("JREG-%05d", e.getId())));
 		columnId.setCellValueFactory(e-> new SimpleObjectProperty<>(e.getValue()));
 		columnId.setCellFactory(e-> new ColumnJRegisIdFeature());
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
@@ -161,20 +160,13 @@ public class MainApplication extends BaseMainApplication {
 
 		textSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredDocumentData.setPredicate(p -> {
-				if (newValue == null || newValue.isEmpty()) {
-					return true;
-				}
 				String searchContent = newValue.toLowerCase();
-				if (p.getName().toLowerCase().contains(searchContent)) {
-					return true;
-				} else if (String.valueOf(p.getId()).contains(searchContent)) {
-					return true;
-				} else if (p.getCreatedOnAsString() != null && p.getCreatedOnAsString().contains(searchContent)) {
-					return true;
-				} else if (p.getUpdatedOnAsString() != null && p.getUpdatedOnAsString().contains(searchContent)) {
-					return true;
-				}
-				return false;
+				boolean isEmpty = newValue == null || newValue.isEmpty();
+				boolean isNameEquals = p.getName().toLowerCase().contains(searchContent);
+				boolean isIdEquals = String.valueOf(p.getId()).contains(searchContent);
+				boolean isCreatedEquals = p.getCreatedOnAsString() != null && p.getCreatedOnAsString().contains(searchContent);
+				boolean isUpdatedEquals = p.getUpdatedOnAsString() != null && p.getUpdatedOnAsString().contains(searchContent);
+				return isEmpty || isNameEquals || isCreatedEquals || isUpdatedEquals || isIdEquals;
 			});
 		});
 	}
