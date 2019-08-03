@@ -1,0 +1,69 @@
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+SELECT * FROM user ORDER BY id DESC [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_HISTORY" nicht gefunden
+Table "DOCUMENT_HISTORY" not found; SQL statement:
+SELECT * FROM document_history [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CLIPBOARD_NAME_SUGGESTION" nicht gefunden
+Table "CLIPBOARD_NAME_SUGGESTION" not found; SQL statement:
+SELECT * FROM clipboard_name_suggestion ORDER BY name [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" nicht gefunden
+Table "DOCUMENT" not found; SQL statement:
+SELECT * FROM document ORDER BY id DESC [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_CATEGORY" nicht gefunden
+Table "DOCUMENT_CATEGORY" not found; SQL statement:
+SELECT * FROM document_category ORDER BY name ASC [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" nicht gefunden
+Table "DOCUMENT" not found; SQL statement:
+SELECT * FROM document ORDER BY id DESC [42102-196]
+2019-08-03 13:28:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_NAME_SUGGESTION" nicht gefunden
+Table "DOCUMENT_NAME_SUGGESTION" not found; SQL statement:
+SELECT * FROM document_name_suggestion ORDER BY name [42102-196]
+2019-08-03 13:33:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+SELECT * FROM user ORDER BY id DESC [42102-196]
+2019-08-03 13:33:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_HISTORY" nicht gefunden
+Table "DOCUMENT_HISTORY" not found; SQL statement:
+SELECT * FROM document_history [42102-196]
+2019-08-03 13:33:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CLIPBOARD_NAME_SUGGESTION" nicht gefunden
+Table "CLIPBOARD_NAME_SUGGESTION" not found; SQL statement:
+SELECT * FROM clipboard_name_suggestion ORDER BY name [42102-196]
+2019-08-03 13:33:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" nicht gefunden
+Table "DOCUMENT" not found; SQL statement:
+SELECT * FROM document ORDER BY id DESC [42102-196]
+2019-08-03 13:33:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_CATEGORY" nicht gefunden
+Table "DOCUMENT_CATEGORY" not found; SQL statement:
+SELECT * FROM document_category ORDER BY name ASC [42102-196]
+2019-08-03 13:33:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" nicht gefunden
+Table "DOCUMENT" not found; SQL statement:
+SELECT * FROM document ORDER BY id DESC [42102-196]
+2019-08-03 13:33:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT_NAME_SUGGESTION" nicht gefunden
+Table "DOCUMENT_NAME_SUGGESTION" not found; SQL statement:
+SELECT * FROM document_name_suggestion ORDER BY name [42102-196]
+2019-08-03 13:39:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "DOCUMENT" besteht bereits
+Table "DOCUMENT" already exists; SQL statement:
+CREATE TABLE DOCUMENT(
+    ID BIGINT AUTO_INCREMENT,
+    CATEGORY_ID BIGINT NOT NULL,
+    DESCRIPTION CLOB NOT NULL,
+    NAME VARCHAR(255) NOT NULL,
+    URL VARCHAR(255),
+    CREATED_ON TIMESTAMP NOT NULL,
+    UPDATED_ON TIMESTAMP,
+    STATUS_ID BIGINT NOT NULL
+) [42101-196]

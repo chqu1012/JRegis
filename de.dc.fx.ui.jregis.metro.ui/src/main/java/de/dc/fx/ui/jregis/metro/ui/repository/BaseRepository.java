@@ -19,7 +19,7 @@ public abstract class BaseRepository<T> {
 
 	protected List<T> cachedList = new ArrayList<>();
 
-	private static final String JDBC_URL = "jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;";
+	public static final String JDBC_URL = "jdbc:h2:file:./data/reg_db;DB_CLOSE_ON_EXIT=true;";
 	
 	public BaseRepository() {
 		try {
