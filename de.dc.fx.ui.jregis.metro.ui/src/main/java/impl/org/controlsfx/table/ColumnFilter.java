@@ -71,7 +71,11 @@ public final class ColumnFilter<T,R> {
             }
             if (lc.wasRemoved()) {
                 lc.getRemoved().stream()
-                        .forEach(t -> removeBackingItem(t, getTableColumn().getCellObservableValue(t)));
+                        .forEach(t -> {
+                        	if (t!=null) {
+                        		removeBackingItem(t, getTableColumn().getCellObservableValue(t));
+							}
+                        });
             }
         }
     };
@@ -242,7 +246,9 @@ public final class ColumnFilter<T,R> {
 
         //remove listener from cell
         ChangeListener<R> listener = trackedCells.get(new CellIdentity<>(item));
-        cellValue.removeListener(listener);
+        if (listener!=null) {
+        	cellValue.removeListener(listener);
+		}
         trackedCells.remove(new CellIdentity<>(item));
     }
     private void removeValue(R value) {

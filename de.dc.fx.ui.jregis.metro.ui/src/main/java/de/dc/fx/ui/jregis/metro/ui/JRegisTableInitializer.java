@@ -19,6 +19,8 @@ public class JRegisTableInitializer{
 		URL createUserUrl = JRegisTableInitializer.class.getResource("/sql/create_user.sql");
 		RunScript.execute(connection, new FileReader(new File(createUrl.getFile())));
 		RunScript.execute(connection, new FileReader(new File(createUserUrl.getFile())));
+		
+		System.out.println("Tables initialized!");
 	}
 }
 
