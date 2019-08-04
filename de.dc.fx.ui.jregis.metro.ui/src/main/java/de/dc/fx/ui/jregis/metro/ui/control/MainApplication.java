@@ -15,10 +15,13 @@ import org.controlsfx.control.PopOver.ArrowLocation;
 import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
+import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnJRegisIdFeature;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
@@ -81,8 +84,23 @@ public class MainApplication extends BaseMainApplication {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml " + FXML, exception);
 		}
+		
+		JRegisPlatform.getInstance(IEventBroker.class).register(this);
 	}
 
+	@Subscribe
+	public void closeNotificationViaEventBroker(EventContext<String> context) {
+		if (context.getEventId().equals("/close/notification")) {
+			if (context.getInput().equals("user")) {
+				popOverUser.hide();
+			}else if (context.getInput().equals("preferences")) {
+				popOverPreferences.hide();
+			}else if (context.getInput().equals("notifications")) {
+				popOverNotification.hide();
+			}
+		}
+	}
+	
 	public void initialize() {
 		initData();
 		initTableView();

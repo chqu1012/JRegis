@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 
@@ -27,32 +30,27 @@ private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
 	@Override
 	protected void onLinkAccountClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));
 	}
 
 	@Override
 	protected void onLinkLockScreenClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));	
 	}
 
 	@Override
 	protected void onLinkLogOutClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));		
 	}
 
 	@Override
 	protected void onLinkSettingsClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));		
 	}
 
 	@Override
 	protected void onLinkSupportClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));		
 	}
 
 }
