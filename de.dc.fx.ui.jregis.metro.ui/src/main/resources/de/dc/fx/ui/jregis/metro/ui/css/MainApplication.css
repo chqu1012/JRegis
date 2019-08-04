@@ -9,3 +9,23 @@
 .notification-image-view:pressed{
     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-push.png');
 }
+
+.preferences-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-gray.png');
+}
+
+.preferences-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-light.png');
+}
+
+.preferences-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-blue.png');
+}
+
+.panel-user{
+	-fx-background-color: transparent;
+}
+
+.panel-user:pressed{
+	-fx-background-color: #C2C2C2;
+}

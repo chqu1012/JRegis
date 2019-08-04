@@ -62,6 +62,8 @@ public class MainApplication extends BaseMainApplication {
 	private PreferencePage preferencePage = new PreferencePage();
 
 	private PopOver popOverNotification = new PopOver();
+	private PopOver popOverPreferences = new PopOver();
+	private PopOver popOverUser = new PopOver();
 	
 	@Inject UserManagementPage userManagementPage;
 	
@@ -353,5 +355,22 @@ public class MainApplication extends BaseMainApplication {
 		popOverNotification.setDetachable(false);
 		popOverNotification.setAutoFix(true);
 		popOverNotification.show(imageViewNotification);
+	}
+
+	@Override
+	protected void onImageViewPreferencesClicked(MouseEvent event) {
+		popOverPreferences.setArrowLocation(ArrowLocation.TOP_RIGHT);
+		popOverPreferences.setDetachable(false);
+		popOverPreferences.setAutoFix(true);
+		popOverPreferences.show(imageViewPreferences);
+	}
+
+	@Override
+	protected void onHBoxUserClicked(MouseEvent event) {
+		popOverUser.setArrowLocation(ArrowLocation.TOP_CENTER);
+		popOverUser.setDetachable(false);
+		popOverUser.setAutoFix(true);
+		popOverUser.setArrowSize(0);
+		popOverUser.show(panelUser);
 	}
 }

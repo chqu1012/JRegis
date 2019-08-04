@@ -22,6 +22,12 @@ import javafx.scene.layout.StackPane;
 public abstract class BaseMainApplication extends BorderPane{
 
 	@FXML
+	protected HBox panelUser;
+	
+	@FXML
+	protected ImageView imageViewPreferences;
+
+	@FXML
 	protected ImageView imageViewNotification;
 	
 	@FXML
@@ -164,4 +170,10 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onImageViewNotificationClicked(MouseEvent event);
+    
+    @FXML
+    protected abstract void onImageViewPreferencesClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onHBoxUserClicked(MouseEvent event);
 }
