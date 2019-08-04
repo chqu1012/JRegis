@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" style="-fx-background-color: white;" type="VBox" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox spacing="5.0">
+         <children>
+            <Label text="Welcome" textFill="#898989">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelUsername" text="Max Mustermann" textFill="#898989">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-benutzer-48-gray.png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkAccountClicked" text="Account" textFill="#808080">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-einstellungen-48-gray.png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkSettingsClicked" text="Settings" textFill="#808080">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-support-48.png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkSupportClicked" text="Support" textFill="#808080">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-nur-hochkant-30.png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkLockScreenClicked" text="Lock Screen" textFill="#808080">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-exportieren-24%20(1).png" />
+               </image>
+            </ImageView>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkLogOutClicked" text="Log Out" textFill="#808080">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
+</fx:root>

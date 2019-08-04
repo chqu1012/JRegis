@@ -368,6 +368,7 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onHBoxUserClicked(MouseEvent event) {
 		popOverUser.setArrowLocation(ArrowLocation.TOP_CENTER);
+		popOverUser.setContentNode(new NotificationUser()); 
 		popOverUser.setDetachable(false);
 		popOverUser.setAutoFix(true);
 		popOverUser.setArrowSize(0);
