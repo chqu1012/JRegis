@@ -40,7 +40,7 @@ private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 
 	@Override
 	protected void onLinkLogOutClicked(MouseEvent event) {
-		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "user"));		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/close/notification", "logout"));		
 	}
 
 	@Override

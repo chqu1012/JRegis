@@ -96,9 +96,12 @@ public class MainApplication extends BaseMainApplication {
 				popOverUser.hide();
 				profilePage.toFront();
 			}else if (context.getInput().equals("preferences")) {
-				popOverPreferences.hide();
+				popOverUser.hide();
 			}else if (context.getInput().equals("notifications")) {
-				popOverNotification.hide();
+				popOverUser.hide();
+			}else if (context.getInput().equals("logout")) {
+				popOverUser.hide();
+				paneLogin.toFront();
 			}
 		}
 	}
@@ -208,7 +211,6 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onButtonLoginAction(ActionEvent event) {
-		textCreatedOn.setText(LocalDateTime.now().toString());
 		paneDocumentTableView.toFront();
 	}
 
