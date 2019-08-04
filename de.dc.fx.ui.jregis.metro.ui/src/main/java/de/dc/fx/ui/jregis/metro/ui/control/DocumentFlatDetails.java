@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.Rating;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -77,6 +78,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
 
 	private List<Reference> referencesRegistry = new ArrayList<>();
+
+	private Rating rating = new Rating(5);
 	
 	private DocumentContext context = new DocumentContext();
 
@@ -106,6 +109,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			return filteredNameSuggestion;
 		});
 
+		hboxTitle.getChildren().add(rating);
+		
 		initBindings();
 		initReferenceDialog();
 	}
@@ -208,6 +213,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		
 		context.documentComment.set("");
 
+		rating.setRating(0);
+		
 		// Fill References
 		List<Reference> references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
 		references = references.stream().filter(e-> e.getFirstId()==context.current.get().getId()).collect(Collectors.toList());
