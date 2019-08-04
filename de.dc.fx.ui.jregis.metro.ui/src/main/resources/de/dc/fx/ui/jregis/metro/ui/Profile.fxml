@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="root" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pannable="true" stylesheets="@css/Profile.css" type="ScrollPane" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.221">
+<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="600.0" stylesheets="@css/Profile.css" type="ScrollPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.221">
   <content>
     <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="content">
          <children>
