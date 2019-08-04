@@ -63,7 +63,8 @@ public class MainApplication extends BaseMainApplication {
 	// Pages
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
-
+	private ProfilePage profilePage = new ProfilePage();
+	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
@@ -93,6 +94,7 @@ public class MainApplication extends BaseMainApplication {
 		if (context.getEventId().equals("/close/notification")) {
 			if (context.getInput().equals("user")) {
 				popOverUser.hide();
+				profilePage.toFront();
 			}else if (context.getInput().equals("preferences")) {
 				popOverPreferences.hide();
 			}else if (context.getInput().equals("notifications")) {
@@ -111,6 +113,8 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
 		mainStackPane.getChildren().add(documentFlatDetails);
+		mainStackPane.getChildren().add(profilePage);
+		
 		paneDocumentTableView.toFront();
 	}
 

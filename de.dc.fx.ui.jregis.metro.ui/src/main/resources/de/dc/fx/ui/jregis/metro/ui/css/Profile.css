@@ -1,0 +1,49 @@
+.header{
+	-fx-background-color: #254962;
+	-fx-background-radius: 5;
+}
+
+.content{
+	-fx-background-color: #DBDFE2;
+}
+
+.content-white{
+	-fx-background-color: white;
+	-fx-background-radius: 5;
+}
+
+.content-white-title{
+	-fx-text-fill: #969696;
+	-fx-font-weight: bold;
+	-fx-font-size: 10pt ;
+}
+
+.label-profile-name{
+	-fx-text-fill: white;
+	-fx-font-size: 20pt ;
+	-fx-font-weight: normal;
+}
+
+.label-profile{
+	-fx-text-fill: #969696;
+	-fx-font-size: 14pt ;
+	-fx-font-weight: bold;
+}
+
+.label-role{
+	-fx-text-fill: #969696;
+	-fx-font-size: 10pt ;
+	-fx-font-weight: normal;
+	-fx-font-style: normal;
+}
+
+.label-total-documents-value{
+	-fx-text-fill: white;
+	-fx-font-size: 14pt ;
+	-fx-font-weight: bold;
+}
+
+.label-total-documents-name{
+	-fx-text-fill: #969696;
+	-fx-font-size: 10pt ;
+}
