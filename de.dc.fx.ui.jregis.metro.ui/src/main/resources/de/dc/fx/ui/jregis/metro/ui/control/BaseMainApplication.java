@@ -22,6 +22,9 @@ import javafx.scene.layout.StackPane;
 public abstract class BaseMainApplication extends BorderPane{
 
 	@FXML
+	protected ImageView imageViewNotification;
+	
+	@FXML
 	protected TextField textSearch;
 	
 	@FXML
@@ -158,4 +161,7 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onNavigationUserManagementClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onImageViewNotificationClicked(MouseEvent event);
 }

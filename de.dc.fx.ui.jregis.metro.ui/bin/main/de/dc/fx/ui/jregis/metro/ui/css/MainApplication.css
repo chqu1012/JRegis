@@ -1,0 +1,11 @@
+.notification-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48.png');
+}
+
+.notification-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-lightgray.png');
+}
+
+.notification-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-push.png');
+}

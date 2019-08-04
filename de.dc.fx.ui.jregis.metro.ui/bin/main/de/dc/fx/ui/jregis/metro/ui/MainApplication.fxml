@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" prefWidth="1200.0" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" prefWidth="1200.0" stylesheets="@css/MainApplication.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane>
          <center>
@@ -168,13 +168,19 @@
             </StackPane>
          </center>
          <top>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" style="-fx-background-color: #254962;" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" style="-fx-background-color: #254962;" BorderPane.alignment="CENTER">
                <children>
                   <TextField prefHeight="25.0" prefWidth="238.0" promptText="Search..." style="-fx-background-color: #386E93; -fx-text-fill: white;">
                      <HBox.margin>
                         <Insets bottom="10.0" left="20.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <ImageView fx:id="imageViewNotification" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#onImageViewNotificationClicked" pickOnBounds="true" preserveRatio="true" styleClass="notification-image-view">
+                     <image>
+                        <Image url="@images/icons8-alarm-48.png" />
+                     </image>
+                  </ImageView>
                </children>
                <effect>
                   <DropShadow height="6.17" radius="1.8449999999999998" width="3.21" />
@@ -182,6 +188,9 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </HBox>
          </top>
       </BorderPane>

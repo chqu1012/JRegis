@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.PopOver;
+import org.controlsfx.control.PopOver.ArrowLocation;
 import org.controlsfx.control.table.TableFilter;
 
 import com.google.common.base.Function;
@@ -59,6 +61,8 @@ public class MainApplication extends BaseMainApplication {
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
 
+	private PopOver popOverNotification = new PopOver();
+	
 	@Inject UserManagementPage userManagementPage;
 	
 	@Inject CategoryRepository categoryRepository;
@@ -341,5 +345,13 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onNavigationUserManagementClicked(MouseEvent event) {
 		userManagementPage.toFront();
+	}
+
+	@Override
+	protected void onImageViewNotificationClicked(MouseEvent event) {
+		popOverNotification.setArrowLocation(ArrowLocation.TOP_RIGHT);
+		popOverNotification.setDetachable(false);
+		popOverNotification.setAutoFix(true);
+		popOverNotification.show(imageViewNotification);
 	}
 }
