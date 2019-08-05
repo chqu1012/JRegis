@@ -114,7 +114,8 @@ public class MainApplication extends BaseMainApplication {
 		initCategoryComboBox();
 		initControls();
 		initBindings();
-
+		
+		popOverNotification.setContentNode(new NotificationAlerts());
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
 		mainStackPane.getChildren().add(documentFlatDetails);

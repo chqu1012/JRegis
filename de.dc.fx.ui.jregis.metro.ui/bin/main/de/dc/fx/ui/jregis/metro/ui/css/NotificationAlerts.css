@@ -1,0 +1,9 @@
+.content{
+	-fx-background-color: white;
+}
+
+.content-item{
+	-fx-background-color: #F5F5F5;
+	-fx-font-weight: bold;
+	-fx-text-fill: #23527C;
+}
