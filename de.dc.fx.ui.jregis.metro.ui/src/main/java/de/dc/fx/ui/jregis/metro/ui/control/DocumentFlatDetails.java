@@ -385,6 +385,14 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		}
 		event.consume();
 	}
+	
+	@Subscribe
+	public void restoreStage(EventContext<String> context) {
+		if (context.getEventId().equals("/restore/stage")) {
+			Stage mainStage = (Stage) root.getScene().getWindow();
+			mainStage.setIconified(false);
+		}
+	}
 
 	@Subscribe
 	public void deleteHistory(IEventContext<History> context) {
@@ -677,7 +685,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		mainStage.setIconified(true);
 		
 		try {
-			Thread.sleep(500);
+			Thread.sleep(200);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

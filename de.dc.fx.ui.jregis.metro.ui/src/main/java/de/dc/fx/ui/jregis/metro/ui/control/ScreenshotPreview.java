@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileSystemView;
 
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
@@ -48,6 +51,8 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
     private final DoubleProperty mouseXProperty = new SimpleDoubleProperty();
     private final DoubleProperty mouseYProperty = new SimpleDoubleProperty();
 	
+    private Stage stage = new Stage();
+    
 	public ScreenshotPreview() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
@@ -135,6 +140,10 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
         try {
             boolean successfully = ImageIO.write(bufferedImage, "png", pictureFile);
             labelMessage.setText(successfully ? "Successfully" : "Failed");
+            
+            stage.close();
+            
+            JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<String>("/restore/stage", ""));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -183,7 +192,6 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
         zoomProperty.set(Math.min(imageViewScreenshot.getFitWidth() / imageViewScreenshot.getImage().getWidth(), imageViewScreenshot.getFitHeight()
                 / imageViewScreenshot.getImage().getHeight()));
         
-        Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Screenshot " + title);
