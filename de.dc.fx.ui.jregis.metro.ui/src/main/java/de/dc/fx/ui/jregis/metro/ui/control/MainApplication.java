@@ -40,6 +40,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -355,24 +356,9 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	@Override
-	protected void onNavigationPreferencesClicked(MouseEvent event) {
-		preferencePage.toFront();
-	}
-
-	@Override
-	protected void onNavigationDocumentClicked(MouseEvent event) {
-		paneDocumentTableView.toFront();
-	}
-
-	@Override
 	protected void onMenuItemShowAllAction(ActionEvent event) {
 		tableFilter.resetFilter();
 		filteredDocumentData.setPredicate(p -> true);
-	}
-
-	@Override
-	protected void onNavigationUserManagementClicked(MouseEvent event) {
-		userManagementPage.toFront();
 	}
 
 	@Override
@@ -399,5 +385,26 @@ public class MainApplication extends BaseMainApplication {
 		popOverUser.setAutoFix(true);
 		popOverUser.setArrowSize(0);
 		popOverUser.show(panelUser);
+	}
+
+	@Override
+	protected void onNavigationItemClicked(MouseEvent event) {
+		Object source = event.getSource();
+		if (source instanceof Label) { 
+			Label label = (Label) source;
+			if (label.getText().equals("Dashboard")) {
+				dashboard.toFront();
+			}else if (label.getText().equals("Document")) {
+				paneDocumentTableView.toFront();
+			}else if (label.getText().equals("User Management")) {
+				userManagementPage.toFront();
+			}else if (label.getText().equals("Information")) {
+				
+			}else if (label.getText().equals("License")) {
+				
+			}else if (label.getText().equals("Preferences")) {
+				preferencePage.toFront();
+			}
+		}
 	}
 }

@@ -252,7 +252,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Separator>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Dashboard" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Dashboard" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -260,7 +260,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationDocumentClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Document" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Document" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -268,7 +268,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationUserManagementClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="User Management" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="User Management" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -276,7 +276,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Information" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Information" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -284,7 +284,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Licence" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Licence" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -292,7 +292,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationPreferencesClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Preferences" textFill="WHITE">
+            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Preferences" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
