@@ -2,6 +2,10 @@
 	-fx-background-color: white;
 }
 
+.content:hover{
+	-fx-background-color: #EEF0F1;
+}
+
 .label-timeline{
 	-fx-background-color: lightgray;
 }
