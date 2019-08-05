@@ -1,0 +1,8 @@
+.content{
+	-fx-background-color: #DBDFE2;
+}
+
+.main-content{
+	-fx-background-color: white;
+	-fx-background-radius: 5;
+}

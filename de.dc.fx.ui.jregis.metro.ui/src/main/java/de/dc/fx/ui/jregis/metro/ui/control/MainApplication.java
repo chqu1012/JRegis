@@ -66,6 +66,7 @@ public class MainApplication extends BaseMainApplication {
 	private PreferencePage preferencePage = new PreferencePage();
 	private ProfilePage profilePage = new ProfilePage();
 	private Dashboard dashboard = new Dashboard();
+	private Inbox inbox = new Inbox();
 	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
@@ -91,6 +92,14 @@ public class MainApplication extends BaseMainApplication {
 		JRegisPlatform.getInstance(IEventBroker.class).register(this);
 	}
 
+	@Subscribe
+	public void openSeeAllAlertsPane(EventContext<String> context) {
+		if (context.getEventId().equals("/open/see/all/alerts")) {
+			popOverNotification.hide();
+			inbox.toFront();
+		}
+	}
+	
 	@Subscribe
 	public void closeNotificationViaEventBroker(EventContext<String> context) {
 		if (context.getEventId().equals("/close/notification")) {
@@ -121,6 +130,7 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(documentFlatDetails);
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(dashboard);
+		mainStackPane.getChildren().add(inbox);
 		
 		dashboard.toFront();
 	}

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 
@@ -32,7 +35,7 @@ public class NotificationAlerts extends BaseNotificationAlerts{
 	
 	@Override
 	protected void onLabelSeeAllAlertsClicked(MouseEvent event) {
-		
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<String>("/open/see/all/alerts", "alerts"));
 	}
 
 }

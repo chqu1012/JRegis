@@ -1,0 +1,15 @@
+.label-marker:hover{
+	-fx-background-color: #E82634;
+}
+
+.label-marker{
+	-fx-background-color: transparent;
+}
+
+.root{
+	-fx-background-color: transparent;
+}
+
+.root:hover{
+	-fx-background-color: #EEF0F1;
+}
