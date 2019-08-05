@@ -13,3 +13,7 @@
 .root:hover{
 	-fx-background-color: #EEF0F1;
 }
+
+.root:pressed{
+	-fx-background-color: #55637D;
+}

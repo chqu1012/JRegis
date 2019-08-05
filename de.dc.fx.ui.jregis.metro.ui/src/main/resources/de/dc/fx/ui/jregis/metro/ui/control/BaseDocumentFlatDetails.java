@@ -237,4 +237,10 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
     
     @FXML
     protected abstract void onListViewReferencedDocuments(MouseEvent event);
+
+    @FXML
+    protected abstract void onButtonScreenshotAction(ActionEvent event);
+
+    @FXML
+    protected abstract void onButtonFullScreenshotAction(ActionEvent event);
 }

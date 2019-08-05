@@ -3,8 +3,28 @@
 	-fx-background-radius: 5;
 }
 
+.tile-user:pressed{
+	-fx-background-color: #0174C6;
+	-fx-background-radius: 5;
+}
+
+.tile-user:hover{
+	-fx-background-color: #55A2D9;
+	-fx-background-radius: 5;
+}
+
 .tile-documents{
 	-fx-background-color: #81C867;
+	-fx-background-radius: 5;
+}
+
+.tile-documents:pressed{
+	-fx-background-color: #81C867;
+	-fx-background-radius: 5;
+}
+
+.tile-documents:hover{
+	-fx-background-color: #ABDA99;
 	-fx-background-radius: 5;
 }
 
@@ -13,8 +33,28 @@
 	-fx-background-radius: 5;
 }
 
+.tile-comments:pressed{
+	-fx-background-color: #F05150;
+	-fx-background-radius: 5;
+}
+
+.tile-comments:hover{
+	-fx-background-color: #F58B8A;
+	-fx-background-radius: 5;
+}
+
 .tile-files{
 	-fx-background-color: #FFBE4C;
+	-fx-background-radius: 5;
+}
+
+.tile-files:pressed{
+	-fx-background-color: #FFBE4C;
+	-fx-background-radius: 5;
+}
+
+.tile-files:hover{
+	-fx-background-color: #FFD387;
 	-fx-background-radius: 5;
 }
 

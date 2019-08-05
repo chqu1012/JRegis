@@ -38,6 +38,7 @@ import de.dc.fx.ui.jregis.metro.ui.service.AttachmentService;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.service.HistoryService;
 import de.dc.fx.ui.jregis.metro.ui.util.ClipboardHelper;
+import de.dc.fx.ui.jregis.metro.ui.util.screenshot.ScreenshotStage;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
@@ -79,6 +80,8 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private List<Reference> referencesRegistry = new ArrayList<>();
 
+	private ScreenshotPreview screenshotPreview = new ScreenshotPreview();
+	
 	private Rating rating = new Rating(5);
 	
 	private DocumentContext context = new DocumentContext();
@@ -657,5 +660,30 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			referenceAllAvailableList.add(selection);
 			referencedList.remove(selection);
 		}
+	}
+
+	@Override
+	protected void onButtonScreenshotAction(ActionEvent event) {
+		Stage mainStage = (Stage) root.getScene().getWindow();
+		mainStage.setIconified(true);
+		
+		ScreenshotStage stage = new ScreenshotStage(false);
+		stage.show();
+	}
+
+	@Override
+	protected void onButtonFullScreenshotAction(ActionEvent event) {
+		Stage mainStage = (Stage) root.getScene().getWindow();
+		mainStage.setIconified(true);
+		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		ScreenshotStage stage = new ScreenshotStage(true);
+		stage.show();
+		
 	}
 }

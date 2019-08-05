@@ -203,6 +203,16 @@
                                  <children>
                                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                     <CheckBox fx:id="checkBoxShowDeletedComments" mnemonicParsing="false" onAction="#onCheckBoxShowDeletedCommentsAction" prefHeight="28.0" prefWidth="151.0" selected="true" text="Hide delete comments" />
+                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonScreenshotAction" text="ScreenShot">
+                                       <tooltip>
+                                          <Tooltip text="Paste File or Image from Clipboard" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonFullScreenshotAction" text="Full">
+                                       <tooltip>
+                                          <Tooltip text="Paste File or Image from Clipboard" />
+                                       </tooltip>
+                                    </Button>
                                     <Button mnemonicParsing="false" onAction="#onButtonClipboardHelperAction">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
