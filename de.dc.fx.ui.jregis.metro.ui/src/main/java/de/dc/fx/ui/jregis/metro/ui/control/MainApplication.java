@@ -64,6 +64,7 @@ public class MainApplication extends BaseMainApplication {
 	private DocumentFlatDetails documentFlatDetails = new DocumentFlatDetails();
 	private PreferencePage preferencePage = new PreferencePage();
 	private ProfilePage profilePage = new ProfilePage();
+	private Dashboard dashboard = new Dashboard();
 	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
@@ -117,8 +118,9 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
 		mainStackPane.getChildren().add(documentFlatDetails);
 		mainStackPane.getChildren().add(profilePage);
+		mainStackPane.getChildren().add(dashboard);
 		
-		paneDocumentTableView.toFront();
+		dashboard.toFront();
 	}
 
 	private void initData() {

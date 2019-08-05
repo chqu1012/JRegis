@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="600.0" prefWidth="1000.0" stylesheets="@css/Dashboard.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #EBEBEB;">
+         <children>
+            <HBox prefHeight="120.0" prefWidth="958.0" spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <HBox alignment="CENTER" prefWidth="220.0" styleClass="tile-user">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-name-96.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="120.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" prefWidth="136.0" styleClass="tile-mainlabel" text="Users" />
+                              <Label alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" styleClass="tile-label" text="1000" />
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefWidth="220.0" styleClass="tile-documents">
+                     <children>
+                        <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-dokument-100.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="120.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" prefWidth="0.0" styleClass="tile-mainlabel" text="Documents" />
+                              <Label alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" styleClass="tile-label" text="1000" />
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefWidth="220.0" styleClass="tile-comments">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-sprechblase-mit-punkten-96.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="120.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" prefWidth="136.0" styleClass="tile-mainlabel" text="Comments" />
+                              <Label alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" styleClass="tile-label" text="1000" />
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefWidth="220.0" styleClass="tile-files">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-anfügen-80.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="120.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" prefWidth="136.0" styleClass="tile-mainlabel" text="Files" />
+                              <Label alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="120.0" styleClass="tile-label" text="1000" />
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox layoutX="40.0" layoutY="190.0" prefHeight="344.0" prefWidth="268.0" spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="190.0">
+               <children>
+                  <VBox prefHeight="334.0" prefWidth="342.0" spacing="5.0" styleClass="tile-white">
+                     <children>
+                        <Label text="FEEDS" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="You have 4 pending tasks." />
+                                    <Label text="Just Now" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="#1fff27" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Server #1 overloaded." />
+                                    <Label text="Just Now" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="#ff1fc4" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="New user registered" />
+                                    <Label text="03.08.2019 19:49" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="#ff631f" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Serber #2 overlasted." />
+                                    <Label text="03.08.2019 20:55" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="#deff1f" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="New user registered" />
+                                    <Label text="03.08.2019 15:15" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="273.0" spacing="5.0">
+                           <children>
+                              <Circle fill="#1fff49" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="New Version just arrived." />
+                                    <Label text="03.08.2019 19:49" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="334.0" prefWidth="342.0" spacing="10.0" styleClass="tile-white">
+                     <children>
+                        <Label text="TO DO" />
+                        <CheckBox mnemonicParsing="false" text="Scheduling meeting" />
+                        <CheckBox mnemonicParsing="false" text="Give Purchase report" />
+                        <CheckBox mnemonicParsing="false" text="Book flight for holiday" />
+                        <CheckBox mnemonicParsing="false" text="Forward all tasks." />
+                        <CheckBox mnemonicParsing="false" text="Recieve shipment" />
+                        <CheckBox mnemonicParsing="false" text="Important tasks" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="334.0" prefWidth="342.0" styleClass="tile-white">
+                     <children>
+                        <Label text="NOTIFICATIONS" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="40.0" layoutY="550.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="550.0">
+               <children>
+                  <LineChart>
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="tile-white" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="RECENTLY ACTIVITIES" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children></AnchorPane>
+  </content>
+</fx:root>
