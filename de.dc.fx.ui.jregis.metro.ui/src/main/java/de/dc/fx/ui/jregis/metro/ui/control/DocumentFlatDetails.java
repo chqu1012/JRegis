@@ -4,13 +4,17 @@ import static de.dc.fx.ui.jregis.metro.ui.control.DocumentFileItem.getFileIcon;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import javax.imageio.ImageIO;
 
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
@@ -45,10 +49,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -387,10 +393,28 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 	
 	@Subscribe
-	public void restoreStage(EventContext<String> context) {
-		if (context.getEventId().equals("/restore/stage")) {
+	public void restoreStage(EventContext<Image> context) {
+		if (context.getEventId().equals("/store/add/screenshot/image")) {
 			Stage mainStage = (Stage) root.getScene().getWindow();
 			mainStage.setIconified(false);
+			
+			LocalDateTime createdOn = LocalDateTime.now();
+			History history = new History("Added Screenshot", createdOn , createdOn, this.context.current.get().getId());
+			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
+			history.setId(historyId);
+			
+			String dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-S").format(new Date());
+			Attachment attachment = new Attachment(dateFormat+"_Screenshot.png", createdOn, createdOn, historyId);
+			long attachmentId = JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
+			attachment.setId(attachmentId);
+			history.getAttachments().add(attachment);
+			
+			JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(this.context.current.get(), dateFormat+"_Screenshot.png", context.getInput());
+			
+			addAttachment(history);
+			addHistory(history);
+			
+			
 		}
 	}
 

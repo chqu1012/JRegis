@@ -143,7 +143,7 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
             
             stage.close();
             
-            JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<String>("/restore/stage", ""));
+            JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<Image>("/store/add/screenshot/image", image));
         } catch (IOException e) {
             e.printStackTrace();
         }
