@@ -6,13 +6,13 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXMLLoader;
 
-public class Dashboard extends BaseDashboard {
+public class RecentlyActivityItem extends BaseRecentlyActivityItem {
 
-	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
+	private Logger log = Logger.getLogger(RecentlyActivityItem.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Dashboard.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/RecentlyActivityItem.fxml";
 
-	public Dashboard(){
+	public RecentlyActivityItem() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -21,10 +21,6 @@ public class Dashboard extends BaseDashboard {
 			fxmlLoader.load();
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
-		}
-		
-		for (int i = 0; i < 10; i++) { 
-			hboxRecentlyActivities.getChildren().add(new RecentlyActivityItem());
 		}
 	}
 }

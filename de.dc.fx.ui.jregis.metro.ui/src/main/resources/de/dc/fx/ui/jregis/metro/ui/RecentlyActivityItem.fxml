@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" styleClass="content" stylesheets="@css/RecentlyActivityItem.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="3.0" styleClass="label-timeline" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
+      <Circle fx:id="circle" fill="WHITE" layoutX="12.0" layoutY="15.0" radius="7.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="3.0" AnchorPane.leftAnchor="5.0" />
+      <Label fx:id="labelDescription" layoutX="27.0" layoutY="4.0" prefHeight="12.0" prefWidth="270.0" text="Small description to this activity" textFill="#6284a2" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <HBox layoutX="25.0" layoutY="18.0" spacing="5.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label fx:id="labelTimestamp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="17.0" text="10.10.2019 13:30" textFill="#9a9a9a">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label maxWidth="1.7976931348623157E308" prefHeight="12.0" text="by" textFill="#9a9a9a">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelUser" maxWidth="1.7976931348623157E308" prefHeight="12.0" text="Max Mustermann" textFill="#6f8ea9">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label fx:id="labelContent" layoutX="25.0" layoutY="38.0" maxHeight="1.7976931348623157E308" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo " wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="38.0" />
+   </children>
+</fx:root>
