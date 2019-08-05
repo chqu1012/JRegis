@@ -7,3 +7,16 @@
 	-fx-font-weight: bold;
 	-fx-text-fill: #23527C;
 }
+
+.content-item:hover{
+	-fx-background-color: #6C8BA7;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.content-item:pressed{
+	-fx-background-color: #23527C;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
