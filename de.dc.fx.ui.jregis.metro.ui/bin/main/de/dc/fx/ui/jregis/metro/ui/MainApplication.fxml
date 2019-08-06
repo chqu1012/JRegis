@@ -187,19 +187,24 @@
                      </HBox.margin>
                   </TextField>
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <ImageView fx:id="imageViewPreferences" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#onImageViewPreferencesClicked" pickOnBounds="true" preserveRatio="true" styleClass="preferences-image-view">
+                  <ImageView fx:id="imageViewAdbook" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewAdbookClicked" pickOnBounds="true" preserveRatio="true" styleClass="adbook-image-view">
+                     <image>
+                        <Image url="@images/icons8-adressbuch-96.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageViewPreferences" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewPreferencesClicked" pickOnBounds="true" preserveRatio="true" styleClass="preferences-image-view">
                      <image>
                         <Image url="@images/icons8-einstellungen-48-gray.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageViewNotification" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#onImageViewNotificationClicked" pickOnBounds="true" preserveRatio="true" styleClass="notification-image-view">
+                  <ImageView fx:id="imageViewNotification" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewNotificationClicked" pickOnBounds="true" preserveRatio="true" styleClass="notification-image-view">
                      <image>
                         <Image url="@images/icons8-alarm-48.png" />
                      </image>
                   </ImageView>
                   <HBox fx:id="panelUser" alignment="CENTER_LEFT" onMouseClicked="#onHBoxUserClicked" prefHeight="45.0" prefWidth="181.0" spacing="10.0" styleClass="panel-user">
                      <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/icons8-benutzer-48-gray.png" />
                            </image>

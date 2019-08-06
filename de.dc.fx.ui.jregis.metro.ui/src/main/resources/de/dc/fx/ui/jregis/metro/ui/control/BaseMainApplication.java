@@ -23,6 +23,9 @@ import javafx.scene.layout.StackPane;
 public abstract class BaseMainApplication extends BorderPane{
 
 	@FXML
+	protected ImageView imageViewAdbook;
+	
+	@FXML
 	protected TreeView<Category> treeView;
 	
 	@FXML
@@ -174,4 +177,7 @@ public abstract class BaseMainApplication extends BorderPane{
 
     @FXML
     protected abstract void onNavigationItemClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onImageViewAdbookClicked(MouseEvent event);
 }

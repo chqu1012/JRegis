@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
+import de.dc.fx.ui.jregis.metro.ui.control.contact.ContactPage;
 import de.dc.fx.ui.jregis.metro.ui.control.dashboard.Dashboard;
 import de.dc.fx.ui.jregis.metro.ui.control.document.management.DocumentFlatDetails;
 import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnJRegisIdFeature;
@@ -40,7 +41,6 @@ import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,7 +78,8 @@ public class MainApplication extends BaseMainApplication {
 	private ProfilePage profilePage = new ProfilePage();
 	private Dashboard dashboard = new Dashboard();
 	private Inbox inbox = new Inbox();
-
+	private ContactPage contactViewer = new ContactPage();
+	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
@@ -213,6 +214,7 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(dashboard);
 		mainStackPane.getChildren().add(inbox);
+		mainStackPane.getChildren().add(contactViewer);
 
 		dashboard.toFront();
 	}
@@ -501,5 +503,10 @@ public class MainApplication extends BaseMainApplication {
 				preferencePage.toFront();
 			}
 		}
+	}
+
+	@Override
+	protected void onImageViewAdbookClicked(MouseEvent event) {
+		contactViewer.toFront();
 	}
 }

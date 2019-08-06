@@ -19,6 +19,18 @@
 	-fx-background-color: #677985;
 }
 
+.adbook-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96.png');
+}
+
+.adbook-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-dark.png');
+}
+
+.adbook-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-bue.png');
+}
+
 .notification-image-view {
 	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48.png');
 }
