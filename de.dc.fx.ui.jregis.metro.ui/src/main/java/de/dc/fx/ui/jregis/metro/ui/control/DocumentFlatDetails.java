@@ -431,10 +431,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			
 			JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(this.context.current.get(), dateFormat+"_Screenshot.png", context.getInput());
 			
-			addAttachment(history);
 			addHistory(history);
-			
-			
 		}
 	}
 
