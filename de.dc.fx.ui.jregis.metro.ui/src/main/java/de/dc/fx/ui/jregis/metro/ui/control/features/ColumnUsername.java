@@ -2,7 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.control.features;
 
 import java.io.IOException;
 
-import de.dc.fx.ui.jregis.metro.ui.control.BaseColumnUsername;
+import de.dc.fx.ui.jregis.metro.ui.control.document.management.BaseColumnUsername;
 import de.dc.fx.ui.jregis.metro.ui.model.User;
 import javafx.fxml.FXMLLoader;
 

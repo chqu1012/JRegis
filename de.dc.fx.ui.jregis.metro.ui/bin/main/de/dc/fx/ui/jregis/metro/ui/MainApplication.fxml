@@ -68,7 +68,12 @@
                            <children>
                               <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                                  <children>
-                                    <TreeView fx:id="treeView" layoutX="53.0" layoutY="81.0" style="-fx-border-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                    <TreeView fx:id="treeView" layoutX="53.0" layoutY="81.0" styleClass="tree-view-category" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="30.0" />
+                                    <Label layoutX="16.0" layoutY="16.0" text="DOCUMENT CATEGORIES" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 4;" HBox.hgrow="ALWAYS">
@@ -233,7 +238,7 @@
       </BorderPane>
    </center>
    <left>
-      <VBox prefHeight="700.0" prefWidth="253.0" style="-fx-background-color: #1C3749;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="700.0" prefWidth="253.0" style="-fx-background-color: #122F54;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="53.0" prefWidth="213.0" style="-fx-background-color: white; -fx-background-radius: 5;" text="JREGIS" textFill="#1c3749">
                <font>

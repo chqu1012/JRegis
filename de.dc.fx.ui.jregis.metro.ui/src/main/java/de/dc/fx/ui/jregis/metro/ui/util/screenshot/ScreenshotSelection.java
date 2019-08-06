@@ -2,7 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.util.screenshot;
 
 import static java.lang.Math.abs;
 
-import de.dc.fx.ui.jregis.metro.ui.control.ScreenshotPreview;
+import de.dc.fx.ui.jregis.metro.ui.control.screenshot.ScreenshotPreview;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;

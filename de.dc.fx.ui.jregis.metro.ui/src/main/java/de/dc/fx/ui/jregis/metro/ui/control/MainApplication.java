@@ -19,7 +19,14 @@ import com.google.common.base.Function;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
+import de.dc.fx.ui.jregis.metro.ui.control.dashboard.Dashboard;
+import de.dc.fx.ui.jregis.metro.ui.control.document.management.DocumentFlatDetails;
 import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnJRegisIdFeature;
+import de.dc.fx.ui.jregis.metro.ui.control.inbox.Inbox;
+import de.dc.fx.ui.jregis.metro.ui.control.toolbar.NotificationAlerts;
+import de.dc.fx.ui.jregis.metro.ui.control.toolbar.NotificationUser;
+import de.dc.fx.ui.jregis.metro.ui.control.toolbar.ProfilePage;
+import de.dc.fx.ui.jregis.metro.ui.control.user.management.UserManagementPage;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;

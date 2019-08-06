@@ -2,7 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.di;
 
 import com.google.inject.AbstractModule;
 
-import de.dc.fx.ui.jregis.metro.ui.control.UserManagementPage;
+import de.dc.fx.ui.jregis.metro.ui.control.user.management.UserManagementPage;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
