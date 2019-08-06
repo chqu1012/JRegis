@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javax.imageio.ImageIO;
-
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
 
@@ -49,7 +47,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -271,6 +268,29 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			addAttachment(e);
 			addHistory(e);
 		});
+		
+		if (vboxComment.getChildren().size()==1) {
+			File[] contents = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderContent(context.current.get());
+			if (contents.length>0) {
+				HistoryRepository historyRepository = JRegisPlatform.getInstance(HistoryRepository.class);
+				AttachmentRepository attachmentRepository = JRegisPlatform.getInstance(AttachmentRepository.class);
+				
+				LocalDateTime createdOn = context.current.get().getCreatedOn();
+				LocalDateTime updatedOn = LocalDateTime.now();
+				Long documentId = context.current.get().getId();
+				History history = new History("Reimport file(s) to history, because no history available.", createdOn , updatedOn, documentId );
+				long historyId = historyRepository.save(history);
+				history.setId(historyId);
+				
+				for (File file : contents) {
+					Attachment attachment = new Attachment(file.getName(), createdOn, updatedOn, historyId);
+					long attachmentId = attachmentRepository.save(attachment);
+					attachment.setId(attachmentId);
+					history.getAttachments().add(attachment);
+				}
+				addHistory(history);
+			}
+		}
 	}
 
 	private void addAttachment(History history) {
