@@ -3,11 +3,12 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.annotation.PostConstruct;
+import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
@@ -32,6 +33,7 @@ import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,11 +41,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 
@@ -67,14 +71,16 @@ public class MainApplication extends BaseMainApplication {
 	private ProfilePage profilePage = new ProfilePage();
 	private Dashboard dashboard = new Dashboard();
 	private Inbox inbox = new Inbox();
-	
+
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
-	
-	@Inject UserManagementPage userManagementPage;
-	
-	@Inject CategoryRepository categoryRepository;
+
+	@Inject
+	UserManagementPage userManagementPage;
+
+	@Inject
+	CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
 
@@ -88,8 +94,76 @@ public class MainApplication extends BaseMainApplication {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml " + FXML, exception);
 		}
-		
+
 		JRegisPlatform.getInstance(IEventBroker.class).register(this);
+
+		initTreeView();
+	}
+
+	private Map<Long, Category> registry = new TreeMap<>();
+
+	public Category buildTree(List<Category> models) {
+		registry.clear();
+		Long firstElement = null;
+		for (Category model : models) {
+			if (firstElement == null) {
+				firstElement = model.getId();
+			}
+			registry.put(model.getId(), model);
+		}
+		registry.values().forEach(nav -> {
+			Long parentId = nav.getId();
+			List<Category> filteredList = models.stream().filter(e->e.getParentId()==parentId).collect(Collectors.toList());
+			filteredList.sort((Category o1, Category o2)->o1.getName().compareTo(o2.getName()));
+			nav.getChildren().addAll(filteredList);
+		});
+		
+		
+		return registry.get(firstElement);
+	}
+
+	private void buildTreeItems(TreeItem<Category> parentItem, Category element) {
+		TreeItem<Category> newItem = new TreeItem<>(element);
+		parentItem.getChildren().add(newItem);
+		if (!element.getChildren().isEmpty()) {
+			List<Category> children = element.getChildren();
+			for (Category category : children) {
+				if (category!=element) {
+					buildTreeItems(newItem, category);
+				}
+			}
+		}
+	}
+
+	private void initTreeView() {
+		List<Category> categories = JRegisPlatform.getInstance(CategoryRepository.class).findAll();
+		Optional<List<Category>> optionalCategories = Optional.ofNullable(categories);
+		optionalCategories.ifPresent(e->{
+			Category root = buildTree(categories);
+			TreeItem<Category> rootItem = new TreeItem<>(
+					new Category("Categories", LocalDateTime.now(), LocalDateTime.now(), -1));
+			buildTreeItems(rootItem, root);
+			treeView.setRoot(rootItem);
+			treeView.setCellFactory(param -> new TreeCell<Category>() {
+				@Override
+				protected void updateItem(Category item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText(item.getName());
+					}
+				}
+			});
+			
+			treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.getValue().getName().equals("Root")) {
+					filteredDocumentData.setPredicate(p->true);
+				}else {
+					filteredDocumentData.setPredicate(p->p.getCategoryId()==newValue.getValue().getId());
+				}
+			});
+		});
 	}
 
 	@Subscribe
@@ -99,31 +173,31 @@ public class MainApplication extends BaseMainApplication {
 			inbox.toFront();
 		}
 	}
-	
+
 	@Subscribe
 	public void closeNotificationViaEventBroker(EventContext<String> context) {
 		if (context.getEventId().equals("/close/notification")) {
 			if (context.getInput().equals("user")) {
 				popOverUser.hide();
 				profilePage.toFront();
-			}else if (context.getInput().equals("preferences")) {
+			} else if (context.getInput().equals("preferences")) {
 				popOverUser.hide();
-			}else if (context.getInput().equals("notifications")) {
+			} else if (context.getInput().equals("notifications")) {
 				popOverUser.hide();
-			}else if (context.getInput().equals("logout")) {
+			} else if (context.getInput().equals("logout")) {
 				popOverUser.hide();
 				paneLogin.toFront();
 			}
 		}
 	}
-	
+
 	public void initialize() {
 		initData();
 		initTableView();
 		initCategoryComboBox();
 		initControls();
 		initBindings();
-		
+
 		popOverNotification.setContentNode(new NotificationAlerts());
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
@@ -131,7 +205,7 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(dashboard);
 		mainStackPane.getChildren().add(inbox);
-		
+
 		dashboard.toFront();
 	}
 
@@ -178,8 +252,8 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initTableView() {
-		columnId.setCellValueFactory(e-> new SimpleObjectProperty<>(e.getValue()));
-		columnId.setCellFactory(e-> new ColumnJRegisIdFeature());
+		columnId.setCellValueFactory(e -> new SimpleObjectProperty<>(e.getValue()));
+		columnId.setCellFactory(e -> new ColumnJRegisIdFeature());
 		setupCellValueFactory(columnName, e -> new SimpleObjectProperty(e.getName()));
 		setupCellValueFactory(columnCreated, e -> new SimpleObjectProperty(e.getCreatedOnAsString()));
 		setupCellValueFactory(columnUpdated, e -> new SimpleObjectProperty(e.getUpdatedOnAsString()));
@@ -195,12 +269,12 @@ public class MainApplication extends BaseMainApplication {
 		tableViewDocument.setItems(filteredDocumentData);
 
 		tableFilter = TableFilter.forTableView(tableViewDocument).apply();
-		tableFilter.setSearchStrategy((input,target) -> {
-		    try {
-		        return target.toLowerCase().contains(input.toLowerCase());
-		    } catch (Exception e) {
-		        return false;
-		    }
+		tableFilter.setSearchStrategy((input, target) -> {
+			try {
+				return target.toLowerCase().contains(input.toLowerCase());
+			} catch (Exception e) {
+				return false;
+			}
 		});
 
 		textSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -209,8 +283,10 @@ public class MainApplication extends BaseMainApplication {
 				boolean isEmpty = newValue == null || newValue.isEmpty();
 				boolean isNameEquals = p.getName().toLowerCase().contains(searchContent);
 				boolean isIdEquals = String.valueOf(p.getId()).contains(searchContent);
-				boolean isCreatedEquals = p.getCreatedOnAsString() != null && p.getCreatedOnAsString().contains(searchContent);
-				boolean isUpdatedEquals = p.getUpdatedOnAsString() != null && p.getUpdatedOnAsString().contains(searchContent);
+				boolean isCreatedEquals = p.getCreatedOnAsString() != null
+						&& p.getCreatedOnAsString().contains(searchContent);
+				boolean isUpdatedEquals = p.getUpdatedOnAsString() != null
+						&& p.getUpdatedOnAsString().contains(searchContent);
 				return isEmpty || isNameEquals || isCreatedEquals || isUpdatedEquals || isIdEquals;
 			});
 		});
@@ -391,7 +467,7 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onHBoxUserClicked(MouseEvent event) {
 		popOverUser.setArrowLocation(ArrowLocation.TOP_CENTER);
-		popOverUser.setContentNode(new NotificationUser()); 
+		popOverUser.setContentNode(new NotificationUser());
 		popOverUser.setDetachable(false);
 		popOverUser.setAutoFix(true);
 		popOverUser.setArrowSize(0);
@@ -401,19 +477,19 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onNavigationItemClicked(MouseEvent event) {
 		Object source = event.getSource();
-		if (source instanceof Label) { 
+		if (source instanceof Label) {
 			Label label = (Label) source;
 			if (label.getText().equals("Dashboard")) {
 				dashboard.toFront();
-			}else if (label.getText().equals("Document")) {
+			} else if (label.getText().equals("Document")) {
 				paneDocumentTableView.toFront();
-			}else if (label.getText().equals("User Management")) {
+			} else if (label.getText().equals("User Management")) {
 				userManagementPage.toFront();
-			}else if (label.getText().equals("Information")) {
-				
-			}else if (label.getText().equals("License")) {
-				
-			}else if (label.getText().equals("Preferences")) {
+			} else if (label.getText().equals("Information")) {
+
+			} else if (label.getText().equals("License")) {
+
+			} else if (label.getText().equals("Preferences")) {
 				preferencePage.toFront();
 			}
 		}

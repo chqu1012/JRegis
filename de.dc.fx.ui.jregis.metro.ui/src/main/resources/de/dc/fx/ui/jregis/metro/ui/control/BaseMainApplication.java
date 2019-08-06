@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,9 @@ import javafx.scene.layout.StackPane;
 
 public abstract class BaseMainApplication extends BorderPane{
 
+	@FXML
+	protected TreeView<Category> treeView;
+	
 	@FXML
 	protected HBox panelUser;
 	

@@ -39,7 +39,7 @@ public class CategoryRepository extends BaseRepository<Category> {
 
 	@Override
 	protected String findAllStatement() {
-		return "SELECT * FROM document_category ORDER BY name ASC";
+		return "SELECT * FROM document_category ORDER BY id ASC";
 	}
 
 	@Override

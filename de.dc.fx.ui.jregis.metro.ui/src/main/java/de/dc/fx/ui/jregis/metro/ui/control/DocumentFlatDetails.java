@@ -403,7 +403,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			history.setId(historyId);
 			
-			String dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-S").format(new Date());
+			String dateFormat = new SimpleDateFormat("yyyy-MM-dd_HHmmss").format(new Date());
 			Attachment attachment = new Attachment(dateFormat+"_Screenshot.png", createdOn, createdOn, historyId);
 			long attachmentId = JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 			attachment.setId(attachmentId);

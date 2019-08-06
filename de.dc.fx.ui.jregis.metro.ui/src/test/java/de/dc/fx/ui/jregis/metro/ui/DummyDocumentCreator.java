@@ -3,7 +3,9 @@ package de.dc.fx.ui.jregis.metro.ui;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+import de.dc.fx.ui.jregis.metro.ui.model.Category;
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
+import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
 
 public class DummyDocumentCreator {
@@ -23,9 +25,20 @@ public class DummyDocumentCreator {
 		}
 	}
 	
+	public void createDummyCategories() {
+		CategoryRepository repository = new CategoryRepository();
+		String[] titles = {"School", "Work", "Information Technology", "Shopping", "Banking", "Others"};
+		for (int i = 0; i < titles.length; i++) {
+			LocalDateTime createdOn = LocalDateTime.now();
+			LocalDateTime updatedOn = LocalDateTime.now();
+			repository.save(new Category(titles[i], createdOn, updatedOn, i));
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
-		new DummyDocumentCreator().createDummyDocuments();
-		
+		DummyDocumentCreator creator = new DummyDocumentCreator();
+		creator.createDummyCategories();
+		creator.createDummyDocuments();
 		System.out.println("Dummy document created!");
 	}
 }

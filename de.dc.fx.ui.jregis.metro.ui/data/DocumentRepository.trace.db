@@ -1,0 +1,4 @@
+2019-08-06 16:15:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "SELECT * FROM DOCUMENT_HISTORY  WHERE DOCUM DOCUMENT_ID[*] =280 "
+Syntax error in SQL statement "SELECT * FROM DOCUMENT_HISTORY  WHERE DOCUM DOCUMENT_ID[*] =280 "; SQL statement:
+SELECT * FROM DOCUMENT_HISTORY  where docum DOCUMENT_ID =280 [42000-196]
