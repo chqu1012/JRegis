@@ -203,15 +203,29 @@
                                  <children>
                                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                     <CheckBox fx:id="checkBoxShowDeletedComments" mnemonicParsing="false" onAction="#onCheckBoxShowDeletedCommentsAction" prefHeight="28.0" prefWidth="151.0" selected="true" text="Hide delete comments" />
-                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonScreenshotAction" text="ScreenShot">
+                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonScreenshotAction">
                                        <tooltip>
-                                          <Tooltip text="Paste File or Image from Clipboard" />
+                                          <Tooltip text="Selection Rectangle Screenshot" />
                                        </tooltip>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/icons8-einen-screenshot-machen-32.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
-                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonFullScreenshotAction" text="Full">
+                                    <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonFullScreenshotAction">
                                        <tooltip>
-                                          <Tooltip text="Paste File or Image from Clipboard" />
+                                          <Tooltip text="Fullscreen shot" />
                                        </tooltip>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/icons8-vollbild-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
                                     <Button mnemonicParsing="false" onAction="#onButtonClipboardHelperAction">
                                        <graphic>
