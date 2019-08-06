@@ -155,7 +155,8 @@ public class MainApplication extends BaseMainApplication {
 					}
 				}
 			});
-			
+			rootItem.setExpanded(true);
+			treeView.setShowRoot(false);
 			treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				if(newValue.getValue().getName().equals("Root")) {
 					filteredDocumentData.setPredicate(p->true);
