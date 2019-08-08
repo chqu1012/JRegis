@@ -38,6 +38,16 @@ public class ContactPage extends BaseContactPage{
 		context.getMasterData().addAll(contactRepository.findAll());
 		listViewContacts.setItems(context.getFilteredMasterData());
 		listViewContacts.setCellFactory(e->new ContactListCell());
+
+		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
+			context.getFilteredMasterData().setPredicate(p->{
+				boolean isEmpty = p==null || newValue.isEmpty();
+				boolean isFirstnameEquals = p.getFirstname().toLowerCase().contains(newValue.toLowerCase());
+				boolean isLastnameEquals = p.getLastname().toLowerCase().contains(newValue.toLowerCase());
+				boolean isUsernameEquals = p.getUsername().toLowerCase().contains(newValue.toLowerCase());
+				return isEmpty || isFirstnameEquals ||isLastnameEquals || isUsernameEquals;
+			});
+		});
 	}
 	
 	public void addContactItem(Contact contact) {
