@@ -1,17 +1,16 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.*;
 public class DatesRepository extends BaseRepository<Dates>{
 
 	@Override
 	protected Dates map(ResultSet resultSet) throws SQLException{
 		Dates dates = new Dates();
-		dates.setContactId(resultSet.getLong("ContactId"));
-		dates.setName(resultSet.getString("Name"));
-		dates.setDate(resultSet.getTimestamp("Date").toLocalDateTime());
+		dates.setId(resultSet.getLong("ID"));
+		dates.setContactId(resultSet.getLong("CONTACT_ID"));
+		dates.setName(resultSet.getString("NAME"));
+		dates.setDate(resultSet.getTimestamp("DATE").toLocalDateTime());
 		return dates;
 	}
 
@@ -27,7 +26,7 @@ public class DatesRepository extends BaseRepository<Dates>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO dates (ContactId, Name, Date) VALUES (?, ?, ?);";
+		return DatesConstant.SQL_INSERT;
 	}
 
 	@Override
@@ -39,19 +38,20 @@ public class DatesRepository extends BaseRepository<Dates>{
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO dates KEY (ID) VALUES ( ?, ?);";
+		return DatesConstant.SQL_MERGE;
 	}
 
 	@Override
 	protected void prepareStatetmentForUpdate(Dates t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getContactId());
-		statement.setString(2, t.getName());
-		statement.setTimestamp(3, Timestamp.valueOf(t.getDate()));
+		statement.setLong(1, t.getId());
+		statement.setLong(2, t.getContactId());
+		statement.setString(3, t.getName());
+		statement.setTimestamp(4, Timestamp.valueOf(t.getDate()));
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE dates WHERE id = ?";
+		return DatesConstant.SQL_DELETE_BY_ID;
 	}
 	
 	@Override

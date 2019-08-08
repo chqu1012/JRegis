@@ -1,19 +1,18 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.*;
 public class AddressRepository extends BaseRepository<Address>{
 
 	@Override
 	protected Address map(ResultSet resultSet) throws SQLException{
 		Address address = new Address();
-		address.setContactId(resultSet.getLong("ContactId"));
-		address.setStreet(resultSet.getString("Street"));
-		address.setCountry(resultSet.getString("Country"));
-		address.setState(resultSet.getString("State"));
-		address.setZipCode(resultSet.getInt("ZipCode"));
+		address.setId(resultSet.getLong("ID"));
+		address.setContactId(resultSet.getLong("CONTACT_ID"));
+		address.setStreet(resultSet.getString("STREET"));
+		address.setCountry(resultSet.getString("COUNTRY"));
+		address.setState(resultSet.getString("STATE"));
+		address.setZipCode(resultSet.getInt("ZIP_CODE"));
 		return address;
 	}
 
@@ -29,7 +28,7 @@ public class AddressRepository extends BaseRepository<Address>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO address (ContactId, Street, Country, State, ZipCode) VALUES (?, ?, ?, ?, ?);";
+		return AddressConstant.SQL_INSERT;
 	}
 
 	@Override
@@ -43,21 +42,22 @@ public class AddressRepository extends BaseRepository<Address>{
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO address KEY (ID) VALUES ( ?, ?, ?, ?);";
+		return AddressConstant.SQL_MERGE;
 	}
 
 	@Override
 	protected void prepareStatetmentForUpdate(Address t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getContactId());
-		statement.setString(2, t.getStreet());
-		statement.setString(3, t.getCountry());
-		statement.setString(4, t.getState());
-		statement.setInt(5, t.getZipCode());
+		statement.setLong(1, t.getId());
+		statement.setLong(2, t.getContactId());
+		statement.setString(3, t.getStreet());
+		statement.setString(4, t.getCountry());
+		statement.setString(5, t.getState());
+		statement.setInt(6, t.getZipCode());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE address WHERE id = ?";
+		return AddressConstant.SQL_DELETE_BY_ID;
 	}
 	
 	@Override

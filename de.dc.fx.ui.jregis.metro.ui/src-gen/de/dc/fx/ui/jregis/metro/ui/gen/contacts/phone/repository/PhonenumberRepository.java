@@ -1,18 +1,17 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.*;
 public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 
 	@Override
 	protected Phonenumber map(ResultSet resultSet) throws SQLException{
 		Phonenumber phonenumber = new Phonenumber();
-		phonenumber.setContactId(resultSet.getLong("ContactId"));
-		phonenumber.setName(resultSet.getString("Name"));
-		phonenumber.setNumber(resultSet.getString("Number"));
-		phonenumber.setNumberType(resultSet.getString("NumberType"));
+		phonenumber.setId(resultSet.getLong("ID"));
+		phonenumber.setContactId(resultSet.getLong("CONTACT_ID"));
+		phonenumber.setName(resultSet.getString("NAME"));
+		phonenumber.setNumber(resultSet.getString("NUMBER"));
+		phonenumber.setNumberType(resultSet.getString("NUMBER_TYPE"));
 		return phonenumber;
 	}
 
@@ -28,7 +27,7 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO phonenumber (ContactId, Name, Number, NumberType) VALUES (?, ?, ?, ?);";
+		return PhonenumberConstant.SQL_INSERT;
 	}
 
 	@Override
@@ -41,20 +40,21 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO phonenumber KEY (ID) VALUES ( ?, ?, ?);";
+		return PhonenumberConstant.SQL_MERGE;
 	}
 
 	@Override
 	protected void prepareStatetmentForUpdate(Phonenumber t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getContactId());
-		statement.setString(2, t.getName());
-		statement.setString(3, t.getNumber());
-		statement.setString(4, t.getNumberType());
+		statement.setLong(1, t.getId());
+		statement.setLong(2, t.getContactId());
+		statement.setString(3, t.getName());
+		statement.setString(4, t.getNumber());
+		statement.setString(5, t.getNumberType());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE phonenumber WHERE id = ?";
+		return PhonenumberConstant.SQL_DELETE_BY_ID;
 	}
 	
 	@Override

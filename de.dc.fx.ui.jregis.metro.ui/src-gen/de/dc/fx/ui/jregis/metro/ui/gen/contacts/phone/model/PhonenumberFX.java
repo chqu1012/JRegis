@@ -1,11 +1,11 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model;
 
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.*;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.beans.binding.BooleanBinding;
 
 import java.lang.Long;
 import java.lang.String;
@@ -15,7 +15,7 @@ import java.lang.String;
 public class PhonenumberFX {
 	
   private Phonenumber phonenumber;
-
+  private ObjectProperty<Phonenumber> phonenumberProperty = new SimpleObjectProperty<>();
   private ObservableList<Phonenumber> masterData = FXCollections.observableArrayList();
   private FilteredList<Phonenumber> filteredMasterData = new FilteredList<>(masterData, p-> true);
   
@@ -33,8 +33,23 @@ public class PhonenumberFX {
   
   public PhonenumberFX(Phonenumber phonenumber) {
     this.phonenumber=phonenumber;
+    this.phonenumberProperty.set(phonenumber);
+    
+	this.phonenumberProperty.addListener((observable, oldValue, newValue) -> {
+		if (newValue!=null) {
+			contactIdProperty.set(newValue.getContactId());
+			nameProperty.set(newValue.getName());
+			numberProperty.set(newValue.getNumber());
+			numberTypeProperty.set(newValue.getNumberType());
+		}
+	});
+
     BooleanBinding isEnabled = nameProperty.isNotEmpty().and(numberProperty.isNotEmpty()).and(numberTypeProperty.isNotEmpty());
     this.enableSubmitProperty.bind(isEnabled);
+  }
+
+  public ObjectProperty<Phonenumber> getPhonenumberProperty() {
+    return phonenumberProperty;
   }
 
   public BooleanProperty getEnabledSubmitProperty() {

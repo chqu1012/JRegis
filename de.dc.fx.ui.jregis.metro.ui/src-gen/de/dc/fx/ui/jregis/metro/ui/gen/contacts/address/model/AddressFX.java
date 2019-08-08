@@ -1,11 +1,11 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model;
 
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.*;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.beans.binding.BooleanBinding;
 
 import java.lang.Long;
 import java.lang.String;
@@ -16,7 +16,7 @@ import java.lang.Integer;
 public class AddressFX {
 	
   private Address address;
-
+  private ObjectProperty<Address> addressProperty = new SimpleObjectProperty<>();
   private ObservableList<Address> masterData = FXCollections.observableArrayList();
   private FilteredList<Address> filteredMasterData = new FilteredList<>(masterData, p-> true);
   
@@ -35,8 +35,24 @@ public class AddressFX {
   
   public AddressFX(Address address) {
     this.address=address;
+    this.addressProperty.set(address);
+    
+	this.addressProperty.addListener((observable, oldValue, newValue) -> {
+		if (newValue!=null) {
+			contactIdProperty.set(newValue.getContactId());
+			streetProperty.set(newValue.getStreet());
+			countryProperty.set(newValue.getCountry());
+			stateProperty.set(newValue.getState());
+			zipCodeProperty.set(newValue.getZipCode());
+		}
+	});
+
     BooleanBinding isEnabled = streetProperty.isNotEmpty().and(countryProperty.isNotEmpty()).and(stateProperty.isNotEmpty());
     this.enableSubmitProperty.bind(isEnabled);
+  }
+
+  public ObjectProperty<Address> getAddressProperty() {
+    return addressProperty;
   }
 
   public BooleanProperty getEnabledSubmitProperty() {

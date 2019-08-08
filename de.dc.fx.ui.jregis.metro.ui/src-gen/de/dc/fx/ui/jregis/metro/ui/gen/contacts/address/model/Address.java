@@ -1,12 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.String;
-import java.lang.String;
-import java.lang.Integer;
 import java.util.*;
-
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Address{
@@ -21,7 +16,7 @@ public class Address{
 	public Address() {
 	}
 		
-	public Address(Long contactid, String street, String country, String state, Integer zipcode) {
+	public Address(Long contactId, String street, String country, String state, Integer zipCode) {
 		this.contactId = contactId;
 		this.street = street;
 		this.country = country;

@@ -1,11 +1,11 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model;
 
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.*;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.beans.binding.BooleanBinding;
 
 import java.lang.Long;
 import java.lang.String;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class DatesFX {
 	
   private Dates dates;
-
+  private ObjectProperty<Dates> datesProperty = new SimpleObjectProperty<>();
   private ObservableList<Dates> masterData = FXCollections.observableArrayList();
   private FilteredList<Dates> filteredMasterData = new FilteredList<>(masterData, p-> true);
   
@@ -31,8 +31,22 @@ public class DatesFX {
   
   public DatesFX(Dates dates) {
     this.dates=dates;
+    this.datesProperty.set(dates);
+    
+	this.datesProperty.addListener((observable, oldValue, newValue) -> {
+		if (newValue!=null) {
+			contactIdProperty.set(newValue.getContactId());
+			nameProperty.set(newValue.getName());
+			dateProperty.set(newValue.getDate());
+		}
+	});
+
     BooleanBinding isEnabled = nameProperty.isNotEmpty();
     this.enableSubmitProperty.bind(isEnabled);
+  }
+
+  public ObjectProperty<Dates> getDatesProperty() {
+    return datesProperty;
   }
 
   public BooleanProperty getEnabledSubmitProperty() {

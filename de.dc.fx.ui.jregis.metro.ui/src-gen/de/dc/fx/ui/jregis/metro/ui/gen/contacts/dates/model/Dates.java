@@ -1,10 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model;
 
-import java.lang.Long;
-import java.lang.String;
-import java.time.LocalDateTime;
 import java.util.*;
-
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Dates{
@@ -17,7 +14,7 @@ public class Dates{
 	public Dates() {
 	}
 		
-	public Dates(Long contactid, String name, LocalDateTime date) {
+	public Dates(Long contactId, String name, LocalDateTime date) {
 		this.contactId = contactId;
 		this.name = name;
 		this.date = date;

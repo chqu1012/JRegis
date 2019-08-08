@@ -28,6 +28,10 @@ public class ContactTableView extends TableView<Contact>{
 		this.context = context;
 		this.contactRepository = contactRepository;
 		
+		TableColumn<Contact, Long> columnId = new TableColumn<>("#ID");
+		columnId.setPrefWidth(100);
+		setupCellValueFactory(columnId, e->new SimpleObjectProperty<>(e.getId()));
+		getColumns().add(columnId);
 		TableColumn<Contact, java.lang.String> columnFirstname = new TableColumn<>("#FIRSTNAME");
 		columnFirstname.setPrefWidth(100.0);
 		setupCellValueFactory(columnFirstname, e->new SimpleObjectProperty<>(e.getFirstname()));

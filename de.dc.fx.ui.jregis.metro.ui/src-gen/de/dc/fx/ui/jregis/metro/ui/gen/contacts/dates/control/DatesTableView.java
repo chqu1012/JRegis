@@ -28,6 +28,10 @@ public class DatesTableView extends TableView<Dates>{
 		this.context = context;
 		this.datesRepository = datesRepository;
 		
+		TableColumn<Dates, Long> columnId = new TableColumn<>("#ID");
+		columnId.setPrefWidth(100);
+		setupCellValueFactory(columnId, e->new SimpleObjectProperty<>(e.getId()));
+		getColumns().add(columnId);
 		TableColumn<Dates, java.lang.Long> columnContactId = new TableColumn<>("#CONTACTID");
 		columnContactId.setPrefWidth(100.0);
 		setupCellValueFactory(columnContactId, e->new SimpleObjectProperty<>(e.getContactId()));

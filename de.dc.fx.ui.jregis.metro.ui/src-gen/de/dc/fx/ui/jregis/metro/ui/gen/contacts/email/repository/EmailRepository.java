@@ -1,17 +1,16 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.*;
 public class EmailRepository extends BaseRepository<Email>{
 
 	@Override
 	protected Email map(ResultSet resultSet) throws SQLException{
 		Email email = new Email();
-		email.setContactId(resultSet.getLong("ContactId"));
-		email.setName(resultSet.getString("Name"));
-		email.setEmail(resultSet.getString("Email"));
+		email.setId(resultSet.getLong("ID"));
+		email.setContactId(resultSet.getLong("CONTACT_ID"));
+		email.setName(resultSet.getString("NAME"));
+		email.setAddress(resultSet.getString("ADDRESS"));
 		return email;
 	}
 
@@ -27,31 +26,32 @@ public class EmailRepository extends BaseRepository<Email>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO email (ContactId, Name, Email) VALUES (?, ?, ?);";
+		return EmailConstant.SQL_INSERT;
 	}
 
 	@Override
 	protected void prepareStatetmentForSave(Email t, PreparedStatement statement) throws SQLException {
 		statement.setLong(1, t.getContactId());
 		statement.setString(2, t.getName());
-		statement.setString(3, t.getEmail());
+		statement.setString(3, t.getAddress());
 	}
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO email KEY (ID) VALUES ( ?, ?);";
+		return EmailConstant.SQL_MERGE;
 	}
 
 	@Override
 	protected void prepareStatetmentForUpdate(Email t, PreparedStatement statement) throws SQLException {
-		statement.setLong(1, t.getContactId());
-		statement.setString(2, t.getName());
-		statement.setString(3, t.getEmail());
+		statement.setLong(1, t.getId());
+		statement.setLong(2, t.getContactId());
+		statement.setString(3, t.getName());
+		statement.setString(4, t.getAddress());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE email WHERE id = ?";
+		return EmailConstant.SQL_DELETE_BY_ID;
 	}
 	
 	@Override

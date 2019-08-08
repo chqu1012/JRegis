@@ -1,11 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model;
 
-import java.lang.String;
-import java.lang.String;
-import java.lang.String;
-import java.lang.Long;
 import java.util.*;
-
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Contact{
@@ -15,15 +11,15 @@ public class Contact{
 	private String lastname;
 	private String username;
 	private Long contactImageId;
-	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsList = new java.util.ArrayList<>();
-	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListList = new java.util.ArrayList<>();
-	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListList = new java.util.ArrayList<>();
-	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateListList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emails = new java.util.ArrayList<>();
+	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateList = new java.util.ArrayList<>();
 	
 	public Contact() {
 	}
 		
-	public Contact(String firstname, String lastname, String username, Long contactimageid) {
+	public Contact(String firstname, String lastname, String username, Long contactImageId) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
@@ -65,33 +61,33 @@ public class Contact{
 	public void setContactImageId(Long contactImageId) {
 		this.contactImageId = contactImageId;
 	}
-	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmailsList() {
-		return emailsList;
+	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmails() {
+		return emails;
 	}
 
-	public void setEmails(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsList) {
-		this.emailsList=emailsList;
+	public void setEmails(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emails) {
+		this.emails=emails;
 	}
-	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> getAddressListList() {
-		return addressListList;
-	}
-
-	public void setAddressList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListList) {
-		this.addressListList=addressListList;
-	}
-	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> getPhoneListList() {
-		return phoneListList;
+	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> getAddressList() {
+		return addressList;
 	}
 
-	public void setPhoneList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListList) {
-		this.phoneListList=phoneListList;
+	public void setAddressList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressList) {
+		this.addressList=addressList;
 	}
-	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> getDateListList() {
-		return dateListList;
+	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> getPhoneList() {
+		return phoneList;
 	}
 
-	public void setDateList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateListList) {
-		this.dateListList=dateListList;
+	public void setPhoneList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneList) {
+		this.phoneList=phoneList;
+	}
+	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> getDateList() {
+		return dateList;
+	}
+
+	public void setDateList(java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateList) {
+		this.dateList=dateList;
 	}
 
 	@Override

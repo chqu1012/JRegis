@@ -1,18 +1,17 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.*;
 public class ContactRepository extends BaseRepository<Contact>{
 
 	@Override
 	protected Contact map(ResultSet resultSet) throws SQLException{
 		Contact contact = new Contact();
-		contact.setFirstname(resultSet.getString("Firstname"));
-		contact.setLastname(resultSet.getString("Lastname"));
-		contact.setUsername(resultSet.getString("Username"));
-		contact.setContactImageId(resultSet.getLong("ContactImageId"));
+		contact.setId(resultSet.getLong("ID"));
+		contact.setFirstname(resultSet.getString("FIRSTNAME"));
+		contact.setLastname(resultSet.getString("LASTNAME"));
+		contact.setUsername(resultSet.getString("USERNAME"));
+		contact.setContactImageId(resultSet.getLong("CONTACT_IMAGE_ID"));
 		return contact;
 	}
 
@@ -28,7 +27,7 @@ public class ContactRepository extends BaseRepository<Contact>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO contact (Firstname, Lastname, Username, ContactImageId) VALUES (?, ?, ?, ?);";
+		return ContactConstant.SQL_INSERT;
 	}
 
 	@Override
@@ -41,20 +40,21 @@ public class ContactRepository extends BaseRepository<Contact>{
 
 	@Override
 	protected String updateStatement() {
-		return "MERGE INTO contact KEY (ID) VALUES ( ?, ?, ?);";
+		return ContactConstant.SQL_MERGE;
 	}
 
 	@Override
 	protected void prepareStatetmentForUpdate(Contact t, PreparedStatement statement) throws SQLException {
-		statement.setString(1, t.getFirstname());
-		statement.setString(2, t.getLastname());
-		statement.setString(3, t.getUsername());
-		statement.setLong(4, t.getContactImageId());
+		statement.setLong(1, t.getId());
+		statement.setString(2, t.getFirstname());
+		statement.setString(3, t.getLastname());
+		statement.setString(4, t.getUsername());
+		statement.setLong(5, t.getContactImageId());
 	}
 
 	@Override
 	protected String deleteStatement() {
-		return "DELETE contact WHERE id = ?";
+		return ContactConstant.SQL_DELETE_BY_ID;
 	}
 	
 	@Override

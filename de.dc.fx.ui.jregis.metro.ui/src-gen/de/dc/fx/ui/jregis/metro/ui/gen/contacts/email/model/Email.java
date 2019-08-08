@@ -1,10 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.String;
 import java.util.*;
-
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Email{
@@ -12,15 +9,15 @@ public class Email{
 	private Long id;
 	private Long contactId;
 	private String name;
-	private String email;
+	private String address;
 	
 	public Email() {
 	}
 		
-	public Email(Long contactid, String name, String email) {
+	public Email(Long contactId, String name, String address) {
 		this.contactId = contactId;
 		this.name = name;
-		this.email = email;
+		this.address = address;
 	}
 	
 	public Long getId(){
@@ -44,12 +41,12 @@ public class Email{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override

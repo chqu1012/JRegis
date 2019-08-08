@@ -32,11 +32,11 @@ public class EmailFormular extends VBox{
 		nameTextField.setPromptText("Please enter a Name");
 		nameTextField.textProperty().bindBidirectional(context.getNameProperty() );
 		getChildren().add(nameTextField);
-		getChildren().add(new Label("Email:"));
-		javafx.scene.control.TextField emailTextField = new javafx.scene.control.TextField();
-		emailTextField.setPromptText("Please enter a Email");
-		emailTextField.textProperty().bindBidirectional(context.getEmailProperty() );
-		getChildren().add(emailTextField);
+		getChildren().add(new Label("Address:"));
+		javafx.scene.control.TextField addressTextField = new javafx.scene.control.TextField();
+		addressTextField.setPromptText("Please enter a Address");
+		addressTextField.textProperty().bindBidirectional(context.getAddressProperty() );
+		getChildren().add(addressTextField);
 		
 		Button submitButton = new Button("Submit");
 		submitButton.setOnMouseClicked(this::onButtonSubmit);

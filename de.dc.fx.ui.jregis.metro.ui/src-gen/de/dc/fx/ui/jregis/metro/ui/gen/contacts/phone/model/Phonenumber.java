@@ -1,11 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.String;
-import java.lang.String;
 import java.util.*;
-
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Phonenumber{
@@ -19,7 +15,7 @@ public class Phonenumber{
 	public Phonenumber() {
 	}
 		
-	public Phonenumber(Long contactid, String name, String number, String numbertype) {
+	public Phonenumber(Long contactId, String name, String number, String numberType) {
 		this.contactId = contactId;
 		this.name = name;
 		this.number = number;

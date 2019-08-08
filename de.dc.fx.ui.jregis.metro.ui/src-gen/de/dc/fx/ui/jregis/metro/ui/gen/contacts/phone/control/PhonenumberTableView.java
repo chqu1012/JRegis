@@ -28,6 +28,10 @@ public class PhonenumberTableView extends TableView<Phonenumber>{
 		this.context = context;
 		this.phonenumberRepository = phonenumberRepository;
 		
+		TableColumn<Phonenumber, Long> columnId = new TableColumn<>("#ID");
+		columnId.setPrefWidth(100);
+		setupCellValueFactory(columnId, e->new SimpleObjectProperty<>(e.getId()));
+		getColumns().add(columnId);
 		TableColumn<Phonenumber, java.lang.Long> columnContactId = new TableColumn<>("#CONTACTID");
 		columnContactId.setPrefWidth(100.0);
 		setupCellValueFactory(columnContactId, e->new SimpleObjectProperty<>(e.getContactId()));
