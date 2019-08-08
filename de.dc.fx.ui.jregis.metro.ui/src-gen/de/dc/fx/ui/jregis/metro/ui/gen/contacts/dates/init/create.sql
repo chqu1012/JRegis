@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS Dates(ID BIGINT AUTO_INCREMENT, Name varchar, Date Timestamp);

@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS Email(ID BIGINT AUTO_INCREMENT, Name varchar, Email varchar);

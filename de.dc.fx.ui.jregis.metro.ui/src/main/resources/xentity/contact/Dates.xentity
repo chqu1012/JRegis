@@ -1,0 +1,17 @@
+packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates
+
+Entity Dates{ 
+	Field(name: Name, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+		columnWidth: 200
+		binding: textProperty
+	]
+	Field(name: Date, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+ 
+	Repository{
+		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
+	}
+}

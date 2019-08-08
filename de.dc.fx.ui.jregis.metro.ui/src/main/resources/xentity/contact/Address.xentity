@@ -1,0 +1,21 @@
+packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.address
+
+Entity Address{ 
+	Field(name: Street, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+		columnWidth: 200
+	]
+	Field(name: Country, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: State, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: ZipCode, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+ 
+	Repository{
+		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
+	}
+}

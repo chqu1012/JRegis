@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS Phonenumber(ID BIGINT AUTO_INCREMENT, Name varchar, Number BIGINT, NumberType BIGINT);

@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS Address(ID BIGINT AUTO_INCREMENT, Street varchar, Country varchar, State varchar, ZipCode BIGINT)
