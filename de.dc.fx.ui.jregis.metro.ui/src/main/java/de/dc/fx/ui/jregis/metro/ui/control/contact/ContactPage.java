@@ -10,6 +10,8 @@ import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -21,7 +23,7 @@ public class ContactPage extends BaseContactPage{
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/Contacts.fxml";
 
 	@Inject ContactRepository contactRepository;
-	
+
 	@Inject 
 	public ContactPage(ContactRepository contactRepository, ContactFX context) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -37,7 +39,7 @@ public class ContactPage extends BaseContactPage{
 		context.getMasterData().addAll(contactRepository.findAll());
 		listViewContacts.setItems(context.getFilteredMasterData());
 		listViewContacts.setCellFactory(e->new ContactListCell());
-
+		listViewContacts.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> context.getContactProperty().set(newValue));
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
 			context.getFilteredMasterData().setPredicate(p->{
 				boolean isEmpty = p==null || newValue.isEmpty();
@@ -47,8 +49,15 @@ public class ContactPage extends BaseContactPage{
 				return isEmpty || isFirstnameEquals ||isLastnameEquals || isUsernameEquals;
 			});
 		});
+		
+		initBinding(context);
 	}
 	
+	private void initBinding(ContactFX context) {
+		labelName.textProperty().bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
+		labelNickname.textProperty().bind(context.getUsernameProperty());
+	}
+
 	public void addContactItem(Contact contact) {
 		vboxContactList.getChildren().add(new Button(contact.getUsername()));
 	}
