@@ -1,4 +1,4 @@
-package de.dc.fx.ui.jregis.metro.ui.control.features;
+package de.dc.fx.ui.jregis.metro.ui.control.user.management.feature;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ public class ColumnUsername extends BaseColumnUsername {
 	private FXMLLoader mLLoader;
 
 	public ColumnUsername() {
-		mLLoader = new FXMLLoader(getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/ColumnUsername.fxml"));
+		mLLoader = new FXMLLoader(getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/control/user/management/feature/ColumnUsername.fxml"));
 		mLLoader.setController(this);
 
 		try {

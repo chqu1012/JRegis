@@ -1,4 +1,4 @@
-package de.dc.fx.ui.jregis.metro.ui.control.features;
+package de.dc.fx.ui.jregis.metro.ui.control.document.management.feature;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import javafx.scene.control.ListCell;

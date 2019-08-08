@@ -20,7 +20,7 @@ import org.controlsfx.control.Rating;
 import com.google.common.eventbus.Subscribe;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
-import de.dc.fx.ui.jregis.metro.ui.control.features.ReferenceListCellFeature;
+import de.dc.fx.ui.jregis.metro.ui.control.document.management.feature.ReferenceListCellFeature;
 import de.dc.fx.ui.jregis.metro.ui.control.screenshot.ScreenshotPreview;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;

@@ -44,7 +44,7 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
     private Screen primary = Screen.getPrimary();
     private Rectangle2D bounds = primary.getBounds();
     
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/ScreenshotPreview.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/screenshot/ScreenshotPreview.fxml";
 
     private static final double ZOOM_FACTOR = 1.0014450997779993488675056142818;
     private final DoubleProperty zoomProperty = new SimpleDoubleProperty(1000);

@@ -15,7 +15,7 @@
             <Insets left="2.0" right="6.0" />
          </HBox.margin>
          <image>
-            <Image url="@images/icons8-name-64.png" />
+            <Image url="@../../../../images/icons8-name-64.png" />
          </image>
       </ImageView>
       <Label fx:id="labelName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Max Mustermann" textFill="#7c7c7c">

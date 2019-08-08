@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.UserContext;
 import de.dc.fx.ui.jregis.metro.ui.control.document.management.AttachmentControl;
-import de.dc.fx.ui.jregis.metro.ui.control.features.ColumnUsername;
+import de.dc.fx.ui.jregis.metro.ui.control.user.management.feature.ColumnUsername;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.model.User;
 import de.dc.fx.ui.jregis.metro.ui.repository.UserRepository;
