@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="-62.0" layoutY="-59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0">
          <image>
-            <Image url="@images/icons8-name-64.png" />
+            <Image url="@../../images/icons8-name-64.png" />
          </image>
       </ImageView>
       <Label layoutX="37.0" layoutY="6.0" text="Max Mustermann" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="5.0" />

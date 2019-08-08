@@ -21,7 +21,7 @@ public class AttachmentControl extends BaseAttachmentControl {
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Attachment.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/document/management/Attachment.fxml";
 
 	private Attachment attachment;
 

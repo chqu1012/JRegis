@@ -32,7 +32,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icons8-benutzer-48-gray.png" />
+                  <Image url="@../../images/icons8-benutzer-48-gray.png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkAccountClicked" text="Account" textFill="#808080">
@@ -49,7 +49,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icons8-einstellungen-48-gray.png" />
+                  <Image url="@../../images/icons8-einstellungen-48-gray.png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkSettingsClicked" text="Settings" textFill="#808080">
@@ -66,7 +66,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icons8-support-48.png" />
+                  <Image url="@../../images/icons8-support-48.png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkSupportClicked" text="Support" textFill="#808080">
@@ -83,7 +83,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icons8-nur-hochkant-30.png" />
+                  <Image url="@../../images/icons8-nur-hochkant-30.png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkLockScreenClicked" text="Lock Screen" textFill="#808080">
@@ -100,7 +100,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icons8-exportieren-24%20(1).png" />
+                  <Image url="@../../images/icons8-exportieren-24%20(1).png" />
                </image>
             </ImageView>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onLinkLogOutClicked" text="Log Out" textFill="#808080">

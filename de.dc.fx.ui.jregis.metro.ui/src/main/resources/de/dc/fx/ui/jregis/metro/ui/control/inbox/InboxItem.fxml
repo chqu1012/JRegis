@@ -11,7 +11,7 @@
       <Label layoutX="25.0" layoutY="14.0" prefWidth="10.0" styleClass="label-marker" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fx:id="imageViewuser" fitHeight="48.0" fitWidth="48.0" layoutX="25.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="6.0">
          <image>
-            <Image url="@images/icons8-benutzer-48.png" />
+            <Image url="@../../images/icons8-benutzer-48.png" />
          </image>
       </ImageView>
       <Label fx:id="labelSender" layoutX="68.0" layoutY="2.0" text="Max Mustermann" textFill="#363636">

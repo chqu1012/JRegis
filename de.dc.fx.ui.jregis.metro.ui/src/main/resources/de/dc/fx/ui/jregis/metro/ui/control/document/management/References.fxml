@@ -40,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <image>
-                        <Image url="@images/icons8-löschen-24-gray.png" />
+                        <Image url="@../../../images/icons8-löschen-24-gray.png" />
                      </image>
                   </ImageView>
                </children>

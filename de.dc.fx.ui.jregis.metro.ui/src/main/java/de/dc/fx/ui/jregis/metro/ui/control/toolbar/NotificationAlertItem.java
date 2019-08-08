@@ -11,7 +11,7 @@ public class NotificationAlertItem extends AnchorPane{
 
 	private Logger log = Logger.getLogger(NotificationAlertItem.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/NotificationAlertItem.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/toolbar/NotificationAlertItem.fxml";
 	
 	public NotificationAlertItem() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

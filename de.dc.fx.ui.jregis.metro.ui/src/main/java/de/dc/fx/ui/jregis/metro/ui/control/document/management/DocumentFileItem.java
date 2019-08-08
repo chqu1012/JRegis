@@ -27,7 +27,7 @@ public class DocumentFileItem extends HBox{
     @FXML
     protected Hyperlink fileNameLabel;
 
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/DocumentsFileItem.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/document/management/DocumentsFileItem.fxml";
 
 	private Consumer<String> executer;
 

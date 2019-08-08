@@ -92,7 +92,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	public DocumentFlatDetails() {
 		FXMLLoader fxmlLoader = new FXMLLoader(
-				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/DocumentFlatDetails.fxml"));
+				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/control/document/management/DocumentFlatDetails.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 

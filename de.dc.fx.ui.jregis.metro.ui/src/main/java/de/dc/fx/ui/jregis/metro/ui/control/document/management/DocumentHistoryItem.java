@@ -46,7 +46,7 @@ public class DocumentHistoryItem extends AnchorPane {
 
 	private Map<Attachment, DocumentFileItem> attachmentLinks = new HashMap<>(); 
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/DocumentsHistoryItem.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/document/management/DocumentsHistoryItem.fxml";
 
 	private History history;
 

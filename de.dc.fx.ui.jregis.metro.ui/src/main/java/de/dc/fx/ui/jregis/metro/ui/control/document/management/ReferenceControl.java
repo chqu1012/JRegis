@@ -17,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 public class ReferenceControl extends BaseReferenceControl {
 
 	private Logger log = Logger.getLogger(ReferenceControl.class.getSimpleName());
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/References.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/document/management/References.fxml";
 	private Reference reference;
 	private boolean isParent;
 

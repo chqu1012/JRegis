@@ -10,7 +10,7 @@ public class InboxItem extends BaseInboxItem{
 
 	private Logger log = Logger.getLogger(InboxItem.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/InboxItem.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/inbox/InboxItem.fxml";
 
 	public InboxItem() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

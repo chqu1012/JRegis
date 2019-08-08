@@ -11,7 +11,7 @@ public class Dashboard extends BaseDashboard {
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Dashboard.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/dashboard/Dashboard.fxml";
 
 	public Dashboard(){
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

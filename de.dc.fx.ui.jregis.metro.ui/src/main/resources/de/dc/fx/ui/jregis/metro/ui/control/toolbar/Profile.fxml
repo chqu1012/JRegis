@@ -28,7 +28,7 @@
                      <children>
                         <ImageView fx:id="imageViewUser" fitHeight="150.0" fitWidth="150.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
                            <image>
-                              <Image url="@images/icons8-männlichen-benutzer-hinzufügen-100-white.png" />
+                              <Image url="@../../images/icons8-männlichen-benutzer-hinzufügen-100-white.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="labelUsername" layoutX="190.0" layoutY="25.0" styleClass="label-profile-name" text="Max Mustermann" />

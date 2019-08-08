@@ -26,7 +26,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@images/icons8-zip-24-gray.png" />
+                  <Image url="@../../../images/icons8-zip-24-gray.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewDeleteClicked" pickOnBounds="true" preserveRatio="true" styleClass="image-view-delete">
@@ -34,7 +34,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@images/icons8-löschen-24-gray.png" />
+                  <Image url="@../../../images/icons8-löschen-24-gray.png" />
                </image>
             </ImageView>
          </children>

@@ -11,7 +11,7 @@ public class Inbox extends BaseInbox {
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Inbox.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/inbox/Inbox.fxml";
 
 	public Inbox() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

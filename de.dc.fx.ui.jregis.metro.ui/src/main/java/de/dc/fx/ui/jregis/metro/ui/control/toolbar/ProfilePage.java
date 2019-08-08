@@ -12,7 +12,7 @@ public class ProfilePage extends BaseProfile {
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Profile.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/toolbar/Profile.fxml";
 
 	public ProfilePage() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

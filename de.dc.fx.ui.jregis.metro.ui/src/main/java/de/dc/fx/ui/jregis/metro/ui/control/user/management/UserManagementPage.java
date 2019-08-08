@@ -30,7 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class UserManagementPage extends BaseUserManagementPage {
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/UserManagement.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/user/management/UserManagement.fxml";
 
 	private ObservableList<User> masterData = FXCollections.observableArrayList();
 	private FilteredList<User> filteredMasterData = new FilteredList<>(masterData, p->true);

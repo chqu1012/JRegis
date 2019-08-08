@@ -14,7 +14,7 @@
          <children>
             <ImageView fx:id="imageViewFileType" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
                <image>
-                  <Image url="@images/icons8_Overview_64px.png" />
+                  <Image url="@../../../images/icons8_Overview_64px.png" />
                </image>
             </ImageView>
             <Label fx:id="labelFilename" layoutX="47.0" layoutY="7.0" maxWidth="1.7976931348623157E308" onMouseClicked="#onLabelFilenameClicked" prefHeight="17.0" prefWidth="157.0" text="Filename.zip" textFill="#6b6969" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="88.0">
@@ -30,7 +30,7 @@
             </Label>
             <ImageView fx:id="imageViewExport" fitHeight="20.0" fitWidth="20.0" layoutX="254.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="export-image-view" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
-                  <Image url="@images/icons8-exportieren-24-gray.png" />
+                  <Image url="@../../../images/icons8-exportieren-24-gray.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -41,7 +41,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@images/icons8-löschen-24-gray.png" />
+                  <Image url="@../../../images/icons8-löschen-24-gray.png" />
                </image>
             </ImageView>
          </children>

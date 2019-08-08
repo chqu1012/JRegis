@@ -15,7 +15,7 @@ public class NotificationAlerts extends BaseNotificationAlerts{
 
 	private Logger log = Logger.getLogger(AttachmentControl.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/NotificationAlerts.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/toolbar/NotificationAlerts.fxml";
 	
 	public NotificationAlerts() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));

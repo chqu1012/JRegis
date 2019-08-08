@@ -10,7 +10,6 @@ import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +18,7 @@ public class ContactPage extends BaseContactPage{
 
 	private Logger log = Logger.getLogger(ContactPage.class.getSimpleName());
 	
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Contacts.fxml";
+	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/Contacts.fxml";
 
 	@Inject ContactRepository contactRepository;
 	
