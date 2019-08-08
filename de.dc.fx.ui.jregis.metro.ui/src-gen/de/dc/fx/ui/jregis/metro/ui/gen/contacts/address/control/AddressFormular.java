@@ -27,6 +27,11 @@ public class AddressFormular extends VBox{
 		contactIdTextField.setPromptText("Please enter a ContactId");
 		contactIdTextField.textProperty().bindBidirectional(context.getContactIdProperty() , java.text.NumberFormat.getInstance());
 		getChildren().add(contactIdTextField);
+		getChildren().add(new Label("AddressType:"));
+		javafx.scene.control.TextField addressTypeTextField = new javafx.scene.control.TextField();
+		addressTypeTextField.setPromptText("Please enter a AddressType");
+		addressTypeTextField.textProperty().bindBidirectional(context.getAddressTypeProperty() );
+		getChildren().add(addressTypeTextField);
 		getChildren().add(new Label("Street:"));
 		javafx.scene.control.TextField streetTextField = new javafx.scene.control.TextField();
 		streetTextField.setPromptText("Please enter a Street");

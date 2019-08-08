@@ -1,6 +1,12 @@
 packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.address
 
-Entity Address{ 
+Entity Address{
+	Field(name: ContactId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: AddressType, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
 	Field(name: Street, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 		columnWidth: 200

@@ -1,5 +1,5 @@
 packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact
- 
+
 Entity Contact{ 
 	Field(name: Firstname, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
@@ -7,10 +7,10 @@ Entity Contact{
 	Field(name: Lastname, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
-	Field(name: Account, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+	Field(name: Username, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
-	Field(name: AvatarId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+	Field(name: ContactImageId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
 	Field(name: Emails, datatype:java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email>, 
@@ -20,6 +20,9 @@ Entity Contact{
 		required: false, useByTableView: false, useByRepository: false
 	)
 	Field(name: PhoneList, datatype:java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber>, 
+		required: false, useByTableView: false, useByRepository: false
+	)
+	Field(name: DateList, datatype:java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates>, 
 		required: false, useByTableView: false, useByRepository: false
 	)
 

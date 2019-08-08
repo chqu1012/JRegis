@@ -11,6 +11,7 @@ import java.lang.Long;
 import java.lang.String;
 import java.lang.String;
 import java.lang.String;
+import java.lang.String;
 import java.lang.Integer;
 
 public class AddressFX {
@@ -24,6 +25,7 @@ public class AddressFX {
   private BooleanProperty enableSubmitProperty = new SimpleBooleanProperty(false);
   
   private LongProperty contactIdProperty = new SimpleLongProperty();
+  private StringProperty addressTypeProperty = new SimpleStringProperty();
   private StringProperty streetProperty = new SimpleStringProperty();
   private StringProperty countryProperty = new SimpleStringProperty();
   private StringProperty stateProperty = new SimpleStringProperty();
@@ -40,6 +42,7 @@ public class AddressFX {
 	this.addressProperty.addListener((observable, oldValue, newValue) -> {
 		if (newValue!=null) {
 			contactIdProperty.set(newValue.getContactId());
+			addressTypeProperty.set(newValue.getAddressType());
 			streetProperty.set(newValue.getStreet());
 			countryProperty.set(newValue.getCountry());
 			stateProperty.set(newValue.getState());
@@ -47,7 +50,7 @@ public class AddressFX {
 		}
 	});
 
-    BooleanBinding isEnabled = streetProperty.isNotEmpty().and(countryProperty.isNotEmpty()).and(stateProperty.isNotEmpty());
+    BooleanBinding isEnabled = addressTypeProperty.isNotEmpty().and(streetProperty.isNotEmpty()).and(countryProperty.isNotEmpty()).and(stateProperty.isNotEmpty());
     this.enableSubmitProperty.bind(isEnabled);
   }
 
@@ -70,6 +73,7 @@ public class AddressFX {
   public Address getAddress() {
   	this.address = new Address();
   	this.address.setContactId(contactIdProperty.getValue());
+  	this.address.setAddressType(addressTypeProperty.getValue());
   	this.address.setStreet(streetProperty.getValue());
   	this.address.setCountry(countryProperty.getValue());
   	this.address.setState(stateProperty.getValue());
@@ -91,6 +95,13 @@ public class AddressFX {
   
   public void setContactIdProperty(LongProperty contactIdProperty) {
     this.contactIdProperty = contactIdProperty;
+  }
+  public StringProperty getAddressTypeProperty() {
+    return this.addressTypeProperty;
+  }
+  
+  public void setAddressTypeProperty(StringProperty addressTypeProperty) {
+    this.addressTypeProperty = addressTypeProperty;
   }
   public StringProperty getStreetProperty() {
     return this.streetProperty;
@@ -123,6 +134,7 @@ public class AddressFX {
 
   public void clear() {
   	  this.contactIdProperty.set(0l);
+  	  this.addressTypeProperty.set("");
   	  this.streetProperty.set("");
   	  this.countryProperty.set("");
   	  this.stateProperty.set("");

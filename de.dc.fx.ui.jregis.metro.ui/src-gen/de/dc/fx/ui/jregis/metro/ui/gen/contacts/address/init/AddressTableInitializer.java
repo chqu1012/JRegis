@@ -13,6 +13,6 @@ public class AddressTableInitializer{
 		URL createUrl = AddressTableInitializer.class.getResource("/de/dc/fx/ui/jregis/metro/ui/gen/contacts/address/init/create.sql");
 		RunScript.execute(connection, new FileReader(new File(createUrl.getFile())));
 		
-		System.out.println("Tables initialized!");
+		System.out.println("Address table initialized!");
 	}
 }

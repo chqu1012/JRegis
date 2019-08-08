@@ -1,7 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model;
 
-import java.util.*;
-import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Contact{

@@ -8,6 +8,7 @@ public class Address{
 
 	private Long id;
 	private Long contactId;
+	private String addressType;
 	private String street;
 	private String country;
 	private String state;
@@ -16,8 +17,9 @@ public class Address{
 	public Address() {
 	}
 		
-	public Address(Long contactId, String street, String country, String state, Integer zipCode) {
+	public Address(Long contactId, String addressType, String street, String country, String state, Integer zipCode) {
 		this.contactId = contactId;
+		this.addressType = addressType;
 		this.street = street;
 		this.country = country;
 		this.state = state;
@@ -37,6 +39,13 @@ public class Address{
 
 	public void setContactId(Long contactId) {
 		this.contactId = contactId;
+	}
+	public String getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
 	}
 	public String getStreet() {
 		return street;

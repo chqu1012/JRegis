@@ -13,6 +13,6 @@ public class ContactTableInitializer{
 		URL createUrl = ContactTableInitializer.class.getResource("/de/dc/fx/ui/jregis/metro/ui/gen/contacts/contact/init/create.sql");
 		RunScript.execute(connection, new FileReader(new File(createUrl.getFile())));
 		
-		System.out.println("Tables initialized!");
+		System.out.println("Contact table initialized!");
 	}
 }

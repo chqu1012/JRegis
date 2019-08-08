@@ -62,7 +62,7 @@
             <ListView fx:id="listViewContacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" styleClass="hbox">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="400.0" styleClass="hbox">
          <content>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="hbox">
                <children>

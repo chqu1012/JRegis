@@ -36,6 +36,10 @@ public class AddressTableView extends TableView<Address>{
 		columnContactId.setPrefWidth(100.0);
 		setupCellValueFactory(columnContactId, e->new SimpleObjectProperty<>(e.getContactId()));
 		getColumns().add(columnContactId);
+		TableColumn<Address, java.lang.String> columnAddressType = new TableColumn<>("#ADDRESSTYPE");
+		columnAddressType.setPrefWidth(100.0);
+		setupCellValueFactory(columnAddressType, e->new SimpleObjectProperty<>(e.getAddressType()));
+		getColumns().add(columnAddressType);
 		TableColumn<Address, java.lang.String> columnStreet = new TableColumn<>("#STREET");
 		columnStreet.setPrefWidth(200.0);
 		setupCellValueFactory(columnStreet, e->new SimpleObjectProperty<>(e.getStreet()));

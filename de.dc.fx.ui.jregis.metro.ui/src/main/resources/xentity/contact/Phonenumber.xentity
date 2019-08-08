@@ -1,6 +1,9 @@
 packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone
 
 Entity Phonenumber{ 
+	Field(name: ContactId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
 	Field(name: Name, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
@@ -10,7 +13,7 @@ Entity Phonenumber{
 	Field(name: NumberType, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
- 
+
 	Repository{
 		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
 	}

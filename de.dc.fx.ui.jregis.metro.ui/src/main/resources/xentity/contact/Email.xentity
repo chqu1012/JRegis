@@ -1,10 +1,13 @@
 packagePath de.dc.fx.ui.jregis.metro.ui.gen.contacts.email
 
 Entity Email{
+	Field(name: ContactId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
 	Field(name: Name, datatype:String, required: true, useByTableView: true, useByRepository: true)[
 		control: javafx.scene.control.TextField
 	]
-	Field(name: Email, datatype:String, required: true, useByTableView: true, useByRepository: true)[
+	Field(name: Address, datatype:String, required: true, useByTableView: true, useByRepository: true)[
 		control: javafx.scene.control.TextField
 	]
 

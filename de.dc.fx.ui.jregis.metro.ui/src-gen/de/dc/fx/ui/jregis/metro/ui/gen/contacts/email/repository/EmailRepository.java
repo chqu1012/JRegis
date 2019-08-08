@@ -2,6 +2,9 @@ package de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository;
 
 import java.sql.*;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.*;
+import java.util.*;
+import java.time.*;
+
 public class EmailRepository extends BaseRepository<Email>{
 
 	@Override
@@ -13,7 +16,77 @@ public class EmailRepository extends BaseRepository<Email>{
 		email.setAddress(resultSet.getString("ADDRESS"));
 		return email;
 	}
+	
+	public List<Email> findAllByContactId(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID = '%s'", String.valueOf(contactId)));
+	}
 
+	public List<Email> findAllByContactIdOrderByAsc(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID = '%s' ORDER BY CONTACT_ID ASC", String.valueOf(contactId)));
+	}
+
+	public List<Email> findAllByContactIdOrderByDesc(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID = '%s' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
+	}
+
+	public List<Email> findAllByContactIdLike(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID like '%%s%'", String.valueOf(contactId)));
+	}
+	
+	public List<Email> findAllByContactIdLikeOrderByAsc(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID ASC", String.valueOf(contactId)));
+	}
+	
+	public List<Email> findAllByContactIdLikeOrderByDesc(Long contactId){
+		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
+	}
+	public List<Email> findAllByName(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME = '%s'", String.valueOf(name)));
+	}
+
+	public List<Email> findAllByNameOrderByAsc(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME = '%s' ORDER BY NAME ASC", String.valueOf(name)));
+	}
+
+	public List<Email> findAllByNameOrderByDesc(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME = '%s' ORDER BY NAME DESC", String.valueOf(name)));
+	}
+
+	public List<Email> findAllByNameLike(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME like '%%s%'", String.valueOf(name)));
+	}
+	
+	public List<Email> findAllByNameLikeOrderByAsc(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME like '%%s%' ORDER BY NAME ASC", String.valueOf(name)));
+	}
+	
+	public List<Email> findAllByNameLikeOrderByDesc(String name){
+		return query(String.format("SELECT * FROM EMAIL WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
+	}
+	public List<Email> findAllByAddress(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS = '%s'", String.valueOf(address)));
+	}
+
+	public List<Email> findAllByAddressOrderByAsc(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS = '%s' ORDER BY ADDRESS ASC", String.valueOf(address)));
+	}
+
+	public List<Email> findAllByAddressOrderByDesc(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS = '%s' ORDER BY ADDRESS DESC", String.valueOf(address)));
+	}
+
+	public List<Email> findAllByAddressLike(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS like '%%s%'", String.valueOf(address)));
+	}
+	
+	public List<Email> findAllByAddressLikeOrderByAsc(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS like '%%s%' ORDER BY ADDRESS ASC", String.valueOf(address)));
+	}
+	
+	public List<Email> findAllByAddressLikeOrderByDesc(String address){
+		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS like '%%s%' ORDER BY ADDRESS DESC", String.valueOf(address)));
+	}
+	
 	@Override
 	protected String findAllStatement() {
 		return EmailConstant.SQL_FIND_ALL;

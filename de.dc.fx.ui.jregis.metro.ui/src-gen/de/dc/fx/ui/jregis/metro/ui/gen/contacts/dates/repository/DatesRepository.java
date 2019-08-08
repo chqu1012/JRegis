@@ -2,6 +2,9 @@ package de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository;
 
 import java.sql.*;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.*;
+import java.util.*;
+import java.time.*;
+
 public class DatesRepository extends BaseRepository<Dates>{
 
 	@Override
@@ -13,7 +16,77 @@ public class DatesRepository extends BaseRepository<Dates>{
 		dates.setDate(resultSet.getTimestamp("DATE").toLocalDateTime());
 		return dates;
 	}
+	
+	public List<Dates> findAllByContactId(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID = '%s'", String.valueOf(contactId)));
+	}
 
+	public List<Dates> findAllByContactIdOrderByAsc(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID = '%s' ORDER BY CONTACT_ID ASC", String.valueOf(contactId)));
+	}
+
+	public List<Dates> findAllByContactIdOrderByDesc(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID = '%s' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
+	}
+
+	public List<Dates> findAllByContactIdLike(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID like '%%s%'", String.valueOf(contactId)));
+	}
+	
+	public List<Dates> findAllByContactIdLikeOrderByAsc(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID ASC", String.valueOf(contactId)));
+	}
+	
+	public List<Dates> findAllByContactIdLikeOrderByDesc(Long contactId){
+		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
+	}
+	public List<Dates> findAllByName(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME = '%s'", String.valueOf(name)));
+	}
+
+	public List<Dates> findAllByNameOrderByAsc(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME = '%s' ORDER BY NAME ASC", String.valueOf(name)));
+	}
+
+	public List<Dates> findAllByNameOrderByDesc(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME = '%s' ORDER BY NAME DESC", String.valueOf(name)));
+	}
+
+	public List<Dates> findAllByNameLike(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME like '%%s%'", String.valueOf(name)));
+	}
+	
+	public List<Dates> findAllByNameLikeOrderByAsc(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME like '%%s%' ORDER BY NAME ASC", String.valueOf(name)));
+	}
+	
+	public List<Dates> findAllByNameLikeOrderByDesc(String name){
+		return query(String.format("SELECT * FROM DATES WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
+	}
+	public List<Dates> findAllByDate(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE = '%s'", String.valueOf(date)));
+	}
+
+	public List<Dates> findAllByDateOrderByAsc(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE = '%s' ORDER BY DATE ASC", String.valueOf(date)));
+	}
+
+	public List<Dates> findAllByDateOrderByDesc(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE = '%s' ORDER BY DATE DESC", String.valueOf(date)));
+	}
+
+	public List<Dates> findAllByDateLike(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE like '%%s%'", String.valueOf(date)));
+	}
+	
+	public List<Dates> findAllByDateLikeOrderByAsc(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE like '%%s%' ORDER BY DATE ASC", String.valueOf(date)));
+	}
+	
+	public List<Dates> findAllByDateLikeOrderByDesc(LocalDateTime date){
+		return query(String.format("SELECT * FROM DATES WHERE DATE like '%%s%' ORDER BY DATE DESC", String.valueOf(date)));
+	}
+	
 	@Override
 	protected String findAllStatement() {
 		return DatesConstant.SQL_FIND_ALL;

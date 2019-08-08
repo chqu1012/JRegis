@@ -41,11 +41,9 @@ public class ContactListCell extends ListCell<Contact> {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                
-                labelName.setText(item.getFirstname()+" "+item.getLastname());
-                labelUsername.setText(item.getUsername());
-
             }
+            labelName.setText(item.getFirstname()+" "+item.getLastname());
+            labelUsername.setText(item.getUsername());
             setGraphic(root);
         }
 

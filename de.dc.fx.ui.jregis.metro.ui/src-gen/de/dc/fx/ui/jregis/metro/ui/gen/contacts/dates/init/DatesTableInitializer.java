@@ -13,6 +13,6 @@ public class DatesTableInitializer{
 		URL createUrl = DatesTableInitializer.class.getResource("/de/dc/fx/ui/jregis/metro/ui/gen/contacts/dates/init/create.sql");
 		RunScript.execute(connection, new FileReader(new File(createUrl.getFile())));
 		
-		System.out.println("Tables initialized!");
+		System.out.println("Dates table initialized!");
 	}
 }

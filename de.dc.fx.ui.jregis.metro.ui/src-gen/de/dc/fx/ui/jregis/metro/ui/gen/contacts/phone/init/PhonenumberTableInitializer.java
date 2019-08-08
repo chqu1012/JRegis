@@ -13,6 +13,6 @@ public class PhonenumberTableInitializer{
 		URL createUrl = PhonenumberTableInitializer.class.getResource("/de/dc/fx/ui/jregis/metro/ui/gen/contacts/phone/init/create.sql");
 		RunScript.execute(connection, new FileReader(new File(createUrl.getFile())));
 		
-		System.out.println("Tables initialized!");
+		System.out.println("Phonenumber table initialized!");
 	}
 }

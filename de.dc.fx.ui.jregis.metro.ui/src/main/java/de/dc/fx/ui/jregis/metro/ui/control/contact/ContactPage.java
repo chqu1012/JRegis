@@ -56,7 +56,7 @@ public class ContactPage extends BaseContactPage {
 		listViewContacts.setItems(filteredContacts);
 		 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
-			context.getFilteredMasterData().setPredicate(p -> {
+			filteredContacts.setPredicate(p -> {
 				boolean isEmpty = p == null || newValue.isEmpty();
 				boolean isFirstnameEquals = p.getFirstname().toLowerCase().contains(newValue.toLowerCase());
 				boolean isLastnameEquals = p.getLastname().toLowerCase().contains(newValue.toLowerCase());

@@ -43,6 +43,20 @@ package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository;
 			return cachedList;
 		}
 	
+		public List<T> query(String sql) {
+			ArrayList<T> list = new ArrayList<>();
+			try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA");
+					PreparedStatement statement = connection.prepareStatement(sql);
+					ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					list.add(map(resultSet));
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, "Failed to query: " + sql, e);
+			}
+			return list;
+		}
+	
 		public List<T> forceFindAll() {
 			List<T> tempList = new ArrayList<>();
 			try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA");

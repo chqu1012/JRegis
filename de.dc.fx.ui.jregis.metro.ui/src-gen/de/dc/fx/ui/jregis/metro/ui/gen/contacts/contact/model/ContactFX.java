@@ -64,11 +64,7 @@ public class ContactFX {
     return enableSubmitProperty;
   }
   
-  public void setMasterData(ObservableList<Contact> masterData) {
-	  this.masterData = masterData;
-  }
-  
-  public ObservableList<Contact> getMasterData(){
+  public ObservableList<Contact>  getMasterData(){
   	return masterData;
   }
 
