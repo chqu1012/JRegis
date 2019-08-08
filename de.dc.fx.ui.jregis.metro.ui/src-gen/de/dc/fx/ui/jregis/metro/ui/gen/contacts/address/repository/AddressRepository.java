@@ -1,7 +1,12 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository;
 
-import java.sql.*;
-import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.AddressConstant;
 public class AddressRepository extends BaseRepository<Address>{
 
 	@Override
@@ -26,6 +31,10 @@ public class AddressRepository extends BaseRepository<Address>{
 		return String.format(AddressConstant.SQL_FIND_BY_ID, id);
 	}
 
+	public List<Address> findAllByContactId(Long contactId){
+		return query("SELECT * FROM ADDRESS WHERE CONTACT_ID = "+contactId);
+	}
+	
 	@Override
 	protected String saveStatement() {
 		return AddressConstant.SQL_INSERT;

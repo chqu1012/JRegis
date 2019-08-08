@@ -1,6 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,13 +9,15 @@ import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener.Change;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -25,11 +28,13 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/Contacts.fxml";
 
-	@Inject
-	ContactRepository contactRepository;
-	@Inject
-	ContactFX context;
+	@Inject ContactRepository contactRepository;
+	@Inject AddressRepository addressRepository;
+	@Inject ContactFX context;
 
+	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
+	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p-> true); 
+	
 	@Inject
 	public ContactPage(ContactRepository contactRepository, ContactFX context) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -42,13 +47,14 @@ public class ContactPage extends BaseContactPage {
 			log.log(Level.SEVERE, "Failed to load fxml " + FXML, exception);
 		}
 
-		context.getMasterData().addAll(contactRepository.findAll());
-		listViewContacts.setItems(context.getFilteredMasterData());
 		listViewContacts.setCellFactory(e -> new ContactListCell());
 		listViewContacts.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
-		context.getAddressListProperty().addListener((ListChangeListener<Address>) c -> c.getList().forEach(System.out::println));
+		.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
+		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		
+		contacts.addAll(contactRepository.findAll());
+		listViewContacts.setItems(filteredContacts);
+		 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
 			context.getFilteredMasterData().setPredicate(p -> {
 				boolean isEmpty = p == null || newValue.isEmpty();
@@ -62,10 +68,21 @@ public class ContactPage extends BaseContactPage {
 		initBinding(context);
 	}
 
+	private void onAddressListSelectionChanged(Change<? extends Address> c) {
+		ObservableList<Address> addressList = context.getAddressListProperty().get();
+		vboxAddresses.getChildren().clear();
+		addressList.forEach(e->{
+			vboxAddresses.getChildren().add(new ContactAddressItem(e));
+		});
+	}
+
 	private void onContactSelectionChanged(Contact newValue) {
-		newValue.getAddressList().clear();
-		newValue.getAddressList().add(new Address(newValue.getId(), "Test", "Test", "Test", 83738));
-		context.getContactProperty().set(newValue);
+		if (newValue!=null) {
+			newValue.getAddressList().clear();
+			List<Address> addressList = addressRepository.findAllByContactId(newValue.getId());
+			newValue.getAddressList().addAll(addressList);
+			context.getContactProperty().set(newValue);
+		}
 	}
 
 	private void initBinding(ContactFX context) {
