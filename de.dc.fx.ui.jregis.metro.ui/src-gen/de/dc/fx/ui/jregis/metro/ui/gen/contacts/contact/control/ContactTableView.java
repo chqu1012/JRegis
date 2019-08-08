@@ -36,14 +36,14 @@ public class ContactTableView extends TableView<Contact>{
 		columnLastname.setPrefWidth(100.0);
 		setupCellValueFactory(columnLastname, e->new SimpleObjectProperty<>(e.getLastname()));
 		getColumns().add(columnLastname);
-		TableColumn<Contact, java.lang.String> columnAccount = new TableColumn<>("#ACCOUNT");
-		columnAccount.setPrefWidth(100.0);
-		setupCellValueFactory(columnAccount, e->new SimpleObjectProperty<>(e.getAccount()));
-		getColumns().add(columnAccount);
-		TableColumn<Contact, java.lang.Long> columnAvatarId = new TableColumn<>("#AVATARID");
-		columnAvatarId.setPrefWidth(100.0);
-		setupCellValueFactory(columnAvatarId, e->new SimpleObjectProperty<>(e.getAvatarId()));
-		getColumns().add(columnAvatarId);
+		TableColumn<Contact, java.lang.String> columnUsername = new TableColumn<>("#USERNAME");
+		columnUsername.setPrefWidth(100.0);
+		setupCellValueFactory(columnUsername, e->new SimpleObjectProperty<>(e.getUsername()));
+		getColumns().add(columnUsername);
+		TableColumn<Contact, java.lang.Long> columnContactImageId = new TableColumn<>("#CONTACTIMAGEID");
+		columnContactImageId.setPrefWidth(100.0);
+		setupCellValueFactory(columnContactImageId, e->new SimpleObjectProperty<>(e.getContactImageId()));
+		getColumns().add(columnContactImageId);
 		
 		context.getMasterData().addAll(contactRepository.findAll());
 		setItems(context.getFilteredMasterData());

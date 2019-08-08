@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imageViewUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <image>
+            <Image url="@../../../images/icons8-name-64.png" />
+         </image>
+      </ImageView>
+      <VBox HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="labelName" maxWidth="1.7976931348623157E308" text="Max Mustermann" textFill="#868686">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelUsername" text="mamu1984" textFill="#575757" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+   </padding>
+</HBox>

@@ -4,7 +4,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.inject.Inject;
+
+import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class ContactPage extends BaseContactPage{
@@ -13,7 +21,10 @@ public class ContactPage extends BaseContactPage{
 	
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/Contacts.fxml";
 
-	public ContactPage() {
+	@Inject ContactRepository contactRepository;
+	
+	@Inject 
+	public ContactPage(ContactRepository contactRepository, ContactFX context) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -23,11 +34,18 @@ public class ContactPage extends BaseContactPage{
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
 		}
+		
+		context.getMasterData().addAll(contactRepository.findAll());
+		listViewContacts.setItems(context.getFilteredMasterData());
+		listViewContacts.setCellFactory(e->new ContactListCell());
+	}
+	
+	public void addContactItem(Contact contact) {
+		vboxContactList.getChildren().add(new Button(contact.getUsername()));
 	}
 	
 	@Override
 	protected void onImageViewNewUser(MouseEvent event) {
-		// TODO Auto-generated method stub
 		
 	}
 

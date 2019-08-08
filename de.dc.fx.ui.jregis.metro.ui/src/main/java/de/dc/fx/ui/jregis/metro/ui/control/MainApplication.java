@@ -78,17 +78,15 @@ public class MainApplication extends BaseMainApplication {
 	private ProfilePage profilePage = new ProfilePage();
 	private Dashboard dashboard = new Dashboard();
 	private Inbox inbox = new Inbox();
-	private ContactPage contactViewer = new ContactPage();
 	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 
-	@Inject
-	UserManagementPage userManagementPage;
+	@Inject UserManagementPage userManagementPage;
+	@Inject ContactPage contactPage;
 
-	@Inject
-	CategoryRepository categoryRepository;
+	@Inject CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
 
@@ -214,7 +212,7 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(dashboard);
 		mainStackPane.getChildren().add(inbox);
-		mainStackPane.getChildren().add(contactViewer);
+		mainStackPane.getChildren().add(JRegisPlatform.getInstance(ContactPage.class));
 
 		dashboard.toFront();
 	}
@@ -507,6 +505,6 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onImageViewAdbookClicked(MouseEvent event) {
-		contactViewer.toFront();
+		contactPage.toFront();
 	}
 }

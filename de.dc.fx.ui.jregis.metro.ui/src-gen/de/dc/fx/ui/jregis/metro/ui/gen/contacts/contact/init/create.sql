@@ -1,1 +1,1 @@
-CREATE TABLE IF NOT EXISTS Contact(ID BIGINT AUTO_INCREMENT, Firstname varchar, Lastname varchar);
+CREATE TABLE IF NOT EXISTS Contact(ID BIGINT AUTO_INCREMENT, Firstname varchar, Lastname varchar, UserName varchar, ContactImageId BIGINT);

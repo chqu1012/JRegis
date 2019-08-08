@@ -24,8 +24,8 @@ public class ContactFX {
   
   private StringProperty firstnameProperty = new SimpleStringProperty();
   private StringProperty lastnameProperty = new SimpleStringProperty();
-  private StringProperty accountProperty = new SimpleStringProperty();
-  private LongProperty avatarIdProperty = new SimpleLongProperty();
+  private StringProperty usernameProperty = new SimpleStringProperty();
+  private LongProperty contactImageIdProperty = new SimpleLongProperty();
   
   public ContactFX() {
     this(new Contact());
@@ -33,7 +33,7 @@ public class ContactFX {
   
   public ContactFX(Contact contact) {
     this.contact=contact;
-    BooleanBinding isEnabled = firstnameProperty.isNotEmpty().and(lastnameProperty.isNotEmpty()).and(accountProperty.isNotEmpty());
+    BooleanBinding isEnabled = firstnameProperty.isNotEmpty().and(lastnameProperty.isNotEmpty()).and(usernameProperty.isNotEmpty());
     this.enableSubmitProperty.bind(isEnabled);
   }
 
@@ -53,8 +53,8 @@ public class ContactFX {
   	this.contact = new Contact();
   	this.contact.setFirstname(firstnameProperty.getValue());
   	this.contact.setLastname(lastnameProperty.getValue());
-  	this.contact.setAccount(accountProperty.getValue());
-  	this.contact.setAvatarId(avatarIdProperty.getValue());
+  	this.contact.setUsername(usernameProperty.getValue());
+  	this.contact.setContactImageId(contactImageIdProperty.getValue());
     return this.contact;
   }
   
@@ -80,26 +80,26 @@ public class ContactFX {
   public void setLastnameProperty(StringProperty lastnameProperty) {
     this.lastnameProperty = lastnameProperty;
   }
-  public StringProperty getAccountProperty() {
-    return this.accountProperty;
+  public StringProperty getUsernameProperty() {
+    return this.usernameProperty;
   }
   
-  public void setAccountProperty(StringProperty accountProperty) {
-    this.accountProperty = accountProperty;
+  public void setUsernameProperty(StringProperty usernameProperty) {
+    this.usernameProperty = usernameProperty;
   }
-  public LongProperty getAvatarIdProperty() {
-    return this.avatarIdProperty;
+  public LongProperty getContactImageIdProperty() {
+    return this.contactImageIdProperty;
   }
   
-  public void setAvatarIdProperty(LongProperty avatarIdProperty) {
-    this.avatarIdProperty = avatarIdProperty;
+  public void setContactImageIdProperty(LongProperty contactImageIdProperty) {
+    this.contactImageIdProperty = contactImageIdProperty;
   }
 
   public void clear() {
   	  this.firstnameProperty.set("");
   	  this.lastnameProperty.set("");
-  	  this.accountProperty.set("");
-  	  this.avatarIdProperty.set(0l);
+  	  this.usernameProperty.set("");
+  	  this.contactImageIdProperty.set(0l);
   }
 
   public String toString() {

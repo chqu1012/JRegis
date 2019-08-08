@@ -11,8 +11,8 @@ public class ContactRepository extends BaseRepository<Contact>{
 		Contact contact = new Contact();
 		contact.setFirstname(resultSet.getString("Firstname"));
 		contact.setLastname(resultSet.getString("Lastname"));
-		contact.setAccount(resultSet.getString("Account"));
-		contact.setAvatarId(resultSet.getLong("AvatarId"));
+		contact.setUsername(resultSet.getString("Username"));
+		contact.setContactImageId(resultSet.getLong("ContactImageId"));
 		return contact;
 	}
 
@@ -28,15 +28,15 @@ public class ContactRepository extends BaseRepository<Contact>{
 
 	@Override
 	protected String saveStatement() {
-		return "INSERT INTO contact (Firstname, Lastname, Account, AvatarId) VALUES (?, ?, ?, ?);";
+		return "INSERT INTO contact (Firstname, Lastname, Username, ContactImageId) VALUES (?, ?, ?, ?);";
 	}
 
 	@Override
 	protected void prepareStatetmentForSave(Contact t, PreparedStatement statement) throws SQLException {
 		statement.setString(1, t.getFirstname());
 		statement.setString(2, t.getLastname());
-		statement.setString(3, t.getAccount());
-		statement.setLong(4, t.getAvatarId());
+		statement.setString(3, t.getUsername());
+		statement.setLong(4, t.getContactImageId());
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class ContactRepository extends BaseRepository<Contact>{
 	protected void prepareStatetmentForUpdate(Contact t, PreparedStatement statement) throws SQLException {
 		statement.setString(1, t.getFirstname());
 		statement.setString(2, t.getLastname());
-		statement.setString(3, t.getAccount());
-		statement.setLong(4, t.getAvatarId());
+		statement.setString(3, t.getUsername());
+		statement.setLong(4, t.getContactImageId());
 	}
 
 	@Override

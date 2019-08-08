@@ -2,9 +2,11 @@ package de.dc.fx.ui.jregis.metro.ui.di;
 
 import com.google.inject.AbstractModule;
 
+import de.dc.fx.ui.jregis.metro.ui.control.contact.ContactPage;
 import de.dc.fx.ui.jregis.metro.ui.control.user.management.UserManagementPage;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.di.ContactModule;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
@@ -36,5 +38,8 @@ public class GlobalModul extends AbstractModule {
 		bind(IEventBroker.class).to(EventBroker.class).asEagerSingleton();
 		
 		bind(UserManagementPage.class).asEagerSingleton();
+		bind(ContactPage.class).asEagerSingleton();
+		
+		install(new ContactModule());
 	}
 }

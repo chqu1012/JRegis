@@ -1,4 +1,0 @@
-2019-08-07 19:27:02 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Tabelle "DATES" nicht gefunden
-Table "DATES" not found; SQL statement:
-SELECT * FROM Dates ORDER BY id DESC [42102-196]

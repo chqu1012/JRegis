@@ -32,16 +32,16 @@ public class ContactFormular extends VBox{
 		lastnameTextField.setPromptText("Please enter a Lastname");
 		lastnameTextField.textProperty().bindBidirectional(context.getLastnameProperty() );
 		getChildren().add(lastnameTextField);
-		getChildren().add(new Label("Account:"));
-		javafx.scene.control.TextField accountTextField = new javafx.scene.control.TextField();
-		accountTextField.setPromptText("Please enter a Account");
-		accountTextField.textProperty().bindBidirectional(context.getAccountProperty() );
-		getChildren().add(accountTextField);
-		getChildren().add(new Label("AvatarId:"));
-		javafx.scene.control.TextField avatarIdTextField = new javafx.scene.control.TextField();
-		avatarIdTextField.setPromptText("Please enter a AvatarId");
-		avatarIdTextField.textProperty().bindBidirectional(context.getAvatarIdProperty() , java.text.NumberFormat.getInstance());
-		getChildren().add(avatarIdTextField);
+		getChildren().add(new Label("Username:"));
+		javafx.scene.control.TextField usernameTextField = new javafx.scene.control.TextField();
+		usernameTextField.setPromptText("Please enter a Username");
+		usernameTextField.textProperty().bindBidirectional(context.getUsernameProperty() );
+		getChildren().add(usernameTextField);
+		getChildren().add(new Label("ContactImageId:"));
+		javafx.scene.control.TextField contactImageIdTextField = new javafx.scene.control.TextField();
+		contactImageIdTextField.setPromptText("Please enter a ContactImageId");
+		contactImageIdTextField.textProperty().bindBidirectional(context.getContactImageIdProperty() , java.text.NumberFormat.getInstance());
+		getChildren().add(contactImageIdTextField);
 		
 		Button submitButton = new Button("Submit");
 		submitButton.setOnMouseClicked(this::onButtonSubmit);

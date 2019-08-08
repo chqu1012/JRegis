@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
@@ -14,7 +15,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <fx:root dividerPositions="0.2545090180360721, 0.531062124248497" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/Contacts.css" type="SplitPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <items>
@@ -33,38 +33,35 @@
             <TreeView fx:id="treeViewEmail" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true">
-         <content>
-            <VBox fx:id="vboxContactList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" spacing="5.0" styleClass="hbox">
+      <VBox fx:id="vboxContactList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" spacing="5.0" styleClass="hbox">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="36.0" spacing="5.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="36.0" spacing="5.0">
-                     <children>
-                        <ComboBox fx:id="comboInboxType" prefWidth="150.0" />
-                        <Label maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewNewUser" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8-männlichen-benutzer-hinzufügen-100.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewPreferences" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8-einstellungen-48.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </HBox>
-                  <TextField fx:id="textSearchContact" prefHeight="26.0" promptText="Search in all contacts">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </VBox.margin>
-                  </TextField>
+                  <ComboBox fx:id="comboInboxType" prefWidth="150.0" />
+                  <Label maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewNewUser" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-männlichen-benutzer-hinzufügen-100.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewPreferences" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-einstellungen-48.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </VBox>
-         </content>
-      </ScrollPane>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="textSearchContact" prefHeight="26.0" promptText="Search in all contacts">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </TextField>
+            <ListView fx:id="listViewContacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
       <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" styleClass="hbox">
          <content>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="hbox">

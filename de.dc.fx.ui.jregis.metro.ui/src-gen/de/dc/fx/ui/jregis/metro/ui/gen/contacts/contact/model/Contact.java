@@ -13,8 +13,8 @@ public class Contact{
 	private Long id;
 	private String firstname;
 	private String lastname;
-	private String account;
-	private Long avatarId;
+	private String username;
+	private Long contactImageId;
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsList = new java.util.ArrayList<>();
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListList = new java.util.ArrayList<>();
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListList = new java.util.ArrayList<>();
@@ -23,11 +23,11 @@ public class Contact{
 	public Contact() {
 	}
 		
-	public Contact(String firstname, String lastname, String account, Long avatarid) {
+	public Contact(String firstname, String lastname, String username, Long contactimageid) {
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.account = account;
-		this.avatarId = avatarId;
+		this.username = username;
+		this.contactImageId = contactImageId;
 	}
 	
 	public Long getId(){
@@ -51,19 +51,19 @@ public class Contact{
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public String getAccount() {
-		return account;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public Long getAvatarId() {
-		return avatarId;
+	public Long getContactImageId() {
+		return contactImageId;
 	}
 
-	public void setAvatarId(Long avatarId) {
-		this.avatarId = avatarId;
+	public void setContactImageId(Long contactImageId) {
+		this.contactImageId = contactImageId;
 	}
 	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmailsList() {
 		return emailsList;
