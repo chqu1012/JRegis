@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #D1D5D7;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="paneMainContent" layoutX="55.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 5;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="95.0" />
+      <Label layoutX="20.0" layoutY="14.0" text="CALENDAR" textFill="#8d8d8d">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="34.0" prefHeight="53.0" prefWidth="960.0" text="A calendar is a system of organizing days for social, religious, commercial or administrative purposes. This is done by giving names to periods of time, typically days, weeks, months and years. A date is the designation of a single, specific day within such a system. A calendar is also a physical record (often paper) of such a system. A calendar can also mean a list of planned events, such as a court calendar or a partly or fully chronological list of documents, such as a calendar of wills." textFill="#867e7e" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+   </children>
+</fx:root>
