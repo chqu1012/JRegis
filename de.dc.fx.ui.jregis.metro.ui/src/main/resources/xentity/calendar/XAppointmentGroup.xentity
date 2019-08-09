@@ -1,0 +1,28 @@
+packagePath de.dc.fx.ui.jregis.metro.ui.gen.calendar.group
+
+Entity XAppointmentGroup{
+	Field(name: AppointmentId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Topic, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Summary, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Start, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+	Field(name: End, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+	Field(name: AppointmentGroupId, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+ 
+	Repository{
+		jdbcUrl: "jdbc:h2:file:./data/AppointmentRepository;DB_CLOSE_ON_EXIT=true;"
+	}
+}
