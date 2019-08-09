@@ -4,6 +4,9 @@ import javafx.scene.layout.AnchorPane;
 
 public abstract class BaseCalendarPage extends AnchorPane{
 
+	@FXML
+	protected AnchorPane root;
+	
     @FXML
     protected AnchorPane paneMainContent;
 

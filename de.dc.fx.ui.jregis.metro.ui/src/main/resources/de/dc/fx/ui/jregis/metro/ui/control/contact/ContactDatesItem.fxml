@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="imageView" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
@@ -23,7 +22,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="labelDate" text="12.12.1984" />
+            <Hyperlink fx:id="labelDate" onAction="#onLinkDateAction" text="12.12.1984" />
          </children>
       </VBox>
    </children>

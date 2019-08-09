@@ -1,4 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -15,5 +16,8 @@ public abstract class BaseContactDatesItem extends HBox {
 
     @FXML
     protected Hyperlink labelDate;
+    
+    @FXML
+    protected abstract void onLinkDateAction(ActionEvent event);
 
 }
