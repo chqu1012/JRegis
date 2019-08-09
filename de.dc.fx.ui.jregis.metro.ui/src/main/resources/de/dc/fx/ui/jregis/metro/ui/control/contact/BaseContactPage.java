@@ -10,10 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public abstract class BaseContactPage extends SplitPane{
+
+	@FXML
+	protected Separator separatorDates;
 
 	@FXML
 	protected Separator separatorEmail;

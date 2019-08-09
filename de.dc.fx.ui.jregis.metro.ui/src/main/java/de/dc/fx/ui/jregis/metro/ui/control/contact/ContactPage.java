@@ -13,6 +13,8 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressReposi
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
 import javafx.beans.binding.Bindings;
@@ -33,6 +35,7 @@ public class ContactPage extends BaseContactPage {
 	@Inject ContactRepository contactRepository;
 	@Inject AddressRepository addressRepository;
 	@Inject EmailRepository emailRepository;
+	@Inject DatesRepository DatesRepository;
 	@Inject ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
@@ -57,6 +60,7 @@ public class ContactPage extends BaseContactPage {
 		// React on list changes
 		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
+		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
 		
 		contacts.addAll(contactRepository.findAll());
 		listViewContacts.setItems(filteredContacts);
@@ -90,16 +94,28 @@ public class ContactPage extends BaseContactPage {
 		});
 	}
 
+	private void onDatesListSelectionChanged(Change<? extends Dates> c) {
+		ObservableList<Dates> datesList = context.getDateListProperty().get();
+		vboxDates.getChildren().clear();
+		datesList.forEach(e->{
+			vboxDates.getChildren().add(new ContactDatesItem(e));
+		});
+	}
+
 	private void onContactSelectionChanged(Contact newValue) {
 		if (newValue!=null) {
 			newValue.getAddressList().clear();
 			newValue.getEmails().clear();
+			newValue.getDateList().clear();
 			
 			List<Address> addressList = addressRepository.findAllByContactId(newValue.getId());
 			newValue.getAddressList().addAll(addressList);
 			
 			List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
 			newValue.getEmails().addAll(emails);
+			
+			List<Dates> dates = DatesRepository.findAllByContactId(newValue.getId());
+			newValue.getDateList().addAll(dates);
 			
 			context.getContactProperty().set(newValue);
 		}
@@ -112,6 +128,7 @@ public class ContactPage extends BaseContactPage {
 		
 		separatorAddress.visibleProperty().bind(Bindings.size(vboxAddresses.getChildren()).greaterThan(0));
 		separatorEmail.visibleProperty().bind(Bindings.size(vboxEmail.getChildren()).greaterThan(0));
+		separatorDates.visibleProperty().bind(Bindings.size(vboxDates.getChildren()).greaterThan(0));
 	}
 
 	public void addContactItem(Contact contact) {

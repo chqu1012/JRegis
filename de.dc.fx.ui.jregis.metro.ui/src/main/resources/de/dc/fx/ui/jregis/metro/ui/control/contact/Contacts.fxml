@@ -168,95 +168,14 @@
                      </children>
                   </VBox>
                   <HBox />
-                  <Separator prefWidth="200.0">
+                  <Separator fx:id="separatorDates" prefWidth="200.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </Separator>
-                  <VBox fx:id="vboxDates" spacing="15.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-geburtstag-52.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Birthday" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink text="12.12.1984" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-kalender-48.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Wedding" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink alignment="TOP_LEFT" text="20.12.2012" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-kalender-48.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Others" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink text="20.12.2012" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="vboxDates" spacing="15.0" />
                   <Separator fx:id="separatorAddress" prefWidth="200.0" />
-                  <VBox fx:id="vboxAddresses" spacing="15.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-adresse-48.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Home" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink text="Donaustraße 20, 71876 Stuttgart" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </children>
+                  <VBox fx:id="vboxAddresses" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
                      <padding>
                         <Insets bottom="40.0" />
                      </padding>
