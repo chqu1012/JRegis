@@ -187,6 +187,11 @@
                      </HBox.margin>
                   </TextField>
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <ImageView fx:id="imageViewCalendar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewCalendarClicked" pickOnBounds="true" preserveRatio="true" styleClass="calendar-image-view">
+                     <image>
+                        <Image url="@images/icons8-kalender-48.png" />
+                     </image>
+                  </ImageView>
                   <ImageView fx:id="imageViewAdbook" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewAdbookClicked" pickOnBounds="true" preserveRatio="true" styleClass="adbook-image-view">
                      <image>
                         <Image url="@images/icons8-adressbuch-96.png" />

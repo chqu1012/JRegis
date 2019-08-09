@@ -55,6 +55,18 @@
     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-blue.png');
 }
 
+.calendar-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48.png');
+}
+
+.calendar-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-dark.png');
+}
+
+.calendar-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-blue.png');
+}
+
 .panel-user{
 	-fx-background-color: transparent;
 }

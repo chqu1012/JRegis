@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
+import de.dc.fx.ui.jregis.metro.ui.control.calendar.CalendarPage;
 import de.dc.fx.ui.jregis.metro.ui.control.contact.ContactPage;
 import de.dc.fx.ui.jregis.metro.ui.control.dashboard.Dashboard;
 import de.dc.fx.ui.jregis.metro.ui.control.document.management.DocumentFlatDetails;
@@ -85,7 +86,8 @@ public class MainApplication extends BaseMainApplication {
 
 	@Inject UserManagementPage userManagementPage;
 	@Inject ContactPage contactPage;
-
+	CalendarPage calendarPage = new CalendarPage();
+	
 	@Inject CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
@@ -213,6 +215,7 @@ public class MainApplication extends BaseMainApplication {
 		mainStackPane.getChildren().add(dashboard);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(JRegisPlatform.getInstance(ContactPage.class));
+		mainStackPane.getChildren().add(calendarPage);
 
 		dashboard.toFront();
 	}
@@ -506,5 +509,10 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onImageViewAdbookClicked(MouseEvent event) {
 		contactPage.toFront();
+	}
+
+	@Override
+	protected void onImageViewCalendarClicked(MouseEvent event) {
+		calendarPage.toFront();
 	}
 }
