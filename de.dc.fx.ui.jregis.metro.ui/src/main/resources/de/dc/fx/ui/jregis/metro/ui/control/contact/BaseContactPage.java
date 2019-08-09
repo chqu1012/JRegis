@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
 public abstract class BaseContactPage extends SplitPane{
 
 	@FXML
+	protected ImageView imageViewAddEmail;
+	
+	@FXML
 	protected Separator separatorDates;
 
 	@FXML
@@ -64,5 +67,8 @@ public abstract class BaseContactPage extends SplitPane{
 
     @FXML
     protected abstract void onImageViewPreferences(MouseEvent event);
+
+    @FXML
+    protected abstract void onImageViewAddClicked(MouseEvent event);
 
 }

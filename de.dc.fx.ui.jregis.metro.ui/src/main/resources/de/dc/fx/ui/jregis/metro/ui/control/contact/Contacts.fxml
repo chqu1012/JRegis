@@ -95,11 +95,20 @@
                         <Insets top="20.0" />
                      </padding>
                   </HBox>
-                  <Separator fx:id="separatorEmail" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                  </Separator>
+                     <children>
+                        <Label text="Email" textFill="#a1a1a1" />
+                        <Separator fx:id="separatorEmail" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddEmail" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                   <VBox fx:id="vboxEmail" spacing="15.0" />
                   <Separator prefWidth="200.0">
                      <VBox.margin>

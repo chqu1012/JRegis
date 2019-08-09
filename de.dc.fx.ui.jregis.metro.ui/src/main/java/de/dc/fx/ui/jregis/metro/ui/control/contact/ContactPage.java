@@ -32,15 +32,20 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/Contacts.fxml";
 
-	@Inject ContactRepository contactRepository;
-	@Inject AddressRepository addressRepository;
-	@Inject EmailRepository emailRepository;
-	@Inject DatesRepository DatesRepository;
-	@Inject ContactFX context;
+	@Inject
+	ContactRepository contactRepository;
+	@Inject
+	AddressRepository addressRepository;
+	@Inject
+	EmailRepository emailRepository;
+	@Inject
+	DatesRepository DatesRepository;
+	@Inject
+	ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
-	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p-> true); 
-	
+	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
+
 	@Inject
 	public ContactPage(ContactRepository contactRepository, ContactFX context) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -55,16 +60,16 @@ public class ContactPage extends BaseContactPage {
 
 		listViewContacts.setCellFactory(e -> new ContactListCell());
 		listViewContacts.getSelectionModel().selectedItemProperty()
-		.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
-		
+				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
+
 		// React on list changes
 		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
 		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
-		
+
 		contacts.addAll(contactRepository.findAll());
 		listViewContacts.setItems(filteredContacts);
-		 
+
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredContacts.setPredicate(p -> {
 				boolean isEmpty = p == null || newValue.isEmpty();
@@ -81,15 +86,15 @@ public class ContactPage extends BaseContactPage {
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
 		ObservableList<Address> addressList = context.getAddressListProperty().get();
 		vboxAddresses.getChildren().clear();
-		addressList.forEach(e->{
+		addressList.forEach(e -> {
 			vboxAddresses.getChildren().add(new ContactAddressItem(e));
 		});
 	}
-	
+
 	private void onEmailListSelectionChanged(Change<? extends Email> c) {
 		ObservableList<Email> emailList = context.getEmailsProperty().get();
 		vboxEmail.getChildren().clear();
-		emailList.forEach(e->{
+		emailList.forEach(e -> {
 			vboxEmail.getChildren().add(new ContactEmailItem(e));
 		});
 	}
@@ -97,26 +102,26 @@ public class ContactPage extends BaseContactPage {
 	private void onDatesListSelectionChanged(Change<? extends Dates> c) {
 		ObservableList<Dates> datesList = context.getDateListProperty().get();
 		vboxDates.getChildren().clear();
-		datesList.forEach(e->{
+		datesList.forEach(e -> {
 			vboxDates.getChildren().add(new ContactDatesItem(e));
 		});
 	}
 
 	private void onContactSelectionChanged(Contact newValue) {
-		if (newValue!=null) {
+		if (newValue != null) {
 			newValue.getAddressList().clear();
 			newValue.getEmails().clear();
 			newValue.getDateList().clear();
-			
+
 			List<Address> addressList = addressRepository.findAllByContactId(newValue.getId());
 			newValue.getAddressList().addAll(addressList);
-			
+
 			List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
 			newValue.getEmails().addAll(emails);
-			
+
 			List<Dates> dates = DatesRepository.findAllByContactId(newValue.getId());
 			newValue.getDateList().addAll(dates);
-			
+
 			context.getContactProperty().set(newValue);
 		}
 	}
@@ -125,9 +130,8 @@ public class ContactPage extends BaseContactPage {
 		labelName.textProperty()
 				.bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
 		labelNickname.textProperty().bind(context.getUsernameProperty());
-		
+
 		separatorAddress.visibleProperty().bind(Bindings.size(vboxAddresses.getChildren()).greaterThan(0));
-		separatorEmail.visibleProperty().bind(Bindings.size(vboxEmail.getChildren()).greaterThan(0));
 		separatorDates.visibleProperty().bind(Bindings.size(vboxDates.getChildren()).greaterThan(0));
 	}
 
@@ -144,6 +148,20 @@ public class ContactPage extends BaseContactPage {
 	protected void onImageViewPreferences(MouseEvent event) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void onImageViewAddClicked(MouseEvent event) {
+		if (event.getSource() == imageViewAddEmail) {
+			Contact contact = listViewContacts.getSelectionModel().getSelectedItem();
+			if (contact!=null) {
+				Email newEmail = new Email();
+				newEmail.setContactId(contact.getId());
+				ContactEmailItem item = new ContactEmailItem(newEmail);
+				item.setEditMode(true);
+				vboxEmail.getChildren().add(item);
+			}
+		}
 	}
 
 }

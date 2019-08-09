@@ -21,7 +21,7 @@ Entity XAppointment{
 	Field(name: AppointmentGroupId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
- 
+  
 	Repository{
 		jdbcUrl: "jdbc:h2:file:./data/AppointmentRepository;DB_CLOSE_ON_EXIT=true;"
 	}

@@ -1,5 +1,5 @@
 packagePath de.dc.fx.ui.jregis.metro.ui.gen.calendar.group
-
+ 
 Entity XAppointmentGroup{
 	Field(name: AppointmentId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField

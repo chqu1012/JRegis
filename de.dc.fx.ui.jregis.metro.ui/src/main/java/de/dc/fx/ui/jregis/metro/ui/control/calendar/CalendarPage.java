@@ -33,7 +33,7 @@ public class CalendarPage extends BaseCalendarPage {
 
 	private Agenda agenda = new Agenda();
 	
-	private Map<Object, LocalDateTime> dates = new HashMap<>();
+	private Map<Object, Appointment> dates = new HashMap<>();
 	private Map<String, Agenda.AppointmentGroup> lAppointmentGroupMap = new TreeMap<>();
 	
 	public CalendarPage() {
@@ -72,14 +72,18 @@ public class CalendarPage extends BaseCalendarPage {
 	public void addDateViaEventBroker(EventContext<Dates> context) {
 		if (context.getEventId().equals("/open/contact/date")) {
 			Dates input = context.getInput();
-			Appointment appointment = new Agenda.AppointmentImplLocal()
-					.withStartLocalDateTime(input.getDate())
-					.withEndLocalDateTime(input.getDate().plusHours(1))
-					.withSummary(input.getName())
-					.withDescription(input.getName())
-					.withAppointmentGroup(lAppointmentGroupMap.get("group07"));
-			agenda.appointments().addAll(appointment);
+			if (dates.get(input)==null) {
+				Appointment appointment = new Agenda.AppointmentImplLocal()
+						.withStartLocalDateTime(input.getDate())
+						.withEndLocalDateTime(input.getDate().plusHours(1))
+						.withSummary(input.getName())
+						.withDescription(input.getName())
+						.withAppointmentGroup(lAppointmentGroupMap.get("group07"));
+				agenda.appointments().addAll(appointment);
+				dates.put(input, appointment);
+			}
 			agenda.setDisplayedLocalDateTime(input.getDate());
+			agenda.selectedAppointments().add(dates.get(input));
 			root.toFront();
 		}
 	}
