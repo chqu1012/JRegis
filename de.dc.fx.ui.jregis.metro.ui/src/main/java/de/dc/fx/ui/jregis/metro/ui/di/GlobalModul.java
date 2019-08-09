@@ -6,6 +6,7 @@ import de.dc.fx.ui.jregis.metro.ui.control.contact.ContactPage;
 import de.dc.fx.ui.jregis.metro.ui.control.user.management.UserManagementPage;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
+import de.dc.fx.ui.jregis.metro.ui.gen.calendar.appointment.di.XAppointmentModule;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.di.ContactModule;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
@@ -41,5 +42,6 @@ public class GlobalModul extends AbstractModule {
 		bind(ContactPage.class).asEagerSingleton();
 		
 		install(new ContactModule());
+		install(new XAppointmentModule());
 	}
 }

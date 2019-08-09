@@ -1,0 +1,66 @@
+2019-08-09 13:18:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "TABLE" nicht gefunden
+Table "TABLE" not found; SQL statement:
+
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "IT Examination 1", "Information Technology", PARSEDATETIME('09082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('09082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "MDA Examination", "Information Technology", PARSEDATETIME('10082019 9:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('10082019 10:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Engineering Examination 1", "Information Technology", PARSEDATETIME('08082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('08082019 15:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "BWL Examination 1", "Information Technology", PARSEDATETIME('11082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('11082019 11:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Autonome System Examination", "Information Technology", PARSEDATETIME('12082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('12082019 12:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "OS Examination", "Information Technology", PARSEDATETIME('13082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('15082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Operation Research Examination 1", "Information Technology", PARSEDATETIME('16082019 18:30', 'ddMMyyyy hh:mm'), PARSEDATETIME('16082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Physic Examination", "Information Technology", PARSEDATETIME('18082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('18082019 16:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO TABLE XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Theoretische Informatic Examination 1", "Information Technology", PARSEDATETIME('22082019 11:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('22082019 19:47', 'ddMMyyyy hh:mm'), 0)
+ [42102-196]
+2019-08-09 13:18:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""IT Examination 1"", ""Information Technology"", PARSEDATETIME('09082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('09082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT[*] INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""MDA Examination"", ""Information Technology"", PARSEDATETIME('10082019 9:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('10082019 10:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Engineering Examination 1"", ""Information Technology"", PARSEDATETIME('08082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('08082019 15:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""BWL Examination 1"", ""Information Technology"", PARSEDATETIME('11082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('11082019 11:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Autonome System Examination"", ""Information Technology"", PARSEDATETIME('12082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('12082019 12:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""OS Examination"", ""Information Technology"", PARSEDATETIME('13082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('15082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Operation Research Examination 1"", ""Information Technology"", PARSEDATETIME('16082019 18:30', 'ddMMyyyy hh:mm'), PARSEDATETIME('16082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Physic Examination"", ""Information Technology"", PARSEDATETIME('18082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('18082019 16:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Theoretische Informatic Examination 1"", ""Information Technology"", PARSEDATETIME('22082019 11:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('22082019 19:47', 'ddMMyyyy hh:mm'), 0)
+ "
+Syntax error in SQL statement "
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""IT Examination 1"", ""Information Technology"", PARSEDATETIME('09082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('09082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT[*] INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""MDA Examination"", ""Information Technology"", PARSEDATETIME('10082019 9:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('10082019 10:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Engineering Examination 1"", ""Information Technology"", PARSEDATETIME('08082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('08082019 15:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""BWL Examination 1"", ""Information Technology"", PARSEDATETIME('11082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('11082019 11:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Autonome System Examination"", ""Information Technology"", PARSEDATETIME('12082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('12082019 12:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""OS Examination"", ""Information Technology"", PARSEDATETIME('13082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('15082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Operation Research Examination 1"", ""Information Technology"", PARSEDATETIME('16082019 18:30', 'ddMMyyyy hh:mm'), PARSEDATETIME('16082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Physic Examination"", ""Information Technology"", PARSEDATETIME('18082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('18082019 16:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAPPOINTMENT(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, ""Theoretische Informatic Examination 1"", ""Information Technology"", PARSEDATETIME('22082019 11:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('22082019 19:47', 'ddMMyyyy hh:mm'), 0)
+ "; SQL statement:
+
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "IT Examination 1", "Information Technology", PARSEDATETIME('09082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('09082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "MDA Examination", "Information Technology", PARSEDATETIME('10082019 9:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('10082019 10:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Engineering Examination 1", "Information Technology", PARSEDATETIME('08082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('08082019 15:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "BWL Examination 1", "Information Technology", PARSEDATETIME('11082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('11082019 11:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Autonome System Examination", "Information Technology", PARSEDATETIME('12082019 14:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('12082019 12:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "OS Examination", "Information Technology", PARSEDATETIME('13082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('15082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Operation Research Examination 1", "Information Technology", PARSEDATETIME('16082019 18:30', 'ddMMyyyy hh:mm'), PARSEDATETIME('16082019 19:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Physic Examination", "Information Technology", PARSEDATETIME('18082019 15:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('18082019 16:47', 'ddMMyyyy hh:mm'), 0)
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "Theoretische Informatic Examination 1", "Information Technology", PARSEDATETIME('22082019 11:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('22082019 19:47', 'ddMMyyyy hh:mm'), 0)
+ [42000-196]
+2019-08-09 13:19:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "IT Examination 1" nicht gefunden
+Column "IT Examination 1" not found; SQL statement:
+
+INSERT INTO XAppointment(CONTACT_ID, TOPIC, SUMMARY, START, END, APPOINTMENT_GROUP_ID) VALUES(1, "IT Examination 1", "Information Technology", PARSEDATETIME('09082019 18:47', 'ddMMyyyy hh:mm'), PARSEDATETIME('09082019 19:47', 'ddMMyyyy hh:mm'), 0) [42122-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Insert.prepare(Insert.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:263)
+	at org.h2.engine.Session.prepareLocal(Session.java:578)
+	at org.h2.engine.Session.prepareCommand(Session.java:519)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1204)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:176)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:164)
+	at org.h2.tools.RunScript.execute(RunScript.java:171)
+	at de.dc.fx.ui.jregis.metro.ui.gen.calendar.appointment.init.XAppointmentTableInitializer.main(XAppointmentTableInitializer.java:14)
