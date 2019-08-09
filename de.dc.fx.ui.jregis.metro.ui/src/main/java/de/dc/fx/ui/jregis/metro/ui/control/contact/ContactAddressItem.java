@@ -25,5 +25,6 @@ public class ContactAddressItem extends BaseContactAddressItem{
 		}
 		
 		labelAddress.setText(String.format("%s, %s %s, %s", item.getStreet(), item.getZipCode(), item.getState(), item.getCountry()));
+		labelAddressType.setText(item.getAddressType());
 	}
 }

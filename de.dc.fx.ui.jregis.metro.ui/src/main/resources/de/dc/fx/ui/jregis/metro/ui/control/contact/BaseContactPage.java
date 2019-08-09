@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Separator;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
@@ -14,6 +15,12 @@ import javafx.scene.layout.VBox;
 
 public abstract class BaseContactPage extends SplitPane{
 
+	@FXML
+	protected Separator separatorEmail;
+
+	@FXML
+	protected Separator separatorAddress;
+	
 	@FXML
 	protected ListView<Contact> listViewContacts;
 	

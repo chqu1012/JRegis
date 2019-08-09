@@ -4,3 +4,8 @@ INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CO
 INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(3, 1, 'Work', 'Badenweiler 33', 'Freiburg', 'Baden Württemberg', 76133);
 INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(4, 1, 'Business', 'Rulszheim 1', 'Böblingen', 'Baden Württemberg', 76133);
 INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(5, 1, 'Others', 'Weinweg 1', 'Tübingen', 'Baden Württemberg', 76133);
+INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(6, 2, 'Home', 'Marthystraße 11', 'Karlsruhe', 'Baden Württemberg', 76133);
+INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(7, 2, 'Work', 'Sophienstraße 13', 'Stuttgart', 'Baden Württemberg', 76133);
+INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(8, 2, 'Work', 'Turmringer 33', 'Freiburg', 'Baden Württemberg', 76133);
+INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(9, 2, 'Business', 'Alte Gasse 1', 'Böblingen', 'Baden Württemberg', 76133);
+INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(10, 2, 'Others', 'Neue Weg 1', 'Tübingen', 'Baden Württemberg', 76133);

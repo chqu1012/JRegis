@@ -1,7 +1,0 @@
-2019-08-08 20:25:44 jdbc[4]: exception
-org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "
-INSERT INTO ADDRESS(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(1, 1, 'Home', 'Donaustraße 1', 'Karlsruhe', BADEN WÜRTTEMBERG[*], 76133) "; erwartet "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"
-Syntax error in SQL statement "
-INSERT INTO ADDRESS(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(1, 1, 'Home', 'Donaustraße 1', 'Karlsruhe', BADEN WÜRTTEMBERG[*], 76133) "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
-
-INSERT INTO Address(ID, CONTACT_ID, ADDRESS_TYPE, STREET, COUNTRY, STATE, ZIP_CODE) VALUES(1, 1, 'Home', 'Donaustraße 1', 'Karlsruhe', Baden Württemberg, 76133) [42001-196]
