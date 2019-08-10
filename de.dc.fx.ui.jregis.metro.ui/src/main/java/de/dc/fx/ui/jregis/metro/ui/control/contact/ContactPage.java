@@ -40,7 +40,7 @@ public class ContactPage extends BaseContactPage {
 	@Inject
 	EmailRepository emailRepository;
 	@Inject
-	DatesRepository DatesRepository;
+	DatesRepository datesRepository;
 	@Inject
 	ContactFX context;
 
@@ -113,6 +113,8 @@ public class ContactPage extends BaseContactPage {
 
 	private void onContactSelectionChanged(Contact newValue) {
 		if (newValue != null) {
+			panePreview.setVisible(true);
+						
 			newValue.getAddressList().clear();
 			newValue.getEmails().clear();
 			newValue.getDateList().clear();
@@ -123,7 +125,7 @@ public class ContactPage extends BaseContactPage {
 			List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
 			newValue.getEmails().addAll(emails);
 
-			List<Dates> dates = DatesRepository.findAllByContactId(newValue.getId());
+			List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
 			newValue.getDateList().addAll(dates);
 
 			context.getContactProperty().set(newValue);

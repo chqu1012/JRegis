@@ -64,7 +64,7 @@
       </VBox>
       <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="300.0" styleClass="hbox">
          <content>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="hbox">
+            <VBox fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="hbox" visible="false">
                <children>
                   <HBox prefHeight="153.0" prefWidth="466.0">
                      <children>
