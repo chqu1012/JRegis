@@ -83,4 +83,7 @@ public abstract class BaseContactPage extends SplitPane{
     @FXML
     protected abstract void onImageViewAddClicked(MouseEvent event);
 
+    @FXML
+    protected abstract void onImageViewUserClicked(MouseEvent event);
+
 }

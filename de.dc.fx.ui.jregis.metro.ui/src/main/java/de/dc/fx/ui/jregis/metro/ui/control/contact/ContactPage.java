@@ -1,6 +1,8 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +11,7 @@ import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
@@ -22,6 +25,7 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
+import de.dc.fx.ui.jregis.metro.ui.service.ContactFolderService;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
@@ -29,7 +33,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class ContactPage extends BaseContactPage {
 
@@ -208,6 +215,19 @@ public class ContactPage extends BaseContactPage {
 				ContactAddressItem item = new ContactAddressItem(address);
 				item.setEditMode(true);
 				vboxAddresses.getChildren().add(item);
+			}
+		}
+	}
+
+	@Override
+	protected void onImageViewUserClicked(MouseEvent event) {
+		if (event.getClickCount()==2) {
+			FileChooser chooser = new FileChooser();
+			File file = chooser.showOpenDialog(new Stage());
+			if (file!=null) {
+				Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
+				JRegisPlatform.getInstance(ContactFolderService.class).copyFile(selection, file);
+				imageViewUser.setImage(new Image(file.toURI().toString()));
 			}
 		}
 	}
