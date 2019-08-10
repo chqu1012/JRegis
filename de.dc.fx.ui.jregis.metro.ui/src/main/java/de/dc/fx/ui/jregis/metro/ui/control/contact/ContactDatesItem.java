@@ -1,6 +1,5 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.controlsfx.control.Notifications;
@@ -12,22 +11,44 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import jfxtras.scene.control.LocalDateTimeTextField;
 
 public class ContactDatesItem extends BaseContactItem<Dates>{
 
 	private static final String DATE_PATTERN = "dd.MM.yyyy HH:mm";
-	private DateTimeFormatter  formatter =  DateTimeFormatter.ofPattern(DATE_PATTERN);
+	
+	private LocalDateTimeTextField textDate;
+	
+	private DateTimeFormatter formatter;
 	
 	public ContactDatesItem(Dates item) {
 		super(item);
-		
-		textValue.setPromptText(DATE_PATTERN);
 	}
 
 	@Override
+	protected void initializeEditFields() {
+		labelType.textProperty().bindBidirectional(textType.textProperty());
+		labelType.setText(getType()==null? "" : getType());
+		
+		formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+
+		textDate = new LocalDateTimeTextField(item.getDate());
+		HBox.setMargin(textDate, new Insets(7));
+		HBox.setHgrow(textDate, Priority.ALWAYS);
+		panelEdit.getChildren().add(2, textDate);
+		panelEdit.getChildren().remove(textValue);
+
+		getValue();
+		labelValue.textProperty().bind(textDate.localDateTimeProperty().asString());
+	}
+	
+	@Override
 	protected void onButtonAccept(ActionEvent event) {
 		item.setName(textType.getText());
-		item.setDate(LocalDateTime.parse(textValue.getText(), formatter));
+		item.setDate(textDate.getLocalDateTime());
 		if (item.getId()!=null) {
 			JRegisPlatform.getInstance(DatesRepository.class).update(item);
 		}else {

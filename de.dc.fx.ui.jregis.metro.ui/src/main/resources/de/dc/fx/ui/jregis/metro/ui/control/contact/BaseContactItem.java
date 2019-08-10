@@ -76,7 +76,11 @@ public abstract class BaseContactItem<T> extends AnchorPane {
 	protected void onImageViewDeleteItem(MouseEvent event) {
     	deleteItem(item);
 		Notifications.create().darkStyle().title(getClass().getSimpleName()+" delete!").text("Deleted "+textValue.getText()+"!").show();
-		onButtonCancel(null);		
+		Parent parent = root.getParent();
+		if (parent instanceof VBox) {
+			VBox vbox = (VBox) parent;
+			vbox.getChildren().remove(root);
+		}
 	}
     
     protected abstract void deleteItem(T item);
