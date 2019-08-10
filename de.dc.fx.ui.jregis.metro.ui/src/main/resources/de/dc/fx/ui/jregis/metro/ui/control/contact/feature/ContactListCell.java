@@ -2,6 +2,9 @@ package de.dc.fx.ui.jregis.metro.ui.control.contact.feature;
 
 import java.io.IOException;
 
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,7 +75,6 @@ public class ContactListCell extends ListCell<Contact> {
 			}
 			setGraphic(root);
 		}
-
 	}
 
 	@FXML
@@ -91,6 +93,6 @@ public class ContactListCell extends ListCell<Contact> {
 
 	@FXML
 	protected void onButtonCancel(ActionEvent event) {
-		root.getChildren().remove(paneEdit);
+		JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/cancel/contact/create", getItem()));
 	}
 }

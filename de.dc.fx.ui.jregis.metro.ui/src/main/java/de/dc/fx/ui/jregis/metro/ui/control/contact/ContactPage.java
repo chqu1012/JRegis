@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 
 import de.dc.fx.ui.jregis.metro.ui.control.contact.feature.ContactListCell;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
+import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
@@ -45,7 +48,7 @@ public class ContactPage extends BaseContactPage {
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
 
 	@Inject
-	public ContactPage(ContactRepository contactRepository, ContactFX context) {
+	public ContactPage(ContactRepository contactRepository, ContactFX context, IEventBroker broker) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -80,8 +83,17 @@ public class ContactPage extends BaseContactPage {
 		});
 
 		initBinding(context);
+		
+		broker.register(this);
 	}
 
+	@Subscribe
+	public void cancelCreateContactViaEventBroker(EventContext<Contact> context) {
+		if (context.getEventId().equals("/cancel/contact/create")) {
+			contacts.remove(context.getInput());
+		}
+	}
+	
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
 		ObservableList<Address> addressList = context.getAddressListProperty().get();
 		vboxAddresses.getChildren().clear();
