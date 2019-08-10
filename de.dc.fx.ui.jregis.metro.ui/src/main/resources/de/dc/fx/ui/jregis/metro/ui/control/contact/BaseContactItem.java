@@ -112,6 +112,10 @@ public abstract class BaseContactItem<T> extends AnchorPane {
 			imageViewMain.setImage(image);
 		}
 		
+		initializeEditFields();
+	}
+
+	protected void initializeEditFields() {
 		labelValue.textProperty().bindBidirectional(textValue.textProperty());
 		labelType.textProperty().bindBidirectional(textType.textProperty());
 		
