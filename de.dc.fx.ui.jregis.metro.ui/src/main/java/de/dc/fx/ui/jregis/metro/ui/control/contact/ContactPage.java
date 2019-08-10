@@ -88,7 +88,8 @@ public class ContactPage extends BaseContactPage {
 		ObservableList<Address> addressList = context.getAddressListProperty().get();
 		vboxAddresses.getChildren().clear();
 		addressList.forEach(e -> {
-			vboxAddresses.getChildren().add(new ContactAddressItem(e));
+			ContactAddressItem item = new ContactAddressItem(e);
+			vboxAddresses.getChildren().add(item);
 		});
 	}
 
@@ -96,7 +97,8 @@ public class ContactPage extends BaseContactPage {
 		ObservableList<Email> emailList = context.getEmailsProperty().get();
 		vboxEmail.getChildren().clear();
 		emailList.forEach(e -> {
-			vboxEmail.getChildren().add(new ContactEmailItem(e));
+			ContactEmailItem item = new ContactEmailItem(e);
+			vboxEmail.getChildren().add(item);
 		});
 	}
 
@@ -104,7 +106,8 @@ public class ContactPage extends BaseContactPage {
 		ObservableList<Dates> datesList = context.getDateListProperty().get();
 		vboxDates.getChildren().clear();
 		datesList.forEach(e -> {
-			vboxDates.getChildren().add(new ContactDatesItem(e));
+			ContactDatesItem item = new ContactDatesItem(e);
+			vboxDates.getChildren().add(item);
 		});
 	}
 
@@ -168,9 +171,14 @@ public class ContactPage extends BaseContactPage {
 				Dates dates = new Dates();
 				dates.setContactId(contactId);
 				ContactDatesItem item = new ContactDatesItem(dates);
-//				item.seE
+				item.setEditMode(true);
+				vboxDates.getChildren().add(item);
 			}else if (event.getSource()==imageViewAddAddress) {
-				
+				Address address = new Address();
+				address.setContactId(contactId);
+				ContactAddressItem item = new ContactAddressItem(address);
+				item.setEditMode(true);
+				vboxAddresses.getChildren().add(item);
 			}
 		}
 	}

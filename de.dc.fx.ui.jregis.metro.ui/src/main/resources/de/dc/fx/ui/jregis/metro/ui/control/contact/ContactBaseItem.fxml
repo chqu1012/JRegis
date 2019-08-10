@@ -71,7 +71,7 @@
                         <Insets left="3.0" />
                      </padding>
                   </Label>
-                  <Hyperlink fx:id="labelValue" text="MaxMustermann@gmail.com" />
+                  <Hyperlink fx:id="labelValue" onAction="#onLinkValueAction" text="MaxMustermann@gmail.com" />
                </children>
             </VBox>
             <ImageView fx:id="imageViewEdit" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewEditItem" pickOnBounds="true" preserveRatio="true" styleClass="edit-image-view">

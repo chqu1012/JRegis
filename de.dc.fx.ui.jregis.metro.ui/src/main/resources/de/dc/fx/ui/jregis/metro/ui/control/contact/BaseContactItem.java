@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 
-import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
-import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressRepository;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -117,8 +115,8 @@ public abstract class BaseContactItem<T> extends AnchorPane {
 		labelValue.textProperty().bindBidirectional(textValue.textProperty());
 		labelType.textProperty().bindBidirectional(textType.textProperty());
 		
-		labelType.setText(getType());
-		labelValue.setText(getValue());
+		labelType.setText(getType()==null? "" : getType());
+		labelValue.setText(getValue()==null? "" : getValue());
 
 		BooleanBinding isValueEmptyProperty = textValue.textProperty().isEmpty();
 		BooleanBinding isTypeEmptyProperty = textType.textProperty().isEmpty();
@@ -141,6 +139,11 @@ public abstract class BaseContactItem<T> extends AnchorPane {
 
 	public Image getImage(String imageName) {
 		return new Image(getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/"+imageName));
+	}
+	
+	@FXML
+	protected void onLinkValueAction(ActionEvent e) {
+		
 	}
 
 }
