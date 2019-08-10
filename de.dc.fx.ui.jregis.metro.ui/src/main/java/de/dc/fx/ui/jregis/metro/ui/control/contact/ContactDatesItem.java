@@ -15,12 +15,13 @@ import javafx.event.ActionEvent;
 
 public class ContactDatesItem extends BaseContactItem<Dates>{
 
-	private DateTimeFormatter  formatter =  DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+	private static final String DATE_PATTERN = "dd.MM.yyyy HH:mm";
+	private DateTimeFormatter  formatter =  DateTimeFormatter.ofPattern(DATE_PATTERN);
 	
 	public ContactDatesItem(Dates item) {
 		super(item);
 		
-		textValue.setPromptText("dd.MM.yyyy HH:mm");
+		textValue.setPromptText(DATE_PATTERN);
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 		if (item==null || item.getDate()==null) {
 			return "";
 		}
-		return item.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm"));
+		return item.getDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN));
 	}
 
 	@Override
