@@ -3,6 +3,7 @@ package de.dc.fx.ui.jregis.metro.ui.control.contact;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,8 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.model.ContactImage;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.repository.ContactImageRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.ContactFolderService;
@@ -226,7 +229,18 @@ public class ContactPage extends BaseContactPage {
 			File file = chooser.showOpenDialog(new Stage());
 			if (file!=null) {
 				Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
+				
 				JRegisPlatform.getInstance(ContactFolderService.class).copyFile(selection, file);
+				
+				ContactImage image = new ContactImage();
+				image.setCreatedOn(LocalDateTime.now());
+				image.setName(file.getName());
+				long imageId = JRegisPlatform.getInstance(ContactImageRepository.class).save(image);
+				image.setId(imageId);
+				
+				selection.setContactImageId(imageId);
+				JRegisPlatform.getInstance(ContactRepository.class).update(selection);
+				
 				imageViewUser.setImage(new Image(file.toURI().toString()));
 			}
 		}
