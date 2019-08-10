@@ -2510,3 +2510,51 @@ INSERT INTO Phonenumber (CONTACT_ID, NAME, NUMBER, NUMBER_TYPE) VALUES (?, ?, ?,
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Unknown Source)
+2019-08-10 12:49:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:49:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:49:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:49:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:53:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:55:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:55:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:58:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:58:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:58:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:58:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 12:58:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
