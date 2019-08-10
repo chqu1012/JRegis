@@ -37,7 +37,7 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 		
 		formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
-		textDate = new LocalDateTimeTextField(item.getDate());
+		textDate = new LocalDateTimeTextField(item.getDate()==null? LocalDateTime.now() : item.getDate());
 		HBox.setMargin(textDate, new Insets(7));
 		HBox.setHgrow(textDate, Priority.ALWAYS);
 		panelEdit.getChildren().add(2, textDate);

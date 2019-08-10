@@ -139,19 +139,22 @@ public class ContactPage extends BaseContactPage {
 			newValue.getDateList().clear();
 			newValue.getPhoneList().clear();
 
-			List<Address> addressList = addressRepository.findAllByContactId(newValue.getId());
-			newValue.getAddressList().addAll(addressList);
-
-			List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
-			newValue.getEmails().addAll(emails);
-
-			List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
-			newValue.getDateList().addAll(dates);
-
-			List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
-			newValue.getPhoneList().addAll(phones);
-
-			context.getContactProperty().set(newValue);
+			Long id = newValue.getId();
+			if (id!=null) {
+				List<Address> addressList = addressRepository.findAllByContactId(id);
+				newValue.getAddressList().addAll(addressList);
+				
+				List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
+				newValue.getEmails().addAll(emails);
+				
+				List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
+				newValue.getDateList().addAll(dates);
+				
+				List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
+				newValue.getPhoneList().addAll(phones);
+				
+				context.getContactProperty().set(newValue);
+			}
 		}
 	}
 

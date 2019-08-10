@@ -2,10 +2,14 @@ package de.dc.fx.ui.jregis.metro.ui.control.contact.feature;
 
 import java.io.IOException;
 
+import org.controlsfx.control.Notifications;
+
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,12 +87,14 @@ public class ContactListCell extends ListCell<Contact> {
 		getItem().setLastname(textLastname.getText());
 		getItem().setUsername(textUsername.getText());
 		getItem().setContactImageId(0L);
-		// Workaround not to show editpane on new contact
-		getItem().setId(10000L);
+		long contactId = JRegisPlatform.getInstance(ContactRepository.class).save(getItem());
+		getItem().setId(contactId);
 		
 		labelName.setText(getItem().getFirstname() + " " + getItem().getLastname());
 		labelUsername.setText(getItem().getUsername());
 		root.getChildren().remove(paneEdit);
+		
+		Platform.runLater(()-> Notifications.create().darkStyle().title("Created new contact").text(textUsername.getText()+" was created!").show());
 	}
 
 	@FXML

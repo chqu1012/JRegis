@@ -2586,3 +2586,7 @@ SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
 Data conversion error converting "null"; SQL statement:
 SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-10 13:23:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
+Data conversion error converting "null"; SQL statement:
+SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]

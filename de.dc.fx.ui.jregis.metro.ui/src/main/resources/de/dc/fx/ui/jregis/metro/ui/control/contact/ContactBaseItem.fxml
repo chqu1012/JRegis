@@ -86,7 +86,7 @@
             </ImageView>
          </children>
          <padding>
-            <Insets right="20.0" />
+            <Insets right="30.0" />
          </padding>
       </HBox>
    </children>
