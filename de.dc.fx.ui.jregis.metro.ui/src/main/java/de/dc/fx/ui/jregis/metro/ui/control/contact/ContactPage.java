@@ -18,6 +18,7 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
@@ -33,16 +34,12 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/Contacts.fxml";
 
-	@Inject
-	ContactRepository contactRepository;
-	@Inject
-	AddressRepository addressRepository;
-	@Inject
-	EmailRepository emailRepository;
-	@Inject
-	DatesRepository datesRepository;
-	@Inject
-	ContactFX context;
+	@Inject PhonenumberRepository phoneRepository;
+	@Inject ContactRepository contactRepository;
+	@Inject AddressRepository addressRepository;
+	@Inject EmailRepository emailRepository;
+	@Inject DatesRepository datesRepository;
+	@Inject ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
@@ -67,6 +64,7 @@ public class ContactPage extends BaseContactPage {
 		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
 		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
+		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
 
 		contacts.addAll(contactRepository.findAll());
 		listViewContacts.setItems(filteredContacts);
@@ -111,6 +109,15 @@ public class ContactPage extends BaseContactPage {
 		});
 	}
 
+	private void onPhoneListSelectionChanged(Change<? extends Phonenumber> c) {
+		ObservableList<Phonenumber> phoneList = context.getPhoneListProperty().get();
+		vboxPhoneNumbers.getChildren().clear();
+		phoneList.forEach(e -> {
+			ContactPhonenumberItem item = new ContactPhonenumberItem(e);
+			vboxPhoneNumbers.getChildren().add(item);
+		});
+	}
+
 	private void onContactSelectionChanged(Contact newValue) {
 		if (newValue != null) {
 			panePreview.setVisible(true);
@@ -118,6 +125,7 @@ public class ContactPage extends BaseContactPage {
 			newValue.getAddressList().clear();
 			newValue.getEmails().clear();
 			newValue.getDateList().clear();
+			newValue.getPhoneList().clear();
 
 			List<Address> addressList = addressRepository.findAllByContactId(newValue.getId());
 			newValue.getAddressList().addAll(addressList);
@@ -127,6 +135,9 @@ public class ContactPage extends BaseContactPage {
 
 			List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
 			newValue.getDateList().addAll(dates);
+
+			List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
+			newValue.getPhoneList().addAll(phones);
 
 			context.getContactProperty().set(newValue);
 		}
@@ -167,8 +178,9 @@ public class ContactPage extends BaseContactPage {
 			}else if (event.getSource()==imageViewAddPhonenumbers) {
 				Phonenumber phonenumber = new Phonenumber();
 				phonenumber.setContactId(contactId);
-//				new PhoneNu
-//				item.setEditMode(true);
+				ContactPhonenumberItem item = new ContactPhonenumberItem(phonenumber);
+				item.setEditMode(true);
+				vboxPhoneNumbers.getChildren().add(item);
 			}else if (event.getSource()==imageViewAddDates) {
 				Dates dates = new Dates();
 				dates.setContactId(contactId);

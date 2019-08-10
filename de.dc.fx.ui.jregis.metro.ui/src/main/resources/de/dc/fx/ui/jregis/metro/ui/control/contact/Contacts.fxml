@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -64,7 +63,7 @@
       </VBox>
       <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="300.0" styleClass="hbox">
          <content>
-            <VBox fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="hbox" visible="false">
+            <VBox fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" spacing="10.0" styleClass="hbox" visible="false">
                <children>
                   <HBox prefHeight="153.0" prefWidth="466.0">
                      <children>
@@ -124,67 +123,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <VBox fx:id="vboxPhoneNumbers" spacing="15.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-telefon-52.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Phone Number" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink text="07622 / 55 44 33 2" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-handy-48.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Mobile Number" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink alignment="TOP_LEFT" text="0178 / 11 22 33 44" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8-telefon-52.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="Work Number" textFill="#949494">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink text="07622 / 55 44 33 2" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="vboxPhoneNumbers" spacing="15.0" />
                   <HBox />
                   <HBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
