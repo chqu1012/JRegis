@@ -1,3 +1,11 @@
+.root{
+	-fx-background-color: white;
+}
+
+.root:hover{
+	-fx-background-color: lightgray;
+}
+
 .delete-image-view {
 	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-löschen-24-gray.png');
 }

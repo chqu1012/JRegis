@@ -17,6 +17,7 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
@@ -130,9 +131,6 @@ public class ContactPage extends BaseContactPage {
 		labelName.textProperty()
 				.bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
 		labelNickname.textProperty().bind(context.getUsernameProperty());
-
-		separatorAddress.visibleProperty().bind(Bindings.size(vboxAddresses.getChildren()).greaterThan(0));
-		separatorDates.visibleProperty().bind(Bindings.size(vboxDates.getChildren()).greaterThan(0));
 	}
 
 	public void addContactItem(Contact contact) {
@@ -152,14 +150,27 @@ public class ContactPage extends BaseContactPage {
 
 	@Override
 	protected void onImageViewAddClicked(MouseEvent event) {
-		if (event.getSource() == imageViewAddEmail) {
-			Contact contact = listViewContacts.getSelectionModel().getSelectedItem();
-			if (contact!=null) {
+		Contact contact = listViewContacts.getSelectionModel().getSelectedItem();
+		if (contact!=null) {
+			Long contactId = contact.getId();
+			if (event.getSource() == imageViewAddEmail) {
 				Email newEmail = new Email();
-				newEmail.setContactId(contact.getId());
+				newEmail.setContactId(contactId);
 				ContactEmailItem item = new ContactEmailItem(newEmail);
 				item.setEditMode(true);
 				vboxEmail.getChildren().add(item);
+			}else if (event.getSource()==imageViewAddPhonenumbers) {
+				Phonenumber phonenumber = new Phonenumber();
+				phonenumber.setContactId(contactId);
+//				new PhoneNu
+//				item.setEditMode(true);
+			}else if (event.getSource()==imageViewAddDates) {
+				Dates dates = new Dates();
+				dates.setContactId(contactId);
+				ContactDatesItem item = new ContactDatesItem(dates);
+//				item.seE
+			}else if (event.getSource()==imageViewAddAddress) {
+				
 			}
 		}
 	}

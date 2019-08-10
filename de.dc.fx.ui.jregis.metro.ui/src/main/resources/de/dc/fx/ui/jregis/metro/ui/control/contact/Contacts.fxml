@@ -110,11 +110,20 @@
                      </children>
                   </HBox>
                   <VBox fx:id="vboxEmail" spacing="15.0" />
-                  <Separator prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                  </Separator>
+                     <children>
+                        <Label text="Phonenumbers" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddPhonenumbers" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                   <VBox fx:id="vboxPhoneNumbers" spacing="15.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -177,13 +186,29 @@
                      </children>
                   </VBox>
                   <HBox />
-                  <Separator fx:id="separatorDates" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </Separator>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Dates" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddDates" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                   <VBox fx:id="vboxDates" spacing="15.0" />
-                  <Separator fx:id="separatorAddress" prefWidth="200.0" />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Address" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddAddress" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                   <VBox fx:id="vboxAddresses" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
                      <padding>
                         <Insets bottom="40.0" />

@@ -1,30 +1,53 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.controlsfx.control.Notifications;
 
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
-import javafx.fxml.FXMLLoader;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressRepository;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 
-public class ContactAddressItem extends BaseContactAddressItem{
+public class ContactAddressItem extends BaseContactItem<Address>{
 
-	private Logger log = Logger.getLogger(ContactAddressItem.class.getSimpleName());
+	public ContactAddressItem(Address t) {
+		super(t);
+	}
 
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/ContactAddressItem.fxml";
-
-	public ContactAddressItem(Address item) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			log.log(Level.SEVERE, "Failed to load fxml " + FXML, exception);
+	@Override
+	protected void onButtonAccept(ActionEvent event) {
+		if (item.getId()!=null) {
+			JRegisPlatform.getInstance(AddressRepository.class).update(item);
+		}else {
+			long itemId = JRegisPlatform.getInstance(AddressRepository.class).save(item);
+			item.setId(itemId);
 		}
-		
-		labelAddress.setText(String.format("%s, %s %s, %s", item.getStreet(), item.getZipCode(), item.getState(), item.getCountry()));
-		labelAddressType.setText(item.getAddressType());
+		Platform.runLater(() -> Notifications.create().darkStyle().title(item.getClass().getSimpleName()+" added!").text("Created "+textValue.getText()+"!").show());
+		panePreview.toFront();		
+	}
+
+	@Override
+	protected String getValue() {
+		return String.format("%s, %s %s, %s", item.getStreet(), item.getZipCode(), item.getState(), item.getCountry());
+	}
+
+	@Override
+	protected String getType() {
+		return item.getAddressType();
+	}
+
+	@Override
+	protected String getImageName() {
+		return "icons8-adresse-48.png";
+	}
+
+	@Override
+	protected void deleteItem(Address item) {
+		JRegisPlatform.getInstance(AddressRepository.class).delete(item);
+	}
+
+	@Override
+	protected Long getItemId(Address item) {
+		return item.getId();
 	}
 }

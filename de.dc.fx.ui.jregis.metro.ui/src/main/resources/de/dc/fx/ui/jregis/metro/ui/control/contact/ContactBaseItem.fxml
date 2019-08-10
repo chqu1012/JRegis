@@ -16,17 +16,17 @@
    <children>
       <HBox fx:id="panelEdit" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" spacing="5.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="imageViewEmailEdit" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageViewEdit" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/icons8-post-48.png" />
                </image>
             </ImageView>
-            <TextField fx:id="textEmailType" maxWidth="1.7976931348623157E308" promptText="Email Type" HBox.hgrow="ALWAYS">
+            <TextField fx:id="textType" maxWidth="1.7976931348623157E308" promptText="Type" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
-            <TextField fx:id="textEmail" maxWidth="1.7976931348623157E308" promptText="Email Address" HBox.hgrow="ALWAYS">
+            <TextField fx:id="textValue" maxWidth="1.7976931348623157E308" promptText="Value" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="10.0" />
                </font>
@@ -56,14 +56,14 @@
       </HBox>
       <HBox fx:id="panePreview" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="imageViewEmail" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageViewMain" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/icons8-post-48.png" />
                </image>
             </ImageView>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="labelEmailType" text="Home" textFill="#949494">
+                  <Label fx:id="labelType" text="Home" textFill="#949494">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -71,15 +71,15 @@
                         <Insets left="3.0" />
                      </padding>
                   </Label>
-                  <Hyperlink fx:id="labelEmail" text="MaxMustermann@gmail.com" />
+                  <Hyperlink fx:id="labelValue" text="MaxMustermann@gmail.com" />
                </children>
             </VBox>
-            <ImageView fx:id="imageViewEdit" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewEditEmail" pickOnBounds="true" preserveRatio="true" styleClass="edit-image-view">
+            <ImageView fx:id="imageViewEdit" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewEditItem" pickOnBounds="true" preserveRatio="true" styleClass="edit-image-view">
                <image>
                   <Image url="@../../images/icons8-bearbeiten-30.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewDeleteEmail" pickOnBounds="true" preserveRatio="true" styleClass="delete-image-view">
+            <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewDeleteItem" pickOnBounds="true" preserveRatio="true" styleClass="delete-image-view">
                <image>
                   <Image url="@../../images/icons8-löschen-24-gray.png" />
                </image>

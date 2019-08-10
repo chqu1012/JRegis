@@ -15,6 +15,15 @@ import javafx.scene.layout.VBox;
 public abstract class BaseContactPage extends SplitPane{
 
 	@FXML
+	protected ImageView imageViewAddAddress;
+	
+	@FXML
+	protected ImageView imageViewAddDates;
+
+	@FXML
+	protected ImageView imageViewAddPhonenumbers;
+
+	@FXML
 	protected ImageView imageViewAddEmail;
 	
 	@FXML
