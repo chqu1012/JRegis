@@ -155,7 +155,7 @@ public class ContactPage extends BaseContactPage {
 
 	@Override
 	protected void onImageViewNewUser(MouseEvent event) {
-		contacts.add(new Contact());
+		contacts.add(0, new Contact());
 	}
 
 	@Override

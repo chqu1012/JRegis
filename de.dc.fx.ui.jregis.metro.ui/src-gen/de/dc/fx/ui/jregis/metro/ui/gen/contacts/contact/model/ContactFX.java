@@ -1,16 +1,19 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model;
 
-import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.*;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
-import java.lang.String;
-import java.lang.String;
-import java.lang.String;
-import java.lang.Long;
 
 public class ContactFX {
 	
@@ -41,10 +44,10 @@ public class ContactFX {
     
 	this.contactProperty.addListener((observable, oldValue, newValue) -> {
 		if (newValue!=null) {
-			firstnameProperty.set(newValue.getFirstname());
-			lastnameProperty.set(newValue.getLastname());
-			usernameProperty.set(newValue.getUsername());
-			contactImageIdProperty.set(newValue.getContactImageId());
+			firstnameProperty.set(newValue.getFirstname() == null ? "" : newValue.getFirstname());
+			lastnameProperty.set(newValue.getLastname() == null ? "" : newValue.getLastname());
+			usernameProperty.set(newValue.getUsername() == null ? "" : newValue.getUsername());
+			contactImageIdProperty.set(newValue.getContactImageId() == null? 0 : newValue.getContactImageId());
 			emailsProperty.set(FXCollections.observableArrayList(newValue.getEmails()));
 			addressListProperty.set(FXCollections.observableArrayList(newValue.getAddressList()));
 			phoneListProperty.set(FXCollections.observableArrayList(newValue.getPhoneList()));
