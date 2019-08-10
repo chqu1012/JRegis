@@ -1,5 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.controlsfx.control.Notifications;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.util.StringConverter;
 import jfxtras.scene.control.LocalDateTimeTextField;
 
 public class ContactDatesItem extends BaseContactItem<Dates>{
@@ -42,7 +44,17 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 		panelEdit.getChildren().remove(textValue);
 
 		getValue();
-		labelValue.textProperty().bind(textDate.localDateTimeProperty().asString());
+		labelValue.textProperty().bindBidirectional(textDate.localDateTimeProperty(), new StringConverter<LocalDateTime>() {
+			@Override
+			public LocalDateTime fromString(String content) {
+				return LocalDateTime.parse(content, formatter);
+			}
+
+			@Override
+			public String toString(LocalDateTime object) {
+				return formatter.format(object);
+			}
+		});
 	}
 	
 	@Override
