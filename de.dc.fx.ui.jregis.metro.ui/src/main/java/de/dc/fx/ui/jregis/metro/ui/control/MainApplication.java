@@ -146,45 +146,48 @@ public class MainApplication extends BaseMainApplication {
 		}
 	}
 
+	TreeItem<Category> rootItem;
+
 	private void initTreeView() {
 		List<Category> categories = JRegisPlatform.getInstance(CategoryRepository.class).findAll();
 		if (!categories.isEmpty()) {
 			Optional<List<Category>> optionalCategories = Optional.ofNullable(categories);
 			optionalCategories.ifPresent(e -> {
 				Category root = buildTree(categories);
-				TreeItem<Category> rootItem = new TreeItem<>(root);
+				rootItem = new TreeItem<>(root);
 				for (Category category : root.getChildren()) {
 					buildTreeItems(rootItem, category);
 				}
-				treeView.setRoot(rootItem);
-				treeView.setCellFactory(param -> new TreeCell<Category>() {
-					@Override
-					protected void updateItem(Category item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item == null || empty) {
-							setText(null);
-						} else {
-							setText(item.getName());
-						}
-					}
-				});
-				rootItem.setExpanded(true);
-				treeView.setShowRoot(true);
-				treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-					if (newValue.getValue().getName().equals("Root")) {
-						filteredDocumentData.setPredicate(p -> true);
-					} else {
-						filteredDocumentData.setPredicate(p -> p.getCategoryId() == newValue.getValue().getId());
-					}
-				});
 			});
 		}else {
 			LocalDateTime createdOn = LocalDateTime.now();
-			Category category = new Category("Root", createdOn, createdOn, -1);
-			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
-			category.setId(newId);
-			masterCategoryData.add(category);
+			Category root = new Category("Root", createdOn, createdOn, -1);
+			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(root);
+			root.setId(newId);
+			rootItem = new TreeItem<>(root);
+			masterCategoryData.add(root);
 		}
+		treeView.setRoot(rootItem);
+		treeView.setCellFactory(param -> new TreeCell<Category>() {
+			@Override
+			protected void updateItem(Category item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || empty) {
+					setText(null);
+				} else {
+					setText(item.getName());
+				}
+			}
+		});
+		rootItem.setExpanded(true);
+		treeView.setShowRoot(true);
+		treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue.getValue().getName().equals("Root")) {
+				filteredDocumentData.setPredicate(p -> true);
+			} else {
+				filteredDocumentData.setPredicate(p -> p.getCategoryId() == newValue.getValue().getId());
+			}
+		});
 	}
 
 	@Subscribe
