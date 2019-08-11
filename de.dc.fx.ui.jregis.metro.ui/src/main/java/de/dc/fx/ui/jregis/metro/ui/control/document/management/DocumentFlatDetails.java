@@ -210,10 +210,6 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		try {
 			File file = JRegisPlatform.getInstance(DocumentFolderService.class).getAttachmentByName(context.current.get(), newValue);
 			documentPreview.show(file);
-//			Image image = new Image(file.toURI().toString());
-//			imageViewPreview.setImage(image);
-//			imageViewPreview.setFitWidth(image.getWidth());
-//			imageViewPreview.setFitHeight(image.getHeight());
 			
 			//TODO: OPEN PREVIEW INDEED OF FIle
 //			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);

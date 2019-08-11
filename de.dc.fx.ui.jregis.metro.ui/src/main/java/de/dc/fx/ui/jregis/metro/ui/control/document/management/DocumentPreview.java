@@ -125,31 +125,13 @@ public class DocumentPreview extends BaseDocumentPreview {
         double height = image.getHeight();
         
         imageViewPreview.setImage(image);
-        
-        if (width>=height) {
-        	imageViewPreview.setFitWidth(adaptationW(700));
-        	imageViewPreview.setPreserveRatio(true);
-        }else {
-        	imageViewPreview.setFitHeight(adaptationH(500));
-        	imageViewPreview.setPreserveRatio(true);
-        }
+        imageViewPreview.setFitHeight(height);
+        imageViewPreview.setFitWidth(width);
         
         zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(), imageViewPreview.getFitHeight()
                 / imageViewPreview.getImage().getHeight()));
 	}
 	
-    public double adaptationW(int adaptation) {
-        double ratio = adaptation / 1920.0;
-        double i = ((int) (getScreenWidth() * ratio * 100)) / 100;
-        return Math.round(i);
-    }
-
-    public double adaptationH(int adaptation) {
-        double ratio = adaptation / 1080.0;
-        double i = ((int) (getScreenHeight() * ratio * 100)) / 100;
-        return Math.round(i);
-    }
-    
     public double getScreenWidth() {
         return bounds.getWidth();
     }
