@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +30,8 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.repository.ContactImageRep
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.ContactFolderService;
+import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
@@ -78,7 +81,8 @@ public class ContactPage extends BaseContactPage {
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
 		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
 		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
-
+		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
+		
 		contacts.addAll(contactRepository.findAll());
 		listViewContacts.setItems(filteredContacts);
 
@@ -105,29 +109,48 @@ public class ContactPage extends BaseContactPage {
 	}
 	
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
-		ObservableList<Address> addressList = context.getAddressListProperty().get();
-		vboxAddresses.getChildren().clear();
-		addressList.forEach(e -> {
-			ContactAddressItem item = new ContactAddressItem(e);
-			vboxAddresses.getChildren().add(item);
+		Platform.runLater(()->{
+			ObservableList<Address> addressList = context.getAddressListProperty().get();
+			vboxAddresses.getChildren().clear();
+			addressList.forEach(e -> {
+				ContactAddressItem item = new ContactAddressItem(e);
+				vboxAddresses.getChildren().add(item);
+			});
 		});
 	}
 
 	private void onEmailListSelectionChanged(Change<? extends Email> c) {
-		ObservableList<Email> emailList = context.getEmailsProperty().get();
-		vboxEmail.getChildren().clear();
-		emailList.forEach(e -> {
-			ContactEmailItem item = new ContactEmailItem(e);
-			vboxEmail.getChildren().add(item);
+		Platform.runLater(()->{
+			ObservableList<Email> emailList = context.getEmailsProperty().get();
+			vboxEmail.getChildren().clear();
+			emailList.forEach(e -> {
+				ContactEmailItem item = new ContactEmailItem(e);
+				vboxEmail.getChildren().add(item);
+			});
 		});
 	}
 
 	private void onDatesListSelectionChanged(Change<? extends Dates> c) {
-		ObservableList<Dates> datesList = context.getDateListProperty().get();
-		vboxDates.getChildren().clear();
-		datesList.forEach(e -> {
-			ContactDatesItem item = new ContactDatesItem(e);
-			vboxDates.getChildren().add(item);
+		Platform.runLater(()->{
+			ObservableList<Dates> datesList = context.getDateListProperty().get();
+			vboxDates.getChildren().clear();
+			datesList.forEach(e -> {
+				ContactDatesItem item = new ContactDatesItem(e);
+				vboxDates.getChildren().add(item);
+			});
+		});
+	}
+
+	private void onContactImageIdSelectionChanged(Observable e) {
+		Platform.runLater(()->{
+			Contact contact = context.getContactProperty().get();
+			Optional<ContactImage> optionalImage = JRegisPlatform.getInstance(ContactImageRepository.class).findById(contact.getContactImageId());
+			if (optionalImage.isPresent()) {
+				File image = JRegisPlatform.getInstance(ContactFolderService.class).getImage(contact, optionalImage.get().getName());
+				imageViewUser.setImage(new Image(image.toURI().toString()));
+			}else {
+				imageViewUser.setImage(new Image(getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/icons8-name-100.png")));
+			}
 		});
 	}
 

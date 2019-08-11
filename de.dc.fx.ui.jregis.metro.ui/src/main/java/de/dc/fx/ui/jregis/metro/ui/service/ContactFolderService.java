@@ -6,11 +6,17 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
+import de.dc.fx.ui.jregis.metro.ui.model.Attachment;
 import de.dc.fx.ui.jregis.metro.ui.util.ImageHelper;
 import javafx.scene.image.Image;
 
 public class ContactFolderService extends BaseFolderService<Contact>{
 
+	public File getImage(Contact contact, String name) {
+		String baseFolder = getFolderPathBy(contact);
+		return new File(baseFolder, name);
+	}
+	
 	public void copyImageTo(Contact contact, String filename, Image image) {
 		ImageHelper.saveToFile(getFolderBy(contact) + "/" + filename, image);
 	}
