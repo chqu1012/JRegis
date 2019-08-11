@@ -146,7 +146,6 @@ package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository;
 				while (rs.next()) {
 					return rs.getLong(1);
 				}
-				System.out.println("Update attachment: " + statement.toString());
 				log.log(Level.ALL, "Update attachment: " + updateStatement());
 			} catch (SQLException e) {
 				log.log(Level.SEVERE, "Failed to query: " + updateStatement(), e);

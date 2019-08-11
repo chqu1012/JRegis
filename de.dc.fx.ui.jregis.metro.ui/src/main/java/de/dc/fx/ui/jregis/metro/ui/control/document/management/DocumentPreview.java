@@ -1,20 +1,28 @@
 package de.dc.fx.ui.jregis.metro.ui.control.document.management;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.controlsfx.control.Notifications;
 
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
@@ -33,6 +41,8 @@ public class DocumentPreview extends BaseDocumentPreview {
 	private final DoubleProperty mouseYProperty = new SimpleDoubleProperty();
 
 	private Image image;
+
+	private PDDocument doc;
 
 	public DocumentPreview() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -118,25 +128,67 @@ public class DocumentPreview extends BaseDocumentPreview {
 	protected void onImageViewPreviewCloseClicked(MouseEvent event) {
 		panePreview.setVisible(false);
 		panePreview.toBack();
+
+		if (doc != null) {
+			try {
+				doc.close();
+				doc = null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		textPdfCurrentPage.setText("0");
+		textPdfPageCounter.setText("0");
+		buttonNextPage.setDisable(true);
+		buttonPreviousPage.setDisable(true);
 	}
+
+	int pageCounter = 0;
+
+	private PDFRenderer renderer;
 
 	public void show(File attachmentFile) {
 		String name = attachmentFile.getName().toLowerCase();
-		if (name.endsWith(".jpeg") ||name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp")) {
+		if (name.endsWith(".jpeg") || name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp")) {
 			panePreview.setVisible(true);
 			panePreview.toFront();
-			
+
 			image = new Image(attachmentFile.toURI().toString());
-			double width = image.getWidth();
-			double height = image.getHeight();
-			
+			imageViewPreview.setFitHeight(image.getHeight());
+			imageViewPreview.setFitWidth(image.getWidth());
 			imageViewPreview.setImage(image);
-			imageViewPreview.setFitHeight(height);
-			imageViewPreview.setFitWidth(width);
-			
+
 			zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
 					imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
-		}else {
+		} else if (name.endsWith(".pdf")) {
+			panePreview.setVisible(true);
+			panePreview.toFront();
+			hboxFiles.getChildren().clear();
+			
+			buttonNextPage.setDisable(false);
+			buttonPreviousPage.setDisable(false);
+			
+			try {
+
+				pageCounter = 0;
+				doc = PDDocument.load(attachmentFile);
+				renderer = new PDFRenderer(doc);
+
+				textPdfPageCounter.setText(String.valueOf(doc.getPages().getCount()));
+				textPdfCurrentPage.setText("0");
+
+				BufferedImage img = renderer.renderImage(0, 1);
+				image = SwingFXUtils.toFXImage(img, null);
+				imageViewPreview.setImage(image);
+				imageViewPreview.setFitHeight(image.getHeight());
+				imageViewPreview.setFitWidth(image.getWidth());
+				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
+						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
 			try {
 				JRegisPlatform.getInstance(DocumentFolderService.class).openFile(attachmentFile);
 			} catch (Exception e) {
@@ -155,7 +207,8 @@ public class DocumentPreview extends BaseDocumentPreview {
 
 	@Override
 	protected void onButtonClicked(ActionEvent event) {
-		if (event.getSource() == button100Percent) {
+		Object source = event.getSource();
+		if (source == button100Percent) {
 			imageViewPreview.setFitHeight(image.getHeight());
 			imageViewPreview.setFitWidth(image.getWidth());
 			zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
@@ -164,6 +217,32 @@ public class DocumentPreview extends BaseDocumentPreview {
 			zoomProperty.set(zoomProperty.multiply(1.1).get());
 		} else if (event.getSource() == buttonMinus10Percent) {
 			zoomProperty.set(zoomProperty.multiply(0.9).get());
+		} else if (source == buttonNextPage && doc !=null) {
+			try {
+				BufferedImage bim = renderer.renderImage(++pageCounter);
+				textPdfCurrentPage.setText(pageCounter + "");
+				image = SwingFXUtils.toFXImage(bim, null);
+				imageViewPreview.setImage(image);
+				imageViewPreview.setFitHeight(image.getHeight());
+				imageViewPreview.setFitWidth(image.getWidth());
+				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
+						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (source == buttonPreviousPage && doc !=null) {
+			try {
+				BufferedImage bim = renderer.renderImage(--pageCounter);
+				textPdfCurrentPage.setText(pageCounter + "");
+				image = SwingFXUtils.toFXImage(bim, null);
+				imageViewPreview.setImage(image);
+				imageViewPreview.setFitHeight(image.getHeight());
+				imageViewPreview.setFitWidth(image.getWidth());
+				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
+						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		imageViewPreview.setFitWidth(zoomProperty.get() * image.getWidth());

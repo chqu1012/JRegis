@@ -50,4 +50,6 @@ dependencies {
 	
 	compile group: 'com.google.inject', name: 'guice', version: '+'
 	compile group: 'com.google.guava', name: 'guava', version: '+'
+
+	compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '+'
 }

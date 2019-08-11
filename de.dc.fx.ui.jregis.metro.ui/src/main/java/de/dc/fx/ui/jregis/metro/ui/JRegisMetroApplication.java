@@ -22,6 +22,9 @@ public class JRegisMetroApplication extends Application{
 	public static void main(String[] args) {
 		JRegisPlatform.init();
 		
+		// PDF Renderer Initialisation
+		System.setProperty("sun.java2d.cmm", "sun.java2d.cmm.kcms.KcmsServiceProvider");
+		
 		launch(args);
 	}
 }
