@@ -13,7 +13,7 @@ Entity Dates{
 		control: jfxtras.scene.control.LocalDateTimeTextField
 		binding: localDateTimeProperty
 	]
- 
+  
 	Repository{
 		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
 	}

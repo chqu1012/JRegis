@@ -17,50 +17,50 @@ public class ContactImageRepository extends BaseRepository<ContactImage>{
 	}
 	
 	public List<ContactImage> findAllByName(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME = '%s'", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME = '%s'", String.valueOf(name)));
 	}
 
 	public List<ContactImage> findAllByNameOrderByAsc(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME = '%s' ORDER BY NAME ASC", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME = '%s' ORDER BY NAME ASC", String.valueOf(name)));
 	}
 
 	public List<ContactImage> findAllByNameOrderByDesc(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME = '%s' ORDER BY NAME DESC", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME = '%s' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 
 	public List<ContactImage> findAllByNameLike(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME like '%%s%'", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME like '%%s%'", String.valueOf(name)));
 	}
 	
 	public List<ContactImage> findAllByNameLikeOrderByAsc(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME like '%%s%' ORDER BY NAME ASC", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME like '%%s%' ORDER BY NAME ASC", String.valueOf(name)));
 	}
 	
 	public List<ContactImage> findAllByNameLikeOrderByDesc(String name){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 	public List<ContactImage> findAllByCreatedOn(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON = '%s'", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON = '%s'", String.valueOf(createdOn)));
 	}
 
 	public List<ContactImage> findAllByCreatedOnOrderByAsc(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON = '%s' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON = '%s' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
 	}
 
 	public List<ContactImage> findAllByCreatedOnOrderByDesc(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON = '%s' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON = '%s' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 
 	public List<ContactImage> findAllByCreatedOnLike(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON like '%%s%'", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON like '%%s%'", String.valueOf(createdOn)));
 	}
 	
 	public List<ContactImage> findAllByCreatedOnLikeOrderByAsc(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
 	}
 	
 	public List<ContactImage> findAllByCreatedOnLikeOrderByDesc(LocalDateTime createdOn){
-		return query(String.format("SELECT * FROM CONTACTIMAGE WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	
 	@Override

@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="root" stylesheets="@css/DocumentPreview.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#onRootKeyReleased" styleClass="root" stylesheets="@css/DocumentPreview.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane fx:id="scrollPane" maxHeight="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
         <content>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="1200.0" minWidth="1200.0" styleClass="transparent-panel">
                <children>
                   <AnchorPane fx:id="pdfView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ImageView fx:id="imageViewPreview" fitHeight="600.0" fitWidth="600.0" layoutX="201.0" layoutY="233.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ImageView fx:id="imageViewPreview" fitHeight="600.0" fitWidth="600.0" layoutX="201.0" layoutY="233.0" onKeyReleased="#onRootKeyReleased" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
         </content>

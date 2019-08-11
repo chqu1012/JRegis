@@ -21,142 +21,142 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	}
 	
 	public List<XAppointmentGroup> findAllByAppointmentId(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID = '%s'", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID = '%s'", String.valueOf(appointmentId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentIdOrderByAsc(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID = '%s' ORDER BY APPOINTMENT_ID ASC", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID = '%s' ORDER BY APPOINTMENT_ID ASC", String.valueOf(appointmentId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentIdOrderByDesc(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID = '%s' ORDER BY APPOINTMENT_ID DESC", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID = '%s' ORDER BY APPOINTMENT_ID DESC", String.valueOf(appointmentId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentIdLike(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID like '%%s%'", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID like '%%s%'", String.valueOf(appointmentId)));
 	}
 	
 	public List<XAppointmentGroup> findAllByAppointmentIdLikeOrderByAsc(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID like '%%s%' ORDER BY APPOINTMENT_ID ASC", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID like '%%s%' ORDER BY APPOINTMENT_ID ASC", String.valueOf(appointmentId)));
 	}
 	
 	public List<XAppointmentGroup> findAllByAppointmentIdLikeOrderByDesc(Long appointmentId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_ID like '%%s%' ORDER BY APPOINTMENT_ID DESC", String.valueOf(appointmentId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID like '%%s%' ORDER BY APPOINTMENT_ID DESC", String.valueOf(appointmentId)));
 	}
 	public List<XAppointmentGroup> findAllByTopic(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC = '%s'", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC = '%s'", String.valueOf(topic)));
 	}
 
 	public List<XAppointmentGroup> findAllByTopicOrderByAsc(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC = '%s' ORDER BY TOPIC ASC", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC = '%s' ORDER BY TOPIC ASC", String.valueOf(topic)));
 	}
 
 	public List<XAppointmentGroup> findAllByTopicOrderByDesc(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC = '%s' ORDER BY TOPIC DESC", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC = '%s' ORDER BY TOPIC DESC", String.valueOf(topic)));
 	}
 
 	public List<XAppointmentGroup> findAllByTopicLike(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC like '%%s%'", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC like '%%s%'", String.valueOf(topic)));
 	}
 	
 	public List<XAppointmentGroup> findAllByTopicLikeOrderByAsc(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC like '%%s%' ORDER BY TOPIC ASC", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC like '%%s%' ORDER BY TOPIC ASC", String.valueOf(topic)));
 	}
 	
 	public List<XAppointmentGroup> findAllByTopicLikeOrderByDesc(String topic){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE TOPIC like '%%s%' ORDER BY TOPIC DESC", String.valueOf(topic)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC like '%%s%' ORDER BY TOPIC DESC", String.valueOf(topic)));
 	}
 	public List<XAppointmentGroup> findAllBySummary(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY = '%s'", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY = '%s'", String.valueOf(summary)));
 	}
 
 	public List<XAppointmentGroup> findAllBySummaryOrderByAsc(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY = '%s' ORDER BY SUMMARY ASC", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY = '%s' ORDER BY SUMMARY ASC", String.valueOf(summary)));
 	}
 
 	public List<XAppointmentGroup> findAllBySummaryOrderByDesc(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY = '%s' ORDER BY SUMMARY DESC", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY = '%s' ORDER BY SUMMARY DESC", String.valueOf(summary)));
 	}
 
 	public List<XAppointmentGroup> findAllBySummaryLike(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY like '%%s%'", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY like '%%s%'", String.valueOf(summary)));
 	}
 	
 	public List<XAppointmentGroup> findAllBySummaryLikeOrderByAsc(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY like '%%s%' ORDER BY SUMMARY ASC", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY like '%%s%' ORDER BY SUMMARY ASC", String.valueOf(summary)));
 	}
 	
 	public List<XAppointmentGroup> findAllBySummaryLikeOrderByDesc(String summary){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE SUMMARY like '%%s%' ORDER BY SUMMARY DESC", String.valueOf(summary)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY like '%%s%' ORDER BY SUMMARY DESC", String.valueOf(summary)));
 	}
 	public List<XAppointmentGroup> findAllByStart(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START = '%s'", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START = '%s'", String.valueOf(start)));
 	}
 
 	public List<XAppointmentGroup> findAllByStartOrderByAsc(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START = '%s' ORDER BY START ASC", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START = '%s' ORDER BY START ASC", String.valueOf(start)));
 	}
 
 	public List<XAppointmentGroup> findAllByStartOrderByDesc(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START = '%s' ORDER BY START DESC", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START = '%s' ORDER BY START DESC", String.valueOf(start)));
 	}
 
 	public List<XAppointmentGroup> findAllByStartLike(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START like '%%s%'", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START like '%%s%'", String.valueOf(start)));
 	}
 	
 	public List<XAppointmentGroup> findAllByStartLikeOrderByAsc(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START like '%%s%' ORDER BY START ASC", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START like '%%s%' ORDER BY START ASC", String.valueOf(start)));
 	}
 	
 	public List<XAppointmentGroup> findAllByStartLikeOrderByDesc(LocalDateTime start){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE START like '%%s%' ORDER BY START DESC", String.valueOf(start)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START like '%%s%' ORDER BY START DESC", String.valueOf(start)));
 	}
 	public List<XAppointmentGroup> findAllByEnd(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END = '%s'", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END = '%s'", String.valueOf(end)));
 	}
 
 	public List<XAppointmentGroup> findAllByEndOrderByAsc(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END = '%s' ORDER BY END ASC", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END = '%s' ORDER BY END ASC", String.valueOf(end)));
 	}
 
 	public List<XAppointmentGroup> findAllByEndOrderByDesc(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END = '%s' ORDER BY END DESC", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END = '%s' ORDER BY END DESC", String.valueOf(end)));
 	}
 
 	public List<XAppointmentGroup> findAllByEndLike(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END like '%%s%'", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END like '%%s%'", String.valueOf(end)));
 	}
 	
 	public List<XAppointmentGroup> findAllByEndLikeOrderByAsc(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END like '%%s%' ORDER BY END ASC", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END like '%%s%' ORDER BY END ASC", String.valueOf(end)));
 	}
 	
 	public List<XAppointmentGroup> findAllByEndLikeOrderByDesc(LocalDateTime end){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE END like '%%s%' ORDER BY END DESC", String.valueOf(end)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END like '%%s%' ORDER BY END DESC", String.valueOf(end)));
 	}
 	public List<XAppointmentGroup> findAllByAppointmentGroupId(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID = '%s'", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID = '%s'", String.valueOf(appointmentGroupId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentGroupIdOrderByAsc(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID = '%s' ORDER BY APPOINTMENT_GROUP_ID ASC", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID = '%s' ORDER BY APPOINTMENT_GROUP_ID ASC", String.valueOf(appointmentGroupId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentGroupIdOrderByDesc(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID = '%s' ORDER BY APPOINTMENT_GROUP_ID DESC", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID = '%s' ORDER BY APPOINTMENT_GROUP_ID DESC", String.valueOf(appointmentGroupId)));
 	}
 
 	public List<XAppointmentGroup> findAllByAppointmentGroupIdLike(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID like '%%s%'", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID like '%%s%'", String.valueOf(appointmentGroupId)));
 	}
 	
 	public List<XAppointmentGroup> findAllByAppointmentGroupIdLikeOrderByAsc(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID like '%%s%' ORDER BY APPOINTMENT_GROUP_ID ASC", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID like '%%s%' ORDER BY APPOINTMENT_GROUP_ID ASC", String.valueOf(appointmentGroupId)));
 	}
 	
 	public List<XAppointmentGroup> findAllByAppointmentGroupIdLikeOrderByDesc(Integer appointmentGroupId){
-		return query(String.format("SELECT * FROM XAPPOINTMENTGROUP WHERE APPOINTMENT_GROUP_ID like '%%s%' ORDER BY APPOINTMENT_GROUP_ID DESC", String.valueOf(appointmentGroupId)));
+		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID like '%%s%' ORDER BY APPOINTMENT_GROUP_ID DESC", String.valueOf(appointmentGroupId)));
 	}
 	
 	@Override

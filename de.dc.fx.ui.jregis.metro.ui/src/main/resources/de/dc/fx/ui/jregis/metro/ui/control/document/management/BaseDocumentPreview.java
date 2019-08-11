@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -56,5 +57,8 @@ public abstract class BaseDocumentPreview extends AnchorPane{
     
     @FXML
     protected abstract void onImageViewPreviewCloseClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onRootKeyReleased(KeyEvent event);
 
 }

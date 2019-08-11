@@ -1,4 +1,4 @@
-package de.dc.fx.ui.jregis.metro.ui;
+package de.dc.fx.ui.jregis.metro.ui.init;
 
 import java.io.File;
 import java.io.FileNotFoundException;

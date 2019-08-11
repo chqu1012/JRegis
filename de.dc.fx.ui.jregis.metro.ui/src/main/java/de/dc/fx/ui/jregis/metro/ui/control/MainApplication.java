@@ -145,34 +145,36 @@ public class MainApplication extends BaseMainApplication {
 
 	private void initTreeView() {
 		List<Category> categories = JRegisPlatform.getInstance(CategoryRepository.class).findAll();
-		Optional<List<Category>> optionalCategories = Optional.ofNullable(categories);
-		optionalCategories.ifPresent(e->{
-			Category root = buildTree(categories);
-			TreeItem<Category> rootItem = new TreeItem<>(
-					new Category("Categories", LocalDateTime.now(), LocalDateTime.now(), -1));
-			buildTreeItems(rootItem, root);
-			treeView.setRoot(rootItem);
-			treeView.setCellFactory(param -> new TreeCell<Category>() {
-				@Override
-				protected void updateItem(Category item, boolean empty) {
-					super.updateItem(item, empty);
-					if (item == null || empty) {
-						setText(null);
-					} else {
-						setText(item.getName());
+		if (!categories.isEmpty()) {
+			Optional<List<Category>> optionalCategories = Optional.ofNullable(categories);
+			optionalCategories.ifPresent(e->{
+				Category root = buildTree(categories);
+				TreeItem<Category> rootItem = new TreeItem<>(
+						new Category("Categories", LocalDateTime.now(), LocalDateTime.now(), -1));
+				buildTreeItems(rootItem, root);
+				treeView.setRoot(rootItem);
+				treeView.setCellFactory(param -> new TreeCell<Category>() {
+					@Override
+					protected void updateItem(Category item, boolean empty) {
+						super.updateItem(item, empty);
+						if (item == null || empty) {
+							setText(null);
+						} else {
+							setText(item.getName());
+						}
 					}
-				}
+				});
+				rootItem.setExpanded(true);
+				treeView.setShowRoot(false);
+				treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+					if(newValue.getValue().getName().equals("Root")) {
+						filteredDocumentData.setPredicate(p->true);
+					}else {
+						filteredDocumentData.setPredicate(p->p.getCategoryId()==newValue.getValue().getId());
+					}
+				});
 			});
-			rootItem.setExpanded(true);
-			treeView.setShowRoot(false);
-			treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-				if(newValue.getValue().getName().equals("Root")) {
-					filteredDocumentData.setPredicate(p->true);
-				}else {
-					filteredDocumentData.setPredicate(p->p.getCategoryId()==newValue.getValue().getId());
-				}
-			});
-		});
+		}
 	}
 
 	@Subscribe
@@ -221,18 +223,30 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initData() {
-		CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
-		List<Category> categories = categoryRepository.findAll();
-		masterCategoryData.addAll(categories);
+		Platform.runLater(()->{
+			CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
+			List<Category> categories = categoryRepository.findAll();
+			if (categories != null) {
+				masterCategoryData.addAll(categories);
+			}
+		});
 
-		DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
-		List<Document> documents = documentRepository.findAll();
-		masterDocumentData.addAll(documents);
+		Platform.runLater(()->{
+			DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
+			List<Document> documents = documentRepository.findAll();
+			if (documents != null) {
+				masterDocumentData.addAll(documents);
+			}
+		});
+		
+		Platform.runLater(()->{
 
 		DocumentNameRepository documentNameRepository = JRegisPlatform.getInstance(DocumentNameRepository.class);
-		List<String> documentNames = documentNameRepository.findAll();
-		masterSuggestionData.addAll(documentNames);
-
+			List<String> documentNames = documentNameRepository.findAll();
+			if (documentNames != null) {
+				masterSuggestionData.addAll(documentNames);
+			}
+		});
 	}
 
 	private void initControls() {

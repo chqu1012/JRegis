@@ -1,4 +1,4 @@
-package de.dc.fx.ui.jregis.metro.ui.gen.contacts;
+package de.dc.fx.ui.jregis.metro.ui.init;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -7,6 +7,7 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.init.AddressTableInitial
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.init.ContactTableInitializer;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.init.DatesTableInitializer;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.init.EmailTableInitializer;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.init.ContactImageTableInitializer;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.init.PhonenumberTableInitializer;
 
 public class ContactsTableInitializer {
@@ -17,6 +18,7 @@ public class ContactsTableInitializer {
 		DatesTableInitializer.main(args);
 		EmailTableInitializer.main(args);
 		PhonenumberTableInitializer.main(args);
+		ContactImageTableInitializer.main(args);
 	}
 
 }

@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.controlsfx.control.Notifications;
 
@@ -18,11 +16,10 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
@@ -195,6 +192,8 @@ public class DocumentPreview extends BaseDocumentPreview {
 				Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
 			}
 		}
+		
+		panePreview.requestFocus();
 	}
 
 	public double getScreenWidth() {
@@ -228,7 +227,6 @@ public class DocumentPreview extends BaseDocumentPreview {
 				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
 						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		} else if (source == buttonPreviousPage && doc !=null) {
 			try {
@@ -241,12 +239,18 @@ public class DocumentPreview extends BaseDocumentPreview {
 				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
 						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 
 		imageViewPreview.setFitWidth(zoomProperty.get() * image.getWidth());
 		imageViewPreview.setFitHeight(zoomProperty.get() * image.getHeight());
+	}
+
+	@Override
+	protected void onRootKeyReleased(KeyEvent event) {
+		if (event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE)) {
+			onImageViewPreviewCloseClicked(null);
+		}
 	}
 
 }
