@@ -68,7 +68,16 @@
                            <children>
                               <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                                  <children>
-                                    <TreeView fx:id="treeView" layoutX="53.0" layoutY="81.0" styleClass="tree-view-category" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="30.0" />
+                                    <TreeView fx:id="treeView" layoutX="53.0" layoutY="81.0" styleClass="tree-view-category" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="35.0">
+                                       <contextMenu>
+                                          <ContextMenu>
+                                            <items>
+                                              <MenuItem fx:id="menuItemTreeNew" mnemonicParsing="false" onAction="#onTreeContextMenuAction" text="New" />
+                                                <MenuItem fx:id="menuItemTreeEdit" mnemonicParsing="false" onAction="#onTreeContextMenuAction" text="Edit" />
+                                                <MenuItem fx:id="menuItemTreeDelete" mnemonicParsing="false" onAction="#onTreeContextMenuAction" text="Delete" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu></TreeView>
                                     <Label layoutX="16.0" layoutY="16.0" text="DOCUMENT CATEGORIES" textFill="#727272" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
@@ -139,9 +148,9 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </ComboBox>
-                                          <Button mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
-                                          <Button mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
-                                          <Button mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
+                                          <Button disable="true" mnemonicParsing="false" onAction="#onButtonAddCategoryAction" text="Add" />
+                                          <Button disable="true" mnemonicParsing="false" onAction="#onButtonEditCategoryAction" text="Edit" />
+                                          <Button disable="true" mnemonicParsing="false" onAction="#onButtonRemoveCategoryAction" text="Remove" />
                                        </children>
                                     </HBox>
                                     <TextArea fx:id="textDescription" layoutX="20.0" layoutY="323.0" prefHeight="64.0" prefWidth="246.0" promptText="Description" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" />

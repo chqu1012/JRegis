@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +23,15 @@ import javafx.scene.layout.StackPane;
 
 public abstract class BaseMainApplication extends BorderPane{
 
+    @FXML
+    protected MenuItem menuItemTreeNew;
+
+    @FXML
+    protected MenuItem menuItemTreeEdit;
+
+    @FXML
+    protected MenuItem menuItemTreeDelete;
+	
 	@FXML
 	protected ImageView imageViewAdbook;
 	
@@ -183,4 +193,7 @@ public abstract class BaseMainApplication extends BorderPane{
     
     @FXML
     protected abstract void onImageViewCalendarClicked(MouseEvent event);
+    
+    @FXML
+    protected abstract void onTreeContextMenuAction(ActionEvent event);
 }

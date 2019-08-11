@@ -79,16 +79,19 @@ public class MainApplication extends BaseMainApplication {
 	private ProfilePage profilePage = new ProfilePage();
 	private Dashboard dashboard = new Dashboard();
 	private Inbox inbox = new Inbox();
-	
+
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 
-	@Inject UserManagementPage userManagementPage;
-	@Inject ContactPage contactPage;
+	@Inject
+	UserManagementPage userManagementPage;
+	@Inject
+	ContactPage contactPage;
 	CalendarPage calendarPage = new CalendarPage();
-	
-	@Inject CategoryRepository categoryRepository;
+
+	@Inject
+	CategoryRepository categoryRepository;
 
 	private TableFilter<Document> tableFilter;
 
@@ -121,12 +124,12 @@ public class MainApplication extends BaseMainApplication {
 		}
 		registry.values().forEach(nav -> {
 			Long parentId = nav.getId();
-			List<Category> filteredList = models.stream().filter(e->e.getParentId()==parentId).collect(Collectors.toList());
-			filteredList.sort((Category o1, Category o2)->o1.getName().compareTo(o2.getName()));
+			List<Category> filteredList = models.stream().filter(e -> e.getParentId() == parentId)
+					.collect(Collectors.toList());
+			filteredList.sort((Category o1, Category o2) -> o1.getName().compareTo(o2.getName()));
 			nav.getChildren().addAll(filteredList);
 		});
-		
-		
+
 		return registry.get(firstElement);
 	}
 
@@ -136,7 +139,7 @@ public class MainApplication extends BaseMainApplication {
 		if (!element.getChildren().isEmpty()) {
 			List<Category> children = element.getChildren();
 			for (Category category : children) {
-				if (category!=element) {
+				if (category != element) {
 					buildTreeItems(newItem, category);
 				}
 			}
@@ -147,11 +150,12 @@ public class MainApplication extends BaseMainApplication {
 		List<Category> categories = JRegisPlatform.getInstance(CategoryRepository.class).findAll();
 		if (!categories.isEmpty()) {
 			Optional<List<Category>> optionalCategories = Optional.ofNullable(categories);
-			optionalCategories.ifPresent(e->{
+			optionalCategories.ifPresent(e -> {
 				Category root = buildTree(categories);
-				TreeItem<Category> rootItem = new TreeItem<>(
-						new Category("Categories", LocalDateTime.now(), LocalDateTime.now(), -1));
-				buildTreeItems(rootItem, root);
+				TreeItem<Category> rootItem = new TreeItem<>(root);
+				for (Category category : root.getChildren()) {
+					buildTreeItems(rootItem, category);
+				}
 				treeView.setRoot(rootItem);
 				treeView.setCellFactory(param -> new TreeCell<Category>() {
 					@Override
@@ -165,15 +169,21 @@ public class MainApplication extends BaseMainApplication {
 					}
 				});
 				rootItem.setExpanded(true);
-				treeView.setShowRoot(false);
+				treeView.setShowRoot(true);
 				treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-					if(newValue.getValue().getName().equals("Root")) {
-						filteredDocumentData.setPredicate(p->true);
-					}else {
-						filteredDocumentData.setPredicate(p->p.getCategoryId()==newValue.getValue().getId());
+					if (newValue.getValue().getName().equals("Root")) {
+						filteredDocumentData.setPredicate(p -> true);
+					} else {
+						filteredDocumentData.setPredicate(p -> p.getCategoryId() == newValue.getValue().getId());
 					}
 				});
 			});
+		}else {
+			LocalDateTime createdOn = LocalDateTime.now();
+			Category category = new Category("Root", createdOn, createdOn, -1);
+			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(category);
+			category.setId(newId);
+			masterCategoryData.add(category);
 		}
 	}
 
@@ -223,7 +233,7 @@ public class MainApplication extends BaseMainApplication {
 	}
 
 	private void initData() {
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			CategoryRepository categoryRepository = JRegisPlatform.getInstance(CategoryRepository.class);
 			List<Category> categories = categoryRepository.findAll();
 			if (categories != null) {
@@ -231,17 +241,17 @@ public class MainApplication extends BaseMainApplication {
 			}
 		});
 
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			DocumentRepository documentRepository = JRegisPlatform.getInstance(DocumentRepository.class);
 			List<Document> documents = documentRepository.findAll();
 			if (documents != null) {
 				masterDocumentData.addAll(documents);
 			}
 		});
-		
-		Platform.runLater(()->{
 
-		DocumentNameRepository documentNameRepository = JRegisPlatform.getInstance(DocumentNameRepository.class);
+		Platform.runLater(() -> {
+
+			DocumentNameRepository documentNameRepository = JRegisPlatform.getInstance(DocumentNameRepository.class);
 			List<String> documentNames = documentNameRepository.findAll();
 			if (documentNames != null) {
 				masterSuggestionData.addAll(documentNames);
@@ -528,5 +538,31 @@ public class MainApplication extends BaseMainApplication {
 	@Override
 	protected void onImageViewCalendarClicked(MouseEvent event) {
 		calendarPage.toFront();
+	}
+
+	@Override
+	protected void onTreeContextMenuAction(ActionEvent event) {
+		TreeItem<Category> selection = treeView.getSelectionModel().getSelectedItem();
+		if (selection != null) {
+			Object source = event.getSource();
+			Category category = selection.getValue();
+			if (source == menuItemTreeDelete) {
+				JRegisPlatform.getInstance(CategoryRepository.class).delete(category);
+				selection.getParent().getChildren().remove(selection);
+			} else if (source == menuItemTreeEdit) {
+				throw new UnsupportedOperationException("Not implemented yet!");
+			} else if (source == menuItemTreeNew) {
+				DialogUtil.openInput("New Category", "New Category", "Please give a name for the new category", "Please give a name for the new category", e->{
+					if (e!=null) {
+						LocalDateTime createdOn = LocalDateTime.now();
+						Category newCategory = new Category(e, createdOn, createdOn, category.getId());
+						long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(newCategory);
+						newCategory.setId(newId);
+						selection.getChildren().add(new TreeItem<Category>(newCategory));
+						selection.setExpanded(true);
+					}
+				});
+			}
+		}
 	}
 }
