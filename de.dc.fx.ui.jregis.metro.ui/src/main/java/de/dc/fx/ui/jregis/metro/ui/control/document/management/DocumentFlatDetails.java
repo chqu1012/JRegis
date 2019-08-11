@@ -84,7 +84,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 
 	private List<Reference> referencesRegistry = new ArrayList<>();
 
-	private ScreenshotPreview screenshotPreview = new ScreenshotPreview();
+	private DocumentPreview documentPreview = new DocumentPreview();
 	
 	private Rating rating = new Rating(5);
 	
@@ -120,6 +120,9 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		
 		initBindings();
 		initReferenceDialog();
+		
+		mainContent.getChildren().add(documentPreview);
+		documentPreview.toBack();
 	}
 
 	private void initReferenceDialog() {
@@ -205,14 +208,12 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	
 	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
 		try {
-			panePreview.setVisible(true);
-			panePreview.toFront();
-			
 			File file = JRegisPlatform.getInstance(DocumentFolderService.class).getAttachmentByName(context.current.get(), newValue);
-			Image image = new Image(file.toURI().toString());
-			imageViewPreview.setImage(image);
-			imageViewPreview.setFitWidth(image.getWidth());
-			imageViewPreview.setFitHeight(image.getHeight());
+			documentPreview.show(file);
+//			Image image = new Image(file.toURI().toString());
+//			imageViewPreview.setImage(image);
+//			imageViewPreview.setFitWidth(image.getWidth());
+//			imageViewPreview.setFitHeight(image.getHeight());
 			
 			//TODO: OPEN PREVIEW INDEED OF FIle
 //			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
@@ -745,11 +746,5 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		ScreenshotStage stage = new ScreenshotStage(true);
 		stage.show();
 		
-	}
-
-	@Override
-	protected void onImageViewPreviewCloseClicked(MouseEvent event) {
-		panePreview.setVisible(false);
-		panePreview.toBack();
 	}
 }

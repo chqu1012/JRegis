@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 
 public class DocumentPreview extends BaseDocumentPreview {
@@ -37,7 +38,15 @@ public class DocumentPreview extends BaseDocumentPreview {
 			throw new RuntimeException(exception);
 		}
 		
+		AnchorPane.setBottomAnchor(this, 0d);
+		AnchorPane.setTopAnchor(this, 0d);
+		AnchorPane.setLeftAnchor(this, 0d);
+		AnchorPane.setRightAnchor(this, 0d);
+		
 		initScrollPane();
+
+		setVisible(false);
+		toBack();
 	}
 	
 	private void initScrollPane() {
@@ -50,11 +59,9 @@ public class DocumentPreview extends BaseDocumentPreview {
 		});
 
         addEventFilter(ScrollEvent.ANY, event -> {
-		    ImageView image = (ImageView) scrollPane.getContent();
-
 		    // Original size of the image.
-		    double sourceWidth = zoomProperty.get() * image.getImage().getWidth();
-		    double sourceHeight = zoomProperty.get() * image.getImage().getHeight();
+		    double sourceWidth = zoomProperty.get() * imageViewPreview.getImage().getWidth();
+		    double sourceHeight = zoomProperty.get() * imageViewPreview.getImage().getHeight();
 
 		    zoomProperty.set(zoomProperty.get() * Math.pow(ZOOM_FACTOR, event.getDeltaY()));
 
@@ -71,8 +78,8 @@ public class DocumentPreview extends BaseDocumentPreview {
 		    double mouseYPosition = (mouseYProperty.get() + preScrollYFactor * oldVvalue) / sourceHeight;
 
 		    // Target size of the image.
-		    double targetWidth = zoomProperty.get() * image.getImage().getWidth();
-		    double targetHeight = zoomProperty.get() * image.getImage().getHeight();
+		    double targetWidth = zoomProperty.get() * imageViewPreview.getImage().getWidth();
+		    double targetHeight = zoomProperty.get() * imageViewPreview.getImage().getHeight();
 
 		    // Image pixels outside the visible area which need to be scrolled.
 		    double postScrollXFactor = Math.max(0, targetWidth - getWidth());
@@ -87,8 +94,8 @@ public class DocumentPreview extends BaseDocumentPreview {
 		            ((mouseYPosition * targetHeight) - mouseYProperty.get() + verticalCorrection)
 		                    / postScrollYFactor;
 
-		    image.setFitWidth(targetWidth);
-		    image.setFitHeight(targetHeight);
+		    imageViewPreview.setFitWidth(targetWidth);
+		    imageViewPreview.setFitHeight(targetHeight);
 
 		    scrollPane.setHvalue(newHvalue);
 		    scrollPane.setVvalue(newVvalue);

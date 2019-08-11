@@ -23,14 +23,11 @@ import javafx.scene.layout.VBox;
 public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
 	@FXML
-	protected ImageView imageViewPreview;
+	protected AnchorPane mainContent;
 	
 	@FXML
 	protected HBox hboxTitle;
 	
-	@FXML
-	protected AnchorPane panePreview;
-
 	@FXML
 	protected AnchorPane referenceDialog;
 
@@ -249,7 +246,4 @@ public abstract class BaseDocumentFlatDetails extends ScrollPane {
 
     @FXML
     protected abstract void onButtonFullScreenshotAction(ActionEvent event);
-
-    @FXML
-    protected abstract void onImageViewPreviewCloseClicked(MouseEvent event);
 }
