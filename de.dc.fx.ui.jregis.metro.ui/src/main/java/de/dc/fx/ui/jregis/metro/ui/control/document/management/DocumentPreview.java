@@ -3,6 +3,10 @@ package de.dc.fx.ui.jregis.metro.ui.control.document.management;
 import java.io.File;
 import java.io.IOException;
 
+import org.controlsfx.control.Notifications;
+
+import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
+import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
@@ -117,19 +121,28 @@ public class DocumentPreview extends BaseDocumentPreview {
 	}
 
 	public void show(File attachmentFile) {
-		panePreview.setVisible(true);
-		panePreview.toFront();
-
-		image = new Image(attachmentFile.toURI().toString());
-		double width = image.getWidth();
-		double height = image.getHeight();
-
-		imageViewPreview.setImage(image);
-		imageViewPreview.setFitHeight(height);
-		imageViewPreview.setFitWidth(width);
-
-		zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
-				imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+		String name = attachmentFile.getName().toLowerCase();
+		if (name.endsWith(".jpeg") ||name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp")) {
+			panePreview.setVisible(true);
+			panePreview.toFront();
+			
+			image = new Image(attachmentFile.toURI().toString());
+			double width = image.getWidth();
+			double height = image.getHeight();
+			
+			imageViewPreview.setImage(image);
+			imageViewPreview.setFitHeight(height);
+			imageViewPreview.setFitWidth(width);
+			
+			zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
+					imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+		}else {
+			try {
+				JRegisPlatform.getInstance(DocumentFolderService.class).openFile(attachmentFile);
+			} catch (Exception e) {
+				Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
+			}
+		}
 	}
 
 	public double getScreenWidth() {

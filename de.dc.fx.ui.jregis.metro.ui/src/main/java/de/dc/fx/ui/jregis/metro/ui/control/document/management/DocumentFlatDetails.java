@@ -210,9 +210,7 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		try {
 			File file = JRegisPlatform.getInstance(DocumentFolderService.class).getAttachmentByName(context.current.get(), newValue);
 			documentPreview.show(file);
-			
-			//TODO: OPEN PREVIEW INDEED OF FIle
-//			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
+			root.setVvalue(0d);
 		} catch (Exception e) {
 			Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
 		}
