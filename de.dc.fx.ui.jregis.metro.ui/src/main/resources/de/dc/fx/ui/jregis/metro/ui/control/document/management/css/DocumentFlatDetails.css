@@ -13,3 +13,15 @@
 .download-clipboard-image-view:pressed{
      -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-inhalte-einfügen-24-gray.png');
 }
+
+.preivew-close-image-view {
+     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-fenster-schließen-48-dark.png');
+}
+
+.preivew-close-image-view:hover {
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-fenster-schließen-48.png');
+}
+
+.preivew-close-image-view:pressed{
+     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-fenster-schließen-48-blue.png');
+}

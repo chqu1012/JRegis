@@ -76,6 +76,11 @@ public class DocumentFolderService extends BaseFolderService<Document>{
 		String baseFolder = getFolderPathBy(document);
 		return new File(baseFolder, documentAttachment.getName());
 	}
+
+	public File getAttachmentByName(Document document, String attachmentName) {
+		String baseFolder = getFolderPathBy(document);
+		return new File(baseFolder, attachmentName);
+	}
 	
 	@Override
 	public File getFolderBy(Document t) {

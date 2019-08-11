@@ -205,7 +205,17 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	
 	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
 		try {
-			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
+			panePreview.setVisible(true);
+			panePreview.toFront();
+			
+			File file = JRegisPlatform.getInstance(DocumentFolderService.class).getAttachmentByName(context.current.get(), newValue);
+			Image image = new Image(file.toURI().toString());
+			imageViewPreview.setImage(image);
+			imageViewPreview.setFitWidth(image.getWidth());
+			imageViewPreview.setFitHeight(image.getHeight());
+			
+			//TODO: OPEN PREVIEW INDEED OF FIle
+//			JRegisPlatform.getInstance(DocumentFolderService.class).openFile(context.current.get(), newValue);
 		} catch (Exception e) {
 			Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
 		}
@@ -735,5 +745,11 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 		ScreenshotStage stage = new ScreenshotStage(true);
 		stage.show();
 		
+	}
+
+	@Override
+	protected void onImageViewPreviewCloseClicked(MouseEvent event) {
+		panePreview.setVisible(false);
+		panePreview.toBack();
 	}
 }

@@ -19,10 +19,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onScrollPaneKeyPressed" pannable="true" styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onScrollPaneKeyPressed" pannable="true" prefHeight="600.0" prefWidth="800.0" styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
+            <AnchorPane fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ScrollPane maxHeight="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: rgba(0, 0, 0, .7);" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+                    <content>
+                      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="1200.0" minWidth="1200.0" style="-fx-background-color: rgba(0, 0, 0, .7);">
+                           <children>
+                              <ImageView fx:id="imageViewPreview" fitHeight="600.0" fitWidth="600.0" layoutX="201.0" layoutY="233.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </ScrollPane>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="880.0" layoutY="-41.0" onMouseClicked="#onImageViewPreviewCloseClicked" pickOnBounds="true" preserveRatio="true" styleClass="preivew-close-image-view" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <image>
+                        <Image url="@../../../images/icons8-fenster-schließen-48-dark.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="24.0" layoutY="60.0" prefHeight="200.0" prefWidth="260.0" style="-fx-background-color: rgba(0, 0, 0, .7);" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+               </children>
+            </AnchorPane>
             <AnchorPane fx:id="referenceDialog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onReferenceDialogKeyPressed" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
               <AnchorPane layoutX="342.0" layoutY="311.0" prefHeight="449.0" prefWidth="702.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
