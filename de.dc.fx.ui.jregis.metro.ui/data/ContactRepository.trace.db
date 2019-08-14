@@ -2590,3 +2590,107 @@ SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "null"
 Data conversion error converting "null"; SQL statement:
 SELECT * FROM EMAIL WHERE CONTACT_ID = 'null' [22018-196]
+2019-08-14 21:20:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:20:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:20:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:20:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 3 [42102-196]
+2019-08-14 21:20:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 2 [42102-196]
+2019-08-14 21:20:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:20:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:20:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:25:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 2 [42102-196]
+2019-08-14 21:25:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:25:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 3 [42102-196]
+2019-08-14 21:25:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:25:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:25:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:25:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:45:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 2 [42102-196]
+2019-08-14 21:45:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:45:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 3 [42102-196]
+2019-08-14 21:45:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:45:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:45:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:46:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:46:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 2 [42102-196]
+2019-08-14 21:46:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 0 [42102-196]
+2019-08-14 21:46:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 1 [42102-196]
+2019-08-14 21:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CONTACT_IMAGE" nicht gefunden
+Table "CONTACT_IMAGE" not found; SQL statement:
+SELECT * FROM CONTACT_IMAGE WHERE ID = 3 [42102-196]

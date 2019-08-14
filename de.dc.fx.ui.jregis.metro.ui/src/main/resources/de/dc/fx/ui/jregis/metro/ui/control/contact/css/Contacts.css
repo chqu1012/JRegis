@@ -15,3 +15,15 @@
 .hbox{
 	-fx-background-color: white;
 }
+
+.tray-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-müll-60.png');
+}
+
+.tray-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-müll-60-dark.png');
+}
+
+.tray-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-müll-60-blue.png');
+}

@@ -199,6 +199,7 @@ public class ContactPage extends BaseContactPage {
 		labelName.textProperty()
 				.bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
 		labelNickname.textProperty().bind(context.getUsernameProperty());
+		labelContactsSize.textProperty().bind(Bindings.size(contacts).asString());
 	}
 
 	public void addContactItem(Contact contact) {
@@ -280,9 +281,18 @@ public class ContactPage extends BaseContactPage {
 			if(e.getButtonData().equals(ButtonData.OK_DONE)) {
 				contactRepository.delete(selection);
 				
+				// TODO: Handle emails, address, phonenumbers and dates?
+				
 				contacts.remove(selection);
 				Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
 			}
+		});
+	}
+
+	@Override
+	protected void onImageViewClearAllDeletedContacts(MouseEvent event) {
+		DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with ").ifPresent(e->{
+			
 		});
 	}
 

@@ -16,6 +16,9 @@ import javafx.scene.layout.VBox;
 public abstract class BaseContactPage extends SplitPane{
 
 	@FXML
+	protected Label labelContactsSize;
+	
+	@FXML
 	protected VBox panePreview;
 	
 	@FXML
@@ -89,5 +92,8 @@ public abstract class BaseContactPage extends SplitPane{
 
     @FXML
     protected abstract void onMenuItemDeleteContact(ActionEvent event);
+
+    @FXML
+    protected abstract void onImageViewClearAllDeletedContacts(MouseEvent event);
 
 }
