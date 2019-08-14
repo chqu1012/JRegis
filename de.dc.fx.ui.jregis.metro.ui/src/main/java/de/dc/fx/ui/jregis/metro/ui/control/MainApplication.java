@@ -183,6 +183,7 @@ public class MainApplication extends BaseMainApplication {
 		rootItem.setExpanded(true);
 		treeView.setShowRoot(true);
 		treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			comboBoxCategory.getSelectionModel().select(newValue.getValue());
 			if (newValue.getValue().getName().equals("Root")) {
 				filteredDocumentData.setPredicate(p -> true);
 			} else {
