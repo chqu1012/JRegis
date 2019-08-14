@@ -147,6 +147,7 @@ public class DocumentPreview extends BaseDocumentPreview {
 
 	public void show(File attachmentFile) {
 		String name = attachmentFile.getName().toLowerCase();
+		scrollPane.setVvalue(0d);
 		if (name.endsWith(".jpeg") || name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp")) {
 			panePreview.setVisible(true);
 			panePreview.toFront();

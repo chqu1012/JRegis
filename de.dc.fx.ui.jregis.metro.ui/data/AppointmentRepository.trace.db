@@ -92,3 +92,11 @@ SELECT * FROM X_Appointment ORDER BY ID DESC [42102-196]
 org.h2.jdbc.JdbcSQLException: Tabelle "X_APPOINTMENT" nicht gefunden
 Table "X_APPOINTMENT" not found; SQL statement:
 SELECT * FROM X_Appointment ORDER BY ID DESC [42102-196]
+2019-08-14 16:29:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "XAPPOINTMENT" nicht gefunden
+Table "XAPPOINTMENT" not found; SQL statement:
+SELECT * FROM XAppointment ORDER BY ID DESC [42102-196]
+2019-08-14 16:29:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "XAPPOINTMENT" nicht gefunden
+Table "XAPPOINTMENT" not found; SQL statement:
+SELECT * FROM XAppointment ORDER BY ID DESC [42102-196]
