@@ -2,6 +2,7 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -432,7 +433,12 @@ public class MainApplication extends BaseMainApplication {
 
 		long newDocumentId = JRegisPlatform.getInstance(DocumentRepository.class).save(document);
 		document.setId(newDocumentId);
-		masterDocumentData.add(document);
+		masterDocumentData.add(0,document);
+		
+		textDocumentName.setText("");
+		textDescription.setText("");
+		textUrl.setText("");
+		Notifications.create().darkStyle().title("Document item created!").text("Created document "+name+"!").show();
 	}
 
 	@Override
