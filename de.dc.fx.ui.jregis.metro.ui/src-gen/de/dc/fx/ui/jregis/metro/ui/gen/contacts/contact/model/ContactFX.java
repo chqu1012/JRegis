@@ -11,6 +11,9 @@ import java.lang.String;
 import java.lang.String;
 import java.lang.String;
 import java.lang.Long;
+import java.lang.Integer;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class ContactFX {
 	
@@ -26,6 +29,9 @@ public class ContactFX {
   private StringProperty lastnameProperty = new SimpleStringProperty();
   private StringProperty usernameProperty = new SimpleStringProperty();
   private LongProperty contactImageIdProperty = new SimpleLongProperty();
+  private IntegerProperty statusProperty = new SimpleIntegerProperty();
+  private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
+  private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
   private ListProperty<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsProperty = new SimpleListProperty<>();
   private ListProperty<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListProperty = new SimpleListProperty<>();
   private ListProperty<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListProperty = new SimpleListProperty<>();
@@ -45,6 +51,9 @@ public class ContactFX {
 			lastnameProperty.set(newValue.getLastname());
 			usernameProperty.set(newValue.getUsername());
 			contactImageIdProperty.set(newValue.getContactImageId());
+			statusProperty.set(newValue.getStatus());
+			createdOnProperty.set(newValue.getCreatedOn());
+			updatedOnProperty.set(newValue.getUpdatedOn());
 			emailsProperty.set(FXCollections.observableArrayList(newValue.getEmails()));
 			addressListProperty.set(FXCollections.observableArrayList(newValue.getAddressList()));
 			phoneListProperty.set(FXCollections.observableArrayList(newValue.getPhoneList()));
@@ -78,6 +87,9 @@ public class ContactFX {
   	this.contact.setLastname(lastnameProperty.getValue());
   	this.contact.setUsername(usernameProperty.getValue());
   	this.contact.setContactImageId(contactImageIdProperty.getValue());
+  	this.contact.setStatus(statusProperty.getValue());
+  	this.contact.setCreatedOn(createdOnProperty.getValue());
+  	this.contact.setUpdatedOn(updatedOnProperty.getValue());
   	this.contact.setEmails(emailsProperty.getValue());
   	this.contact.setAddressList(addressListProperty.getValue());
   	this.contact.setPhoneList(phoneListProperty.getValue());
@@ -121,6 +133,27 @@ public class ContactFX {
   public void setContactImageIdProperty(LongProperty contactImageIdProperty) {
     this.contactImageIdProperty = contactImageIdProperty;
   }
+  public IntegerProperty getStatusProperty() {
+    return this.statusProperty;
+  }
+  
+  public void setStatusProperty(IntegerProperty statusProperty) {
+    this.statusProperty = statusProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getCreatedOnProperty() {
+    return this.createdOnProperty;
+  }
+  
+  public void setCreatedOnProperty(ObjectProperty<java.time.LocalDateTime> createdOnProperty) {
+    this.createdOnProperty = createdOnProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getUpdatedOnProperty() {
+    return this.updatedOnProperty;
+  }
+  
+  public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
+    this.updatedOnProperty = updatedOnProperty;
+  }
   public ListProperty<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmailsProperty() {
     return this.emailsProperty;
   }
@@ -155,6 +188,9 @@ public class ContactFX {
   	  this.lastnameProperty.set("");
   	  this.usernameProperty.set("");
   	  this.contactImageIdProperty.set(0l);
+  	  this.statusProperty.set(0);
+  	  this.createdOnProperty.set(java.time.LocalDateTime.now());
+  	  this.updatedOnProperty.set(java.time.LocalDateTime.now());
   }
 
   public String toString() {

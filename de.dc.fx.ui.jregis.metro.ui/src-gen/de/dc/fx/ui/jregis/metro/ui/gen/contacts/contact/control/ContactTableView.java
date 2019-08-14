@@ -48,6 +48,18 @@ public class ContactTableView extends TableView<Contact>{
 		columnContactImageId.setPrefWidth(100.0);
 		setupCellValueFactory(columnContactImageId, e->new SimpleObjectProperty<>(e.getContactImageId()));
 		getColumns().add(columnContactImageId);
+		TableColumn<Contact, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
+		columnStatus.setPrefWidth(100.0);
+		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
+		getColumns().add(columnStatus);
+		TableColumn<Contact, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
+		columnCreatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
+		getColumns().add(columnCreatedOn);
+		TableColumn<Contact, java.time.LocalDateTime> columnUpdatedOn = new TableColumn<>("#UPDATEDON");
+		columnUpdatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnUpdatedOn, e->new SimpleObjectProperty<>(e.getUpdatedOn()));
+		getColumns().add(columnUpdatedOn);
 		
 		context.getMasterData().addAll(contactRepository.findAll());
 		setItems(context.getFilteredMasterData());

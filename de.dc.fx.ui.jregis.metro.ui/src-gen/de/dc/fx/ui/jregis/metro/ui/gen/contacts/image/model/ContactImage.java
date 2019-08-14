@@ -8,14 +8,18 @@ public class ContactImage{
 
 	private Long id;
 	private String name;
+	private Integer status;
 	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 	
 	public ContactImage() {
 	}
 		
-	public ContactImage(String name, LocalDateTime createdOn) {
+	public ContactImage(String name, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.name = name;
+		this.status = status;
 		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 	}
 	
 	public Long getId(){
@@ -32,12 +36,26 @@ public class ContactImage{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
 
 	public void setCreatedOn(LocalDateTime createdOn) {
 		this.createdOn = createdOn;
+	}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	@Override

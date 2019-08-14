@@ -11,6 +11,9 @@ public class Contact{
 	private String lastname;
 	private String username;
 	private Long contactImageId;
+	private Integer status;
+	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emails = new java.util.ArrayList<>();
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressList = new java.util.ArrayList<>();
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneList = new java.util.ArrayList<>();
@@ -19,11 +22,14 @@ public class Contact{
 	public Contact() {
 	}
 		
-	public Contact(String firstname, String lastname, String username, Long contactImageId) {
+	public Contact(String firstname, String lastname, String username, Long contactImageId, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.contactImageId = contactImageId;
+		this.status = status;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 	}
 	
 	public Long getId(){
@@ -60,6 +66,27 @@ public class Contact{
 
 	public void setContactImageId(Long contactImageId) {
 		this.contactImageId = contactImageId;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 	public java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmails() {
 		return emails;

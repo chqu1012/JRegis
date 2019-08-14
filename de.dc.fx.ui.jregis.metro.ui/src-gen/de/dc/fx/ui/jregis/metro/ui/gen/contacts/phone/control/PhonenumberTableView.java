@@ -48,6 +48,18 @@ public class PhonenumberTableView extends TableView<Phonenumber>{
 		columnNumberType.setPrefWidth(100.0);
 		setupCellValueFactory(columnNumberType, e->new SimpleObjectProperty<>(e.getNumberType()));
 		getColumns().add(columnNumberType);
+		TableColumn<Phonenumber, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
+		columnStatus.setPrefWidth(100.0);
+		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
+		getColumns().add(columnStatus);
+		TableColumn<Phonenumber, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
+		columnCreatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
+		getColumns().add(columnCreatedOn);
+		TableColumn<Phonenumber, java.time.LocalDateTime> columnUpdatedOn = new TableColumn<>("#UPDATEDON");
+		columnUpdatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnUpdatedOn, e->new SimpleObjectProperty<>(e.getUpdatedOn()));
+		getColumns().add(columnUpdatedOn);
 		
 		context.getMasterData().addAll(phonenumberRepository.findAll());
 		setItems(context.getFilteredMasterData());

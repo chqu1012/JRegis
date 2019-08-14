@@ -10,6 +10,9 @@ import javafx.collections.transformation.FilteredList;
 import java.lang.Long;
 import java.lang.String;
 import java.lang.String;
+import java.lang.Integer;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class EmailFX {
 	
@@ -24,6 +27,9 @@ public class EmailFX {
   private LongProperty contactIdProperty = new SimpleLongProperty();
   private StringProperty nameProperty = new SimpleStringProperty();
   private StringProperty addressProperty = new SimpleStringProperty();
+  private IntegerProperty statusProperty = new SimpleIntegerProperty();
+  private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
+  private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
   
   public EmailFX() {
     this(new Email());
@@ -38,6 +44,9 @@ public class EmailFX {
 			contactIdProperty.set(newValue.getContactId());
 			nameProperty.set(newValue.getName());
 			addressProperty.set(newValue.getAddress());
+			statusProperty.set(newValue.getStatus());
+			createdOnProperty.set(newValue.getCreatedOn());
+			updatedOnProperty.set(newValue.getUpdatedOn());
 		}
 	});
 
@@ -66,6 +75,9 @@ public class EmailFX {
   	this.email.setContactId(contactIdProperty.getValue());
   	this.email.setName(nameProperty.getValue());
   	this.email.setAddress(addressProperty.getValue());
+  	this.email.setStatus(statusProperty.getValue());
+  	this.email.setCreatedOn(createdOnProperty.getValue());
+  	this.email.setUpdatedOn(updatedOnProperty.getValue());
     return this.email;
   }
   
@@ -98,11 +110,35 @@ public class EmailFX {
   public void setAddressProperty(StringProperty addressProperty) {
     this.addressProperty = addressProperty;
   }
+  public IntegerProperty getStatusProperty() {
+    return this.statusProperty;
+  }
+  
+  public void setStatusProperty(IntegerProperty statusProperty) {
+    this.statusProperty = statusProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getCreatedOnProperty() {
+    return this.createdOnProperty;
+  }
+  
+  public void setCreatedOnProperty(ObjectProperty<java.time.LocalDateTime> createdOnProperty) {
+    this.createdOnProperty = createdOnProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getUpdatedOnProperty() {
+    return this.updatedOnProperty;
+  }
+  
+  public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
+    this.updatedOnProperty = updatedOnProperty;
+  }
 
   public void clear() {
   	  this.contactIdProperty.set(0l);
   	  this.nameProperty.set("");
   	  this.addressProperty.set("");
+  	  this.statusProperty.set(0);
+  	  this.createdOnProperty.set(java.time.LocalDateTime.now());
+  	  this.updatedOnProperty.set(java.time.LocalDateTime.now());
   }
 
   public String toString() {

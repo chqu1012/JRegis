@@ -44,6 +44,18 @@ public class EmailTableView extends TableView<Email>{
 		columnAddress.setPrefWidth(100.0);
 		setupCellValueFactory(columnAddress, e->new SimpleObjectProperty<>(e.getAddress()));
 		getColumns().add(columnAddress);
+		TableColumn<Email, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
+		columnStatus.setPrefWidth(100.0);
+		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
+		getColumns().add(columnStatus);
+		TableColumn<Email, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
+		columnCreatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
+		getColumns().add(columnCreatedOn);
+		TableColumn<Email, java.time.LocalDateTime> columnUpdatedOn = new TableColumn<>("#UPDATEDON");
+		columnUpdatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnUpdatedOn, e->new SimpleObjectProperty<>(e.getUpdatedOn()));
+		getColumns().add(columnUpdatedOn);
 		
 		context.getMasterData().addAll(emailRepository.findAll());
 		setItems(context.getFilteredMasterData());

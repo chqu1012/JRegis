@@ -1,5 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
+import java.time.LocalDateTime;
+
 import org.controlsfx.control.Notifications;
 
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
@@ -18,6 +20,9 @@ public class ContactPhonenumberItem extends BaseContactItem<Phonenumber> {
 	protected void onButtonAccept(ActionEvent event) {
 		item.setNumber(textValue.getText());
 		item.setNumberType(textType.getText());
+		item.setCreatedOn(LocalDateTime.now());
+		item.setUpdatedOn(LocalDateTime.now());
+		item.setStatus(0);
 		if (item.getId()!=null) {
 			JRegisPlatform.getInstance(PhonenumberRepository.class).update(item);
 		}else {

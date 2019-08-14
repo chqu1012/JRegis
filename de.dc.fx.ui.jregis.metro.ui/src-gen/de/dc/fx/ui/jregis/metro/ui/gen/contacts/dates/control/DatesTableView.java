@@ -44,6 +44,18 @@ public class DatesTableView extends TableView<Dates>{
 		columnDate.setPrefWidth(100.0);
 		setupCellValueFactory(columnDate, e->new SimpleObjectProperty<>(e.getDate()));
 		getColumns().add(columnDate);
+		TableColumn<Dates, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
+		columnStatus.setPrefWidth(100.0);
+		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
+		getColumns().add(columnStatus);
+		TableColumn<Dates, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
+		columnCreatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
+		getColumns().add(columnCreatedOn);
+		TableColumn<Dates, java.time.LocalDateTime> columnUpdatedOn = new TableColumn<>("#UPDATEDON");
+		columnUpdatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnUpdatedOn, e->new SimpleObjectProperty<>(e.getUpdatedOn()));
+		getColumns().add(columnUpdatedOn);
 		
 		context.getMasterData().addAll(datesRepository.findAll());
 		setItems(context.getFilteredMasterData());

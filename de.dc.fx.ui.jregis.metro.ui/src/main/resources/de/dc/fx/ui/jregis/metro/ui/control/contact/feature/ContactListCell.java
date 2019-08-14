@@ -1,6 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact.feature;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import org.controlsfx.control.Notifications;
 
@@ -87,6 +88,9 @@ public class ContactListCell extends ListCell<Contact> {
 		getItem().setLastname(textLastname.getText());
 		getItem().setUsername(textUsername.getText());
 		getItem().setContactImageId(0L);
+		getItem().setCreatedOn(LocalDateTime.now());
+		getItem().setUpdatedOn(LocalDateTime.now());
+		getItem().setStatus(0);
 		long contactId = JRegisPlatform.getInstance(ContactRepository.class).save(getItem());
 		getItem().setId(contactId);
 		

@@ -13,6 +13,9 @@ import java.lang.String;
 import java.lang.String;
 import java.lang.String;
 import java.lang.Integer;
+import java.lang.Integer;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class AddressFX {
 	
@@ -30,6 +33,9 @@ public class AddressFX {
   private StringProperty countryProperty = new SimpleStringProperty();
   private StringProperty stateProperty = new SimpleStringProperty();
   private IntegerProperty zipCodeProperty = new SimpleIntegerProperty();
+  private IntegerProperty statusProperty = new SimpleIntegerProperty();
+  private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
+  private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
   
   public AddressFX() {
     this(new Address());
@@ -47,6 +53,9 @@ public class AddressFX {
 			countryProperty.set(newValue.getCountry());
 			stateProperty.set(newValue.getState());
 			zipCodeProperty.set(newValue.getZipCode());
+			statusProperty.set(newValue.getStatus());
+			createdOnProperty.set(newValue.getCreatedOn());
+			updatedOnProperty.set(newValue.getUpdatedOn());
 		}
 	});
 
@@ -78,6 +87,9 @@ public class AddressFX {
   	this.address.setCountry(countryProperty.getValue());
   	this.address.setState(stateProperty.getValue());
   	this.address.setZipCode(zipCodeProperty.getValue());
+  	this.address.setStatus(statusProperty.getValue());
+  	this.address.setCreatedOn(createdOnProperty.getValue());
+  	this.address.setUpdatedOn(updatedOnProperty.getValue());
     return this.address;
   }
   
@@ -131,6 +143,27 @@ public class AddressFX {
   public void setZipCodeProperty(IntegerProperty zipCodeProperty) {
     this.zipCodeProperty = zipCodeProperty;
   }
+  public IntegerProperty getStatusProperty() {
+    return this.statusProperty;
+  }
+  
+  public void setStatusProperty(IntegerProperty statusProperty) {
+    this.statusProperty = statusProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getCreatedOnProperty() {
+    return this.createdOnProperty;
+  }
+  
+  public void setCreatedOnProperty(ObjectProperty<java.time.LocalDateTime> createdOnProperty) {
+    this.createdOnProperty = createdOnProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getUpdatedOnProperty() {
+    return this.updatedOnProperty;
+  }
+  
+  public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
+    this.updatedOnProperty = updatedOnProperty;
+  }
 
   public void clear() {
   	  this.contactIdProperty.set(0l);
@@ -139,6 +172,9 @@ public class AddressFX {
   	  this.countryProperty.set("");
   	  this.stateProperty.set("");
   	  this.zipCodeProperty.set(0);
+  	  this.statusProperty.set(0);
+  	  this.createdOnProperty.set(java.time.LocalDateTime.now());
+  	  this.updatedOnProperty.set(java.time.LocalDateTime.now());
   }
 
   public String toString() {

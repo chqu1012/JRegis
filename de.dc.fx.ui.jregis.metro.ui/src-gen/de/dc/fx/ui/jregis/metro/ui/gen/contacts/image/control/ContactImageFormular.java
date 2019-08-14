@@ -27,11 +27,21 @@ public class ContactImageFormular extends VBox{
 		nameTextField.setPromptText("Please enter a Name");
 		nameTextField.textProperty().bindBidirectional(context.getNameProperty() );
 		getChildren().add(nameTextField);
+		getChildren().add(new Label("Status:"));
+		javafx.scene.control.TextField statusTextField = new javafx.scene.control.TextField();
+		statusTextField.setPromptText("Please enter a Status");
+		statusTextField.textProperty().bindBidirectional(context.getStatusProperty() , java.text.NumberFormat.getInstance());
+		getChildren().add(statusTextField);
 		getChildren().add(new Label("CreatedOn:"));
 		jfxtras.scene.control.LocalDateTimeTextField createdOnLocalDateTimeTextField = new jfxtras.scene.control.LocalDateTimeTextField();
 		createdOnLocalDateTimeTextField.setPromptText("Please enter a CreatedOn");
 		createdOnLocalDateTimeTextField.localDateTimeProperty().bindBidirectional(context.getCreatedOnProperty());
 		getChildren().add(createdOnLocalDateTimeTextField);
+		getChildren().add(new Label("UpdatedOn:"));
+		jfxtras.scene.control.LocalDateTimeTextField updatedOnLocalDateTimeTextField = new jfxtras.scene.control.LocalDateTimeTextField();
+		updatedOnLocalDateTimeTextField.setPromptText("Please enter a UpdatedOn");
+		updatedOnLocalDateTimeTextField.localDateTimeProperty().bindBidirectional(context.getUpdatedOnProperty());
+		getChildren().add(updatedOnLocalDateTimeTextField);
 		
 		Button submitButton = new Button("Submit");
 		submitButton.setOnMouseClicked(this::onButtonSubmit);

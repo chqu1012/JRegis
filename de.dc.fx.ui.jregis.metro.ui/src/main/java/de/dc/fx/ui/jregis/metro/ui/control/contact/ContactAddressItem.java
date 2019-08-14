@@ -1,5 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
+import java.time.LocalDateTime;
+
 import org.controlsfx.control.Notifications;
 
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
@@ -63,6 +65,9 @@ public class ContactAddressItem extends BaseContactItem<Address>{
 		item.setCountry(textCountry.getText());
 		item.setState(textState.getText());
 		item.setZipCode(Integer.parseInt(textZipCode.getText()));
+		item.setCreatedOn(LocalDateTime.now());
+		item.setUpdatedOn(LocalDateTime.now());
+		item.setStatus(0);
 		if (item.getId()!=null) {
 			JRegisPlatform.getInstance(AddressRepository.class).update(item);
 		}else {

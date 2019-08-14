@@ -54,7 +54,7 @@
             </HBox>
          </children>
          <padding>
-            <Insets left="5.0" right="5.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" />
          </padding>
       </VBox>
       <VBox fx:id="vboxContactList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" spacing="5.0" styleClass="hbox">
@@ -87,7 +87,7 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Delete">
+                      <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteContact" text="Delete">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>

@@ -61,6 +61,9 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 	protected void onButtonAccept(ActionEvent event) {
 		item.setName(textType.getText());
 		item.setDate(textDate.getLocalDateTime());
+		item.setCreatedOn(LocalDateTime.now());
+		item.setUpdatedOn(LocalDateTime.now());
+		item.setStatus(0);
 		if (item.getId()!=null) {
 			JRegisPlatform.getInstance(DatesRepository.class).update(item);
 		}else {

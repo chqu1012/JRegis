@@ -15,7 +15,14 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		phonenumber.setName(resultSet.getString("NAME"));
 		phonenumber.setNumber(resultSet.getString("NUMBER"));
 		phonenumber.setNumberType(resultSet.getString("NUMBER_TYPE"));
+		phonenumber.setStatus(resultSet.getInt("STATUS"));
+		phonenumber.setCreatedOn(resultSet.getTimestamp("CREATED_ON").toLocalDateTime());
+		phonenumber.setUpdatedOn(resultSet.getTimestamp("UPDATED_ON").toLocalDateTime());
 		return phonenumber;
+	}
+	
+	public void updateContactId(long id, java.lang.Long contactId) {
+		query("UPDATE PHONENUMBER SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
 	}
 	
 	public List<Phonenumber> findAllByContactId(Long contactId){
@@ -41,6 +48,10 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 	public List<Phonenumber> findAllByContactIdLikeOrderByDesc(Long contactId){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
+	public void updateName(long id, java.lang.String name) {
+		query("UPDATE PHONENUMBER SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
 	public List<Phonenumber> findAllByName(String name){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NAME = '%s'", String.valueOf(name)));
 	}
@@ -64,6 +75,10 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 	public List<Phonenumber> findAllByNameLikeOrderByDesc(String name){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
+	public void updateNumber(long id, java.lang.String number) {
+		query("UPDATE PHONENUMBER SET NUMBER ='"+number+"' WHERE ID = "+id);
+	}
+	
 	public List<Phonenumber> findAllByNumber(String number){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER = '%s'", String.valueOf(number)));
 	}
@@ -87,6 +102,10 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 	public List<Phonenumber> findAllByNumberLikeOrderByDesc(String number){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER like '%%s%' ORDER BY NUMBER DESC", String.valueOf(number)));
 	}
+	public void updateNumberType(long id, java.lang.String numberType) {
+		query("UPDATE PHONENUMBER SET NUMBER_TYPE ='"+numberType+"' WHERE ID = "+id);
+	}
+	
 	public List<Phonenumber> findAllByNumberType(String numberType){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER_TYPE = '%s'", String.valueOf(numberType)));
 	}
@@ -110,6 +129,87 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 	public List<Phonenumber> findAllByNumberTypeLikeOrderByDesc(String numberType){
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER_TYPE like '%%s%' ORDER BY NUMBER_TYPE DESC", String.valueOf(numberType)));
 	}
+	public void updateStatus(long id, java.lang.Integer status) {
+		query("UPDATE PHONENUMBER SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public List<Phonenumber> findAllByStatus(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS = '%s'", String.valueOf(status)));
+	}
+
+	public List<Phonenumber> findAllByStatusOrderByAsc(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS = '%s' ORDER BY STATUS ASC", String.valueOf(status)));
+	}
+
+	public List<Phonenumber> findAllByStatusOrderByDesc(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS = '%s' ORDER BY STATUS DESC", String.valueOf(status)));
+	}
+
+	public List<Phonenumber> findAllByStatusLike(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS like '%%s%'", String.valueOf(status)));
+	}
+	
+	public List<Phonenumber> findAllByStatusLikeOrderByAsc(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS like '%%s%' ORDER BY STATUS ASC", String.valueOf(status)));
+	}
+	
+	public List<Phonenumber> findAllByStatusLikeOrderByDesc(Integer status){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
+	}
+	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
+		query("UPDATE PHONENUMBER SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public List<Phonenumber> findAllByCreatedOn(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON = '%s'", String.valueOf(createdOn)));
+	}
+
+	public List<Phonenumber> findAllByCreatedOnOrderByAsc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON = '%s' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+	}
+
+	public List<Phonenumber> findAllByCreatedOnOrderByDesc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON = '%s' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+	}
+
+	public List<Phonenumber> findAllByCreatedOnLike(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON like '%%s%'", String.valueOf(createdOn)));
+	}
+	
+	public List<Phonenumber> findAllByCreatedOnLikeOrderByAsc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+	}
+	
+	public List<Phonenumber> findAllByCreatedOnLikeOrderByDesc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+	}
+	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
+		query("UPDATE PHONENUMBER SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public List<Phonenumber> findAllByUpdatedOn(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON = '%s'", String.valueOf(updatedOn)));
+	}
+
+	public List<Phonenumber> findAllByUpdatedOnOrderByAsc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON = '%s' ORDER BY UPDATED_ON ASC", String.valueOf(updatedOn)));
+	}
+
+	public List<Phonenumber> findAllByUpdatedOnOrderByDesc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON = '%s' ORDER BY UPDATED_ON DESC", String.valueOf(updatedOn)));
+	}
+
+	public List<Phonenumber> findAllByUpdatedOnLike(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON like '%%s%'", String.valueOf(updatedOn)));
+	}
+	
+	public List<Phonenumber> findAllByUpdatedOnLikeOrderByAsc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON like '%%s%' ORDER BY UPDATED_ON ASC", String.valueOf(updatedOn)));
+	}
+	
+	public List<Phonenumber> findAllByUpdatedOnLikeOrderByDesc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM PHONENUMBER WHERE UPDATED_ON like '%%s%' ORDER BY UPDATED_ON DESC", String.valueOf(updatedOn)));
+	}
 	
 	@Override
 	protected String findAllStatement() {
@@ -132,6 +232,9 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		statement.setString(2, t.getName());
 		statement.setString(3, t.getNumber());
 		statement.setString(4, t.getNumberType());
+		statement.setInt(5, t.getStatus());
+		statement.setTimestamp(6, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(7, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override
@@ -146,6 +249,9 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		statement.setString(3, t.getName());
 		statement.setString(4, t.getNumber());
 		statement.setString(5, t.getNumberType());
+		statement.setInt(6, t.getStatus());
+		statement.setTimestamp(7, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(8, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override

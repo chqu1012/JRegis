@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 import java.lang.String;
+import java.lang.Integer;
+import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 
 public class ContactImageFX {
@@ -21,7 +23,9 @@ public class ContactImageFX {
   private BooleanProperty enableSubmitProperty = new SimpleBooleanProperty(false);
   
   private StringProperty nameProperty = new SimpleStringProperty();
+  private IntegerProperty statusProperty = new SimpleIntegerProperty();
   private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
+  private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
   
   public ContactImageFX() {
     this(new ContactImage());
@@ -34,7 +38,9 @@ public class ContactImageFX {
 	this.contactImageProperty.addListener((observable, oldValue, newValue) -> {
 		if (newValue!=null) {
 			nameProperty.set(newValue.getName());
+			statusProperty.set(newValue.getStatus());
 			createdOnProperty.set(newValue.getCreatedOn());
+			updatedOnProperty.set(newValue.getUpdatedOn());
 		}
 	});
 
@@ -61,7 +67,9 @@ public class ContactImageFX {
   public ContactImage getContactImage() {
   	this.contactImage = new ContactImage();
   	this.contactImage.setName(nameProperty.getValue());
+  	this.contactImage.setStatus(statusProperty.getValue());
   	this.contactImage.setCreatedOn(createdOnProperty.getValue());
+  	this.contactImage.setUpdatedOn(updatedOnProperty.getValue());
     return this.contactImage;
   }
   
@@ -80,6 +88,13 @@ public class ContactImageFX {
   public void setNameProperty(StringProperty nameProperty) {
     this.nameProperty = nameProperty;
   }
+  public IntegerProperty getStatusProperty() {
+    return this.statusProperty;
+  }
+  
+  public void setStatusProperty(IntegerProperty statusProperty) {
+    this.statusProperty = statusProperty;
+  }
   public ObjectProperty<java.time.LocalDateTime> getCreatedOnProperty() {
     return this.createdOnProperty;
   }
@@ -87,10 +102,19 @@ public class ContactImageFX {
   public void setCreatedOnProperty(ObjectProperty<java.time.LocalDateTime> createdOnProperty) {
     this.createdOnProperty = createdOnProperty;
   }
+  public ObjectProperty<java.time.LocalDateTime> getUpdatedOnProperty() {
+    return this.updatedOnProperty;
+  }
+  
+  public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
+    this.updatedOnProperty = updatedOnProperty;
+  }
 
   public void clear() {
   	  this.nameProperty.set("");
+  	  this.statusProperty.set(0);
   	  this.createdOnProperty.set(java.time.LocalDateTime.now());
+  	  this.updatedOnProperty.set(java.time.LocalDateTime.now());
   }
 
   public String toString() {

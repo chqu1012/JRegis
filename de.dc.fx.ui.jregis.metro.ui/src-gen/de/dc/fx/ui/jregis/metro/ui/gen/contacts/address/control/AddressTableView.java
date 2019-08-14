@@ -56,6 +56,18 @@ public class AddressTableView extends TableView<Address>{
 		columnZipCode.setPrefWidth(100.0);
 		setupCellValueFactory(columnZipCode, e->new SimpleObjectProperty<>(e.getZipCode()));
 		getColumns().add(columnZipCode);
+		TableColumn<Address, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
+		columnStatus.setPrefWidth(100.0);
+		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
+		getColumns().add(columnStatus);
+		TableColumn<Address, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
+		columnCreatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
+		getColumns().add(columnCreatedOn);
+		TableColumn<Address, java.time.LocalDateTime> columnUpdatedOn = new TableColumn<>("#UPDATEDON");
+		columnUpdatedOn.setPrefWidth(100.0);
+		setupCellValueFactory(columnUpdatedOn, e->new SimpleObjectProperty<>(e.getUpdatedOn()));
+		getColumns().add(columnUpdatedOn);
 		
 		context.getMasterData().addAll(addressRepository.findAll());
 		setItems(context.getFilteredMasterData());

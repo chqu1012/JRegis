@@ -13,17 +13,23 @@ public class Address{
 	private String country;
 	private String state;
 	private Integer zipCode;
+	private Integer status;
+	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 	
 	public Address() {
 	}
 		
-	public Address(Long contactId, String addressType, String street, String country, String state, Integer zipCode) {
+	public Address(Long contactId, String addressType, String street, String country, String state, Integer zipCode, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.contactId = contactId;
 		this.addressType = addressType;
 		this.street = street;
 		this.country = country;
 		this.state = state;
 		this.zipCode = zipCode;
+		this.status = status;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 	}
 	
 	public Long getId(){
@@ -74,6 +80,27 @@ public class Address{
 
 	public void setZipCode(Integer zipCode) {
 		this.zipCode = zipCode;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	@Override

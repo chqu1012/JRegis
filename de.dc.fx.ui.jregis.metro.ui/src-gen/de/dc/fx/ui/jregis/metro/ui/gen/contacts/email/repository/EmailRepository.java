@@ -14,7 +14,14 @@ public class EmailRepository extends BaseRepository<Email>{
 		email.setContactId(resultSet.getLong("CONTACT_ID"));
 		email.setName(resultSet.getString("NAME"));
 		email.setAddress(resultSet.getString("ADDRESS"));
+		email.setStatus(resultSet.getInt("STATUS"));
+		email.setCreatedOn(resultSet.getTimestamp("CREATED_ON").toLocalDateTime());
+		email.setUpdatedOn(resultSet.getTimestamp("UPDATED_ON").toLocalDateTime());
 		return email;
+	}
+	
+	public void updateContactId(long id, java.lang.Long contactId) {
+		query("UPDATE EMAIL SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
 	}
 	
 	public List<Email> findAllByContactId(Long contactId){
@@ -40,6 +47,10 @@ public class EmailRepository extends BaseRepository<Email>{
 	public List<Email> findAllByContactIdLikeOrderByDesc(Long contactId){
 		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
+	public void updateName(long id, java.lang.String name) {
+		query("UPDATE EMAIL SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
 	public List<Email> findAllByName(String name){
 		return query(String.format("SELECT * FROM EMAIL WHERE NAME = '%s'", String.valueOf(name)));
 	}
@@ -63,6 +74,10 @@ public class EmailRepository extends BaseRepository<Email>{
 	public List<Email> findAllByNameLikeOrderByDesc(String name){
 		return query(String.format("SELECT * FROM EMAIL WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
+	public void updateAddress(long id, java.lang.String address) {
+		query("UPDATE EMAIL SET ADDRESS ='"+address+"' WHERE ID = "+id);
+	}
+	
 	public List<Email> findAllByAddress(String address){
 		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS = '%s'", String.valueOf(address)));
 	}
@@ -86,6 +101,87 @@ public class EmailRepository extends BaseRepository<Email>{
 	public List<Email> findAllByAddressLikeOrderByDesc(String address){
 		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS like '%%s%' ORDER BY ADDRESS DESC", String.valueOf(address)));
 	}
+	public void updateStatus(long id, java.lang.Integer status) {
+		query("UPDATE EMAIL SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public List<Email> findAllByStatus(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS = '%s'", String.valueOf(status)));
+	}
+
+	public List<Email> findAllByStatusOrderByAsc(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS = '%s' ORDER BY STATUS ASC", String.valueOf(status)));
+	}
+
+	public List<Email> findAllByStatusOrderByDesc(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS = '%s' ORDER BY STATUS DESC", String.valueOf(status)));
+	}
+
+	public List<Email> findAllByStatusLike(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS like '%%s%'", String.valueOf(status)));
+	}
+	
+	public List<Email> findAllByStatusLikeOrderByAsc(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS like '%%s%' ORDER BY STATUS ASC", String.valueOf(status)));
+	}
+	
+	public List<Email> findAllByStatusLikeOrderByDesc(Integer status){
+		return query(String.format("SELECT * FROM EMAIL WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
+	}
+	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
+		query("UPDATE EMAIL SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public List<Email> findAllByCreatedOn(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON = '%s'", String.valueOf(createdOn)));
+	}
+
+	public List<Email> findAllByCreatedOnOrderByAsc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON = '%s' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+	}
+
+	public List<Email> findAllByCreatedOnOrderByDesc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON = '%s' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+	}
+
+	public List<Email> findAllByCreatedOnLike(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON like '%%s%'", String.valueOf(createdOn)));
+	}
+	
+	public List<Email> findAllByCreatedOnLikeOrderByAsc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON ASC", String.valueOf(createdOn)));
+	}
+	
+	public List<Email> findAllByCreatedOnLikeOrderByDesc(LocalDateTime createdOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
+	}
+	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
+		query("UPDATE EMAIL SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public List<Email> findAllByUpdatedOn(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON = '%s'", String.valueOf(updatedOn)));
+	}
+
+	public List<Email> findAllByUpdatedOnOrderByAsc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON = '%s' ORDER BY UPDATED_ON ASC", String.valueOf(updatedOn)));
+	}
+
+	public List<Email> findAllByUpdatedOnOrderByDesc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON = '%s' ORDER BY UPDATED_ON DESC", String.valueOf(updatedOn)));
+	}
+
+	public List<Email> findAllByUpdatedOnLike(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON like '%%s%'", String.valueOf(updatedOn)));
+	}
+	
+	public List<Email> findAllByUpdatedOnLikeOrderByAsc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON like '%%s%' ORDER BY UPDATED_ON ASC", String.valueOf(updatedOn)));
+	}
+	
+	public List<Email> findAllByUpdatedOnLikeOrderByDesc(LocalDateTime updatedOn){
+		return query(String.format("SELECT * FROM EMAIL WHERE UPDATED_ON like '%%s%' ORDER BY UPDATED_ON DESC", String.valueOf(updatedOn)));
+	}
 	
 	@Override
 	protected String findAllStatement() {
@@ -107,6 +203,9 @@ public class EmailRepository extends BaseRepository<Email>{
 		statement.setLong(1, t.getContactId());
 		statement.setString(2, t.getName());
 		statement.setString(3, t.getAddress());
+		statement.setInt(4, t.getStatus());
+		statement.setTimestamp(5, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(6, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override
@@ -120,6 +219,9 @@ public class EmailRepository extends BaseRepository<Email>{
 		statement.setLong(2, t.getContactId());
 		statement.setString(3, t.getName());
 		statement.setString(4, t.getAddress());
+		statement.setInt(5, t.getStatus());
+		statement.setTimestamp(6, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(7, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override

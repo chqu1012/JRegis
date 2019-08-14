@@ -11,6 +11,9 @@ import java.lang.Long;
 import java.lang.String;
 import java.lang.String;
 import java.lang.String;
+import java.lang.Integer;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class PhonenumberFX {
 	
@@ -26,6 +29,9 @@ public class PhonenumberFX {
   private StringProperty nameProperty = new SimpleStringProperty();
   private StringProperty numberProperty = new SimpleStringProperty();
   private StringProperty numberTypeProperty = new SimpleStringProperty();
+  private IntegerProperty statusProperty = new SimpleIntegerProperty();
+  private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
+  private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
   
   public PhonenumberFX() {
     this(new Phonenumber());
@@ -41,6 +47,9 @@ public class PhonenumberFX {
 			nameProperty.set(newValue.getName());
 			numberProperty.set(newValue.getNumber());
 			numberTypeProperty.set(newValue.getNumberType());
+			statusProperty.set(newValue.getStatus());
+			createdOnProperty.set(newValue.getCreatedOn());
+			updatedOnProperty.set(newValue.getUpdatedOn());
 		}
 	});
 
@@ -70,6 +79,9 @@ public class PhonenumberFX {
   	this.phonenumber.setName(nameProperty.getValue());
   	this.phonenumber.setNumber(numberProperty.getValue());
   	this.phonenumber.setNumberType(numberTypeProperty.getValue());
+  	this.phonenumber.setStatus(statusProperty.getValue());
+  	this.phonenumber.setCreatedOn(createdOnProperty.getValue());
+  	this.phonenumber.setUpdatedOn(updatedOnProperty.getValue());
     return this.phonenumber;
   }
   
@@ -109,12 +121,36 @@ public class PhonenumberFX {
   public void setNumberTypeProperty(StringProperty numberTypeProperty) {
     this.numberTypeProperty = numberTypeProperty;
   }
+  public IntegerProperty getStatusProperty() {
+    return this.statusProperty;
+  }
+  
+  public void setStatusProperty(IntegerProperty statusProperty) {
+    this.statusProperty = statusProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getCreatedOnProperty() {
+    return this.createdOnProperty;
+  }
+  
+  public void setCreatedOnProperty(ObjectProperty<java.time.LocalDateTime> createdOnProperty) {
+    this.createdOnProperty = createdOnProperty;
+  }
+  public ObjectProperty<java.time.LocalDateTime> getUpdatedOnProperty() {
+    return this.updatedOnProperty;
+  }
+  
+  public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
+    this.updatedOnProperty = updatedOnProperty;
+  }
 
   public void clear() {
   	  this.contactIdProperty.set(0l);
   	  this.nameProperty.set("");
   	  this.numberProperty.set("");
   	  this.numberTypeProperty.set("");
+  	  this.statusProperty.set(0);
+  	  this.createdOnProperty.set(java.time.LocalDateTime.now());
+  	  this.updatedOnProperty.set(java.time.LocalDateTime.now());
   }
 
   public String toString() {

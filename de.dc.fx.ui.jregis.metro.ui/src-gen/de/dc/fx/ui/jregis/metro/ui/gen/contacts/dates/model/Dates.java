@@ -10,14 +10,20 @@ public class Dates{
 	private Long contactId;
 	private String name;
 	private LocalDateTime date;
+	private Integer status;
+	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 	
 	public Dates() {
 	}
 		
-	public Dates(Long contactId, String name, LocalDateTime date) {
+	public Dates(Long contactId, String name, LocalDateTime date, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.contactId = contactId;
 		this.name = name;
 		this.date = date;
+		this.status = status;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 	}
 	
 	public Long getId(){
@@ -47,6 +53,27 @@ public class Dates{
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	@Override
