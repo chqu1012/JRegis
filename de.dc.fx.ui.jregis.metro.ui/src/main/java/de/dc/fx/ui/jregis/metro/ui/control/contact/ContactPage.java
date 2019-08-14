@@ -2,12 +2,13 @@ package de.dc.fx.ui.jregis.metro.ui.control.contact;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.controlsfx.control.Notifications;
 
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
@@ -30,6 +31,7 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.repository.ContactImageRep
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
 import de.dc.fx.ui.jregis.metro.ui.service.ContactFolderService;
+import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -37,8 +39,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -267,6 +271,19 @@ public class ContactPage extends BaseContactPage {
 				imageViewUser.setImage(new Image(file.toURI().toString()));
 			}
 		}
+	}
+
+	@Override
+	protected void onMenuItemDeleteContact(ActionEvent event) {
+		Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
+		DialogUtil.openQuestion("Delete Contact Dialog", "Delete Contact Operation", "Do you really want to delete this contact "+selection.getUsername()).ifPresent(e->{
+			if(e.getButtonData().equals(ButtonData.OK_DONE)) {
+				contactRepository.delete(selection);
+				
+				contacts.remove(selection);
+				Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
+			}
+		});
 	}
 
 }

@@ -1,5 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -85,5 +86,8 @@ public abstract class BaseContactPage extends SplitPane{
 
     @FXML
     protected abstract void onImageViewUserClicked(MouseEvent event);
+
+    @FXML
+    protected abstract void onMenuItemDeleteContact(ActionEvent event);
 
 }
