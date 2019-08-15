@@ -22,7 +22,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 	}
 	
 	public void updateFirstname(long id, java.lang.String firstname) {
-		query("UPDATE CONTACT SET FIRSTNAME ='"+firstname+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET FIRSTNAME ='"+firstname+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByFirstname(java.lang.String firstname) {
+		queryExecute("DELETE CONTACT WHERE FIRSTNAME = '"+firstname+"'");
 	}
 	
 	public List<Contact> findAllByFirstname(String firstname){
@@ -49,7 +53,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE FIRSTNAME like '%%s%' ORDER BY FIRSTNAME DESC", String.valueOf(firstname)));
 	}
 	public void updateLastname(long id, java.lang.String lastname) {
-		query("UPDATE CONTACT SET LASTNAME ='"+lastname+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET LASTNAME ='"+lastname+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByLastname(java.lang.String lastname) {
+		queryExecute("DELETE CONTACT WHERE LASTNAME = '"+lastname+"'");
 	}
 	
 	public List<Contact> findAllByLastname(String lastname){
@@ -76,7 +84,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE LASTNAME like '%%s%' ORDER BY LASTNAME DESC", String.valueOf(lastname)));
 	}
 	public void updateUsername(long id, java.lang.String username) {
-		query("UPDATE CONTACT SET USERNAME ='"+username+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET USERNAME ='"+username+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUsername(java.lang.String username) {
+		queryExecute("DELETE CONTACT WHERE USERNAME = '"+username+"'");
 	}
 	
 	public List<Contact> findAllByUsername(String username){
@@ -103,7 +115,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE USERNAME like '%%s%' ORDER BY USERNAME DESC", String.valueOf(username)));
 	}
 	public void updateContactImageId(long id, java.lang.Long contactImageId) {
-		query("UPDATE CONTACT SET CONTACT_IMAGE_ID ='"+contactImageId+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET CONTACT_IMAGE_ID ='"+contactImageId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactImageId(java.lang.Long contactImageId) {
+		queryExecute("DELETE CONTACT WHERE CONTACT_IMAGE_ID = '"+contactImageId+"'");
 	}
 	
 	public List<Contact> findAllByContactImageId(Long contactImageId){
@@ -130,7 +146,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_IMAGE_ID like '%%s%' ORDER BY CONTACT_IMAGE_ID DESC", String.valueOf(contactImageId)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE CONTACT SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE CONTACT WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<Contact> findAllByStatus(Integer status){
@@ -157,7 +177,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE CONTACT SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE CONTACT WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<Contact> findAllByCreatedOn(LocalDateTime createdOn){
@@ -184,7 +208,11 @@ public class ContactRepository extends BaseRepository<Contact>{
 		return query(String.format("SELECT * FROM CONTACT WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE CONTACT SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE CONTACT WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<Contact> findAllByUpdatedOn(LocalDateTime updatedOn){

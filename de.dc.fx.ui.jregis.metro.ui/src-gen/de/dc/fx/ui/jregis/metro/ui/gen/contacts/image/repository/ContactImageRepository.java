@@ -19,7 +19,11 @@ public class ContactImageRepository extends BaseRepository<ContactImage>{
 	}
 	
 	public void updateName(long id, java.lang.String name) {
-		query("UPDATE CONTACT_IMAGE SET NAME ='"+name+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT_IMAGE SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByName(java.lang.String name) {
+		queryExecute("DELETE CONTACT_IMAGE WHERE NAME = '"+name+"'");
 	}
 	
 	public List<ContactImage> findAllByName(String name){
@@ -46,7 +50,11 @@ public class ContactImageRepository extends BaseRepository<ContactImage>{
 		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE CONTACT_IMAGE SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT_IMAGE SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE CONTACT_IMAGE WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<ContactImage> findAllByStatus(Integer status){
@@ -73,7 +81,11 @@ public class ContactImageRepository extends BaseRepository<ContactImage>{
 		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE CONTACT_IMAGE SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT_IMAGE SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE CONTACT_IMAGE WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<ContactImage> findAllByCreatedOn(LocalDateTime createdOn){
@@ -100,7 +112,11 @@ public class ContactImageRepository extends BaseRepository<ContactImage>{
 		return query(String.format("SELECT * FROM CONTACT_IMAGE WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE CONTACT_IMAGE SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE CONTACT_IMAGE SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE CONTACT_IMAGE WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<ContactImage> findAllByUpdatedOn(LocalDateTime updatedOn){

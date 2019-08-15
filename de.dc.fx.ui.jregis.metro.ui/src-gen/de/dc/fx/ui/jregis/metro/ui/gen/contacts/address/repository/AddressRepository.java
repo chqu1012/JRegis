@@ -24,7 +24,11 @@ public class AddressRepository extends BaseRepository<Address>{
 	}
 	
 	public void updateContactId(long id, java.lang.Long contactId) {
-		query("UPDATE ADDRESS SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactId(java.lang.Long contactId) {
+		queryExecute("DELETE ADDRESS WHERE CONTACT_ID = '"+contactId+"'");
 	}
 	
 	public List<Address> findAllByContactId(Long contactId){
@@ -51,7 +55,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
 	public void updateAddressType(long id, java.lang.String addressType) {
-		query("UPDATE ADDRESS SET ADDRESS_TYPE ='"+addressType+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET ADDRESS_TYPE ='"+addressType+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByAddressType(java.lang.String addressType) {
+		queryExecute("DELETE ADDRESS WHERE ADDRESS_TYPE = '"+addressType+"'");
 	}
 	
 	public List<Address> findAllByAddressType(String addressType){
@@ -78,7 +86,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE ADDRESS_TYPE like '%%s%' ORDER BY ADDRESS_TYPE DESC", String.valueOf(addressType)));
 	}
 	public void updateStreet(long id, java.lang.String street) {
-		query("UPDATE ADDRESS SET STREET ='"+street+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET STREET ='"+street+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStreet(java.lang.String street) {
+		queryExecute("DELETE ADDRESS WHERE STREET = '"+street+"'");
 	}
 	
 	public List<Address> findAllByStreet(String street){
@@ -105,7 +117,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE STREET like '%%s%' ORDER BY STREET DESC", String.valueOf(street)));
 	}
 	public void updateCountry(long id, java.lang.String country) {
-		query("UPDATE ADDRESS SET COUNTRY ='"+country+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET COUNTRY ='"+country+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCountry(java.lang.String country) {
+		queryExecute("DELETE ADDRESS WHERE COUNTRY = '"+country+"'");
 	}
 	
 	public List<Address> findAllByCountry(String country){
@@ -132,7 +148,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE COUNTRY like '%%s%' ORDER BY COUNTRY DESC", String.valueOf(country)));
 	}
 	public void updateState(long id, java.lang.String state) {
-		query("UPDATE ADDRESS SET STATE ='"+state+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET STATE ='"+state+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByState(java.lang.String state) {
+		queryExecute("DELETE ADDRESS WHERE STATE = '"+state+"'");
 	}
 	
 	public List<Address> findAllByState(String state){
@@ -159,7 +179,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE STATE like '%%s%' ORDER BY STATE DESC", String.valueOf(state)));
 	}
 	public void updateZipCode(long id, java.lang.Integer zipCode) {
-		query("UPDATE ADDRESS SET ZIP_CODE ='"+zipCode+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET ZIP_CODE ='"+zipCode+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByZipCode(java.lang.Integer zipCode) {
+		queryExecute("DELETE ADDRESS WHERE ZIP_CODE = '"+zipCode+"'");
 	}
 	
 	public List<Address> findAllByZipCode(Integer zipCode){
@@ -186,7 +210,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE ZIP_CODE like '%%s%' ORDER BY ZIP_CODE DESC", String.valueOf(zipCode)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE ADDRESS SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE ADDRESS WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<Address> findAllByStatus(Integer status){
@@ -213,7 +241,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE ADDRESS SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE ADDRESS WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<Address> findAllByCreatedOn(LocalDateTime createdOn){
@@ -240,7 +272,11 @@ public class AddressRepository extends BaseRepository<Address>{
 		return query(String.format("SELECT * FROM ADDRESS WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE ADDRESS SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE ADDRESS SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE ADDRESS WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<Address> findAllByUpdatedOn(LocalDateTime updatedOn){

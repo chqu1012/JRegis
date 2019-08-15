@@ -21,7 +21,11 @@ public class EmailRepository extends BaseRepository<Email>{
 	}
 	
 	public void updateContactId(long id, java.lang.Long contactId) {
-		query("UPDATE EMAIL SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactId(java.lang.Long contactId) {
+		queryExecute("DELETE EMAIL WHERE CONTACT_ID = '"+contactId+"'");
 	}
 	
 	public List<Email> findAllByContactId(Long contactId){
@@ -48,7 +52,11 @@ public class EmailRepository extends BaseRepository<Email>{
 		return query(String.format("SELECT * FROM EMAIL WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
 	public void updateName(long id, java.lang.String name) {
-		query("UPDATE EMAIL SET NAME ='"+name+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByName(java.lang.String name) {
+		queryExecute("DELETE EMAIL WHERE NAME = '"+name+"'");
 	}
 	
 	public List<Email> findAllByName(String name){
@@ -75,7 +83,11 @@ public class EmailRepository extends BaseRepository<Email>{
 		return query(String.format("SELECT * FROM EMAIL WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 	public void updateAddress(long id, java.lang.String address) {
-		query("UPDATE EMAIL SET ADDRESS ='"+address+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET ADDRESS ='"+address+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByAddress(java.lang.String address) {
+		queryExecute("DELETE EMAIL WHERE ADDRESS = '"+address+"'");
 	}
 	
 	public List<Email> findAllByAddress(String address){
@@ -102,7 +114,11 @@ public class EmailRepository extends BaseRepository<Email>{
 		return query(String.format("SELECT * FROM EMAIL WHERE ADDRESS like '%%s%' ORDER BY ADDRESS DESC", String.valueOf(address)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE EMAIL SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE EMAIL WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<Email> findAllByStatus(Integer status){
@@ -129,7 +145,11 @@ public class EmailRepository extends BaseRepository<Email>{
 		return query(String.format("SELECT * FROM EMAIL WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE EMAIL SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE EMAIL WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<Email> findAllByCreatedOn(LocalDateTime createdOn){
@@ -156,7 +176,11 @@ public class EmailRepository extends BaseRepository<Email>{
 		return query(String.format("SELECT * FROM EMAIL WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE EMAIL SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE EMAIL SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE EMAIL WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<Email> findAllByUpdatedOn(LocalDateTime updatedOn){

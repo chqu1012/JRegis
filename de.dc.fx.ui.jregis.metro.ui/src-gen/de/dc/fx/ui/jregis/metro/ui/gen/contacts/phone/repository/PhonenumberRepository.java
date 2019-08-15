@@ -22,7 +22,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 	}
 	
 	public void updateContactId(long id, java.lang.Long contactId) {
-		query("UPDATE PHONENUMBER SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactId(java.lang.Long contactId) {
+		queryExecute("DELETE PHONENUMBER WHERE CONTACT_ID = '"+contactId+"'");
 	}
 	
 	public List<Phonenumber> findAllByContactId(Long contactId){
@@ -49,7 +53,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
 	public void updateName(long id, java.lang.String name) {
-		query("UPDATE PHONENUMBER SET NAME ='"+name+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByName(java.lang.String name) {
+		queryExecute("DELETE PHONENUMBER WHERE NAME = '"+name+"'");
 	}
 	
 	public List<Phonenumber> findAllByName(String name){
@@ -76,7 +84,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 	public void updateNumber(long id, java.lang.String number) {
-		query("UPDATE PHONENUMBER SET NUMBER ='"+number+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET NUMBER ='"+number+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByNumber(java.lang.String number) {
+		queryExecute("DELETE PHONENUMBER WHERE NUMBER = '"+number+"'");
 	}
 	
 	public List<Phonenumber> findAllByNumber(String number){
@@ -103,7 +115,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER like '%%s%' ORDER BY NUMBER DESC", String.valueOf(number)));
 	}
 	public void updateNumberType(long id, java.lang.String numberType) {
-		query("UPDATE PHONENUMBER SET NUMBER_TYPE ='"+numberType+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET NUMBER_TYPE ='"+numberType+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByNumberType(java.lang.String numberType) {
+		queryExecute("DELETE PHONENUMBER WHERE NUMBER_TYPE = '"+numberType+"'");
 	}
 	
 	public List<Phonenumber> findAllByNumberType(String numberType){
@@ -130,7 +146,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE NUMBER_TYPE like '%%s%' ORDER BY NUMBER_TYPE DESC", String.valueOf(numberType)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE PHONENUMBER SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE PHONENUMBER WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<Phonenumber> findAllByStatus(Integer status){
@@ -157,7 +177,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE PHONENUMBER SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE PHONENUMBER WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<Phonenumber> findAllByCreatedOn(LocalDateTime createdOn){
@@ -184,7 +208,11 @@ public class PhonenumberRepository extends BaseRepository<Phonenumber>{
 		return query(String.format("SELECT * FROM PHONENUMBER WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE PHONENUMBER SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE PHONENUMBER SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE PHONENUMBER WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<Phonenumber> findAllByUpdatedOn(LocalDateTime updatedOn){

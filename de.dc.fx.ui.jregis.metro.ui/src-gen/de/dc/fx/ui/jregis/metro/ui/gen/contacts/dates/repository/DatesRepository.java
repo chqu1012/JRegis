@@ -21,7 +21,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 	}
 	
 	public void updateContactId(long id, java.lang.Long contactId) {
-		query("UPDATE DATES SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET CONTACT_ID ='"+contactId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactId(java.lang.Long contactId) {
+		queryExecute("DELETE DATES WHERE CONTACT_ID = '"+contactId+"'");
 	}
 	
 	public List<Dates> findAllByContactId(Long contactId){
@@ -48,7 +52,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 		return query(String.format("SELECT * FROM DATES WHERE CONTACT_ID like '%%s%' ORDER BY CONTACT_ID DESC", String.valueOf(contactId)));
 	}
 	public void updateName(long id, java.lang.String name) {
-		query("UPDATE DATES SET NAME ='"+name+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET NAME ='"+name+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByName(java.lang.String name) {
+		queryExecute("DELETE DATES WHERE NAME = '"+name+"'");
 	}
 	
 	public List<Dates> findAllByName(String name){
@@ -75,7 +83,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 		return query(String.format("SELECT * FROM DATES WHERE NAME like '%%s%' ORDER BY NAME DESC", String.valueOf(name)));
 	}
 	public void updateDate(long id, java.time.LocalDateTime date) {
-		query("UPDATE DATES SET DATE ='"+date+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET DATE ='"+date+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByDate(java.time.LocalDateTime date) {
+		queryExecute("DELETE DATES WHERE DATE = '"+date+"'");
 	}
 	
 	public List<Dates> findAllByDate(LocalDateTime date){
@@ -102,7 +114,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 		return query(String.format("SELECT * FROM DATES WHERE DATE like '%%s%' ORDER BY DATE DESC", String.valueOf(date)));
 	}
 	public void updateStatus(long id, java.lang.Integer status) {
-		query("UPDATE DATES SET STATUS ='"+status+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET STATUS ='"+status+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStatus(java.lang.Integer status) {
+		queryExecute("DELETE DATES WHERE STATUS = '"+status+"'");
 	}
 	
 	public List<Dates> findAllByStatus(Integer status){
@@ -129,7 +145,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 		return query(String.format("SELECT * FROM DATES WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
-		query("UPDATE DATES SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByCreatedOn(java.time.LocalDateTime createdOn) {
+		queryExecute("DELETE DATES WHERE CREATED_ON = '"+createdOn+"'");
 	}
 	
 	public List<Dates> findAllByCreatedOn(LocalDateTime createdOn){
@@ -156,7 +176,11 @@ public class DatesRepository extends BaseRepository<Dates>{
 		return query(String.format("SELECT * FROM DATES WHERE CREATED_ON like '%%s%' ORDER BY CREATED_ON DESC", String.valueOf(createdOn)));
 	}
 	public void updateUpdatedOn(long id, java.time.LocalDateTime updatedOn) {
-		query("UPDATE DATES SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+		queryExecute("UPDATE DATES SET UPDATED_ON ='"+updatedOn+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByUpdatedOn(java.time.LocalDateTime updatedOn) {
+		queryExecute("DELETE DATES WHERE UPDATED_ON = '"+updatedOn+"'");
 	}
 	
 	public List<Dates> findAllByUpdatedOn(LocalDateTime updatedOn){

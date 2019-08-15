@@ -1,13 +1,7 @@
 package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository;
 	
-	import java.sql.Connection;
-	import java.sql.DriverManager;
-	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-	import java.util.ArrayList;
-	import java.util.List;
-	import java.util.Optional;
+	import java.sql.*;
+	import java.util.*;
 	import java.util.logging.Level;
 	import java.util.logging.Logger;
 	
@@ -55,6 +49,18 @@ package de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.repository;
 				log.log(Level.SEVERE, "Failed to query: " + sql, e);
 			}
 			return list;
+		}
+	
+		/**
+		* Used for updates without result
+		*/
+		public void queryExecute(String sql) {
+			try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA");
+					Statement statement = connection.createStatement()) {
+				statement.execute(sql);
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, "Failed to query: " + sql, e);
+			}
 		}
 	
 		public List<T> forceFindAll() {

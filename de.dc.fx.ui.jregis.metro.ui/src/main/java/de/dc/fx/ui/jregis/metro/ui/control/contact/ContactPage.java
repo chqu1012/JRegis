@@ -277,9 +277,12 @@ public class ContactPage extends BaseContactPage {
 	@Override
 	protected void onMenuItemDeleteContact(ActionEvent event) {
 		Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
+		if (selection==null) {
+			return;
+		}
 		DialogUtil.openQuestion("Delete Contact Dialog", "Delete Contact Operation", "Do you really want to delete this contact "+selection.getUsername()).ifPresent(e->{
 			if(e.getButtonData().equals(ButtonData.OK_DONE)) {
-				contactRepository.delete(selection);
+				contactRepository.updateStatus(selection.getId(), -1);
 				
 				// TODO: Handle emails, address, phonenumbers and dates?
 				
