@@ -9,6 +9,8 @@ public class ContactGroup{
 	private Long id;
 	private String name;
 	private Integer status;
+	private String color;
+	private String hoverColor;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
 	private java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact> contactList = new java.util.ArrayList<>();
@@ -16,9 +18,11 @@ public class ContactGroup{
 	public ContactGroup() {
 	}
 		
-	public ContactGroup(String name, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
+	public ContactGroup(String name, Integer status, String color, String hoverColor, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.name = name;
 		this.status = status;
+		this.color = color;
+		this.hoverColor = hoverColor;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
 	}
@@ -43,6 +47,20 @@ public class ContactGroup{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getHoverColor() {
+		return hoverColor;
+	}
+
+	public void setHoverColor(String hoverColor) {
+		this.hoverColor = hoverColor;
 	}
 	public LocalDateTime getCreatedOn() {
 		return createdOn;

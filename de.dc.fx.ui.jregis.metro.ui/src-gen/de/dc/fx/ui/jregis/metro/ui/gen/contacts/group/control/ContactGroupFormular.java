@@ -32,6 +32,16 @@ public class ContactGroupFormular extends VBox{
 		statusTextField.setPromptText("Please enter a Status");
 		statusTextField.textProperty().bindBidirectional(context.getStatusProperty() , java.text.NumberFormat.getInstance());
 		getChildren().add(statusTextField);
+		getChildren().add(new Label("Color:"));
+		javafx.scene.control.TextField colorTextField = new javafx.scene.control.TextField();
+		colorTextField.setPromptText("Please enter a Color");
+		colorTextField.textProperty().bindBidirectional(context.getColorProperty() );
+		getChildren().add(colorTextField);
+		getChildren().add(new Label("HoverColor:"));
+		javafx.scene.control.TextField hoverColorTextField = new javafx.scene.control.TextField();
+		hoverColorTextField.setPromptText("Please enter a HoverColor");
+		hoverColorTextField.textProperty().bindBidirectional(context.getHoverColorProperty() );
+		getChildren().add(hoverColorTextField);
 		getChildren().add(new Label("CreatedOn:"));
 		jfxtras.scene.control.LocalDateTimeTextField createdOnLocalDateTimeTextField = new jfxtras.scene.control.LocalDateTimeTextField();
 		createdOnLocalDateTimeTextField.setPromptText("Please enter a CreatedOn");

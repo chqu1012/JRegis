@@ -7,6 +7,12 @@ Entity ContactGroup{
 	Field(name: Status, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
 		control: javafx.scene.control.TextField
 	]
+	Field(name: Color, datatype:String, required: false, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: HoverColor, datatype:String, required: false, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
 	Field(name: CreatedOn, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
 		control: jfxtras.scene.control.LocalDateTimeTextField
 		binding: localDateTimeProperty

@@ -13,6 +13,8 @@ public class ContactGroupRepository extends BaseRepository<ContactGroup>{
 		contactGroup.setId(resultSet.getLong("ID"));
 		contactGroup.setName(resultSet.getString("NAME"));
 		contactGroup.setStatus(resultSet.getInt("STATUS"));
+		contactGroup.setColor(resultSet.getString("COLOR"));
+		contactGroup.setHoverColor(resultSet.getString("HOVER_COLOR"));
 		contactGroup.setCreatedOn(resultSet.getTimestamp("CREATED_ON").toLocalDateTime());
 		contactGroup.setUpdatedOn(resultSet.getTimestamp("UPDATED_ON").toLocalDateTime());
 		return contactGroup;
@@ -79,6 +81,68 @@ public class ContactGroupRepository extends BaseRepository<ContactGroup>{
 	
 	public List<ContactGroup> findAllByStatusLikeOrderByDesc(Integer status){
 		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE STATUS like '%%s%' ORDER BY STATUS DESC", String.valueOf(status)));
+	}
+	public void updateColor(long id, java.lang.String color) {
+		queryExecute("UPDATE CONTACT_GROUP SET COLOR ='"+color+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByColor(java.lang.String color) {
+		queryExecute("DELETE CONTACT_GROUP WHERE COLOR = '"+color+"'");
+	}
+	
+	public List<ContactGroup> findAllByColor(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR = '%s'", String.valueOf(color)));
+	}
+
+	public List<ContactGroup> findAllByColorOrderByAsc(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR = '%s' ORDER BY COLOR ASC", String.valueOf(color)));
+	}
+
+	public List<ContactGroup> findAllByColorOrderByDesc(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR = '%s' ORDER BY COLOR DESC", String.valueOf(color)));
+	}
+
+	public List<ContactGroup> findAllByColorLike(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR like '%%s%'", String.valueOf(color)));
+	}
+	
+	public List<ContactGroup> findAllByColorLikeOrderByAsc(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR like '%%s%' ORDER BY COLOR ASC", String.valueOf(color)));
+	}
+	
+	public List<ContactGroup> findAllByColorLikeOrderByDesc(String color){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE COLOR like '%%s%' ORDER BY COLOR DESC", String.valueOf(color)));
+	}
+	public void updateHoverColor(long id, java.lang.String hoverColor) {
+		queryExecute("UPDATE CONTACT_GROUP SET HOVER_COLOR ='"+hoverColor+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByHoverColor(java.lang.String hoverColor) {
+		queryExecute("DELETE CONTACT_GROUP WHERE HOVER_COLOR = '"+hoverColor+"'");
+	}
+	
+	public List<ContactGroup> findAllByHoverColor(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR = '%s'", String.valueOf(hoverColor)));
+	}
+
+	public List<ContactGroup> findAllByHoverColorOrderByAsc(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR = '%s' ORDER BY HOVER_COLOR ASC", String.valueOf(hoverColor)));
+	}
+
+	public List<ContactGroup> findAllByHoverColorOrderByDesc(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR = '%s' ORDER BY HOVER_COLOR DESC", String.valueOf(hoverColor)));
+	}
+
+	public List<ContactGroup> findAllByHoverColorLike(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR like '%%s%'", String.valueOf(hoverColor)));
+	}
+	
+	public List<ContactGroup> findAllByHoverColorLikeOrderByAsc(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR like '%%s%' ORDER BY HOVER_COLOR ASC", String.valueOf(hoverColor)));
+	}
+	
+	public List<ContactGroup> findAllByHoverColorLikeOrderByDesc(String hoverColor){
+		return query(String.format("SELECT * FROM CONTACT_GROUP WHERE HOVER_COLOR like '%%s%' ORDER BY HOVER_COLOR DESC", String.valueOf(hoverColor)));
 	}
 	public void updateCreatedOn(long id, java.time.LocalDateTime createdOn) {
 		queryExecute("UPDATE CONTACT_GROUP SET CREATED_ON ='"+createdOn+"' WHERE ID = "+id);
@@ -162,8 +226,10 @@ public class ContactGroupRepository extends BaseRepository<ContactGroup>{
 	protected void prepareStatetmentForSave(ContactGroup t, PreparedStatement statement) throws SQLException {
 		statement.setString(1, t.getName());
 		statement.setInt(2, t.getStatus());
-		statement.setTimestamp(3, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(4, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setString(3, t.getColor());
+		statement.setString(4, t.getHoverColor());
+		statement.setTimestamp(5, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(6, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override
@@ -176,8 +242,10 @@ public class ContactGroupRepository extends BaseRepository<ContactGroup>{
 		statement.setLong(1, t.getId());
 		statement.setString(2, t.getName());
 		statement.setInt(3, t.getStatus());
-		statement.setTimestamp(4, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(5, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setString(4, t.getColor());
+		statement.setString(5, t.getHoverColor());
+		statement.setTimestamp(6, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(7, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package de.dc.fx.ui.jregis.metro.ui.control.contact.feature;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.controlsfx.control.Notifications;
 
@@ -29,6 +30,9 @@ import javafx.util.StringConverter;
 
 public class ContactListCell extends ListCell<Contact> {
 
+	@FXML
+	protected Label labelGroupname;
+	
 	@FXML
 	protected ComboBox<ContactGroup> comboBoxGroup;
 	
@@ -115,6 +119,14 @@ public class ContactListCell extends ListCell<Contact> {
 				
 				paneEdit.toFront();
 			}else {
+				Optional<ContactGroup> optionalGroup = JRegisPlatform.getInstance(ContactGroupRepository.class).findById(item.getContactGroupId());
+				if(optionalGroup.isPresent()){
+					ContactGroup group = optionalGroup.get();
+					labelGroupname.setText(group.getName());
+					
+					String color = group.getColor()==null? "gray" : "#"+group.getColor();
+					labelGroupname.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: 5; -fx-text-fill: white;", color));
+				}
 				labelName.setText(item.getFirstname() + " " + item.getLastname());
 				labelUsername.setText(item.getUsername());
 				root.getChildren().remove(paneEdit);

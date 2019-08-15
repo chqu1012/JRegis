@@ -40,6 +40,14 @@ public class ContactGroupTableView extends TableView<ContactGroup>{
 		columnStatus.setPrefWidth(100.0);
 		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));
 		getColumns().add(columnStatus);
+		TableColumn<ContactGroup, java.lang.String> columnColor = new TableColumn<>("#COLOR");
+		columnColor.setPrefWidth(100.0);
+		setupCellValueFactory(columnColor, e->new SimpleObjectProperty<>(e.getColor()));
+		getColumns().add(columnColor);
+		TableColumn<ContactGroup, java.lang.String> columnHoverColor = new TableColumn<>("#HOVERCOLOR");
+		columnHoverColor.setPrefWidth(100.0);
+		setupCellValueFactory(columnHoverColor, e->new SimpleObjectProperty<>(e.getHoverColor()));
+		getColumns().add(columnHoverColor);
 		TableColumn<ContactGroup, java.time.LocalDateTime> columnCreatedOn = new TableColumn<>("#CREATEDON");
 		columnCreatedOn.setPrefWidth(100.0);
 		setupCellValueFactory(columnCreatedOn, e->new SimpleObjectProperty<>(e.getCreatedOn()));
