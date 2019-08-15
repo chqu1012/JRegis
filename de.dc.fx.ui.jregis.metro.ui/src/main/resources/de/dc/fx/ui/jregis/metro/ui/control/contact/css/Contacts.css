@@ -27,3 +27,15 @@
 .tray-image-view:pressed{
     -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-müll-60-blue.png');
 }
+
+.tray-item {
+	-fx-background-color: white;
+}
+
+.tray-item:hover {
+	-fx-background-color: #F0F0F0;
+}
+
+.tray-item:pressed{
+	-fx-background-color: #DFE9F4;
+}

@@ -43,13 +43,15 @@
                </children>
             </HBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <HBox>
+            <HBox spacing="5.0" styleClass="tray-item">
                <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewClearAllDeletedContacts" pickOnBounds="true" preserveRatio="true" styleClass="tray-image-view">
+                  <ImageView fx:id="imageViewDeleteContacts" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onPaneDeletedContactsClicked" pickOnBounds="true" preserveRatio="true" styleClass="tray-image-view">
                      <image>
                         <Image url="@../../images/icons8-müll-60.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="labelDeletedContactName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onPaneDeletedContactsClicked" text="Deleted Contact(s)" />
+                  <Label fx:id="labelDeletedContactSize" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" />
                </children>
             </HBox>
          </children>

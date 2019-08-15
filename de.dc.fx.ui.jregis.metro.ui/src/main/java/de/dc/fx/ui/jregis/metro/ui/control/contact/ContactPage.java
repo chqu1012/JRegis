@@ -63,7 +63,8 @@ public class ContactPage extends BaseContactPage {
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
-
+	private ObservableList<Contact> deleteContacts = FXCollections.observableArrayList();
+	
 	@Inject
 	public ContactPage(ContactRepository contactRepository, ContactFX context, IEventBroker broker) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -87,6 +88,7 @@ public class ContactPage extends BaseContactPage {
 		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
 		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
 		
+		deleteContacts.addAll(contactRepository.findAllByStatus(-1));
 		contacts.addAll(contactRepository.findAllByStatus(0));
 		listViewContacts.setItems(filteredContacts);
 
@@ -200,6 +202,7 @@ public class ContactPage extends BaseContactPage {
 				.bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
 		labelNickname.textProperty().bind(context.getUsernameProperty());
 		labelContactsSize.textProperty().bind(Bindings.size(contacts).asString());
+		labelDeletedContactSize.textProperty().bind(Bindings.size(deleteContacts).asString());
 	}
 
 	public void addContactItem(Contact contact) {
@@ -285,18 +288,28 @@ public class ContactPage extends BaseContactPage {
 				contactRepository.updateStatus(selection.getId(), -1);
 				
 				// TODO: Handle emails, address, phonenumbers and dates?
-				
-				contacts.remove(selection);
-				Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
+				Platform.runLater(()->{
+					contacts.remove(selection);
+					deleteContacts.add(selection);
+					Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
+				});
 			}
 		});
 	}
 
 	@Override
-	protected void onImageViewClearAllDeletedContacts(MouseEvent event) {
-		DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with ").ifPresent(e->{
-			
-		});
+	protected void onPaneDeletedContactsClicked(MouseEvent event) {
+		if (event.getSource()==imageViewDeleteContacts) {
+			DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with "+deleteContacts.size()+" contact(s)?").ifPresent(e->{
+				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
+					deleteContacts.clear();
+					contacts.clear();
+				}
+			});
+		}else if (event.getSource()==labelDeletedContactName) {
+			contacts.clear();
+			contacts.addAll(deleteContacts);
+		}
 	}
 
 }
