@@ -87,7 +87,7 @@ public class ContactPage extends BaseContactPage {
 		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
 		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
 		
-		contacts.addAll(contactRepository.findAll());
+		contacts.addAll(contactRepository.findAllByStatus(0));
 		listViewContacts.setItems(filteredContacts);
 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
