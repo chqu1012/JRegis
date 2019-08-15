@@ -48,6 +48,10 @@ public class ContactTableView extends TableView<Contact>{
 		columnContactImageId.setPrefWidth(100.0);
 		setupCellValueFactory(columnContactImageId, e->new SimpleObjectProperty<>(e.getContactImageId()));
 		getColumns().add(columnContactImageId);
+		TableColumn<Contact, java.lang.Long> columnContactGroupId = new TableColumn<>("#CONTACTGROUPID");
+		columnContactGroupId.setPrefWidth(100.0);
+		setupCellValueFactory(columnContactGroupId, e->new SimpleObjectProperty<>(e.getContactGroupId()));
+		getColumns().add(columnContactGroupId);
 		TableColumn<Contact, java.lang.Integer> columnStatus = new TableColumn<>("#STATUS");
 		columnStatus.setPrefWidth(100.0);
 		setupCellValueFactory(columnStatus, e->new SimpleObjectProperty<>(e.getStatus()));

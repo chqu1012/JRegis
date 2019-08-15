@@ -42,6 +42,11 @@ public class ContactFormular extends VBox{
 		contactImageIdTextField.setPromptText("Please enter a ContactImageId");
 		contactImageIdTextField.textProperty().bindBidirectional(context.getContactImageIdProperty() , java.text.NumberFormat.getInstance());
 		getChildren().add(contactImageIdTextField);
+		getChildren().add(new Label("ContactGroupId:"));
+		javafx.scene.control.TextField contactGroupIdTextField = new javafx.scene.control.TextField();
+		contactGroupIdTextField.setPromptText("Please enter a ContactGroupId");
+		contactGroupIdTextField.textProperty().bindBidirectional(context.getContactGroupIdProperty() , java.text.NumberFormat.getInstance());
+		getChildren().add(contactGroupIdTextField);
 		getChildren().add(new Label("Status:"));
 		javafx.scene.control.TextField statusTextField = new javafx.scene.control.TextField();
 		statusTextField.setPromptText("Please enter a Status");

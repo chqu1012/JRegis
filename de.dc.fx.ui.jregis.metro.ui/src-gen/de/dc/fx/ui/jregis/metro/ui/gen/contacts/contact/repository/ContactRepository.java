@@ -15,6 +15,7 @@ public class ContactRepository extends BaseRepository<Contact>{
 		contact.setLastname(resultSet.getString("LASTNAME"));
 		contact.setUsername(resultSet.getString("USERNAME"));
 		contact.setContactImageId(resultSet.getLong("CONTACT_IMAGE_ID"));
+		contact.setContactGroupId(resultSet.getLong("CONTACT_GROUP_ID"));
 		contact.setStatus(resultSet.getInt("STATUS"));
 		contact.setCreatedOn(resultSet.getTimestamp("CREATED_ON").toLocalDateTime());
 		contact.setUpdatedOn(resultSet.getTimestamp("UPDATED_ON").toLocalDateTime());
@@ -145,6 +146,37 @@ public class ContactRepository extends BaseRepository<Contact>{
 	public List<Contact> findAllByContactImageIdLikeOrderByDesc(Long contactImageId){
 		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_IMAGE_ID like '%%s%' ORDER BY CONTACT_IMAGE_ID DESC", String.valueOf(contactImageId)));
 	}
+	public void updateContactGroupId(long id, java.lang.Long contactGroupId) {
+		queryExecute("UPDATE CONTACT SET CONTACT_GROUP_ID ='"+contactGroupId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByContactGroupId(java.lang.Long contactGroupId) {
+		queryExecute("DELETE CONTACT WHERE CONTACT_GROUP_ID = '"+contactGroupId+"'");
+	}
+	
+	public List<Contact> findAllByContactGroupId(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID = '%s'", String.valueOf(contactGroupId)));
+	}
+
+	public List<Contact> findAllByContactGroupIdOrderByAsc(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID = '%s' ORDER BY CONTACT_GROUP_ID ASC", String.valueOf(contactGroupId)));
+	}
+
+	public List<Contact> findAllByContactGroupIdOrderByDesc(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID = '%s' ORDER BY CONTACT_GROUP_ID DESC", String.valueOf(contactGroupId)));
+	}
+
+	public List<Contact> findAllByContactGroupIdLike(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID like '%%s%'", String.valueOf(contactGroupId)));
+	}
+	
+	public List<Contact> findAllByContactGroupIdLikeOrderByAsc(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID like '%%s%' ORDER BY CONTACT_GROUP_ID ASC", String.valueOf(contactGroupId)));
+	}
+	
+	public List<Contact> findAllByContactGroupIdLikeOrderByDesc(Long contactGroupId){
+		return query(String.format("SELECT * FROM CONTACT WHERE CONTACT_GROUP_ID like '%%s%' ORDER BY CONTACT_GROUP_ID DESC", String.valueOf(contactGroupId)));
+	}
 	public void updateStatus(long id, java.lang.Integer status) {
 		queryExecute("UPDATE CONTACT SET STATUS ='"+status+"' WHERE ID = "+id);
 	}
@@ -260,9 +292,10 @@ public class ContactRepository extends BaseRepository<Contact>{
 		statement.setString(2, t.getLastname());
 		statement.setString(3, t.getUsername());
 		statement.setLong(4, t.getContactImageId());
-		statement.setInt(5, t.getStatus());
-		statement.setTimestamp(6, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(7, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setLong(5, t.getContactGroupId());
+		statement.setInt(6, t.getStatus());
+		statement.setTimestamp(7, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(8, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override
@@ -277,9 +310,10 @@ public class ContactRepository extends BaseRepository<Contact>{
 		statement.setString(3, t.getLastname());
 		statement.setString(4, t.getUsername());
 		statement.setLong(5, t.getContactImageId());
-		statement.setInt(6, t.getStatus());
-		statement.setTimestamp(7, Timestamp.valueOf(t.getCreatedOn()));
-		statement.setTimestamp(8, Timestamp.valueOf(t.getUpdatedOn()));
+		statement.setLong(6, t.getContactGroupId());
+		statement.setInt(7, t.getStatus());
+		statement.setTimestamp(8, Timestamp.valueOf(t.getCreatedOn()));
+		statement.setTimestamp(9, Timestamp.valueOf(t.getUpdatedOn()));
 	}
 
 	@Override

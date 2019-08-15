@@ -11,6 +11,7 @@ import java.lang.String;
 import java.lang.String;
 import java.lang.String;
 import java.lang.Long;
+import java.lang.Long;
 import java.lang.Integer;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class ContactFX {
   private StringProperty lastnameProperty = new SimpleStringProperty();
   private StringProperty usernameProperty = new SimpleStringProperty();
   private LongProperty contactImageIdProperty = new SimpleLongProperty();
+  private LongProperty contactGroupIdProperty = new SimpleLongProperty();
   private IntegerProperty statusProperty = new SimpleIntegerProperty();
   private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
   private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
@@ -51,6 +53,7 @@ public class ContactFX {
 			lastnameProperty.set(newValue.getLastname());
 			usernameProperty.set(newValue.getUsername());
 			contactImageIdProperty.set(newValue.getContactImageId());
+			contactGroupIdProperty.set(newValue.getContactGroupId());
 			statusProperty.set(newValue.getStatus());
 			createdOnProperty.set(newValue.getCreatedOn());
 			updatedOnProperty.set(newValue.getUpdatedOn());
@@ -87,6 +90,7 @@ public class ContactFX {
   	this.contact.setLastname(lastnameProperty.getValue());
   	this.contact.setUsername(usernameProperty.getValue());
   	this.contact.setContactImageId(contactImageIdProperty.getValue());
+  	this.contact.setContactGroupId(contactGroupIdProperty.getValue());
   	this.contact.setStatus(statusProperty.getValue());
   	this.contact.setCreatedOn(createdOnProperty.getValue());
   	this.contact.setUpdatedOn(updatedOnProperty.getValue());
@@ -132,6 +136,13 @@ public class ContactFX {
   
   public void setContactImageIdProperty(LongProperty contactImageIdProperty) {
     this.contactImageIdProperty = contactImageIdProperty;
+  }
+  public LongProperty getContactGroupIdProperty() {
+    return this.contactGroupIdProperty;
+  }
+  
+  public void setContactGroupIdProperty(LongProperty contactGroupIdProperty) {
+    this.contactGroupIdProperty = contactGroupIdProperty;
   }
   public IntegerProperty getStatusProperty() {
     return this.statusProperty;
@@ -188,6 +199,7 @@ public class ContactFX {
   	  this.lastnameProperty.set("");
   	  this.usernameProperty.set("");
   	  this.contactImageIdProperty.set(0l);
+  	  this.contactGroupIdProperty.set(0l);
   	  this.statusProperty.set(0);
   	  this.createdOnProperty.set(java.time.LocalDateTime.now());
   	  this.updatedOnProperty.set(java.time.LocalDateTime.now());

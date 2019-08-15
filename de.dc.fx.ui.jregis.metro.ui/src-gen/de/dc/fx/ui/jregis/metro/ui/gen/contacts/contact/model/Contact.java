@@ -11,6 +11,7 @@ public class Contact{
 	private String lastname;
 	private String username;
 	private Long contactImageId;
+	private Long contactGroupId;
 	private Integer status;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
@@ -22,11 +23,12 @@ public class Contact{
 	public Contact() {
 	}
 		
-	public Contact(String firstname, String lastname, String username, Long contactImageId, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
+	public Contact(String firstname, String lastname, String username, Long contactImageId, Long contactGroupId, Integer status, LocalDateTime createdOn, LocalDateTime updatedOn) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.contactImageId = contactImageId;
+		this.contactGroupId = contactGroupId;
 		this.status = status;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
@@ -66,6 +68,13 @@ public class Contact{
 
 	public void setContactImageId(Long contactImageId) {
 		this.contactImageId = contactImageId;
+	}
+	public Long getContactGroupId() {
+		return contactGroupId;
+	}
+
+	public void setContactGroupId(Long contactGroupId) {
+		this.contactGroupId = contactGroupId;
 	}
 	public Integer getStatus() {
 		return status;
