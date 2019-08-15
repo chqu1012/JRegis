@@ -298,7 +298,7 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	@Override
-	protected void onPaneDeletedContactsClicked(MouseEvent event) {
+	protected void onButtonClicked(MouseEvent event) {
 		if (event.getSource()==imageViewDeleteContacts) {
 			DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with "+deleteContacts.size()+" contact(s)?").ifPresent(e->{
 				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
@@ -309,6 +309,9 @@ public class ContactPage extends BaseContactPage {
 		}else if (event.getSource()==labelDeletedContactName) {
 			contacts.clear();
 			contacts.addAll(deleteContacts);
+		}else if (event.getSource()==labelAllContactsName) {
+			contacts.clear();
+			contacts.addAll(contactRepository.findAllByStatus(0));
 		}
 	}
 
