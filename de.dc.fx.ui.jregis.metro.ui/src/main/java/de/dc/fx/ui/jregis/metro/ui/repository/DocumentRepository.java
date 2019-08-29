@@ -1,16 +1,24 @@
 package de.dc.fx.ui.jregis.metro.ui.repository;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import de.dc.fx.ui.jregis.metro.ui.model.Document;
 
 public class DocumentRepository extends BaseRepository<Document>{
 
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
+	
 	@Override
 	protected Document map(ResultSet resultSet) throws SQLException{
 		String name = resultSet.getString("NAME");
@@ -25,6 +33,20 @@ public class DocumentRepository extends BaseRepository<Document>{
 		Document document = new Document(id, name, createdOn, updatedOn, categoryId, description, url);
 		document.setStatus(status);
 		return document;
+	}
+	
+	public List<Document> getLast10(){
+		List<Document> tempList = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(JDBC_URL,"SA", "SA");
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM document ORDER BY id DESC LIMIT 10");
+				ResultSet resultSet = statement.executeQuery()) {
+			while (resultSet.next()) {
+				tempList.add(map(resultSet));
+			}
+		} catch (SQLException e) {
+			log.log(Level.SEVERE, "Failed to query: " + findAllStatement(), e);
+		}
+		return tempList;
 	}
 	
 	@Override
