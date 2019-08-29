@@ -2,7 +2,6 @@ package de.dc.fx.ui.jregis.metro.ui.control;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,6 +37,7 @@ import de.dc.fx.ui.jregis.metro.ui.model.Document;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentNameRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.DocumentRepository;
+import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
 import de.dc.fx.ui.jregis.metro.ui.util.DialogUtil;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
@@ -85,16 +85,13 @@ public class MainApplication extends BaseMainApplication {
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 
-	@Inject
-	UserManagementPage userManagementPage;
-	@Inject
-	ContactPage contactPage;
+	@Inject UserManagementPage userManagementPage;
+	@Inject ContactPage contactPage;
+	@Inject CategoryRepository categoryRepository;
+	
 	CalendarPage calendarPage = new CalendarPage();
 
-	@Inject
-	CategoryRepository categoryRepository;
-
-	private TableFilter<Document> tableFilter;
+	TableFilter<Document> tableFilter;
 
 	public MainApplication() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -387,8 +384,12 @@ public class MainApplication extends BaseMainApplication {
 
 	@Override
 	protected void onMenuItemOpenDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
+		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
+		try {
+			JRegisPlatform.getInstance(DocumentFolderService.class).openFolder(selection);
+		} catch (Exception e) {
+			Notifications.create().darkStyle().title("File Error").text("Failed to open document folder "+selection.getName());
+		}
 	}
 
 	public static <T, U> void setupCellValueFactory(TableColumn<T, U> column, Function<T, ObservableValue<U>> mapper) {
