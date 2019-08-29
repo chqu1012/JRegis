@@ -128,6 +128,8 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
 	protected void onButtonExport(ActionEvent event) {
        String name = textExportName.getText().isEmpty() ? "Screenshot.png" :textExportName.getText().replace(".png", ".png") ;
        JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/store/add/screenshot/image", new ScreenshotContext(image," "+ name)));
+       
+       stage.close();
 	}
 
 	@Override
