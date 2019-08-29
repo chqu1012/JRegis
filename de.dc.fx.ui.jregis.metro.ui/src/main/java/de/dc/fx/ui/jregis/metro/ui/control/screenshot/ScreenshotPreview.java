@@ -4,16 +4,11 @@ import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileSystemView;
-
+import de.dc.fx.ui.jregis.metro.ui.control.screenshot.model.ScreenshotContext;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
@@ -32,7 +27,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
-import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -132,21 +126,8 @@ public class ScreenshotPreview extends BaseScreenshotPreview {
 
 	@Override
 	protected void onButtonExport(ActionEvent event) {
-		String separator = File.separator;
-        String absolutePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath() + separator;
-        String dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-S").format(new Date());
-        File pictureFile = new File(absolutePath + dateFormat + ".png");
-        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-        try {
-            boolean successfully = ImageIO.write(bufferedImage, "png", pictureFile);
-            labelMessage.setText(successfully ? "Successfully" : "Failed");
-            
-            stage.close();
-            
-            JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<Image>("/store/add/screenshot/image", image));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       String name = textExportName.getText().isEmpty() ? "Screenshot.png" :textExportName.getText().replace(".png", ".png") ;
+       JRegisPlatform.getInstance(IEventBroker.class).post(new EventContext<>("/store/add/screenshot/image", new ScreenshotContext(image," "+ name)));
 	}
 
 	@Override

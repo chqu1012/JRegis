@@ -1,5 +1,6 @@
 package de.dc.fx.ui.jregis.metro.ui.control.contact;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.group.model.ContactGroup;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -15,6 +16,9 @@ import javafx.scene.layout.VBox;
 
 public abstract class BaseContactPage extends SplitPane{
 
+	@FXML
+	protected ListView<ContactGroup> listViewContactGroups;
+	
 	@FXML
 	protected Label labelAllContactsName;
 	

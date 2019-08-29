@@ -39,7 +39,7 @@ Entity Contact{
 	Field(name: DateList, datatype:java.util.List<de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates>, 
 		required: false, useByTableView: false, useByRepository: false
 	)
- 
+
 	Repository{
 		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
 	}

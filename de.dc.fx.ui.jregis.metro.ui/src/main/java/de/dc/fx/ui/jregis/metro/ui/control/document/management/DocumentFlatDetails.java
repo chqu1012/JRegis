@@ -21,7 +21,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.dc.fx.ui.jregis.metro.ui.control.binding.DocumentContext;
 import de.dc.fx.ui.jregis.metro.ui.control.document.management.feature.ReferenceListCellFeature;
-import de.dc.fx.ui.jregis.metro.ui.control.screenshot.ScreenshotPreview;
+import de.dc.fx.ui.jregis.metro.ui.control.screenshot.model.ScreenshotContext;
 import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.EventContext;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
@@ -419,23 +419,27 @@ public class DocumentFlatDetails extends BaseDocumentFlatDetails {
 	}
 	
 	@Subscribe
-	public void restoreStage(EventContext<Image> context) {
+	public void restoreStage(EventContext<ScreenshotContext> context) {
 		if (context.getEventId().equals("/store/add/screenshot/image")) {
 			Stage mainStage = (Stage) root.getScene().getWindow();
 			mainStage.setIconified(false);
+			
+			ScreenshotContext screenshotContext = context.getInput();
+			String dateFormat = new SimpleDateFormat("yyyy-MM-dd_HHmmss").format(new Date());
+			String name = dateFormat+screenshotContext.getName();
+			Image image = screenshotContext.getImage();
 			
 			LocalDateTime createdOn = LocalDateTime.now();
 			History history = new History("Added Screenshot", createdOn , createdOn, this.context.current.get().getId());
 			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
 			history.setId(historyId);
 			
-			String dateFormat = new SimpleDateFormat("yyyy-MM-dd_HHmmss").format(new Date());
-			Attachment attachment = new Attachment(dateFormat+"_Screenshot.png", createdOn, createdOn, historyId);
+			Attachment attachment = new Attachment(name, createdOn, createdOn, historyId);
 			long attachmentId = JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
 			attachment.setId(attachmentId);
 			history.getAttachments().add(attachment);
 			
-			JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(this.context.current.get(), dateFormat+"_Screenshot.png", context.getInput());
+			JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(this.context.current.get(), name, image);
 			
 			addHistory(history);
 		}

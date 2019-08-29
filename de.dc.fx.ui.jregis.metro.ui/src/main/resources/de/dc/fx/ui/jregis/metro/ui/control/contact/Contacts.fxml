@@ -19,7 +19,7 @@
 
 <fx:root dividerPositions="0.2545090180360721, 0.531062124248497" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/Contacts.css" type="SplitPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <VBox style="-fx-background-color: white;">
+      <VBox spacing="5.0" style="-fx-background-color: white;">
          <children>
             <HBox prefHeight="35.0" prefWidth="253.0" styleClass="tray-item">
                <children>
@@ -42,7 +42,7 @@
                   <Label prefHeight="25.0" prefWidth="39.0" text="Groups" />
                </children>
             </HBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="listViewContactGroups" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
             <HBox spacing="5.0" styleClass="tray-item">
                <children>
                   <ImageView fx:id="imageViewDeleteContacts" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onButtonClicked" pickOnBounds="true" preserveRatio="true" styleClass="tray-image-view">

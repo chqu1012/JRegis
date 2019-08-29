@@ -26,6 +26,8 @@ import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.group.model.ContactGroup;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.group.repository.ContactGroupRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.model.ContactImage;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.image.repository.ContactImageRepository;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
@@ -42,6 +44,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -59,14 +62,16 @@ public class ContactPage extends BaseContactPage {
 	@Inject AddressRepository addressRepository;
 	@Inject EmailRepository emailRepository;
 	@Inject DatesRepository datesRepository;
+	@Inject ContactGroupRepository contactGroupRepository;
 	@Inject ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
-	private ObservableList<Contact> deleteContacts = FXCollections.observableArrayList();
+	private ObservableList<ContactGroup> contactGruops = FXCollections.observableArrayList();
+	private ObservableList<Contact> deletedContacts = FXCollections.observableArrayList();
 	
 	@Inject
-	public ContactPage(ContactRepository contactRepository, ContactFX context, IEventBroker broker) {
+	public ContactPage(ContactRepository contactRepository, ContactFX context, ContactGroupRepository contactGroupRepository, IEventBroker broker) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -81,6 +86,25 @@ public class ContactPage extends BaseContactPage {
 		listViewContacts.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
 
+		contactGruops.addAll(contactGroupRepository.findAll());
+		listViewContactGroups.setItems(contactGruops);
+		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
+			protected void updateItem(ContactGroup item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item==null || empty) {
+					setText(null);
+				}else {
+					setText(item.getName());
+				}
+			}
+		});
+		listViewContactGroups.setOnMouseClicked(arg0 -> {
+			ContactGroup selection = listViewContactGroups.getSelectionModel().getSelectedItem();
+			if (selection!=null) {
+				filteredContacts.setPredicate(p->p.getContactGroupId()==selection.getId());
+			}
+		});
+		
 		// React on list changes
 		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
@@ -88,8 +112,9 @@ public class ContactPage extends BaseContactPage {
 		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
 		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
 		
-		deleteContacts.addAll(contactRepository.findAllByStatus(-1));
-		contacts.addAll(contactRepository.findAllByStatus(0));
+		contacts.addAll(contactRepository.findAll());
+		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
+		filteredContacts.setPredicate(p->p.getStatus()==0);
 		listViewContacts.setItems(filteredContacts);
 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -202,7 +227,7 @@ public class ContactPage extends BaseContactPage {
 				.bind(Bindings.format("%s %s", context.getFirstnameProperty(), context.getLastnameProperty()));
 		labelNickname.textProperty().bind(context.getUsernameProperty());
 		labelContactsSize.textProperty().bind(Bindings.size(contacts).asString());
-		labelDeletedContactSize.textProperty().bind(Bindings.size(deleteContacts).asString());
+		labelDeletedContactSize.textProperty().bind(Bindings.size(deletedContacts).asString());
 	}
 
 	public void addContactItem(Contact contact) {
@@ -290,7 +315,7 @@ public class ContactPage extends BaseContactPage {
 				// TODO: Handle emails, address, phonenumbers and dates?
 				Platform.runLater(()->{
 					contacts.remove(selection);
-					deleteContacts.add(selection);
+					deletedContacts.add(selection);
 					Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
 				});
 			}
@@ -300,18 +325,15 @@ public class ContactPage extends BaseContactPage {
 	@Override
 	protected void onButtonClicked(MouseEvent event) {
 		if (event.getSource()==imageViewDeleteContacts) {
-			DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with "+deleteContacts.size()+" contact(s)?").ifPresent(e->{
+			DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with "+labelDeletedContactSize.getText()+" contact(s)?").ifPresent(e->{
 				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
-					deleteContacts.clear();
-					contacts.clear();
+					filteredContacts.setPredicate(p->false);
 				}
 			});
 		}else if (event.getSource()==labelDeletedContactName) {
-			contacts.clear();
-			contacts.addAll(deleteContacts);
+			filteredContacts.setPredicate(p->p.getStatus()==-1);
 		}else if (event.getSource()==labelAllContactsName) {
-			contacts.clear();
-			contacts.addAll(contactRepository.findAllByStatus(0));
+			filteredContacts.setPredicate(p->true);
 		}
 	}
 

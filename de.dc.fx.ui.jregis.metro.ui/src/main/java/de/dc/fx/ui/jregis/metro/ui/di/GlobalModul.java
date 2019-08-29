@@ -8,6 +8,7 @@ import de.dc.fx.ui.jregis.metro.ui.eventbus.EventBroker;
 import de.dc.fx.ui.jregis.metro.ui.eventbus.IEventBroker;
 import de.dc.fx.ui.jregis.metro.ui.gen.calendar.appointment.di.XAppointmentModule;
 import de.dc.fx.ui.jregis.metro.ui.gen.contacts.contact.di.ContactModule;
+import de.dc.fx.ui.jregis.metro.ui.gen.contacts.group.di.ContactGroupModule;
 import de.dc.fx.ui.jregis.metro.ui.repository.AttachmentRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.CategoryRepository;
 import de.dc.fx.ui.jregis.metro.ui.repository.ClipboardNameSuggestionRepository;
@@ -33,7 +34,7 @@ public class GlobalModul extends AbstractModule {
 		bind(ClipboardNameSuggestionRepository.class).asEagerSingleton();
 		bind(UserRepository.class).asEagerSingleton();
 		bind(RoleRepository.class).asEagerSingleton();
-		
+
 		bind(HistoryService.class).asEagerSingleton();
 		
 		bind(DocumentFolderService.class).asEagerSingleton();
@@ -44,6 +45,7 @@ public class GlobalModul extends AbstractModule {
 		bind(ContactFolderService.class).asEagerSingleton();
 		
 		install(new ContactModule());
+		install(new ContactGroupModule());
 		install(new XAppointmentModule());
 	}
 }
