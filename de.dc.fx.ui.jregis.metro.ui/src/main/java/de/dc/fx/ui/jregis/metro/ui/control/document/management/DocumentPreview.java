@@ -186,7 +186,9 @@ public class DocumentPreview extends BaseDocumentPreview {
 					zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
 							imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
 				} catch (IOException e) {
-					e.printStackTrace();
+					Notifications.create().darkStyle().text("Failed to load pdf file "+attachmentFile.getAbsolutePath()).title("PDF File Error").show();
+					panePreview.setVisible(false);
+					panePreview.toBack();
 				}
 			});
 			
