@@ -151,16 +151,22 @@ public class DocumentPreview extends BaseDocumentPreview {
 		scrollPane.setVvalue(0d);
 		scrollPane.setHvalue(0d);
 		if (name.endsWith(".jpeg") || name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp")) {
-			panePreview.setVisible(true);
-			panePreview.toFront();
-
-			image = new Image(attachmentFile.toURI().toString());
-			imageViewPreview.setFitHeight(image.getHeight());
-			imageViewPreview.setFitWidth(image.getWidth());
-			imageViewPreview.setImage(image);
-
-			zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
-					imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+			if(attachmentFile.getAbsoluteFile().exists()) {
+				panePreview.setVisible(true);
+				panePreview.toFront();
+				
+				image = new Image(attachmentFile.toURI().toString());
+				imageViewPreview.setFitHeight(image.getHeight());
+				imageViewPreview.setFitWidth(image.getWidth());
+				imageViewPreview.setImage(image);
+				
+				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
+						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
+			}else{
+				Notifications.create().darkStyle().text("Failed to load file "+attachmentFile.getAbsolutePath()).title("File Error").show();
+				panePreview.setVisible(false);
+				panePreview.toBack();
+			}
 		} else if (name.endsWith(".pdf")) {
 			panePreview.setVisible(true);
 			panePreview.toFront();
