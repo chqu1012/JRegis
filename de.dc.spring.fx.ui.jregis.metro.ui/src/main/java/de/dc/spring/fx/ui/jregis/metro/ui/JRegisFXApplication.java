@@ -1,8 +1,6 @@
 package de.dc.spring.fx.ui.jregis.metro.ui;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -18,12 +16,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class JRegisFXApplication extends Application {
 
     private ConfigurableApplicationContext springContext;
     private BorderPane root;
-	private FXMLLoader fxmlLoader;
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
@@ -33,14 +29,12 @@ public class JRegisFXApplication extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(JRegisFXApplication.class);
-        fxmlLoader = new FXMLLoader(getClass().getResource("JRegisApplication.fxml"));
-        fxmlLoader.setControllerFactory(springContext::getBean);
-        root = fxmlLoader.load();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("JRegis Application");
+        root = new JRegisMainPane();
         Scene scene = new Scene(root, 1400, 820);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.DECORATED);
