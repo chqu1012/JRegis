@@ -17,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-public abstract class BaseFxmlDocumentController {
+public abstract class AbstractFxmlDocumentController {
 
     @FXML
     protected AnchorPane root;

@@ -1,40 +1,33 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
-import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseFxmlDocumentController;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
 @Controller
-public class DocumentController extends BaseFxmlDocumentController {
+public class DocumentController extends BaseDocumentController {
 
-	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	
-	private DocumentDetails documentDetails = new DocumentDetails();
-	
-	public void initialize() {
-		AnchorPane.setTopAnchor(documentDetails, 0d);
-		AnchorPane.setBottomAnchor(documentDetails, 0d);
-		AnchorPane.setLeftAnchor(documentDetails, 0d);
-		AnchorPane.setRightAnchor(documentDetails, 0d);
-		root.getChildren().add(0, documentDetails);
-	}
-	
 	@Override
 	protected void onButtonAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		Object source = event.getSource();
+		if (source == linkCancelDocument) {
+			closeNewDocumentPane();
+		}else if (source == buttonCreateDocument) {
+			log.trace("Create new document");
+			closeNewDocumentPane();
+		}
 	}
 
 	@Override
 	protected void onTableMenuItemAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		Object source = event.getSource();
+		if (source==tableMenuItemNew) {
+			openNewDocumentPane();
+		}
 	}
 
 	@Override
