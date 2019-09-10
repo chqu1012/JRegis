@@ -1,44 +1,41 @@
 package de.dc.spring.fx.ui.jregis.metro.ui;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
-import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 @Controller
 public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
-	@Override
-	protected void onButtonLoginAction(ActionEvent event) {
-		// TODO Auto-generated method stub
+	@Autowired
+	ConfigurableApplicationContext springContext;
 
+	private static final String FXML_BASE_PATH = "/de/dc/spring/fx/ui/jregis/metro/ui/";
+	private static final String FXML_DOCUMENT = FXML_BASE_PATH + "document/Document.fxml";
+
+	Pane paneDocument;
+
+	public void initialize() {
+		paneDocument = load(FXML_DOCUMENT);
+		mainStackPane.getChildren().add(paneDocument);
 	}
 
-	@Override
-	protected void onLinkCreateNewUserAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onLinkForgottenPasswordAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onImageViewNotificationClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onImageViewPreferencesClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+	private Pane load(String fxml) {
+		try {
+			return FXMLLoader.load(getClass().getResource(fxml));
+		} catch (IOException e) {
+			log.error("Failed to load fxml " + fxml, e);
+		}
+		return null;
 	}
 
 	@Override
@@ -48,21 +45,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	}
 
 	@Override
-	protected void onNavigationItemClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onImageViewAdbookClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onImageViewCalendarClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+	protected void onMouseClicked(MouseEvent event) {
+		Object source = event.getSource();
+		if (source == labelDocument) {
+			paneDocument.toFront();
+		}
 	}
 
 //	private ObservableList<Document> masterDocumentData = FXCollections.observableArrayList();

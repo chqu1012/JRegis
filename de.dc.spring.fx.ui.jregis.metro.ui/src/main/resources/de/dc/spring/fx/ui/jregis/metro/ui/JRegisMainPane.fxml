@@ -1,62 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefWidth="1200.0" stylesheets="@css/MainApplication.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.JRegisMainPaneController">
+<BorderPane fx:id="root" prefWidth="1200.0" 
+stylesheets="@css/MainApplication.css" 
+xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.JRegisMainPaneController">
    <center>
       <BorderPane>
          <center>
-            <StackPane fx:id="mainStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <children>
-                  <BorderPane fx:id="paneLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #E6EAED; -fx-background-radius: 10;">
-                     <center>
-                        <AnchorPane maxHeight="600.0" maxWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" style="-fx-background-color: #55A6DD;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <TextField fx:id="textUsername" layoutX="160.0" layoutY="337.0" prefHeight="25.0" prefWidth="280.0" promptText="Username" />
-                              <Label layoutX="163.0" layoutY="322.0" text="Username" textFill="#808080">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="163.0" layoutY="376.0" text="Password" textFill="#808080">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fx:id="imageViewUser" fitHeight="183.0" fitWidth="217.0" layoutX="207.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/icons8-name-100.png" />
-                                 </image>
-                              </ImageView>
-                              <Hyperlink layoutX="205.0" layoutY="437.0" onAction="#onLinkForgottenPasswordAction" prefHeight="23.0" prefWidth="122.0" text="Forgotten Password?" />
-                              <Button fx:id="buttonLogin" layoutX="338.0" layoutY="436.0" mnemonicParsing="false" onAction="#onButtonLoginAction" prefHeight="25.0" prefWidth="104.0" text="Login" />
-                              <Hyperlink layoutX="205.0" layoutY="468.0" onAction="#onLinkCreateNewUserAction" text="Create new user" />
-                              <PasswordField fx:id="textPassword" layoutX="160.0" layoutY="391.0" prefHeight="25.0" prefWidth="280.0" />
-                           </children>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </AnchorPane>
-                     </center>
-                  </BorderPane>
-               </children>
-            </StackPane>
+            <StackPane fx:id="mainStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </center>
          <top>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" spacing="15.0" style="-fx-background-color: #254962;" BorderPane.alignment="CENTER">
@@ -67,22 +31,22 @@
                      </HBox.margin>
                   </TextField>
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <ImageView fx:id="imageViewCalendar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewCalendarClicked" pickOnBounds="true" preserveRatio="true" styleClass="calendar-image-view">
+                  <ImageView fx:id="imageViewCalendar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="calendar-image-view">
                      <image>
                         <Image url="@images/icons8-kalender-48.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageViewAdbook" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewAdbookClicked" pickOnBounds="true" preserveRatio="true" styleClass="adbook-image-view">
+                  <ImageView fx:id="imageViewAdbook" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="adbook-image-view">
                      <image>
                         <Image url="@images/icons8-adressbuch-96.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageViewPreferences" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewPreferencesClicked" pickOnBounds="true" preserveRatio="true" styleClass="preferences-image-view">
+                  <ImageView fx:id="imageViewPreferences" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="preferences-image-view">
                      <image>
                         <Image url="@images/icons8-einstellungen-48-gray.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageViewNotification" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onImageViewNotificationClicked" pickOnBounds="true" preserveRatio="true" styleClass="notification-image-view">
+                  <ImageView fx:id="imageViewNotification" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="notification-image-view">
                      <image>
                         <Image url="@images/icons8-alarm-48.png" />
                      </image>
@@ -153,7 +117,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Separator>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Dashboard" textFill="WHITE">
+            <Label fx:id="labelDashboard" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Dashboard" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -161,7 +125,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Document" textFill="WHITE">
+            <Label fx:id="labelDocument" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Document" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -169,7 +133,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="User Management" textFill="WHITE">
+            <Label fx:id="labelUserManagement" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="User Management" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -177,7 +141,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Information" textFill="WHITE">
+            <Label fx:id="labelInformation" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Information" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -185,7 +149,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Licence" textFill="WHITE">
+            <Label fx:id="labelLicense" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Licence" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -193,7 +157,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label maxWidth="1.7976931348623157E308" onMouseClicked="#onNavigationItemClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Preferences" textFill="WHITE">
+            <Label fx:id="labelPreferences" maxWidth="1.7976931348623157E308" onMouseClicked="#onMouseClicked" prefHeight="43.0" prefWidth="253.0" styleClass="navigation-item" text="Preferences" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
