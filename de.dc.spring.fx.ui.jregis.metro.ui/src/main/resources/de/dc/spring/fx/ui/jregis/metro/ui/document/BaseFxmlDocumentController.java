@@ -1,5 +1,6 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public abstract class BaseFxmlDocumentController {
+
+    @FXML
+    protected AnchorPane root;
 
     @FXML
     protected AnchorPane paneDocumentTableView;
@@ -37,22 +41,22 @@ public abstract class BaseFxmlDocumentController {
     protected MenuItem menuItemTreeDelete;
 
     @FXML
-    protected TableView<?> tableViewDocument;
+    protected TableView<Document> tableViewDocument;
 
     @FXML
-    protected TableColumn<?, ?> columnId;
+    protected TableColumn<Document, ?> columnId;
 
     @FXML
-    protected TableColumn<?, ?> columnName;
+    protected TableColumn<Document, ?> columnName;
 
     @FXML
-    protected TableColumn<?, ?> columnCategory;
+    protected TableColumn<Document, ?> columnCategory;
 
     @FXML
-    protected TableColumn<?, ?> columnCreated;
+    protected TableColumn<Document, ?> columnCreated;
 
     @FXML
-    protected TableColumn<?, ?> columnUpdated;
+    protected TableColumn<Document, ?> columnUpdated;
 
     @FXML
     protected MenuItem tableMenuItemOpenDirectory;

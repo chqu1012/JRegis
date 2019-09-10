@@ -1,5 +1,7 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.main;
 
+import static de.dc.spring.fx.ui.jregis.metro.ui.main.UIConstants.FXML_DOCUMENT;
+
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
@@ -19,9 +21,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	@Autowired
 	ConfigurableApplicationContext springContext;
-
-	private static final String FXML_BASE_PATH = "/de/dc/spring/fx/ui/jregis/metro/ui/";
-	private static final String FXML_DOCUMENT = FXML_BASE_PATH + "document/Document.fxml";
 
 	Pane paneDocument;
 

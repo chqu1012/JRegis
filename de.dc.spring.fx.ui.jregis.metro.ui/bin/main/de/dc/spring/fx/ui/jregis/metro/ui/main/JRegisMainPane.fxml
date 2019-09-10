@@ -13,10 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefWidth="1200.0" 
-stylesheets="@css/JRegisMainPane.css" 
-xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" 
-fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.main.JRegisMainPaneController">
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="1000.0" stylesheets="@css/JRegisMainPane.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.main.JRegisMainPaneController">
    <center>
       <BorderPane>
          <center>
@@ -92,7 +89,7 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.main.JRegisMainPaneController"
       </BorderPane>
    </center>
    <left>
-      <VBox prefHeight="700.0" prefWidth="253.0" style="-fx-background-color: #122F54;" BorderPane.alignment="CENTER">
+      <VBox style="-fx-background-color: #122F54;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="53.0" prefWidth="213.0" style="-fx-background-color: white; -fx-background-radius: 5;" text="JREGIS" textFill="#1c3749">
                <font>
