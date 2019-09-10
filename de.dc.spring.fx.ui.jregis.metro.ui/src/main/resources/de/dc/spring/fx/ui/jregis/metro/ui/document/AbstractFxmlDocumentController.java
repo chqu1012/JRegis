@@ -44,19 +44,19 @@ public abstract class AbstractFxmlDocumentController {
     protected TableView<Document> tableViewDocument;
 
     @FXML
-    protected TableColumn<Document, ?> columnId;
+    protected TableColumn<Document, String> columnId;
 
     @FXML
-    protected TableColumn<Document, ?> columnName;
+    protected TableColumn<Document, String> columnName;
 
     @FXML
-    protected TableColumn<Document, ?> columnCategory;
+    protected TableColumn<Document, String> columnCategory;
 
     @FXML
-    protected TableColumn<Document, ?> columnCreated;
+    protected TableColumn<Document, String> columnCreated;
 
     @FXML
-    protected TableColumn<Document, ?> columnUpdated;
+    protected TableColumn<Document, String> columnUpdated;
 
     @FXML
     protected MenuItem tableMenuItemOpenDirectory;

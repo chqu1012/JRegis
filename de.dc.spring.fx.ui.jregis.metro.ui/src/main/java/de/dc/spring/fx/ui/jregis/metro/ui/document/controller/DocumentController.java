@@ -19,6 +19,12 @@ public class DocumentController extends BaseDocumentController {
 	@Autowired DocumentRepository documentReposity;
 	
 	@Override
+	public void initialize() {
+		super.initialize();
+		documentData.addAll(documentReposity.findAll());
+	}
+	
+	@Override
 	protected void onButtonAction(ActionEvent event) {
 		Object source = event.getSource();
 		if (source == linkCancelDocument) {
