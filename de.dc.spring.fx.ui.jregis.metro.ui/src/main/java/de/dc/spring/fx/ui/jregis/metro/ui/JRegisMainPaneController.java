@@ -1,28 +1,15 @@
 package de.dc.spring.fx.ui.jregis.metro.ui;
 
-import java.io.IOException;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 
-public class JRegisMainPane extends BaseJRegisMainPane {
+@Controller
+public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
-//	private Logger log = Logger.getLogger(getClass().getSimpleName());
-
-	private static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/JRegisMainPane.fxml";
-
-	public JRegisMainPane() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-	}
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Override
 	protected void onButtonCancelAction(ActionEvent event) {

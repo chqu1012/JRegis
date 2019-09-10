@@ -24,7 +24,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" prefWidth="1200.0" stylesheets="@css/MainApplication.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="root" prefWidth="1200.0" stylesheets="@css/MainApplication.css" 
+xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.JRegisMainPaneController">
    <center>
       <BorderPane>
          <center>
@@ -336,4 +338,4 @@
          </effect>
       </VBox>
    </left>
-</fx:root>
+</BorderPane>

@@ -19,7 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-public abstract class BaseJRegisMainPane extends BorderPane{
+public abstract class BaseFxmlJRegisMainPaneController{
 
     @FXML
     protected MenuItem menuItemTreeNew;

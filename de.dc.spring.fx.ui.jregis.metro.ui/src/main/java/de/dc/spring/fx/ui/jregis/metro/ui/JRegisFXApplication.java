@@ -29,12 +29,14 @@ public class JRegisFXApplication extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(JRegisFXApplication.class);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/dc/spring/fx/ui/jregis/metro/ui/JRegisMainPane.fxml"));
+        fxmlLoader.setControllerFactory(springContext::getBean);
+        root = fxmlLoader.load();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("JRegis Application");
-        root = new JRegisMainPane();
         Scene scene = new Scene(root, 1400, 820);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.DECORATED);
