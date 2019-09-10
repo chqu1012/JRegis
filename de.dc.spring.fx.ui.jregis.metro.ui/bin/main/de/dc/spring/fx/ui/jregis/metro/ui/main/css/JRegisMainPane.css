@@ -1,0 +1,76 @@
+.tree-view-category{
+	-fx-border-color: white;
+}
+
+.tree-view-category:focused{
+  	-fx-background-insets: 0, 0, 1, 2;
+	-fx-border-color: white;
+}
+
+.navigation-item{
+	-fx-background-color: transparent;
+}
+
+.navigation-item:hover{
+	-fx-background-color: #B3BCC2;
+}
+
+.navigation-item:pressed{
+	-fx-background-color: #677985;
+}
+
+.adbook-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96.png');
+}
+
+.adbook-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-dark.png');
+}
+
+.adbook-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-bue.png');
+}
+
+.notification-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48.png');
+}
+
+.notification-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-lightgray.png');
+}
+
+.notification-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-push.png');
+}
+
+.preferences-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-gray.png');
+}
+
+.preferences-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-light.png');
+}
+
+.preferences-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-blue.png');
+}
+
+.calendar-image-view {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48.png');
+}
+
+.calendar-image-view:hover {
+	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-dark.png');
+}
+
+.calendar-image-view:pressed{
+    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-blue.png');
+}
+
+.panel-user{
+	-fx-background-color: transparent;
+}
+
+.panel-user:pressed{
+	-fx-background-color: #C2C2C2;
+}
