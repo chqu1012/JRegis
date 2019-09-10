@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,11 +18,12 @@ import javafx.scene.input.MouseEvent;
 public class DocumentController extends BaseDocumentController {
 
 	@Autowired DocumentRepository documentReposity;
+	@Autowired DocumentCategoryRepository categoryRepository;
 	
 	@Override
-	public void initialize() {
-		super.initialize();
-		documentData.addAll(documentReposity.findAll());
+	protected void initRepositoryData() {
+		documentData.addAll(documentReposity.findAllByOrderByIdDesc());
+		categoryData.addAll(categoryRepository.findAllByOrderByNameAsc());
 	}
 	
 	@Override

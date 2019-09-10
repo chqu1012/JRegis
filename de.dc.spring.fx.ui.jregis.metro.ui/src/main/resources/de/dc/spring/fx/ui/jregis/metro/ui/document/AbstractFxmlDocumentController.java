@@ -1,6 +1,7 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,7 +30,7 @@ public abstract class AbstractFxmlDocumentController {
     protected HBox vboxDocumentOverviewContent;
 
     @FXML
-    protected TreeView<?> treeView;
+    protected TreeView<DocumentCategory> treeView;
 
     @FXML
     protected MenuItem menuItemTreeNew;
@@ -44,7 +45,7 @@ public abstract class AbstractFxmlDocumentController {
     protected TableView<Document> tableViewDocument;
 
     @FXML
-    protected TableColumn<Document, String> columnId;
+    protected TableColumn<Document, Document> columnId;
 
     @FXML
     protected TableColumn<Document, String> columnName;
@@ -89,7 +90,7 @@ public abstract class AbstractFxmlDocumentController {
     protected TextField textUrl;
 
     @FXML
-    protected ComboBox<?> comboBoxCategory;
+    protected ComboBox<DocumentCategory> comboBoxCategory;
 
     @FXML
     protected Button buttonCategoryAdd;
