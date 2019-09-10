@@ -1,33 +1,12 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
-import static de.dc.spring.fx.ui.jregis.metro.ui.main.UIConstants.FXML_DOCUMENT_DETAILS;
-
-import java.io.IOException;
-
-import org.apache.log4j.Logger;
-
-import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseFxmlDocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentDetails;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class DocumentDetails extends BaseFxmlDocumentDetails {
-
-	private Logger log = Logger.getLogger(getClass().getSimpleName());
-	
-	public DocumentDetails() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_DOCUMENT_DETAILS));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			log.error("Failed to load fxml ", exception);
-		}
-	}
+public class DocumentDetails extends BaseDocumentDetails {
 
 	@Override
 	protected void onButtonAction(ActionEvent event) {
@@ -35,42 +14,6 @@ public class DocumentDetails extends BaseFxmlDocumentDetails {
 		if (linkBack==source) {
 			root.toBack();
 		}
-	}
-
-	@Override
-	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onButtonReferenceDialogApply(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onButtonSelectAllDocument(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onButtonSelectDocument(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onButtonUnselectAllDocument(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onButtonUnselectDocument(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -87,42 +30,6 @@ public class DocumentDetails extends BaseFxmlDocumentDetails {
 
 	@Override
 	protected void onImageViewOpenFolder(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkAddNewSuggestionAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkCancelReferenceDialog(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkClipboardHelperCancelAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkDeleteNewSuggestionAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onLinkDownloadDialogCancelAction(ActionEvent event) {
 		// TODO Auto-generated method stub
 		
 	}

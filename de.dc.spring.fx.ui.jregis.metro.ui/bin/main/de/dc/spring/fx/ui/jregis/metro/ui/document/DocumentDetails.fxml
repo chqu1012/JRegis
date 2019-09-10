@@ -36,16 +36,16 @@
                     <Label fx:id="labelReferencedDocumentCounter" layoutX="526.0" layoutY="145.0" text="(0)" />
                     <VBox layoutX="310.0" layoutY="194.0" spacing="5.0">
                        <children>
-                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonSelectDocument" text="Select" />
-                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonUnselectDocument" text="Unselect" />
-                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonSelectAllDocument" text="Select All" />
-                          <Button mnemonicParsing="false" onAction="#onButtonUnselectAllDocument" text="Unselect All" />
+                          <Button fx:id="buttonSelectDocument" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonAction" text="Select" />
+                          <Button fx:id="buttonUnselectDocument" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonAction" text="Unselect" />
+                          <Button fx:id="buttonSelectAllDocument" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onButtonAction" text="Select All" />
+                          <Button fx:id="buttonUnselectAllDocument" mnemonicParsing="false" onAction="#onButtonAction" text="Unselect All" />
                        </children>
                     </VBox>
                     <TextField fx:id="textSearchForAvailableDocuments" layoutX="51.0" layoutY="118.0" prefHeight="25.0" prefWidth="249.0" promptText="Search for documents" />
                     <TextField fx:id="textSearchForReferencedDocuments" layoutX="399.0" layoutY="118.0" prefHeight="25.0" prefWidth="265.0" promptText="Search for documents" />
-                    <Hyperlink layoutX="517.0" layoutY="396.0" onAction="#onLinkCancelReferenceDialog" text="Cancel" />
-                    <Button layoutX="561.0" layoutY="395.0" mnemonicParsing="false" onAction="#onButtonReferenceDialogApply" prefHeight="25.0" prefWidth="97.0" text="Apply" />
+                    <Hyperlink fx:id="linkCancelReferenceDialog" layoutX="517.0" layoutY="396.0" onAction="#onButtonAction" text="Cancel" />
+                    <Button fx:id="buttonReferenceDialogApply" layoutX="561.0" layoutY="395.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="25.0" prefWidth="97.0" text="Apply" />
                         <ListView fx:id="listViewAllAvailableDocuments" layoutX="50.0" layoutY="162.0" onMouseClicked="#onListViewAllAvailableDocuments" prefHeight="228.0" prefWidth="250.0" />
                         <ListView fx:id="listViewReferencedDocuments" layoutX="400.0" layoutY="162.0" onMouseClicked="#onListViewReferencedDocuments" prefHeight="224.0" prefWidth="265.0" />
                  </children>
@@ -67,8 +67,8 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="buttonDownloadDialogAccept" layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onLinkDownloadDialogAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
-                        <Hyperlink layoutX="296.0" layoutY="259.0" onAction="#onLinkDownloadDialogCancelAction" text="Cancel" />
+                        <Button fx:id="buttonDownloadDialogAccept" layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Hyperlink fx:id="linkDownloadDialogCancel" layoutX="296.0" layoutY="259.0" onAction="#onButtonAction" text="Cancel" />
                         <Label layoutX="70.0" layoutY="58.0" text="Transaction Message" />
                         <TextField fx:id="textDownloadTransactionMessage" layoutX="70.0" layoutY="75.0" prefHeight="25.0" prefWidth="402.0" text="Download Link from URL." />
                         <TextField fx:id="textDownloadFileID" layoutX="71.0" layoutY="180.0" prefHeight="25.0" prefWidth="89.0" />
@@ -99,8 +99,8 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="buttonClipboardHelperAccept" layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonClipboardHelperAcceptAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
-                        <Hyperlink layoutX="572.0" layoutY="608.0" onAction="#onLinkClipboardHelperCancelAction" text="Cancel" />
+                        <Button fx:id="buttonClipboardHelperAccept" layoutX="624.0" layoutY="607.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="25.0" prefWidth="124.0" text="Accept" />
+                        <Hyperlink fx:id="linkClipboardHelperCancel" layoutX="572.0" layoutY="608.0" onAction="#onButtonAction" text="Cancel" />
                         <Label layoutX="199.0" layoutY="59.0" text="Transaction Message" />
                         <TextField fx:id="textTransactionMessage" layoutX="199.0" layoutY="76.0" prefHeight="25.0" prefWidth="402.0" text="Save clipboard image." />
                         <TextField fx:id="textFileID" layoutX="200.0" layoutY="124.0" prefHeight="25.0" prefWidth="89.0" />
@@ -118,12 +118,12 @@
                            </content>
                         </ScrollPane>
                         <Label layoutX="198.0" layoutY="183.0" prefHeight="37.0" prefWidth="404.0" text="Doubble click in the middle of the image view to add a new clipboard image content" wrapText="true" />
-                        <Hyperlink layoutX="667.0" layoutY="125.0" onAction="#onLinkAddNewSuggestionAction" text="Add">
+                        <Hyperlink fx:id="linkAddNewSuggestion" layoutX="667.0" layoutY="125.0" onAction="#onButtonAction" text="Add">
                            <tooltip>
                               <Tooltip text="Adding new suggestion to list" />
                            </tooltip>
                         </Hyperlink>
-                        <Hyperlink layoutX="697.0" layoutY="125.0" onAction="#onLinkDeleteNewSuggestionAction" text="Delete">
+                        <Hyperlink fx:id="linkDeleteSuggestion" layoutX="697.0" layoutY="125.0" onAction="#onButtonAction" text="Delete">
                            <tooltip>
                               <Tooltip text="Adding new suggestion to list" />
                            </tooltip>
