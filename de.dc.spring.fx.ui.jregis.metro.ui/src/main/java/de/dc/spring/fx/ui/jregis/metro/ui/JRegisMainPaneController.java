@@ -12,18 +12,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Override
-	protected void onButtonCancelAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onButtonCreateAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void onButtonLoginAction(ActionEvent event) {
 		// TODO Auto-generated method stub
 
@@ -37,66 +25,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	@Override
 	protected void onLinkForgottenPasswordAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onMenuItemDeleteDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onMenuItemEditDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onMenuItemNewDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onMenuItemOpenDocumentAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onTableViewDocumentClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onMenuItemShowAllAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onButtonAddCategoryAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onButtonEditCategoryAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onButtonRemoveCategoryAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onButtonAddDocumentNameSuggestionAction(ActionEvent event) {
 		// TODO Auto-generated method stub
 
 	}
@@ -133,12 +61,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	@Override
 	protected void onImageViewCalendarClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onTreeContextMenuAction(ActionEvent event) {
 		// TODO Auto-generated method stub
 
 	}
