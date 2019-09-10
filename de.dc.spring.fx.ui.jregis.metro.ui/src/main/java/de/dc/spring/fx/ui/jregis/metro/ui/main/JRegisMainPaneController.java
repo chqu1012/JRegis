@@ -31,7 +31,9 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	private Pane load(String fxml) {
 		try {
-			return FXMLLoader.load(getClass().getResource(fxml));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+	        fxmlLoader.setControllerFactory(springContext::getBean);
+			return fxmlLoader.load();
 		} catch (IOException e) {
 			log.error("Failed to load fxml " + fxml, e);
 		}

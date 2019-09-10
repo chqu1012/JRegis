@@ -3,6 +3,10 @@ package de.dc.spring.fx.ui.jregis.metro.ui.document;
 import org.apache.log4j.Logger;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.layout.AnchorPane;
 
 public abstract class BaseDocumentController extends AbstractFxmlDocumentController {
@@ -10,6 +14,9 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 	protected Logger log = Logger.getLogger(getClass().getSimpleName());
 	
 	protected DocumentDetails documentDetails = new DocumentDetails();
+	
+	protected ObservableList<Document> documentData = FXCollections.observableArrayList();
+	protected FilteredList<Document> filteredDocuments = new FilteredList<>(documentData, p -> true);
 	
 	public void initialize() {
 		AnchorPane.setTopAnchor(documentDetails, 0d);
@@ -19,14 +26,20 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 		root.getChildren().add(0, documentDetails);
 		
 		closeNewDocumentPane();
+		
+		tableViewDocument.setItems(filteredDocuments);
 	}
 	
 	public void closeNewDocumentPane() {
-		vboxDocumentOverviewContent.getChildren().remove(paneAddNewDocument);
+		if (vboxDocumentOverviewContent.getChildren().contains(paneAddNewDocument)) {
+			vboxDocumentOverviewContent.getChildren().remove(paneAddNewDocument);
+		}
 	}
 
 	public void openNewDocumentPane() {
-		vboxDocumentOverviewContent.getChildren().add(paneAddNewDocument);
+		if (!vboxDocumentOverviewContent.getChildren().contains(paneAddNewDocument)) {
+			vboxDocumentOverviewContent.getChildren().add(paneAddNewDocument);
+		}
 	}
 	
 }

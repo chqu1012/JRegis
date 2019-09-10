@@ -1,6 +1,7 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
@@ -254,14 +255,14 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		context.documentId.set(String.format("JREG-%05d", newValue.getId()));
 //		context.documentName.set(newValue.getName());
 //	}
-//
-//	public void setSelection(Document document) {
+
+	public void setSelection(Document document) {
 //		context.current.set(document);
-//
-//		// Used focus for handle escape key
-//		root.requestFocus();
-//	}
-//
+
+		// Used focus for handle escape key
+		root.requestFocus();
+	}
+
 //	private void populateHistoryList(Document document) {
 //		vboxComment.getChildren().clear();
 //		vboxComment.getChildren().add(vboxCommentEditBox);
