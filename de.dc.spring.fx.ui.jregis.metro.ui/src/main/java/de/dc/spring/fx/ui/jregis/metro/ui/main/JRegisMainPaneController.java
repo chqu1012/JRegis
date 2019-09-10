@@ -1,4 +1,4 @@
-package de.dc.spring.fx.ui.jregis.metro.ui;
+package de.dc.spring.fx.ui.jregis.metro.ui.main;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.main.BaseFxmlJRegisMainPaneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;

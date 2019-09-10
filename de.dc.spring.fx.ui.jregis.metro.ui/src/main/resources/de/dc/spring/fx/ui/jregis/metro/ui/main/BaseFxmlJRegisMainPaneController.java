@@ -1,4 +1,4 @@
-package de.dc.spring.fx.ui.jregis.metro.ui;
+package de.dc.spring.fx.ui.jregis.metro.ui.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

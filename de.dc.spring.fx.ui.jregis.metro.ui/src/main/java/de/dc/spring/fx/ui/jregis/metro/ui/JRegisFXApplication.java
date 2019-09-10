@@ -29,7 +29,7 @@ public class JRegisFXApplication extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(JRegisFXApplication.class);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/dc/spring/fx/ui/jregis/metro/ui/JRegisMainPane.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/dc/spring/fx/ui/jregis/metro/ui/main/JRegisMainPane.fxml"));
         fxmlLoader.setControllerFactory(springContext::getBean);
         root = fxmlLoader.load();
     }
