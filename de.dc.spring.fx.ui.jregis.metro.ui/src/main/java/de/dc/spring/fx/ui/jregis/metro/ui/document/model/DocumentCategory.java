@@ -44,6 +44,9 @@ public class DocumentCategory{
 	}
 	
 	public DocumentCategory(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long parentId) {
+		this.name = name;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
 		this.parentId = parentId;
 	}
 

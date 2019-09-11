@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
 
 @Controller
@@ -19,6 +22,12 @@ public class DocumentController extends BaseDocumentController {
 
 	@Autowired DocumentRepository documentReposity;
 	@Autowired DocumentCategoryRepository categoryRepository;
+	
+	@Override
+	public void initialize() {
+		super.initialize();
+		initTreeView(categoryRepository);
+	}
 	
 	@Override
 	protected void initRepositoryData() {
@@ -38,10 +47,10 @@ public class DocumentController extends BaseDocumentController {
 
 			Document document = new Document(name, description, -1L, createdOn, createdOn);
 			documentReposity.save(document);
-//			Category category = comboBoxCategory.getSelectionModel().getSelectedItem();
-//			if (category != null) {
-//				document.setCategoryId(category.getId());
-//			}
+			DocumentCategory category = comboBoxCategory.getSelectionModel().getSelectedItem();
+			if (category != null) {
+				document.setCategoryId(category.getId());
+			}
 
 			documentData.add(0,document);
 			
@@ -76,7 +85,26 @@ public class DocumentController extends BaseDocumentController {
 
 	@Override
 	protected void onTreeContextMenuAction(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		TreeItem<DocumentCategory> selection = treeView.getSelectionModel().getSelectedItem();
+		if (selection != null) {
+			Object source = event.getSource();
+			DocumentCategory category = selection.getValue();
+			if (source == menuItemTreeDelete) {
+				categoryRepository.delete(category);
+				selection.getParent().getChildren().remove(selection);
+			} else if (source == menuItemTreeEdit) {
+				throw new UnsupportedOperationException("Not implemented yet!");
+			} else if (source == menuItemTreeNew) {
+				DialogUtil.openInput("New Category", "New Category", "Please give a name for the new category", "Please give a name for the new category", e->{
+					if (e!=null) {
+						LocalDateTime createdOn = LocalDateTime.now();
+						DocumentCategory newCategory = new DocumentCategory(e, createdOn, createdOn, category.getId());
+						categoryRepository.save(newCategory);
+						selection.getChildren().add(new TreeItem<DocumentCategory>(newCategory));
+						selection.setExpanded(true);
+					}
+				});
+			}
+		}		
 	}
 }

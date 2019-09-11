@@ -12,17 +12,19 @@ import org.apache.log4j.Logger;
 import org.controlsfx.control.table.TableFilter;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryTreeCell;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.ColumnJRegisIdFeature;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 
@@ -84,7 +86,8 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 		});
 	}
 	
-	protected void initTreeView(List<DocumentCategory> categories) {
+	protected void initTreeView(DocumentCategoryRepository repository) {
+		List<DocumentCategory> categories = repository.findAll();
 		if (!categories.isEmpty()) {
 			Optional<List<DocumentCategory>> optionalCategories = Optional.ofNullable(categories);
 			optionalCategories.ifPresent(e -> {
@@ -93,25 +96,14 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 				root.getChildren().stream().forEach(c->buildTreeItems(rootItem, c));
 			});
 		}else {
-//			LocalDateTime createdOn = LocalDateTime.now();
-//			DocumentCategory root = new DocumentCategory("Root", createdOn, createdOn, -1);
-//			long newId = JRegisPlatform.getInstance(CategoryRepository.class).save(root);
-//			root.setId(newId);
-//			rootItem = new TreeItem<>(root);
-//			masterCategoryData.add(root);
+			LocalDateTime createdOn = LocalDateTime.now();
+			DocumentCategory root = new DocumentCategory("Root", createdOn, createdOn, -1);
+			repository.save(root);
+			rootItem = new TreeItem<>(root);
+			categoryData.add(root);
 		}
 		treeView.setRoot(rootItem);
-		treeView.setCellFactory(param -> new TreeCell<DocumentCategory>() {
-			@Override
-			protected void updateItem(DocumentCategory item, boolean empty) {
-				super.updateItem(item, empty);
-				if (item == null || empty) {
-					setText(null);
-				} else {
-					setText(item.getName());
-				}
-			}
-		});
+		treeView.setCellFactory(param -> new CategoryTreeCell());
 		rootItem.setExpanded(true);
 		treeView.setShowRoot(true);
 		treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
