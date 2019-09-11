@@ -53,15 +53,25 @@ public class DocumentController extends BaseDocumentController {
 	
 	@Override
 	protected void onButtonAction(ActionEvent event) {
+		DocumentCategory selection = comboBoxCategory.getSelectionModel().getSelectedItem();
 		Object source = event.getSource();
 		if (source == linkCancelDocument) {
 			closeNewDocumentPane();
 		}else if (source == buttonCreateDocument) {
 			dispatchCreateDocument();
 		}else if (source == buttonCategoryEdit) {
-			DocumentCategory selection = comboBoxCategory.getSelectionModel().getSelectedItem();
 			dispatchEditCategory(selection);
+		}else if (source == buttonCategoryRemove) {
+			dispatchRemoveCategory(selection);
 		}
+	}
+
+	private void dispatchRemoveCategory(DocumentCategory selection) {
+		if (selection != null) {
+			categoryRepository.delete(selection);
+			categoryData.remove(selection);
+			comboBoxCategory.getSelectionModel().selectFirst();
+		}		
 	}
 
 	private void dispatchEditCategory(DocumentCategory selection) {
@@ -72,6 +82,7 @@ public class DocumentController extends BaseDocumentController {
 				categoryData.clear();
 				categoryData.addAll(categoryRepository.findAll());
 				comboBoxCategory.getSelectionModel().select(selection);
+				Notifications.create().darkStyle().title("Category Delete").text("Removed category "+selection.getName()+"!").show();
 			});
 		}		
 	}
