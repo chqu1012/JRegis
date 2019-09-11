@@ -16,6 +16,7 @@ import com.google.common.eventbus.Subscribe;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.inbox.Inbox;
+import de.dc.spring.fx.ui.jregis.metro.ui.preferences.PreferencePage;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
@@ -37,6 +38,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	
 	// TODO: autowiring?
 	private Inbox inbox = new Inbox();
+	private PreferencePage preferencePage = new PreferencePage();
 	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
@@ -45,6 +47,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
+		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(paneDocument);
@@ -90,6 +93,9 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			popOverPreferences.setDetachable(false);
 			popOverPreferences.setAutoFix(true);
 			popOverPreferences.show(imageViewPreferences);
+		}else if (source== labelPreferences) {
+			preferencePage.toFront();
+			preferencePage.init();
 		}
 	}
 

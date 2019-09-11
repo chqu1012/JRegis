@@ -46,7 +46,7 @@ public class JRegisFXApplication extends Application {
 
     @Override
     public void stop() throws Exception {
-        springContext.stop();
+    	springContext.stop();
         springContext.close();
     }
 
