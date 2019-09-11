@@ -18,7 +18,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
-import javafx.util.StringConverter;
 
 @Controller
 public class DocumentController extends BaseDocumentController {

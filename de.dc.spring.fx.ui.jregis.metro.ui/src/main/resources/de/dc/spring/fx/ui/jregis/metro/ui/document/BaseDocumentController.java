@@ -84,6 +84,20 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 				return false;
 			}
 		});
+		
+		textSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredDocuments.setPredicate(p -> {
+				String searchContent = newValue.toLowerCase();
+				boolean isEmpty = newValue == null || newValue.isEmpty();
+				boolean isNameEquals = p.getName().toLowerCase().contains(searchContent);
+				boolean isIdEquals = String.valueOf(p.getId()).contains(searchContent);
+				boolean isCreatedEquals = p.getCreatedOn() != null
+						&& p.getCreatedOn().toString().contains(searchContent);
+				boolean isUpdatedEquals = p.getUpdatedOn() != null
+						&& p.getUpdatedOn().toString().contains(searchContent);
+				return isEmpty || isNameEquals || isCreatedEquals || isUpdatedEquals || isIdEquals;
+			});
+		});
 	}
 	
 	protected void initTreeView(DocumentCategoryRepository repository) {
