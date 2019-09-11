@@ -1,5 +1,8 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document;
 
+import static javafx.beans.binding.Bindings.format;
+import static javafx.beans.binding.Bindings.size;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +24,6 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -80,8 +82,7 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 
 	private void initDatabinding() {
 		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
-		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries",
-				Bindings.size(filteredDocuments), Bindings.size(documentData)));
+		labelEntriesSize.textProperty().bind(format("Showing %d of %d entries", size(filteredDocuments), size(documentData)));
 		buttonCreateDocument.disableProperty().bind(textDocumentName.textProperty().isEmpty());		
 	}
 
