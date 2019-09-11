@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="250.0" styleClass="content" stylesheets="@css/NotificationAlertItem.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="-62.0" layoutY="-59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0">
+         <image>
+            <Image url="@../../images/icons8-name-64.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="37.0" layoutY="6.0" text="Max Mustermann" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="5.0" />
+      <Label layoutX="143.0" layoutY="5.0" text="3 min ago" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="35.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua" wrapText="true" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="22.0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>

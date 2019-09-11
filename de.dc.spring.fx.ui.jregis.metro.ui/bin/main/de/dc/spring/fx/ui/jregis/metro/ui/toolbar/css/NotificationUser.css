@@ -1,0 +1,4 @@
+.hbox-item:hover{
+	-fx-background-color: #254962;
+	-fx-text-fill: white;
+}

@@ -5,12 +5,19 @@ import static de.dc.spring.fx.ui.jregis.metro.ui.main.UIConstants.FXML_DOCUMENT;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.controlsfx.control.PopOver;
+import org.controlsfx.control.PopOver.ArrowLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
+import com.google.common.eventbus.Subscribe;
+
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
-import de.dc.spring.fx.ui.jregis.metro.ui.main.BaseFxmlJRegisMainPaneController;
+import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
+import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
+import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,11 +30,22 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	@Autowired ConfigurableApplicationContext springContext;
 	@Autowired IEventBroker eventBroker;
 
-	Pane paneDocument;
+	@Autowired NotificationUser notificationUser;
+	@Autowired ProfilePage profilePage;
+	@Autowired NotificationAlerts notificationAlerts;
+	
+	private PopOver popOverNotification = new PopOver();
+	private PopOver popOverPreferences = new PopOver();
+	private PopOver popOverUser = new PopOver();
+	private Pane paneDocument;
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
+		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(paneDocument);
+		
+		popOverNotification.setContentNode(notificationAlerts);
+		popOverUser.setContentNode(notificationUser);
 		
 		eventBroker.register(this);
 	}
@@ -45,8 +63,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	@Override
 	protected void onHBoxUserClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+		popOverUser.setArrowLocation(ArrowLocation.TOP_CENTER);
+		popOverUser.setDetachable(false);
+		popOverUser.setAutoFix(true);
+		popOverUser.setArrowSize(0);
+		popOverUser.show(panelUser);
 	}
 
 	@Override
@@ -54,9 +75,36 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		Object source = event.getSource();
 		if (source == labelDocument) {
 			paneDocument.toFront();
+		}else if (source == imageViewNotification) {
+			popOverNotification.setArrowLocation(ArrowLocation.TOP_RIGHT);
+			popOverNotification.setDetachable(false);
+			popOverNotification.setAutoFix(true);
+			popOverNotification.show(imageViewNotification);
+		}else if (source == imageViewPreferences) {
+			popOverPreferences.setArrowLocation(ArrowLocation.TOP_RIGHT);
+			popOverPreferences.setDetachable(false);
+			popOverPreferences.setAutoFix(true);
+			popOverPreferences.show(imageViewPreferences);
 		}
 	}
 
+	@Subscribe
+	public void closeNotificationViaEventBroker(EventContext<String> context) {
+		if (context.getEventId().equals("/close/notification")) {
+			if (context.getInput().equals("user")) {
+				popOverUser.hide();
+				profilePage.toFront();
+			} else if (context.getInput().equals("preferences")) {
+				popOverUser.hide();
+			} else if (context.getInput().equals("notifications")) {
+				popOverUser.hide();
+			} else if (context.getInput().equals("logout")) {
+				popOverUser.hide();
+//				paneLogin.toFront();
+			}
+		}
+	}
+	
 //	@Subscribe
 //	public void openSeeAllAlertsPane(EventContext<String> context) {
 //		if (context.getEventId().equals("/open/see/all/alerts")) {
@@ -65,22 +113,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 //		}
 //	}
 //
-//	@Subscribe
-//	public void closeNotificationViaEventBroker(EventContext<String> context) {
-//		if (context.getEventId().equals("/close/notification")) {
-//			if (context.getInput().equals("user")) {
-//				popOverUser.hide();
-//				profilePage.toFront();
-//			} else if (context.getInput().equals("preferences")) {
-//				popOverUser.hide();
-//			} else if (context.getInput().equals("notifications")) {
-//				popOverUser.hide();
-//			} else if (context.getInput().equals("logout")) {
-//				popOverUser.hide();
-//				paneLogin.toFront();
-//			}
-//		}
-//	}
 //
 //	public void initialize() {
 //		initData();
