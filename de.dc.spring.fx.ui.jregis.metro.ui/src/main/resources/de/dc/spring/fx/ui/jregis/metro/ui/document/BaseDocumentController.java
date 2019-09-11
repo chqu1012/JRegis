@@ -12,11 +12,15 @@ import org.apache.log4j.Logger;
 import org.controlsfx.control.table.TableFilter;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboCell;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboConvertor;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryTreeCell;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.ColumnJRegisIdFeature;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -39,13 +43,16 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 
 	protected ObservableList<DocumentCategory> categoryData = FXCollections.observableArrayList();
 	protected FilteredList<DocumentCategory> filteredCategories = new FilteredList<>(categoryData, p -> true);
+
+	protected ObservableList<String> suggestionData = FXCollections.observableArrayList();
+	protected FilteredList<String> filteredSuggestionData = new FilteredList<>(suggestionData, p -> true);
 	
 	protected TableFilter<Document> tableFilter;
 	protected TreeItem<DocumentCategory> rootItem;
 	private Map<Long, DocumentCategory> categoryRegistry = new TreeMap<>();
 	
 	public void initialize() {
-		initRepositoryData();
+		Platform.runLater(this::initRepositoryData);
 		
 		AnchorPane.setTopAnchor(documentDetails, 0d);
 		AnchorPane.setBottomAnchor(documentDetails, 0d);
@@ -57,6 +64,18 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 		
 		initTableView();
 		initDatabinding();
+		initControls();
+	}
+
+	private void initControls() {
+		comboBoxCategory.setItems(categoryData);
+		comboBoxCategory.setCellFactory(e->new CategoryComboCell());
+		comboBoxCategory.setConverter(new CategoryComboConvertor());
+		
+		new AutoCompletionTextFieldBinding<>(textDocumentName, param -> {
+			filteredSuggestionData.setPredicate(p -> p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			return filteredSuggestionData;
+		});		
 	}
 
 	private void initDatabinding() {

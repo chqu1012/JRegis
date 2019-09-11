@@ -2,17 +2,18 @@ package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
-import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboCell;
-import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboConvertor;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentNameSuggestion;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentNameSuggestionRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentFolderService;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
@@ -29,26 +30,21 @@ public class DocumentController extends BaseDocumentController {
 	@Autowired DocumentRepository documentReposity;
 	@Autowired DocumentCategoryRepository categoryRepository;
 	@Autowired DocumentFolderService folderService;
+	@Autowired DocumentNameSuggestionRepository suggestionRepository;
 	
 	@Override
 	public void initialize() {
 		super.initialize();
 		initTreeView(categoryRepository);
-		initControls();
 		
 		folderService.createIfNotExist();
 	}
 	
-	private void initControls() {
-		comboBoxCategory.setItems(categoryData);
-		comboBoxCategory.setCellFactory(e->new CategoryComboCell());
-		comboBoxCategory.setConverter(new CategoryComboConvertor());
-	}
-
 	@Override
 	protected void initRepositoryData() {
 		documentData.addAll(documentReposity.findAllByOrderByIdDesc());
 		categoryData.addAll(categoryRepository.findAllByOrderByNameAsc());
+		suggestionData.addAll(suggestionRepository.findAllByOrderByNameAsc().stream().map(e->e.getName()).collect(Collectors.toList()));
 	}
 	
 	@Override
@@ -63,7 +59,16 @@ public class DocumentController extends BaseDocumentController {
 			dispatchEditCategory(selection);
 		}else if (source == buttonCategoryRemove) {
 			dispatchRemoveCategory(selection);
+		}else if (source==buttonAddDocumentNameSuggestion) {
+			dispatchAddNameSuggestion();
 		}
+	}
+
+	private void dispatchAddNameSuggestion() {
+		String name = textDocumentName.getText();
+		suggestionRepository.save(new DocumentNameSuggestion(name, LocalDateTime.now(), LocalDateTime.now()));
+		suggestionData.add(name);
+		Notifications.create().darkStyle().title("Add new Suggestion").text("Add suggestion "+name+" to database!").show();
 	}
 
 	private void dispatchRemoveCategory(DocumentCategory selection) {
