@@ -20,51 +20,51 @@
 }
 
 .adbook-image-view {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-adressbuch-96.png');
 }
 
 .adbook-image-view:hover {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-dark.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-adressbuch-96-dark.png');
 }
 
 .adbook-image-view:pressed{
-    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-adressbuch-96-bue.png');
+    -fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-adressbuch-96-bue.png');
 }
 
 .notification-image-view {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-alarm-48.png');
 }
 
 .notification-image-view:hover {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-lightgray.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-alarm-48-lightgray.png');
 }
 
 .notification-image-view:pressed{
-    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-alarm-48-push.png');
+    -fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-alarm-48-push.png');
 }
 
 .preferences-image-view {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-gray.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-einstellungen-48-gray.png');
 }
 
 .preferences-image-view:hover {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-light.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-einstellungen-48-light.png');
 }
 
 .preferences-image-view:pressed{
-    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-einstellungen-48-blue.png');
+    -fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-einstellungen-48-blue.png');
 }
 
 .calendar-image-view {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-kalender-48.png');
 }
 
 .calendar-image-view:hover {
-	-fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-dark.png');
+	-fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-kalender-48-dark.png');
 }
 
 .calendar-image-view:pressed{
-    -fx-image: url('/de/dc/fx/ui/jregis/metro/ui/images/icons8-kalender-48-blue.png');
+    -fx-image: url('/de/dc/spring/fx/ui/jregis/metro/ui/main/images/icons8-kalender-48-blue.png');
 }
 
 .panel-user{
