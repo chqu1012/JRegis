@@ -1,6 +1,7 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository
 import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
 
@@ -78,6 +81,24 @@ public class DocumentController extends BaseDocumentController {
 		Object source = event.getSource();
 		if (source==tableMenuItemNew) {
 			openNewDocumentPane();
+		}else if (source==tableMenuItemDelete) {
+			onDeleteDocument();
+		}
+	}
+
+	private void onDeleteDocument() {
+		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
+		if (selection != null) {
+			String message = "Do you really want to delete \"" + selection.getName() + "\"";
+			Optional<ButtonType> dialog = DialogUtil.openQuestion("Delete Selection",
+					"Delete selected document with ID: " + selection.getId(), message);
+			dialog.ifPresent(e -> {
+				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
+					documentReposity.delete(selection);
+					Notifications.create().darkStyle().title("Delete selection").text(message).show();
+					documentData.remove(selection);
+				}
+			});
 		}
 	}
 
