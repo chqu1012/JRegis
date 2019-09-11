@@ -15,6 +15,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.inbox.Inbox;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
@@ -34,6 +35,9 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	@Autowired ProfilePage profilePage;
 	@Autowired NotificationAlerts notificationAlerts;
 	
+	// TODO: autowiring?
+	private Inbox inbox = new Inbox();
+	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
@@ -41,6 +45,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
+		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(paneDocument);
 		
@@ -89,7 +94,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	}
 
 	@Subscribe
-	public void closeNotificationViaEventBroker(EventContext<String> context) {
+	public void subscribeEventBus(EventContext<String> context) {
 		if (context.getEventId().equals("/close/notification")) {
 			if (context.getInput().equals("user")) {
 				popOverUser.hide();
@@ -102,18 +107,12 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 				popOverUser.hide();
 //				paneLogin.toFront();
 			}
+		}else if (context.getEventId().equals("/open/see/all/alerts")) {
+			popOverNotification.hide();
+			inbox.toFront();
 		}
 	}
 	
-//	@Subscribe
-//	public void openSeeAllAlertsPane(EventContext<String> context) {
-//		if (context.getEventId().equals("/open/see/all/alerts")) {
-//			popOverNotification.hide();
-//			inbox.toFront();
-//		}
-//	}
-//
-//
 //	public void initialize() {
 //		initData();
 //		initTableView();
@@ -134,32 +133,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 //		dashboard.toFront();
 //	}
 
-//	@Override
-//	protected void onImageViewNotificationClicked(MouseEvent event) {
-//		popOverNotification.setArrowLocation(ArrowLocation.TOP_RIGHT);
-//		popOverNotification.setDetachable(false);
-//		popOverNotification.setAutoFix(true);
-//		popOverNotification.show(imageViewNotification);
-//	}
-//
-//	@Override
-//	protected void onImageViewPreferencesClicked(MouseEvent event) {
-//		popOverPreferences.setArrowLocation(ArrowLocation.TOP_RIGHT);
-//		popOverPreferences.setDetachable(false);
-//		popOverPreferences.setAutoFix(true);
-//		popOverPreferences.show(imageViewPreferences);
-//	}
-//
-//	@Override
-//	protected void onHBoxUserClicked(MouseEvent event) {
-//		popOverUser.setArrowLocation(ArrowLocation.TOP_CENTER);
-//		popOverUser.setContentNode(new NotificationUser());
-//		popOverUser.setDetachable(false);
-//		popOverUser.setAutoFix(true);
-//		popOverUser.setArrowSize(0);
-//		popOverUser.show(panelUser);
-//	}
-//
 //	@Override
 //	protected void onNavigationItemClicked(MouseEvent event) {
 //		Object source = event.getSource();
