@@ -82,7 +82,7 @@ public class DocumentController extends BaseDocumentController {
 				categoryData.clear();
 				categoryData.addAll(categoryRepository.findAll());
 				comboBoxCategory.getSelectionModel().select(selection);
-				Notifications.create().darkStyle().title("Category Delete").text("Removed category "+selection.getName()+"!").show();
+				Notifications.create().darkStyle().title("Category Delete").text("Edit category "+selection.getName()+"!").show();
 			});
 		}		
 	}

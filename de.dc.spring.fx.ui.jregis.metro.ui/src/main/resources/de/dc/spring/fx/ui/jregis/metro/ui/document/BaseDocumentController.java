@@ -17,6 +17,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.ColumnJRegisIdFeature
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,7 +25,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 
@@ -56,6 +56,14 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 		closeNewDocumentPane();
 		
 		initTableView();
+		initDatabinding();
+	}
+
+	private void initDatabinding() {
+		buttonAddDocumentNameSuggestion.disableProperty().bind(textDocumentName.textProperty().isEmpty());
+		labelEntriesSize.textProperty().bind(Bindings.format("Showing %d of %d entries",
+				Bindings.size(filteredDocuments), Bindings.size(documentData)));
+		buttonCreateDocument.disableProperty().bind(textDocumentName.textProperty().isEmpty());		
 	}
 
 	protected abstract void initRepositoryData();

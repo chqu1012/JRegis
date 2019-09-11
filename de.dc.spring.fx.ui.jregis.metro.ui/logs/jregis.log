@@ -4720,3 +4720,52 @@ java.awt.HeadlessException: null
 2019-09-11 20:27:05.026  INFO 17644 --- [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2019-09-11 20:27:05.031  INFO 17644 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown initiated...
 2019-09-11 20:27:05.041  INFO 17644 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown completed.
+2019-09-11 20:52:10.407  INFO 17332 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 17332 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-11 20:52:10.418  INFO 17332 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-11 20:52:10.546  INFO 17332 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4291ca67: startup date [Wed Sep 11 20:52:10 CEST 2019]; root of context hierarchy
+2019-09-11 20:52:12.643  INFO 17332 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-11 20:52:13.777  INFO 17332 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-11 20:52:13.791  INFO 17332 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-11 20:52:13.793  INFO 17332 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-11 20:52:14.003  INFO 17332 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-11 20:52:14.003  INFO 17332 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3462 ms
+2019-09-11 20:52:14.265  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-11 20:52:14.268  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-11 20:52:14.273  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-11 20:52:14.274  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-11 20:52:14.275  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-11 20:52:14.275  INFO 17332 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-11 20:52:14.813  INFO 17332 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-11 20:52:15.130  INFO 17332 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Start completed.
+2019-09-11 20:52:15.204  INFO 17332 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-11 20:52:15.227  INFO 17332 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-11 20:52:15.346  INFO 17332 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-11 20:52:15.349  INFO 17332 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-11 20:52:15.408  INFO 17332 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-11 20:52:15.572  INFO 17332 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-09-11 20:52:16.223  INFO 17332 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-09-11 20:52:18.083  INFO 17332 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4291ca67: startup date [Wed Sep 11 20:52:10 CEST 2019]; root of context hierarchy
+2019-09-11 20:52:18.510  INFO 17332 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-09-11 20:52:18.512  INFO 17332 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-09-11 20:52:18.583  INFO 17332 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-11 20:52:18.584  INFO 17332 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-11 20:52:18.650  INFO 17332 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-11 20:52:18.711  WARN 17332 --- [JavaFX-Launcher] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-11 20:52:18.722  WARN 17332 --- [JavaFX-Launcher] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][JavaFX-Launcher] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-09-11 20:52:19.137  INFO 17332 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-09-11 20:52:19.140  INFO 17332 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-09-11 20:52:19.150  INFO 17332 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-09-11 20:52:19.248  INFO 17332 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http)
+2019-09-11 20:52:19.256  INFO 17332 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 9.75 seconds (JVM running for 10.499)
+2019-09-11 20:52:19.638  INFO 17332 --- [JavaFX-Launcher] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-09-11 20:52:19.840 DEBUG 17332 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_0_, document0_.category_id as category2_0_, document0_.created_on as created_3_0_, document0_.description as descript4_0_, document0_.name as name5_0_, document0_.updated_on as updated_6_0_ from document document0_ order by document0_.id desc
+2019-09-11 20:52:19.898 DEBUG 17332 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_1_, documentca0_.created_on as created_2_1_, documentca0_.name as name3_1_, documentca0_.parent_id as parent_i4_1_, documentca0_.updated_on as updated_5_1_ from document_category documentca0_ order by documentca0_.name asc
+2019-09-11 20:52:20.044 DEBUG 17332 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_1_, documentca0_.created_on as created_2_1_, documentca0_.name as name3_1_, documentca0_.parent_id as parent_i4_1_, documentca0_.updated_on as updated_5_1_ from document_category documentca0_
+2019-09-11 20:52:20.112  INFO 17332 --- [JavaFX Application Thread] javafx.css                               : Could not find stylesheet: file:/E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/bin/main/de/dc/spring/fx/ui/jregis/metro/ui/document/css/DocumentFlatDetails.css
+2019-09-11 20:52:41.075 DEBUG 17332 --- [JavaFX Application Thread] org.hibernate.SQL                        : insert into document (id, category_id, created_on, description, name, updated_on) values (null, ?, ?, ?, ?, ?)
+2019-09-11 20:53:09.097 DEBUG 17332 --- [JavaFX Application Thread] org.hibernate.SQL                        : insert into document_category (id, created_on, name, parent_id, updated_on) values (null, ?, ?, ?, ?)
+2019-09-11 20:53:17.075 DEBUG 17332 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_1_0_, documentca0_.created_on as created_2_1_0_, documentca0_.name as name3_1_0_, documentca0_.parent_id as parent_i4_1_0_, documentca0_.updated_on as updated_5_1_0_ from document_category documentca0_ where documentca0_.id=?
+2019-09-11 20:53:17.093 DEBUG 17332 --- [JavaFX Application Thread] org.hibernate.SQL                        : update document_category set created_on=?, name=?, parent_id=?, updated_on=? where id=?
+2019-09-11 20:53:17.101 DEBUG 17332 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_1_, documentca0_.created_on as created_2_1_, documentca0_.name as name3_1_, documentca0_.parent_id as parent_i4_1_, documentca0_.updated_on as updated_5_1_ from document_category documentca0_
