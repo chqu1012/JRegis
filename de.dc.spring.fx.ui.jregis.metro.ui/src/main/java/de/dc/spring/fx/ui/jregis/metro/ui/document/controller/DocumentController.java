@@ -57,8 +57,23 @@ public class DocumentController extends BaseDocumentController {
 		if (source == linkCancelDocument) {
 			closeNewDocumentPane();
 		}else if (source == buttonCreateDocument) {
-			createDocument();
+			dispatchCreateDocument();
+		}else if (source == buttonCategoryEdit) {
+			DocumentCategory selection = comboBoxCategory.getSelectionModel().getSelectedItem();
+			dispatchEditCategory(selection);
 		}
+	}
+
+	private void dispatchEditCategory(DocumentCategory selection) {
+		if (selection != null) {
+			DialogUtil.openInput("Edit Category", selection.getName(), "Edit Category", "", e -> {
+				selection.setName(e);
+				categoryRepository.save(selection);
+				categoryData.clear();
+				categoryData.addAll(categoryRepository.findAll());
+				comboBoxCategory.getSelectionModel().select(selection);
+			});
+		}		
 	}
 
 	@Override
@@ -67,19 +82,23 @@ public class DocumentController extends BaseDocumentController {
 		if (source==tableMenuItemNew) {
 			openNewDocumentPane();
 		}else if (source==tableMenuItemDelete) {
-			onDeleteDocument();
+			dispatchDeleteDocument();
 		}else if (source==tableMenuItemOpenDirectory) {
-			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
-			try {
-				folderService.openFolder(selection);
-			} catch (Exception e) {
-				log.error("Failed to open document folder "+selection.getName(), e);
-				Notifications.create().darkStyle().title("File Error").text("Failed to open document folder "+selection.getName()).show();
-			}
+			dispatchOpenDocumentFolder();
 		}
 	}
 
-	private void onDeleteDocument() {
+	private void dispatchOpenDocumentFolder() {
+		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
+		try {
+			folderService.openFolder(selection);
+		} catch (Exception e) {
+			log.error("Failed to open document folder "+selection.getName(), e);
+			Notifications.create().darkStyle().title("File Error").text("Failed to open document folder "+selection.getName()).show();
+		}
+	}
+
+	private void dispatchDeleteDocument() {
 		Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 		if (selection != null) {
 			String message = "Do you really want to delete \"" + selection.getName() + "\"";
@@ -116,22 +135,28 @@ public class DocumentController extends BaseDocumentController {
 				categoryRepository.delete(category);
 				selection.getParent().getChildren().remove(selection);
 			} else if (source == menuItemTreeEdit) {
-				throw new UnsupportedOperationException("Not implemented yet!");
+				dispatchEditCategory(selection.getValue());
 			} else if (source == menuItemTreeNew) {
-				DialogUtil.openInput("New Category", "New Category", "Please give a name for the new category", "Please give a name for the new category", e->{
-					if (e!=null) {
-						LocalDateTime createdOn = LocalDateTime.now();
-						DocumentCategory newCategory = new DocumentCategory(e, createdOn, createdOn, category.getId());
-						categoryRepository.save(newCategory);
-						selection.getChildren().add(new TreeItem<DocumentCategory>(newCategory));
-						selection.setExpanded(true);
-					}
-				});
+				dispatchCreateCategory(selection, category);
 			}
 		}		
 	}
+
+	private void dispatchCreateCategory(TreeItem<DocumentCategory> selection, DocumentCategory category) {
+		DialogUtil.openInput("New Category", "New Category", "Please give a name for the new category", "Please give a name for the new category", e->{
+			if (e!=null) {
+				LocalDateTime createdOn = LocalDateTime.now();
+				DocumentCategory newCategory = new DocumentCategory(e, createdOn, createdOn, category.getId());
+				categoryRepository.save(newCategory);
+				categoryData.add(newCategory);
+				comboBoxCategory.getSelectionModel().select(category);
+				selection.getChildren().add(new TreeItem<DocumentCategory>(newCategory));
+				selection.setExpanded(true);
+			}
+		});
+	}
 	
-	private void createDocument() {
+	private void dispatchCreateDocument() {
 		String name = textDocumentName.getText();
 		String description = textDescription.getText();
 		LocalDateTime createdOn = LocalDateTime.now();
