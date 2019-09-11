@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboCell;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboConvertor;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
@@ -16,6 +18,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 
 @Controller
 public class DocumentController extends BaseDocumentController {
@@ -27,8 +30,15 @@ public class DocumentController extends BaseDocumentController {
 	public void initialize() {
 		super.initialize();
 		initTreeView(categoryRepository);
+		initControls();
 	}
 	
+	private void initControls() {
+		comboBoxCategory.setItems(categoryData);
+		comboBoxCategory.setCellFactory(e->new CategoryComboCell());
+		comboBoxCategory.setConverter(new CategoryComboConvertor());
+	}
+
 	@Override
 	protected void initRepositoryData() {
 		documentData.addAll(documentReposity.findAllByOrderByIdDesc());
