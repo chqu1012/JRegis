@@ -14,6 +14,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentCategory;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentFolderService;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,12 +28,15 @@ public class DocumentController extends BaseDocumentController {
 
 	@Autowired DocumentRepository documentReposity;
 	@Autowired DocumentCategoryRepository categoryRepository;
+	@Autowired DocumentFolderService folderService;
 	
 	@Override
 	public void initialize() {
 		super.initialize();
 		initTreeView(categoryRepository);
 		initControls();
+		
+		folderService.createIfNotExist();
 	}
 	
 	private void initControls() {
@@ -53,26 +57,7 @@ public class DocumentController extends BaseDocumentController {
 		if (source == linkCancelDocument) {
 			closeNewDocumentPane();
 		}else if (source == buttonCreateDocument) {
-			String name = textDocumentName.getText();
-			String description = textDescription.getText();
-			LocalDateTime createdOn = LocalDateTime.now();
-
-			Document document = new Document(name, description, -1L, createdOn, createdOn);
-			documentReposity.save(document);
-			DocumentCategory category = comboBoxCategory.getSelectionModel().getSelectedItem();
-			if (category != null) {
-				document.setCategoryId(category.getId());
-			}
-
-			documentData.add(0,document);
-			
-			textDocumentName.setText("");
-			textDescription.setText("");
-			textUrl.setText("");
-			Notifications.create().darkStyle().title("Document item created!").text("Created document "+name+"!").show();			
-			
-			log.trace("Create new document");
-			closeNewDocumentPane();
+			createDocument();
 		}
 	}
 
@@ -83,6 +68,14 @@ public class DocumentController extends BaseDocumentController {
 			openNewDocumentPane();
 		}else if (source==tableMenuItemDelete) {
 			onDeleteDocument();
+		}else if (source==tableMenuItemOpenDirectory) {
+			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
+			try {
+				folderService.openFolder(selection);
+			} catch (Exception e) {
+				log.error("Failed to open document folder "+selection.getName(), e);
+				Notifications.create().darkStyle().title("File Error").text("Failed to open document folder "+selection.getName()).show();
+			}
 		}
 	}
 
@@ -137,4 +130,28 @@ public class DocumentController extends BaseDocumentController {
 			}
 		}		
 	}
+	
+	private void createDocument() {
+		String name = textDocumentName.getText();
+		String description = textDescription.getText();
+		LocalDateTime createdOn = LocalDateTime.now();
+
+		Document document = new Document(name, description, -1L, createdOn, createdOn);
+		documentReposity.save(document);
+		DocumentCategory category = comboBoxCategory.getSelectionModel().getSelectedItem();
+		if (category != null) {
+			document.setCategoryId(category.getId());
+		}
+
+		documentData.add(0,document);
+		
+		textDocumentName.setText("");
+		textDescription.setText("");
+		textUrl.setText("");
+		Notifications.create().darkStyle().title("Document item created!").text("Created document "+name+"!").show();			
+		
+		log.trace("Create new document");
+		closeNewDocumentPane();
+	}
+
 }
