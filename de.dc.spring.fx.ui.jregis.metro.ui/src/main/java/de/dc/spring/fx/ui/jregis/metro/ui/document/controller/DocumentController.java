@@ -96,7 +96,14 @@ public class DocumentController extends BaseDocumentController {
 			dispatchDeleteDocument();
 		}else if (source==tableMenuItemOpenDirectory) {
 			dispatchOpenDocumentFolder();
+		}else if (source ==tableMenuItemShowAll) {
+			dispatchShowAllDocuments();
 		}
+	}
+
+	private void dispatchShowAllDocuments() {
+		tableFilter.resetFilter();
+		filteredDocuments.setPredicate(p -> true);		
 	}
 
 	private void dispatchOpenDocumentFolder() {
