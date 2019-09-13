@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.stereotype.Controller;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 
-@Controller
 public class ProfilePage extends BaseProfile {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());

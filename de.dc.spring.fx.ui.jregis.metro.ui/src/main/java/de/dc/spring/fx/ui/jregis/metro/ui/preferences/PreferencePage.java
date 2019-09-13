@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.h2.tools.Server;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

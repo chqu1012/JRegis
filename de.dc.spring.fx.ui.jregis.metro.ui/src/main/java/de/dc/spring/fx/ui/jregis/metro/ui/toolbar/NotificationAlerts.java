@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 
@@ -18,8 +17,6 @@ public class NotificationAlerts extends BaseNotificationAlerts{
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	
 	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/toolbar/NotificationAlerts.fxml";
-	
-	@Autowired IEventBroker eventBroker;
 	
 	public NotificationAlerts() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -40,7 +37,7 @@ public class NotificationAlerts extends BaseNotificationAlerts{
 	
 	@Override
 	protected void onLabelSeeAllAlertsClicked(MouseEvent event) {
-		eventBroker.post(new EventContext<String>("/open/see/all/alerts", "alerts"));
+		EventBroker.getDefault().post(new EventContext<String>("/open/see/all/alerts", "alerts"));
 	}
 
 }

@@ -5,23 +5,30 @@ import org.springframework.stereotype.Service;
 import com.google.common.eventbus.EventBus;
 
 @Service
-public class EventBroker implements IEventBroker{
+public class EventBroker {
 
-	private EventBus eventBus = new EventBus();
-	
-	@Override
+	private static EventBus eventBus;
+
+	private EventBroker() {
+	}
+
+	public static EventBus getDefault() {
+		if (eventBus == null) {
+			eventBus = new EventBus();
+		}
+		return eventBus;
+	}
+
 	public void register(Object obj) {
 		eventBus.register(obj);
 	}
 
-	@Override
 	public void post(EventContext<?> context) {
 		eventBus.post(context);
 	}
 
-	@Override
 	public void unregister(Object obj) {
-		eventBus.unregister(obj);		
+		eventBus.unregister(obj);
 	}
 
 }

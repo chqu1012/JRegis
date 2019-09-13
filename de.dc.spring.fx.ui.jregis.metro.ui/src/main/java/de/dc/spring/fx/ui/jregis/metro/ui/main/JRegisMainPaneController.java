@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.events.IEventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.inbox.Inbox;
 import de.dc.spring.fx.ui.jregis.metro.ui.preferences.PreferencePage;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
@@ -30,13 +30,12 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Autowired ConfigurableApplicationContext springContext;
-	@Autowired IEventBroker eventBroker;
 
-	@Autowired NotificationUser notificationUser;
-	@Autowired ProfilePage profilePage;
-	@Autowired NotificationAlerts notificationAlerts;
+	private NotificationUser notificationUser = new NotificationUser();
+	private NotificationAlerts notificationAlerts = new NotificationAlerts();
 	
 	// TODO: autowiring?
+	private ProfilePage profilePage = new ProfilePage();
 	private Inbox inbox = new Inbox();
 	private PreferencePage preferencePage = new PreferencePage();
 	
@@ -55,7 +54,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		popOverNotification.setContentNode(notificationAlerts);
 		popOverUser.setContentNode(notificationUser);
 		
-		eventBroker.register(this);
+		EventBroker.getDefault().register(this);
 	}
 
 	private Pane load(String fxml) {
