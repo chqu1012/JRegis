@@ -23,7 +23,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 @Controller
 public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
@@ -45,18 +45,21 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 	
-	private Pane paneDocument;
-	private Pane paneUser;
+	private Region paneDocument;
+	private Region paneUser;
+	private Region paneDocumentDetails;
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
 		paneUser = load(UIConstants.FXML_USER);
+		paneDocumentDetails = load(UIConstants.FXML_DOCUMENT_DETAILS);
 		
 		mainStackPane.getChildren().add(paneUser);
+		mainStackPane.getChildren().add(paneDocumentDetails);
+		mainStackPane.getChildren().add(paneDocument);
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
-		mainStackPane.getChildren().add(paneDocument);
 		mainStackPane.getChildren().add(dashboard);
 		
 		popOverNotification.setContentNode(notificationAlerts);
@@ -65,7 +68,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		EventBroker.getDefault().register(this);
 	}
 
-	private Pane load(String fxml) {
+	private Region load(String fxml) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
 	        fxmlLoader.setControllerFactory(springContext::getBean);
@@ -110,7 +113,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	@Subscribe
 	public void subscribeEventBus(EventContext<String> context) {
-		if (context.getEventId().equals("/close/notification")) {
+		String eventId = context.getEventId();
+		if (eventId.equals("/close/notification")) {
 			if (context.getInput().equals("user")) {
 				popOverUser.hide();
 				profilePage.toFront();
@@ -122,9 +126,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 				popOverUser.hide();
 //				paneLogin.toFront();
 			}
-		}else if (context.getEventId().equals("/open/see/all/alerts")) {
+		}else if (eventId.equals("/open/see/all/alerts")) {
 			popOverNotification.hide();
 			inbox.toFront();
+		}else if (eventId.equals("/open/document/details")) {
+			paneDocumentDetails.toFront();
 		}
 	}
 	

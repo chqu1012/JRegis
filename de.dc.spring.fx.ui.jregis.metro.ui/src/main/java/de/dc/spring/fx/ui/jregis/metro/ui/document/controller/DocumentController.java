@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jca.context.ResourceAdapterApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentController;
@@ -16,6 +17,8 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentCategoryRe
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentNameSuggestionRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentFolderService;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -142,8 +145,9 @@ public class DocumentController extends BaseDocumentController {
 		if (event.getClickCount() == 2) {
 			Document selection = tableViewDocument.getSelectionModel().getSelectedItem();
 			if (selection != null) {
-				Platform.runLater(() -> documentDetails.setSelection(selection));
-				documentDetails.toFront();
+//				Platform.runLater(() -> documentDetails.setSelection(selection));
+//				documentDetails.toFront();
+				EventBroker.getDefault().post(new EventContext<>("/open/document/details", selection));
 			}
 		}		
 	}

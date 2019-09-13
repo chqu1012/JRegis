@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.controlsfx.control.table.TableFilter;
 
-import de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboCell;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryComboConvertor;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.CategoryTreeCell;
@@ -32,13 +31,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TreeItem;
-import javafx.scene.layout.AnchorPane;
 
 public abstract class BaseDocumentController extends AbstractFxmlDocumentController {
 
 	protected Logger log = Logger.getLogger(getClass().getSimpleName());
-	
-	protected DocumentDetails documentDetails = new DocumentDetails();
 	
 	protected ObservableList<Document> documentData = FXCollections.observableArrayList();
 	protected FilteredList<Document> filteredDocuments = new FilteredList<>(documentData, p -> true);
@@ -55,12 +51,6 @@ public abstract class BaseDocumentController extends AbstractFxmlDocumentControl
 	
 	public void initialize() {
 		Platform.runLater(this::initRepositoryData);
-		
-		AnchorPane.setTopAnchor(documentDetails, 0d);
-		AnchorPane.setBottomAnchor(documentDetails, 0d);
-		AnchorPane.setLeftAnchor(documentDetails, 0d);
-		AnchorPane.setRightAnchor(documentDetails, 0d);
-		root.getChildren().add(0, documentDetails);
 		
 		closeNewDocumentPane();
 		

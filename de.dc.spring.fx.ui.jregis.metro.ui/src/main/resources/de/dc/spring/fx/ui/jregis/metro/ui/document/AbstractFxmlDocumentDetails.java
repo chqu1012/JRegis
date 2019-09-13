@@ -1,5 +1,6 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,7 +65,7 @@ public abstract class AbstractFxmlDocumentDetails extends ScrollPane {
 	protected Button buttonReferenceDialogApply;
 
 	@FXML
-	protected ListView<?> listViewAllAvailableDocuments;
+	protected ListView<Document> listViewAllAvailableDocuments;
 
 	@FXML
 	protected ListView<?> listViewReferencedDocuments;

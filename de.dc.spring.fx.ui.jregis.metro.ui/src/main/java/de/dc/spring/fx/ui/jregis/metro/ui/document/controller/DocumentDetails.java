@@ -1,19 +1,54 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Controller;
+
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentDetails;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentContext;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentHistory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+@Controller
 public class DocumentDetails extends BaseDocumentDetails {
 
+	private DocumentContext context = new DocumentContext();
+	
+	private ObservableList<DocumentHistory> historyList = FXCollections.observableArrayList();
+	private FilteredList<DocumentHistory> filteredHistory = new FilteredList<>(historyList, p -> true);
+
+	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
+	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p -> true);
+
+	private ObservableList<Document> referenceAllAvailableList = FXCollections.observableArrayList();
+	private FilteredList<Document> fiteredReferenceAllAvailableList = new FilteredList<>(referenceAllAvailableList, p -> true);
+
+	private ObservableList<Document> referencedList = FXCollections.observableArrayList();
+	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
+	
 	@Override
 	protected void onButtonAction(ActionEvent event) {
 		Object source = event.getSource();
 		if (linkBack==source) {
 			root.toBack();
+		}else if (buttonOpenReferenceDialog==source) {
+			referenceDialog.setVisible(false);
+			referenceDialog.toBack();
+			
+			LocalDateTime createdOn = LocalDateTime.now();
+			long firstId = context.current.get().getId();
+
+			referencedList.forEach(e->{
+				long secondId = e.getId();
+//				JRegisPlatform.getInstance(ReferenceRepository.class).save(new Reference(createdOn , createdOn, 0, firstId, secondId));
+			});
 		}
 	}
 
@@ -37,8 +72,11 @@ public class DocumentDetails extends BaseDocumentDetails {
 
 	@Override
 	protected void onListViewAllAvailableDocuments(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
+		if (selection!=null && event.getClickCount()==2) {
+			referencedList.add(selection);
+			referenceAllAvailableList.remove(selection);
+		}			
 	}
 
 	@Override

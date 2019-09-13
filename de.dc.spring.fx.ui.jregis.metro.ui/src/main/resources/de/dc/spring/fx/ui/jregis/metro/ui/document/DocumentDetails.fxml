@@ -19,7 +19,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onScrollPaneKeyPressed" pannable="true" prefHeight="600.0" prefWidth="800.0" styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+onKeyPressed="#onScrollPaneKeyPressed" pannable="true" prefHeight="600.0" prefWidth="800.0" 
+styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css"
+xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails">
    <content>
       <AnchorPane fx:id="mainContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #DBDFE2;">
          <children>
@@ -355,4 +359,4 @@
          </padding>
       </AnchorPane>
    </content>
-</fx:root>
+</ScrollPane>
