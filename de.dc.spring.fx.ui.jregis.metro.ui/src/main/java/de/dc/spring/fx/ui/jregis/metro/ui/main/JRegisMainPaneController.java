@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.dashboard.Dashboard;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.inbox.Inbox;
@@ -20,7 +21,6 @@ import de.dc.spring.fx.ui.jregis.metro.ui.preferences.PreferencePage;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
-import de.dc.spring.fx.ui.jregis.metro.ui.user.UserManagementPage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -35,10 +35,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private NotificationUser notificationUser = new NotificationUser();
 	private NotificationAlerts notificationAlerts = new NotificationAlerts();
 	
-	// TODO: autowiring?
+	// No injection required, only static pages
 	private ProfilePage profilePage = new ProfilePage();
 	private Inbox inbox = new Inbox();
 	private PreferencePage preferencePage = new PreferencePage();
+	private Dashboard dashboard = new Dashboard();
 	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
@@ -56,6 +57,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
 		mainStackPane.getChildren().add(paneDocument);
+		mainStackPane.getChildren().add(dashboard);
 		
 		popOverNotification.setContentNode(notificationAlerts);
 		popOverUser.setContentNode(notificationUser);

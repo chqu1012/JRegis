@@ -1,0 +1,24 @@
+package de.dc.spring.fx.ui.jregis.metro.ui.dashboard;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+
+public abstract class BaseRecentlyActivityItem extends AnchorPane{
+
+    @FXML
+    protected Circle circle;
+
+    @FXML
+    protected Label labelDescription;
+
+    @FXML
+    protected Label labelTimestamp;
+
+    @FXML
+    protected Label labelUser;
+
+    @FXML
+    protected Label labelContent;
+
+}
