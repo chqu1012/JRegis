@@ -32,6 +32,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentHistoryServic
 import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentReferenceService;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
+import de.dc.spring.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
@@ -134,13 +135,55 @@ public class DocumentDetails extends BaseDocumentDetails {
 		} else if (buttonReferenceDialogApply == source) {
 			dispatchApplySelectedReferences();
 		} else if (buttonOpenReferenceDialog == source) {
-			referenceDialog.toFront();
-			referenceDialog.setVisible(true);
+			dispatchOpenReferenceDialog();
 		} else if (source==buttonAttachment) {
 			dispatchAttachSelectedFiles();
+		} else if (source == buttonClipboardHelperAccept) {
+			dispatchAcceptClipboardHelperResult();
+		} else if (source == linkClipboardHelperCancel) {
+			dispatchCloseReferenceDialog();
+		} else if (source == buttonClipboard) {
+			dispatchOpenClipboardHelperDialog();
 		}else if (source == buttomSubmitComment) {
 			dispatchSubmitComment();
 		}
+	}
+
+	private void dispatchOpenClipboardHelperDialog() {
+		clipboardHelperDialog.setVisible(true);
+		clipboardHelperDialog.toFront();
+
+		ClipboardHelper.getImage().ifPresent(e -> {
+			imageViewClipboard.setFitHeight(e.getHeight());
+			imageViewClipboard.setFitWidth(e.getWidth());
+			context.clipboardImageContent.set(e);
+		});
+	}
+
+	private void dispatchCloseReferenceDialog() {
+		clipboardHelperDialog.toBack();
+		clipboardHelperDialog.setVisible(false);
+	}
+
+	private void dispatchOpenReferenceDialog() {
+		referenceDialog.toFront();
+		referenceDialog.setVisible(true);
+	}
+
+	private void dispatchAcceptClipboardHelperResult() {
+		dispatchCloseReferenceDialog();
+
+		context.documentComment.set(context.clipboardTransactionMessage.get());
+		DocumentHistory history = historyService.create(context);
+		folderService.copyImageTo(context);
+
+		DocumentAttachment attachment = attachmentService.create(history, context.clipboardFileName.get()+".png");
+		
+		Notifications.create().text("Added File " + attachment.getName() + " from Clipboard").title("File Clipboard")
+				.darkStyle().show();
+
+		addHistory(history);
+		vboxFiles.getChildren().add(new AttachmentControl(attachment));
 	}
 
 	private void dispatchAttachSelectedFiles() {
