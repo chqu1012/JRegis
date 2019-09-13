@@ -6,4 +6,6 @@ import de.dc.spring.fx.ui.jregis.metro.ui.clipboard.model.ClipboardFileNameSugge
 
 public interface ClipboardFileNameSuggestionRepository extends JpaRepository<ClipboardFileNameSuggestion, Long>{
 
+	void deleteByName(String name);
+
 }

@@ -164,14 +164,31 @@ public class DocumentDetails extends BaseDocumentDetails {
 		}else if (source == checkBoxShowDeletedComments) {
 			populateHistoryList(context.current.get());
 		}else if (source == linkAddNewSuggestion) {
-			if (textFilename.getText().isEmpty()) {
-				Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
-						.showWarning();
-			} else {
-				String name = textFilename.getText();
-				fileNameSuggestionRepository.save(new ClipboardFileNameSuggestion(name, LocalDateTime.now(), LocalDateTime.now()));
-				nameSuggestionList.add(name);
-			}
+			dispatchCreateNewSuggestion();
+		}else if (source == linkDeleteSuggestion) {
+			dispatchDeleteSuggestion();
+		}
+	}
+
+	private void dispatchDeleteSuggestion() {
+		if (textFilename.getText().isEmpty()) {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
+					.showWarning();
+		} else {
+			String name = textFilename.getText();
+			fileNameSuggestionRepository.deleteByName(name);
+			nameSuggestionList.remove(name);
+		}
+	}
+
+	private void dispatchCreateNewSuggestion() {
+		if (textFilename.getText().isEmpty()) {
+			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
+					.showWarning();
+		} else {
+			String name = textFilename.getText();
+			fileNameSuggestionRepository.save(new ClipboardFileNameSuggestion(name, LocalDateTime.now(), LocalDateTime.now()));
+			nameSuggestionList.add(name);
 		}
 	}
 
@@ -613,32 +630,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		}
 //	}
 
-//	@Override
-//	protected void onLinkAddNewSuggestionAction(ActionEvent event) {
-//		if (textFilename.getText().isEmpty()) {
-//			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
-//					.showWarning();
-//		} else {
-//			String name = textFilename.getText();
-//			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).save(name);
-//
-//			nameSuggestionList.add(name);
-//		}
-//	}
-//
-//	@Override
-//	protected void onLinkDeleteNewSuggestionAction(ActionEvent event) {
-//		if (textFilename.getText().isEmpty()) {
-//			Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
-//					.showWarning();
-//		} else {
-//			String name = textFilename.getText();
-//			JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).delete(name);
-//
-//			nameSuggestionList.remove(name);
-//		}
-//	}
-//
 //	@Override
 //	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
 //		if (context.downloadUrl.get().isEmpty()) {
