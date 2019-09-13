@@ -174,7 +174,57 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchOpenFullscreenshot(false);
 		}else if (source == linkCancelReferenceDialog) {
 			dispatchCloseReferenceDialog();
+		}else if (source == buttonDownload) {
+			dispatchOpenDownloadDialog();
+		}else if (source == linkDownloadDialogCancel) {
+			dispatchCloseDownloadDialog();
+		}else if (source == buttonDownloadDialogAccept) {
+			dispatchAcceptDownloadDialog();
 		}
+	}
+
+	private void dispatchOpenDownloadDialog() {
+		context.downloadUrl.set(ClipboardHelper.getString());
+		downloadDialog.setVisible(true);
+		downloadDialog.toFront();
+	}
+
+	private void dispatchCloseDownloadDialog() {
+		downloadDialog.setVisible(false);
+		downloadDialog.toBack();
+	}
+
+	private void dispatchAcceptDownloadDialog() {
+		if (context.downloadUrl.get().isEmpty()) {
+			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
+			return;
+		} else {
+			try {
+				File file = folderService.downloadFile(context);
+				Notifications.create().darkStyle().text("Download url to " + context.downloadUrl.get())
+						.title("Download Finished").onAction(e1 -> onOpenFileChanged(null, null, file.getParent()))
+						.showInformation();
+
+				context.documentComment.set(context.downloadTransactionMessage.get());
+				DocumentHistory history = historyService.create(context);
+				
+				DocumentAttachment attachment = new DocumentAttachment(context.downloadFileName.get(), LocalDateTime.now(), LocalDateTime.now(), history.getId());
+				attachmentService.save(attachment);
+				
+				history.getAttachments().add(attachment);
+				
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				
+				addHistory(history);
+			} catch (IOException e) {
+				Notifications.create().darkStyle()
+						.text(e.getLocalizedMessage())
+						.title("Error on Downloading").showError();
+				return;
+			}
+		}
+
+		dispatchCloseDownloadDialog();
 	}
 
 	private void dispatchOpenDocumentFolder() {
@@ -660,52 +710,4 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		}
 //	}
 
-//	@Override
-//	protected void onLinkDownloadDialogAcceptAction(ActionEvent event) {
-//		if (context.downloadUrl.get().isEmpty()) {
-//			Notifications.create().darkStyle().text("Url cannot be empty!").title("Url Parse Error").showWarning();
-//			return;
-//		} else {
-//			try {
-//				File file = JRegisPlatform.getInstance(DocumentFolderService.class).downloadFile(context);
-//				Notifications.create().darkStyle().text("Download url to " + context.downloadUrl.get())
-//						.title("Download Finished").onAction(e1 -> onOpenFileChanged(null, null, file.getParent()))
-//						.showInformation();
-//
-//				context.documentComment.set(context.downloadTransactionMessage.get());
-//				History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
-//				
-//				Attachment attachment = new Attachment(context.downloadFileName.get(), LocalDateTime.now(), LocalDateTime.now(), history.getId());
-//				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-//				
-//				history.getAttachments().add(attachment);
-//				
-//				vboxFiles.getChildren().add(new AttachmentControl(attachment));
-//				
-//				addHistory(history);
-//			} catch (IOException e) {
-//				Notifications.create().darkStyle()
-//						.text(e.getLocalizedMessage())
-//						.title("Error on Downloading").showError();
-//				return;
-//			}
-//		}
-//
-//		downloadDialog.setVisible(false);
-//		downloadDialog.toBack();
-//	}
-//
-//	@Override
-//	protected void onLinkDownloadDialogCancelAction(ActionEvent event) {
-//		downloadDialog.setVisible(false);
-//		downloadDialog.toBack();
-//	}
-//
-//	@Override
-//	protected void onButtonDownloadDialogAction(ActionEvent event) {
-//		context.downloadUrl.set(ClipboardHelper.getString());
-//		
-//		downloadDialog.setVisible(true);
-//		downloadDialog.toFront();
-//	}
 }
