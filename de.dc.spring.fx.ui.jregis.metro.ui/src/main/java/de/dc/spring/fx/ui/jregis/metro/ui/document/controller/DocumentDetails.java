@@ -124,6 +124,8 @@ public class DocumentDetails extends BaseDocumentDetails {
 		}else if (context.getEventId().equals("/set/current/doccument")) {
 			Optional<Document> optionalDocument = documentRepository.findById((Long)context.getInput());
 			optionalDocument.ifPresent(this::setSelection);
+		}else if (context.getEventId().equals("/open/file/attachment")) {
+			onOpenFileChanged(null, null, (String)context.getInput());
 		}
 	}
 
@@ -366,13 +368,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 		context.toOpenFile.addListener(this::onOpenFileChanged);
 	}
 
-//	@Subscribe
-//	public void openFileAttachmentViaEventBroker(EventContext<String> context) {
-//		if (context.getEventId().contentEquals("/open/file/attachment")) {
-//			onOpenFileChanged(null, null, context.getInput());
-//		}
-//	}
-	
 	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
 		try {
 			File file = folderService.getAttachmentByName(context.current.get(), newValue);

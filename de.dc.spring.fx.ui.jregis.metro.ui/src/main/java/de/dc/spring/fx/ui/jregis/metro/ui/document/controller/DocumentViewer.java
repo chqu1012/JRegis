@@ -17,6 +17,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
@@ -32,6 +33,8 @@ public class DocumentViewer extends BaseDocumentViewer {
 
 	private Logger log = Logger.getLogger(DocumentViewer.class);
 	
+	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/document/DocumentViewer.fxml";
+	
 	private Screen primary = Screen.getPrimary();
 	private Rectangle2D bounds = primary.getBounds();
 	private static final double ZOOM_FACTOR = 1.0014450997779993488675056142818;
@@ -42,11 +45,21 @@ public class DocumentViewer extends BaseDocumentViewer {
 	private Image image;
 	private PDDocument doc;
 
-	public void initialize() {
-		AnchorPane.setBottomAnchor(panePreview, 0d);
-		AnchorPane.setTopAnchor(panePreview, 0d);
-		AnchorPane.setLeftAnchor(panePreview, 0d);
-		AnchorPane.setRightAnchor(panePreview, 0d);
+	public DocumentViewer() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
+
+		AnchorPane.setBottomAnchor(this, 0d);
+		AnchorPane.setTopAnchor(this, 0d);
+		AnchorPane.setLeftAnchor(this, 0d);
+		AnchorPane.setRightAnchor(this, 0d);
 
 		initScrollPane();
 
