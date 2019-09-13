@@ -20,6 +20,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.preferences.PreferencePage;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
+import de.dc.spring.fx.ui.jregis.metro.ui.user.UserManagementPage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -30,6 +31,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Autowired ConfigurableApplicationContext springContext;
+	@Autowired UserManagementPage userPage;
 
 	private NotificationUser notificationUser = new NotificationUser();
 	private NotificationAlerts notificationAlerts = new NotificationAlerts();
@@ -46,6 +48,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
+		mainStackPane.getChildren().add(userPage);
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
@@ -95,6 +98,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		}else if (source== labelPreferences) {
 			preferencePage.toFront();
 			preferencePage.init();
+		}else if (source == labelUserManagement) {
+			userPage.toFront();
 		}
 	}
 
