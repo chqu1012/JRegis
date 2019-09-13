@@ -148,9 +148,9 @@ public class DocumentDetails extends BaseDocumentDetails {
 		Object source = event.getSource();
 		if (linkBack == source) {
 			root.toBack();
-		} else if (buttonReferenceDialogApply == source) {
+		} else if (source == buttonReferenceDialogApply) {
 			dispatchApplySelectedReferences();
-		} else if (buttonOpenReferenceDialog == source) {
+		} else if (source == buttonOpenReferenceDialog) {
 			dispatchOpenReferenceDialog();
 		} else if (source==buttonAttachment) {
 			dispatchAttachSelectedFiles();
@@ -174,6 +174,15 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchOpenFullscreenshot(false);
 		}else if (source == linkCancelReferenceDialog) {
 			dispatchCloseReferenceDialog();
+		}
+	}
+
+	private void dispatchOpenDocumentFolder() {
+		try {
+			folderService.openFolder(context.current.get());
+		} catch (Exception e) {
+			Notifications.create().darkStyle().text(e.getMessage())
+			.title("Failed to open folder!").showError();
 		}
 	}
 
@@ -322,47 +331,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 				.show();
 
 		addHistory(history);
-	}
-
-	@Override
-	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
-		if (event.getClickCount() == 2) {
-			ClipboardHelper.getImage().ifPresent(e -> {
-				imageViewClipboard.setFitHeight(e.getHeight());
-				imageViewClipboard.setFitWidth(e.getWidth());
-				context.clipboardImageContent.set(e);
-			});
-		}
-	}
-
-	@Override
-	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onImageViewOpenFolder(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onListViewAllAvailableDocuments(MouseEvent event) {
-		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
-		if (selection != null && event.getClickCount() == 2) {
-			referencedList.add(selection);
-			referenceAllAvailableList.remove(selection);
-		}
-	}
-
-	@Override
-	protected void onListViewReferencedDocuments(MouseEvent event) {
-		Document selection = listViewReferencedDocuments.getSelectionModel().getSelectedItem();
-		if (selection!=null && event.getClickCount()==2) {
-			referenceAllAvailableList.add(selection);
-			referencedList.remove(selection);
-		}
 	}
 
 	@Override
@@ -603,6 +571,36 @@ public class DocumentDetails extends BaseDocumentDetails {
 		item.setHistory(history, t -> context.toOpenFile.set(t));
 		vboxComment.getChildren().add(item);
 	}
+
+	
+	@Override
+	protected void onMouseClicked(MouseEvent e) {
+		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
+		Object source = e.getSource();
+		if (source == imageViewOpenFolder) {
+			dispatchOpenDocumentFolder();
+		}else if (source == listViewAllAvailableDocuments) {
+			if (selection != null && e.getClickCount() == 2) {
+				referencedList.add(selection);
+				referenceAllAvailableList.remove(selection);
+			}
+		}else if (source == listViewReferencedDocuments) {
+			if (selection!=null && e.getClickCount()==2) {
+				referenceAllAvailableList.add(selection);
+				referencedList.remove(selection);
+			}
+		}else if (source == imageViewClipboard) {
+			if (e.getClickCount() == 2) {
+				ClipboardHelper.getImage().ifPresent(e1 -> {
+					imageViewClipboard.setFitHeight(e1.getHeight());
+					imageViewClipboard.setFitWidth(e1.getWidth());
+					context.clipboardImageContent.set(e1);
+				});
+			}
+		}else if (source == imageViewDownloadPaste) {
+			context.downloadUrl.set(ClipboardHelper.getString());
+		}
+	}
 	
 //	@Subscribe
 //	public void deleteHistory(IEventContext<History> context) {
@@ -710,27 +708,4 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		downloadDialog.setVisible(true);
 //		downloadDialog.toFront();
 //	}
-//
-//	@Override
-//	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
-//		context.downloadUrl.set(ClipboardHelper.getString());
-//	}
-//
-//	@Override
-//	protected void onImageViewOpenFolder(MouseEvent event) {
-//		try {
-//			JRegisPlatform.getInstance(DocumentFolderService.class).openFolder(context.current.get());
-//		} catch (Exception e) {
-//			Notifications.create().darkStyle()
-//			.text(e.getLocalizedMessage())
-//			.title("Failed to open folder!").showError();
-//		}
-//	}
-
-//	@Override
-//	protected void onButtonOpenReferenceDialog(ActionEvent event) {
-//		referenceDialog.toFront();
-//		referenceDialog.setVisible(true);
-//	}
-
 }

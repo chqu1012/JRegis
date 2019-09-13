@@ -215,21 +215,6 @@ public abstract class AbstractFxmlDocumentDetails extends ScrollPane {
 	protected abstract void onButtonAction(ActionEvent event);
 
 	@FXML
-	protected abstract void onImageViewClipboardHelperClicked(MouseEvent event);
-
-	@FXML
-	protected abstract void onImageViewDownloadClipboardClicked(MouseEvent event);
-
-	@FXML
-	protected abstract void onImageViewOpenFolder(MouseEvent event);
-
-	@FXML
-	protected abstract void onListViewAllAvailableDocuments(MouseEvent event);
-
-	@FXML
-	protected abstract void onListViewReferencedDocuments(MouseEvent event);
-
-	@FXML
 	protected abstract void onReferenceDialogKeyPressed(KeyEvent event);
 
 	@FXML
@@ -240,4 +225,7 @@ public abstract class AbstractFxmlDocumentDetails extends ScrollPane {
 
 	@FXML
 	protected abstract void onVBoxDraggingFileBoxDragOver(DragEvent event);
+	
+	@FXML
+	protected abstract void onMouseClicked(MouseEvent e);
 }

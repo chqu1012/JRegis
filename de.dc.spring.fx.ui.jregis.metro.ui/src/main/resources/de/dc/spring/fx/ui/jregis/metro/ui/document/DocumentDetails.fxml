@@ -21,7 +21,7 @@
 
 <ScrollPane fx:id="root" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
 onKeyPressed="#onScrollPaneKeyPressed" pannable="true" prefHeight="600.0" prefWidth="800.0" 
-styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css"
+styleClass="scroll-main-pane" stylesheets="@css/DocumentFlatDetails.css" 
 xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
 fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDetails">
    <content>
@@ -50,8 +50,8 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDe
                     <TextField fx:id="textSearchForReferencedDocuments" layoutX="399.0" layoutY="118.0" prefHeight="25.0" prefWidth="265.0" promptText="Search for documents" />
                     <Hyperlink fx:id="linkCancelReferenceDialog" layoutX="517.0" layoutY="396.0" onAction="#onButtonAction" text="Cancel" />
                     <Button fx:id="buttonReferenceDialogApply" layoutX="561.0" layoutY="395.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="25.0" prefWidth="97.0" text="Apply" />
-                        <ListView fx:id="listViewAllAvailableDocuments" layoutX="50.0" layoutY="162.0" onMouseClicked="#onListViewAllAvailableDocuments" prefHeight="228.0" prefWidth="250.0" />
-                        <ListView fx:id="listViewReferencedDocuments" layoutX="400.0" layoutY="162.0" onMouseClicked="#onListViewReferencedDocuments" prefHeight="224.0" prefWidth="265.0" />
+                        <ListView fx:id="listViewAllAvailableDocuments" layoutX="50.0" layoutY="162.0" onMouseClicked="#onMouseClicked" prefHeight="228.0" prefWidth="250.0" />
+                        <ListView fx:id="listViewReferencedDocuments" layoutX="400.0" layoutY="162.0" onMouseClicked="#onMouseClicked" prefHeight="224.0" prefWidth="265.0" />
                  </children>
                  <effect>
                     <DropShadow />
@@ -82,7 +82,7 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDe
                         <CheckBox fx:id="checkBoxUsingDownloadFileId" layoutX="71.0" layoutY="220.0" mnemonicParsing="false" text="Using File ID" />
                         <Label layoutX="70.0" layoutY="111.0" text="URL" />
                         <TextField fx:id="textDownloadTUrl" layoutX="70.0" layoutY="128.0" prefHeight="25.0" prefWidth="402.0" />
-                        <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" onMouseClicked="#onImageViewDownloadClipboardClicked" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
+                        <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
                            <image>
                               <Image url="@images/icons8-inhalte-einfügen-24.png" />
                            </image>
@@ -114,7 +114,7 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDe
                         <CheckBox fx:id="checkBoxUsingFileId" layoutX="200.0" layoutY="156.0" mnemonicParsing="false" text="Using File ID" />
                         <ScrollPane layoutX="191.0" layoutY="223.0" pannable="true" prefHeight="376.0" prefWidth="558.0">
                            <content>
-                              <ImageView fx:id="imageViewClipboard" fitHeight="300.0" fitWidth="400.0" onMouseClicked="#onImageViewClipboardHelperClicked" pickOnBounds="true">
+                              <ImageView fx:id="imageViewClipboard" fitHeight="300.0" fitWidth="400.0" onMouseClicked="#onMouseClicked" pickOnBounds="true">
                                  <image>
                                     <Image url="@images/icons8_Multiply_32px.png" />
                                  </image>
@@ -340,7 +340,7 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentDe
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="imageViewOpenFolder" fitHeight="24.0" fitWidth="24.0" layoutX="217.0" layoutY="16.0" onMouseClicked="#onImageViewOpenFolder" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <ImageView fx:id="imageViewOpenFolder" fitHeight="24.0" fitWidth="24.0" layoutX="217.0" layoutY="16.0" onMouseClicked="#onMouseClicked" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <image>
                               <Image url="@images/icons8_Open_32px_3.png" />
                            </image>
