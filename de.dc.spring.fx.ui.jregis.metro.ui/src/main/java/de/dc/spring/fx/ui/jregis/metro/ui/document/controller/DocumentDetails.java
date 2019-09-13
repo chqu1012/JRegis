@@ -36,6 +36,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentHistoryServic
 import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentReferenceService;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
+import de.dc.spring.fx.ui.jregis.metro.ui.screenshot.ScreenshotStage;
 import de.dc.spring.fx.ui.jregis.metro.ui.screenshot.model.ScreenshotContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
@@ -167,7 +168,23 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchCreateNewSuggestion();
 		}else if (source == linkDeleteSuggestion) {
 			dispatchDeleteSuggestion();
+		}else if (source == buttonFullscreenshot) {
+			dispatchOpenFullscreenshot();
 		}
+	}
+
+	private void dispatchOpenFullscreenshot() {
+		Stage mainStage = (Stage) root.getScene().getWindow();
+		mainStage.setIconified(true);
+		
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			log.error("Error on running thread#sleep", e);
+		}
+		
+		ScreenshotStage stage = new ScreenshotStage(true);
+		stage.show();
 	}
 
 	private void dispatchDeleteSuggestion() {
@@ -694,45 +711,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 //			.title("Failed to open folder!").showError();
 //		}
 //	}
-//
-//	@Override
-//	protected void onButtonReferenceDialogApply(ActionEvent event) {
-//		referenceDialog.setVisible(false);
-//		referenceDialog.toBack();
-//		
-//		LocalDateTime createdOn = LocalDateTime.now();
-//		long firstId = context.current.get().getId();
-//
-//		referencedList.forEach(e->{
-//			long secondId = e.getId();
-//			JRegisPlatform.getInstance(ReferenceRepository.class).save(new Reference(createdOn , createdOn, 0, firstId, secondId));
-//		});
-//	}
-//
-//	@Override
-//	protected void onButtonSelectAllDocument(ActionEvent event) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	protected void onButtonSelectDocument(ActionEvent event) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	protected void onButtonUnselectAllDocument(ActionEvent event) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	protected void onButtonUnselectDocument(ActionEvent event) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
+
 //	@Override
 //	protected void onLinkCancelReferenceDialog(ActionEvent event) {
 //		referenceDialog.setVisible(false);
@@ -777,21 +756,5 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		
 //		ScreenshotStage stage = new ScreenshotStage(false);
 //		stage.show();
-//	}
-//
-//	@Override
-//	protected void onButtonFullScreenshotAction(ActionEvent event) {
-//		Stage mainStage = (Stage) root.getScene().getWindow();
-//		mainStage.setIconified(true);
-//		
-//		try {
-//			Thread.sleep(200);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		ScreenshotStage stage = new ScreenshotStage(true);
-//		stage.show();
-//		
 //	}
 }

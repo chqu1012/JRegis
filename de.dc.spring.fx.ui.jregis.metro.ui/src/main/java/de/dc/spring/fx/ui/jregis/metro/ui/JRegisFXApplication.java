@@ -57,6 +57,8 @@ public class JRegisFXApplication extends Application {
     
 
     public static void main(String[] args) {
+    	// Used for avoiding screenshot robot exception
+    	System.setProperty("java.awt.headless", "false");
         launch(JRegisFXApplication.class);
     }
 }
