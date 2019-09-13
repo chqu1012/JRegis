@@ -1,6 +1,5 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.user;
 
-import java.time.LocalDateTime;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.factory.ColumnUsername;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.model.User;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.model.UserContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.user.repository.UserRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.user.service.UserService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,7 +30,7 @@ public class UserManagementPage extends BaseUserManagementPage {
 	
 	private UserContext context = new UserContext();
 	
-	@Autowired UserRepository userRepository;
+	@Autowired UserService userService;
 	
 	public void initialize() {
 		textUsername.textProperty().bindBidirectional(context.username);
@@ -64,7 +63,7 @@ public class UserManagementPage extends BaseUserManagementPage {
 		setupCellValueFactory(columnStatus, e-> new SimpleObjectProperty<>(String.valueOf(e.getStatus())));
 		tableView.setItems(filteredMasterData);
 		
-		masterData.addAll(userRepository.findAll());
+		masterData.addAll(userService.findAll());
 	}
 	
 	public static <T, U> void setupCellValueFactory(TableColumn<T, U> column, Function<T, ObservableValue<U>> mapper) {
@@ -73,25 +72,7 @@ public class UserManagementPage extends BaseUserManagementPage {
 	
 	@Override
 	protected void onButtonCreateUser(ActionEvent event) {
-//		User user = JRegisPlatform.getInstance(UserService.class).create(context);
-		// TODO: Replaced by real implementaton
-		LocalDateTime updatedOn = null;
-		LocalDateTime createdOn= null;
-		String name= null;
-		Long roleId= null;
-		LocalDateTime birthday= null;
-		String mobile= null;
-		String country= null;
-		String state= null;
-		String city= null;
-		String address= null;
-		String email= null;
-		String lastname= null;
-		String firstname= null;
-		String password= null;
-		String username= null;
-		User user = new User(username, password, firstname, lastname, email, address, city, state, country, mobile, birthday, roleId, name, createdOn, updatedOn);
-		userRepository.save(user);
+		User user = userService.create(context);
 		
 		masterData.add(user);
 		Notifications.create().darkStyle().title("New User created!").text("Create new user "+context.username.getValue()).show();

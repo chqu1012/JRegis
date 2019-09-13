@@ -64,6 +64,9 @@ public class User {
 	@Column(nullable = true)
 	protected Integer status;
 
+	public User() {
+	}
+	
 	public User(String username, String password, String firstname, String lastname, String email, String address,
 			String city, String state, String country, String mobile, LocalDateTime birthday, Long roleId, String name,
 			LocalDateTime createdOn, LocalDateTime updatedOn) {
