@@ -80,7 +80,7 @@
                         <TextField fx:id="textDownloadTUrl" layoutX="70.0" layoutY="128.0" prefHeight="25.0" prefWidth="402.0" />
                         <ImageView fx:id="imageViewDownloadPaste" fitHeight="24.0" fitWidth="24.0" layoutX="477.0" layoutY="129.0" onMouseClicked="#onImageViewDownloadClipboardClicked" pickOnBounds="true" preserveRatio="true" styleClass="download-clipboard-image-view">
                            <image>
-                              <Image url="@../../../images/icons8-inhalte-einfügen-24.png" />
+                              <Image url="@images/icons8-inhalte-einfügen-24.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -112,7 +112,7 @@
                            <content>
                               <ImageView fx:id="imageViewClipboard" fitHeight="300.0" fitWidth="400.0" onMouseClicked="#onImageViewClipboardHelperClicked" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../../../images/icons8_Multiply_32px.png" />
+                                    <Image url="@images/icons8_Multiply_32px.png" />
                                  </image>
                               </ImageView>
                            </content>
@@ -210,7 +210,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-einen-screenshot-machen-32.png" />
+                                                <Image url="@images/icons8-einen-screenshot-machen-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -222,7 +222,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-vollbild-48.png" />
+                                                <Image url="@images/icons8-vollbild-48.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -231,7 +231,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8_Copy_to_Clipboard_32px.png" />
+                                                <Image url="@images/icons8_Copy_to_Clipboard_32px.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -243,7 +243,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-anfügen-20.png" />
+                                                <Image url="@images/icons8-anfügen-20.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -255,7 +255,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-aus-der-cloud-laden-20.png" />
+                                                <Image url="@images/icons8-aus-der-cloud-laden-20.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -338,7 +338,7 @@
                         </Label>
                         <ImageView fx:id="imageViewOpenFolder" fitHeight="24.0" fitWidth="24.0" layoutX="217.0" layoutY="16.0" onMouseClicked="#onImageViewOpenFolder" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <image>
-                              <Image url="@../../../images/icons8_Open_32px_3.png" />
+                              <Image url="@images/icons8_Open_32px_3.png" />
                            </image>
                         </ImageView>
                      </children>
