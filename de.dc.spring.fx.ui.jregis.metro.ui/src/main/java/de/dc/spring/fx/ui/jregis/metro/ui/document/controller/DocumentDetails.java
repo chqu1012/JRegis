@@ -609,7 +609,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 
 	private void addAttachment(DocumentHistory history) {
 		attachmentService.findAll().stream()
-				.filter(e -> e.getHistoryId() == history.getId())
+				.filter(e -> e.getHistoryId().equals(history.getId()))
 				.filter(e -> e.getStatus() == DocumentAttachmentStatus.ADD.getStatusValue()).forEach(e -> {
 					vboxFiles.getChildren().add(new AttachmentControl(e));
 					history.getAttachments().add(e);
