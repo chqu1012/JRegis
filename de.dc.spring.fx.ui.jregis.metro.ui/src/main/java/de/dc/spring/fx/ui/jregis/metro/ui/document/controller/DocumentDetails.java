@@ -157,7 +157,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 		} else if (source == buttonClipboardHelperAccept) {
 			dispatchAcceptClipboardHelperResult();
 		} else if (source == linkClipboardHelperCancel) {
-			dispatchCloseReferenceDialog();
+			dispatchCloseClipboardHelperDialog();
 		} else if (source == buttonClipboard) {
 			dispatchOpenClipboardHelperDialog();
 		}else if (source == buttomSubmitComment) {
@@ -172,6 +172,8 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchOpenFullscreenshot(true);
 		}else if (source == buttonScreenshot) {
 			dispatchOpenFullscreenshot(false);
+		}else if (source == linkCancelReferenceDialog) {
+			dispatchCloseReferenceDialog();
 		}
 	}
 
@@ -246,7 +248,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 		});
 	}
 
-	private void dispatchCloseReferenceDialog() {
+	private void dispatchCloseClipboardHelperDialog() {
 		clipboardHelperDialog.toBack();
 		clipboardHelperDialog.setVisible(false);
 	}
@@ -257,7 +259,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 	}
 
 	private void dispatchAcceptClipboardHelperResult() {
-		dispatchCloseReferenceDialog();
+		dispatchCloseClipboardHelperDialog();
 
 		context.documentComment.set(context.clipboardTransactionMessage.get());
 		DocumentHistory history = historyService.create(context);
@@ -356,14 +358,23 @@ public class DocumentDetails extends BaseDocumentDetails {
 
 	@Override
 	protected void onListViewReferencedDocuments(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+		Document selection = listViewReferencedDocuments.getSelectionModel().getSelectedItem();
+		if (selection!=null && event.getClickCount()==2) {
+			referenceAllAvailableList.add(selection);
+			referencedList.remove(selection);
+		}
 	}
 
 	@Override
 	protected void onReferenceDialogKeyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
+		if (event.getCode().equals(KeyCode.ESCAPE)) {
+			dispatchCloseReferenceDialog();
+		}
+	}
 
+	private void dispatchCloseReferenceDialog() {
+		referenceDialog.setVisible(false);
+		referenceDialog.toBack();			
 	}
 
 	@Override
@@ -717,39 +728,9 @@ public class DocumentDetails extends BaseDocumentDetails {
 //	}
 
 //	@Override
-//	protected void onLinkCancelReferenceDialog(ActionEvent event) {
-//		referenceDialog.setVisible(false);
-//		referenceDialog.toBack();		
-//	}
-//
-//	@Override
 //	protected void onButtonOpenReferenceDialog(ActionEvent event) {
 //		referenceDialog.toFront();
 //		referenceDialog.setVisible(true);
 //	}
-//	
-//	@Override
-//	protected void onReferenceDialogKeyPressed(KeyEvent event) {
-//		if (event.getCode().equals(KeyCode.ESCAPE)) {
-//			onLinkCancelReferenceDialog(null);
-//		}
-//	}
-//
-//	@Override
-//	protected void onListViewAllAvailableDocuments(MouseEvent event) {
-//		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
-//		if (selection!=null && event.getClickCount()==2) {
-//			referencedList.add(selection);
-//			referenceAllAvailableList.remove(selection);
-//		}		
-//	}
-//
-//	@Override
-//	protected void onListViewReferencedDocuments(MouseEvent event) {
-//		Document selection = listViewReferencedDocuments.getSelectionModel().getSelectedItem();
-//		if (selection!=null && event.getClickCount()==2) {
-//			referenceAllAvailableList.add(selection);
-//			referencedList.remove(selection);
-//		}
-//	}
+
 }
