@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.clipboard.model.ClipboardFileNameSuggestion;
+import de.dc.spring.fx.ui.jregis.metro.ui.clipboard.respository.ClipboardFileNameSuggestionRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentDetails;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.ReferenceListCellFeature;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
@@ -98,6 +100,9 @@ public class DocumentDetails extends BaseDocumentDetails {
 	@Autowired
 	DocumentReferenceService referenceService;
 	
+	@Autowired
+	ClipboardFileNameSuggestionRepository fileNameSuggestionRepository;
+	
 	@Override
 	public void initialize() {
 		super.initialize();
@@ -158,6 +163,15 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchSubmitComment();
 		}else if (source == checkBoxShowDeletedComments) {
 			populateHistoryList(context.current.get());
+		}else if (source == linkAddNewSuggestion) {
+			if (textFilename.getText().isEmpty()) {
+				Notifications.create().text("File Name cannot be empty").title("File Name Suggestion").darkStyle()
+						.showWarning();
+			} else {
+				String name = textFilename.getText();
+				fileNameSuggestionRepository.save(new ClipboardFileNameSuggestion(name, LocalDateTime.now(), LocalDateTime.now()));
+				nameSuggestionList.add(name);
+			}
 		}
 	}
 
@@ -599,53 +613,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 //		}
 //	}
 
-//	@Override
-//	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
-//		clipboardHelperDialog.toBack();
-//		clipboardHelperDialog.setVisible(false);
-//
-//		context.documentComment.set(context.clipboardTransactionMessage.get());
-//		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
-//		JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(context);
-//
-//		Attachment attachment = JRegisPlatform.getInstance(AttachmentService.class).create(history, context.clipboardFileName.get()+".png");
-//		
-//		Notifications.create().text("Added File " + attachment.getName() + " from Clipboard").title("File Clipboard")
-//				.darkStyle().show();
-//
-//		addHistory(history);
-//		vboxFiles.getChildren().add(new AttachmentControl(attachment));
-//	}
-//
-//	@Override
-//	protected void onLinkClipboardHelperCancelAction(ActionEvent event) {
-//		clipboardHelperDialog.toBack();
-//		clipboardHelperDialog.setVisible(false);
-//	}
-//
-//	@Override
-//	protected void onButtonClipboardHelperAction(ActionEvent event) {
-//		clipboardHelperDialog.setVisible(true);
-//		clipboardHelperDialog.toFront();
-//
-//		ClipboardHelper.getImage().ifPresent(e -> {
-//			imageViewClipboard.setFitHeight(e.getHeight());
-//			imageViewClipboard.setFitWidth(e.getWidth());
-//			context.clipboardImageContent.set(e);
-//		});
-//	}
-//
-//	@Override
-//	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
-//		if (event.getClickCount() == 2) {
-//			ClipboardHelper.getImage().ifPresent(e -> {
-//				imageViewClipboard.setFitHeight(e.getHeight());
-//				imageViewClipboard.setFitWidth(e.getWidth());
-//				context.clipboardImageContent.set(e);
-//			});
-//		}
-//	}
-//
 //	@Override
 //	protected void onLinkAddNewSuggestionAction(ActionEvent event) {
 //		if (textFilename.getText().isEmpty()) {
