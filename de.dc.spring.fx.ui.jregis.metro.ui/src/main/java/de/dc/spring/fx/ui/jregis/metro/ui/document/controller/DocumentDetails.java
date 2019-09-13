@@ -4,8 +4,10 @@ import static de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentFil
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +34,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentHistoryServic
 import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentReferenceService;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
+import de.dc.spring.fx.ui.jregis.metro.ui.screenshot.model.ScreenshotContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.ClipboardHelper;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.beans.binding.Bindings;
@@ -41,6 +44,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -128,6 +132,8 @@ public class DocumentDetails extends BaseDocumentDetails {
 			optionalDocument.ifPresent(this::setSelection);
 		}else if (context.getEventId().equals("/open/file/attachment")) {
 			onOpenFileChanged(null, null, (String)context.getInput());
+		}else if (context.getEventId().equals("/store/add/screenshot/image")) {
+			dispatchAddScreenshot(context);
 		}
 	}
 
@@ -155,6 +161,28 @@ public class DocumentDetails extends BaseDocumentDetails {
 		}
 	}
 
+	private void dispatchAddScreenshot(EventContext<?> context) {
+		Stage mainStage = (Stage) root.getScene().getWindow();
+		mainStage.setIconified(false);
+		
+		ScreenshotContext screenshotContext = (ScreenshotContext) context.getInput();
+		String dateFormat = new SimpleDateFormat("yyyy-MM-dd_HHmmss").format(new Date());
+		String name = dateFormat+screenshotContext.getName();
+		Image image = screenshotContext.getImage();
+		
+		LocalDateTime createdOn = LocalDateTime.now();
+		DocumentHistory history = new DocumentHistory("Added Screenshot", createdOn , createdOn, this.context.current.get().getId());
+		history = historyRepository.save(history);
+		
+		DocumentAttachment attachment = new DocumentAttachment(name, createdOn, createdOn, history.getId());
+		attachment = attachmentService.save(attachment);
+		history.getAttachments().add(attachment);
+		
+		folderService.copyImageTo(this.context.current.get(), name, image);
+		
+		addHistory(history);
+	}
+	
 	private void dispatchOpenClipboardHelperDialog() {
 		clipboardHelperDialog.setVisible(true);
 		clipboardHelperDialog.toFront();
@@ -514,33 +542,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 	}
 	
 //	@Subscribe
-//	public void restoreStage(EventContext<ScreenshotContext> context) {
-//		if (context.getEventId().equals("/store/add/screenshot/image")) {
-//			Stage mainStage = (Stage) root.getScene().getWindow();
-//			mainStage.setIconified(false);
-//			
-//			ScreenshotContext screenshotContext = context.getInput();
-//			String dateFormat = new SimpleDateFormat("yyyy-MM-dd_HHmmss").format(new Date());
-//			String name = dateFormat+screenshotContext.getName();
-//			Image image = screenshotContext.getImage();
-//			
-//			LocalDateTime createdOn = LocalDateTime.now();
-//			History history = new History("Added Screenshot", createdOn , createdOn, this.context.current.get().getId());
-//			long historyId = JRegisPlatform.getInstance(HistoryRepository.class).save(history);
-//			history.setId(historyId);
-//			
-//			Attachment attachment = new Attachment(name, createdOn, createdOn, historyId);
-//			long attachmentId = JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-//			attachment.setId(attachmentId);
-//			history.getAttachments().add(attachment);
-//			
-//			JRegisPlatform.getInstance(DocumentFolderService.class).copyImageTo(this.context.current.get(), name, image);
-//			
-//			addHistory(history);
-//		}
-//	}
-//
-//	@Subscribe
 //	public void deleteHistory(IEventContext<History> context) {
 //		if (context.getEventId().equals(ID_DELETE_HISTORY)) {
 //			History input = context.getInput();
@@ -597,12 +598,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 //			historyList.add(history);
 //		}
 //	}
-//
-//	@Override
-//	protected void onCheckBoxShowDeletedCommentsAction(ActionEvent event) {
-//		populateHistoryList(context.current.get());
-//	}
-//
+
 //	@Override
 //	protected void onButtonClipboardHelperAcceptAction(ActionEvent event) {
 //		clipboardHelperDialog.toBack();
