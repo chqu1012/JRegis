@@ -1,5 +1,7 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
+import static de.dc.spring.fx.ui.jregis.metro.ui.document.controller.DocumentFileItem.getFileIcon;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -38,10 +40,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 @Controller
 public class DocumentDetails extends BaseDocumentDetails {
@@ -127,39 +132,65 @@ public class DocumentDetails extends BaseDocumentDetails {
 		if (linkBack == source) {
 			root.toBack();
 		} else if (buttonReferenceDialogApply == source) {
-			referenceDialog.setVisible(false);
-			referenceDialog.toBack();
-
-			LocalDateTime createdOn = LocalDateTime.now();
-			long firstId = context.current.get().getId();
-
-			referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId())));
+			dispatchApplySelectedReferences();
 		} else if (buttonOpenReferenceDialog == source) {
 			referenceDialog.toFront();
 			referenceDialog.setVisible(true);
-		} else if (source == buttomSubmitComment) {
-			DocumentHistory history = historyService.create(context);
-			flowPaneFiles.getChildren().stream().forEach(e -> {
-				try {
-					folderService.copyFile(context.current.get(), e.getAccessibleText());
-				} catch (IOException e1) {
-					Notifications.create().darkStyle().text("Failed to copy file " + e.getAccessibleText())
-							.title("File Copy Error!").show();
-					return;
-				}
-				DocumentAttachment attachment = attachmentService.create(history, ((Hyperlink) e).getText());
-				vboxFiles.getChildren().add(new AttachmentControl(attachment));
-				history.getAttachments().add(attachment);
-			});
-
-			textAreaComment.clear();
-			flowPaneFiles.getChildren().clear();
-
-			Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle()
-					.show();
-
-			addHistory(history);
+		} else if (source==buttonAttachment) {
+			dispatchAttachSelectedFiles();
+		}else if (source == buttomSubmitComment) {
+			dispatchSubmitComment();
 		}
+	}
+
+	private void dispatchAttachSelectedFiles() {
+		FileChooser chooser = new FileChooser();
+		List<File> files = chooser.showOpenMultipleDialog(new Stage());
+		if (files != null) {
+			files.stream().forEach(e -> {
+				Hyperlink link = new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())));
+				link.setAccessibleText(e.getAbsolutePath());
+				flowPaneFiles.getChildren().add(link);
+			});
+		}
+
+		if (textAreaComment.getText().isEmpty()) {
+			textAreaComment.setText("Attached files from os.");
+		}
+	}
+
+	private void dispatchApplySelectedReferences() {
+		referenceDialog.setVisible(false);
+		referenceDialog.toBack();
+
+		LocalDateTime createdOn = LocalDateTime.now();
+		long firstId = context.current.get().getId();
+
+		referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId())));
+	}
+
+	private void dispatchSubmitComment() {
+		DocumentHistory history = historyService.create(context);
+		flowPaneFiles.getChildren().stream().forEach(e -> {
+			try {
+				folderService.copyFile(context.current.get(), e.getAccessibleText());
+			} catch (IOException e1) {
+				Notifications.create().darkStyle().text("Failed to copy file " + e.getAccessibleText())
+						.title("File Copy Error!").show();
+				return;
+			}
+			DocumentAttachment attachment = attachmentService.create(history, ((Hyperlink) e).getText());
+			vboxFiles.getChildren().add(new AttachmentControl(attachment));
+			history.getAttachments().add(attachment);
+		});
+
+		textAreaComment.clear();
+		flowPaneFiles.getChildren().clear();
+
+		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle()
+				.show();
+
+		addHistory(history);
 	}
 
 	@Override
