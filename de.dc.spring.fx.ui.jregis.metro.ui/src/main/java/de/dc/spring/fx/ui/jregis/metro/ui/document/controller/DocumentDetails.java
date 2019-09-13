@@ -240,8 +240,13 @@ public class DocumentDetails extends BaseDocumentDetails {
 
 	@Override
 	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+		if (event.getClickCount() == 2) {
+			ClipboardHelper.getImage().ifPresent(e -> {
+				imageViewClipboard.setFitHeight(e.getHeight());
+				imageViewClipboard.setFitWidth(e.getWidth());
+				context.clipboardImageContent.set(e);
+			});
+		}
 	}
 
 	@Override
