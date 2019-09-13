@@ -1,18 +1,45 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.google.common.eventbus.Subscribe;
+
 import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentDetails;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.factory.ReferenceListCellFeature;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.Document;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentAttachment;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentAttachmentStatus;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentHistory;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentHistoryStatus;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.model.DocumentReference;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentHistoryRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.repository.DocumentRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentAttachmentService;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentFolderService;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentHistoryService;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.service.DocumentReferenceService;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +47,9 @@ import javafx.scene.input.MouseEvent;
 public class DocumentDetails extends BaseDocumentDetails {
 
 	private DocumentContext context = new DocumentContext();
+
+	public static final String ID_DELETE_ATTACHMENT = "/attachment/delete";
+	public static final String ID_DELETE_HISTORY = "/history/delete";
 	
 	private ObservableList<DocumentHistory> historyList = FXCollections.observableArrayList();
 	private FilteredList<DocumentHistory> filteredHistory = new FilteredList<>(historyList, p -> true);
@@ -28,370 +58,348 @@ public class DocumentDetails extends BaseDocumentDetails {
 	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p -> true);
 
 	private ObservableList<Document> referenceAllAvailableList = FXCollections.observableArrayList();
-	private FilteredList<Document> fiteredReferenceAllAvailableList = new FilteredList<>(referenceAllAvailableList, p -> true);
+	private FilteredList<Document> fiteredReferenceAllAvailableList = new FilteredList<>(referenceAllAvailableList,
+			p -> true);
 
 	private ObservableList<Document> referencedList = FXCollections.observableArrayList();
 	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
+
+	private List<DocumentReference> referencesRegistry = new ArrayList<>();
 	
+	private DocumentViewer viewer = new DocumentViewer();
+
+	@Autowired
+	DocumentHistoryRepository historyRepository;
+
+	@Autowired
+	DocumentHistoryService historyService;
+	
+	@Autowired 
+	DocumentRepository documentRepository;
+
+	@Autowired 
+	DocumentFolderService folderService;
+	
+	@Autowired
+	DocumentAttachmentService attachmentService;
+	
+	@Autowired
+	DocumentReferenceService referenceService;
+	
+	@Override
+	public void initialize() {
+		super.initialize();
+
+		// Fill Histories
+		List<DocumentHistory> histories = historyRepository.findAll();
+		historyList.addAll(histories);
+
+//		List<String> fileNames = JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).findAll();
+//		nameSuggestionList.addAll(fileNames);
+
+		new AutoCompletionTextFieldBinding<>(textFilename, param -> {
+			filteredNameSuggestion.setPredicate(p -> p.toLowerCase().contains(param.getUserText().toLowerCase()));
+			return filteredNameSuggestion;
+		});
+
+		initBindings();
+		initReferenceDialog();
+
+		mainContent.getChildren().add(viewer);
+		viewer.toBack();
+
+		EventBroker.getDefault().register(this);
+	}
+
+	@Subscribe
+	public void subscribeEventBroker(EventContext<?> context) {
+		if (context.getEventId().equals("/open/document/details")) {
+			setSelection((Document) context.getInput());
+		}else if (context.getEventId().equals("/set/current/doccument")) {
+			Optional<Document> optionalDocument = documentRepository.findById((Long)context.getInput());
+			optionalDocument.ifPresent(this::setSelection);
+		}
+	}
+
 	@Override
 	protected void onButtonAction(ActionEvent event) {
 		Object source = event.getSource();
-		if (linkBack==source) {
+		if (linkBack == source) {
 			root.toBack();
-		}else if (buttonOpenReferenceDialog==source) {
+		} else if (buttonReferenceDialogApply == source) {
 			referenceDialog.setVisible(false);
 			referenceDialog.toBack();
-			
+
 			LocalDateTime createdOn = LocalDateTime.now();
 			long firstId = context.current.get().getId();
 
-			referencedList.forEach(e->{
-				long secondId = e.getId();
-//				JRegisPlatform.getInstance(ReferenceRepository.class).save(new Reference(createdOn , createdOn, 0, firstId, secondId));
+			referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId())));
+		} else if (buttonOpenReferenceDialog == source) {
+			referenceDialog.toFront();
+			referenceDialog.setVisible(true);
+		} else if (source == buttomSubmitComment) {
+			DocumentHistory history = historyService.create(context);
+			flowPaneFiles.getChildren().stream().forEach(e -> {
+				try {
+					folderService.copyFile(context.current.get(), e.getAccessibleText());
+				} catch (IOException e1) {
+					Notifications.create().darkStyle().text("Failed to copy file " + e.getAccessibleText())
+							.title("File Copy Error!").show();
+					return;
+				}
+				DocumentAttachment attachment = attachmentService.create(history, ((Hyperlink) e).getText());
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				history.getAttachments().add(attachment);
 			});
+
+			textAreaComment.clear();
+			flowPaneFiles.getChildren().clear();
+
+			Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle()
+					.show();
+
+			addHistory(history);
 		}
 	}
 
 	@Override
 	protected void onImageViewClipboardHelperClicked(MouseEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void onImageViewDownloadClipboardClicked(MouseEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void onImageViewOpenFolder(MouseEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void onListViewAllAvailableDocuments(MouseEvent event) {
 		Document selection = listViewAllAvailableDocuments.getSelectionModel().getSelectedItem();
-		if (selection!=null && event.getClickCount()==2) {
+		if (selection != null && event.getClickCount() == 2) {
 			referencedList.add(selection);
 			referenceAllAvailableList.remove(selection);
-		}			
+		}
 	}
 
 	@Override
 	protected void onListViewReferencedDocuments(MouseEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void onReferenceDialogKeyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	protected void onScrollPaneKeyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
-		
+	protected void onScrollPaneKeyPressed(KeyEvent e) {
+		if (e.getCode().equals(KeyCode.ESCAPE)) {
+			root.toBack();
+		}
 	}
 
 	@Override
 	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void onVBoxDraggingFileBoxDragOver(DragEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	private void initReferenceDialog() {
+		// texytToReferencedDocument.textProperty().bind(Bindings.format("JREG-%05d:
+		// %s", context.current.get().getId(), context.current.get().getName()));
 
-//	public static final String ID_DELETE_ATTACHMENT = "/attachment/delete";
-//	public static final String ID_DELETE_HISTORY = "/history/delete";
-//
-//	private Logger log = Logger.getLogger(getClass().getSimpleName());
-//
-//	private ObservableList<History> historyList = FXCollections.observableArrayList();
-//	private FilteredList<History> filteredHistory = new FilteredList<>(historyList, p -> true);
-//
-//	private ObservableList<String> nameSuggestionList = FXCollections.observableArrayList();
-//	private FilteredList<String> filteredNameSuggestion = new FilteredList<>(nameSuggestionList, p -> true);
-//
-//	private ObservableList<Document> referenceAllAvailableList = FXCollections.observableArrayList();
-//	private FilteredList<Document> fiteredReferenceAllAvailableList = new FilteredList<>(referenceAllAvailableList, p -> true);
-//
-//	private ObservableList<Document> referencedList = FXCollections.observableArrayList();
-//	private FilteredList<Document> fiteredReferencedList = new FilteredList<>(referencedList, p -> true);
-//
-//	private List<Reference> referencesRegistry = new ArrayList<>();
-//
-//	private DocumentPreview documentPreview = new DocumentPreview();
-//	
-//	private Rating rating = new Rating(5);
-//	
-//	private DocumentContext context = new DocumentContext();
-//
-//	public DocumentFlatDetails() {
-//		FXMLLoader fxmlLoader = new FXMLLoader(
-//				getClass().getResource("/de/dc/fx/ui/jregis/metro/ui/control/document/management/DocumentFlatDetails.fxml"));
-//		fxmlLoader.setRoot(this);
-//		fxmlLoader.setController(this);
-//
-//		try {
-//			fxmlLoader.load();
-//		} catch (IOException exception) {
-//			log.log(Level.SEVERE, "Failed to load fxml ", exception);
-//		}
-//
-//		JRegisPlatform.getInstance(IEventBroker.class).register(this);
-//
-//		// Fill Histories
-//		List<History> histories = JRegisPlatform.getInstance(HistoryRepository.class).findAll();
-//		historyList.addAll(histories);
-//
-//		List<String> fileNames = JRegisPlatform.getInstance(ClipboardNameSuggestionRepository.class).findAll();
-//		nameSuggestionList.addAll(fileNames);
-//
-//		new AutoCompletionTextFieldBinding<>(textFilename, param -> {
-//			filteredNameSuggestion.setPredicate(p -> p.toLowerCase().contains(param.getUserText().toLowerCase()));
-//			return filteredNameSuggestion;
-//		});
-//
-//		hboxTitle.getChildren().add(rating);
-//		
-//		initBindings();
-//		initReferenceDialog();
-//		
-//		mainContent.getChildren().add(documentPreview);
-//		documentPreview.toBack();
-//	}
-//
-//	private void initReferenceDialog() {
-//		//texytToReferencedDocument.textProperty().bind(Bindings.format("JREG-%05d: %s", context.current.get().getId(), context.current.get().getName()));
-//		
-//		referenceAllAvailableList.addAll(JRegisPlatform.getInstance(DocumentRepository.class).findAll());
-//		
-//		listViewAllAvailableDocuments.setItems(fiteredReferenceAllAvailableList);
-//		listViewReferencedDocuments.setItems(fiteredReferencedList);
-//		
-//		labelAllAvailableDocumentsCounter.textProperty().bind(Bindings.format("(%d)", Bindings.size(fiteredReferenceAllAvailableList)));
-//		labelReferencedDocumentCounter.textProperty().bind(Bindings.format("(%d)", Bindings.size(fiteredReferencedList)));
-//		
-//		listViewAllAvailableDocuments.setCellFactory(param -> new ReferenceListCellFeature());
-//		listViewReferencedDocuments.setCellFactory(param -> new ReferenceListCellFeature());
-//		
-//		textSearchForAvailableDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p->{
-//			boolean isNewValueEmpty = newValue==null || newValue.isEmpty();
-//			boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
-//			boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
-//			return isNewValueEmpty || isNameEquals || isIdEquals;
-//		}));
-//		
-//		textSearchForReferencedDocuments.textProperty().addListener((observable, oldValue, newValue) -> fiteredReferencedList.setPredicate(p->{
-//			boolean isNewValueEmpty = newValue==null || newValue.isEmpty();
-//			boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
-//			boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
-//			return isNewValueEmpty || isNameEquals || isIdEquals;
-//		}));
-//	}
-//	
-//	private void initBindings() {
-//		// Document Properties
-//		textAreaComment.textProperty().bindBidirectional(context.documentComment);
-//		labelDocumentName.textProperty().bind(context.documentName);
-//		labelDocumentId.textProperty().bind(context.documentId);
-//		labelDocumentDescription.textProperty().bind(context.documentDescription);
-//		labelCreatedOn.textProperty().bind(context.documentCreatedOn);
-//		labelUpdatedOn.textProperty().bind(context.documentUpdatedOn);
-//
-//		textAreaComment.textProperty().bindBidirectional(context.documentComment);
-//
-//		// Counters
-//		labelFilesCount.textProperty().bind(context.countFile);
-//		labelCommentCount.textProperty().bind(context.countComment);
-//		labelReferenceCount.textProperty().bind(context.countReference);
-//		context.countFile.bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
-//		context.countComment.bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
-//		context.countReference.bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
-//
-//		// Webdownload Dialog
-//		buttonDownloadDialogAccept.disableProperty().bind(context.downloadFileName.isEmpty());
-//		textDownloadFileID.textProperty().bindBidirectional(context.downloadFileID);
-//		textDownloadFilename.textProperty().bindBidirectional(context.downloadFileName);
-//		textDownloadTransactionMessage.textProperty().bindBidirectional(context.downloadTransactionMessage);
-//		textDownloadTUrl.textProperty().bindBidirectional(context.downloadUrl);
-//
-//		// Clipboard Dialog
-//		buttonClipboardHelperAccept.disableProperty().bind(context.clipboardFileName.isEmpty());
-//		textFilename.textProperty().bindBidirectional(context.clipboardFileName);
-//		textFileID.textProperty().bindBidirectional(context.clipboardFileID);
-//		textTransactionMessage.textProperty().bindBidirectional(context.clipboardTransactionMessage);
-//		imageViewClipboard.imageProperty().bindBidirectional(context.clipboardImageContent);
-//		
-//		// Add Listeners
-//		context.current.addListener(this::onDocumentChanged);
-//		context.toOpenFile.addListener(this::onOpenFileChanged);
-//	}
-//
-//	@Subscribe
-//	public void setDocumentViaEventBroker(EventContext<Document> context) {
-//		if (context.getEventId().equals("/set/current/doccument")) {
-//			setSelection(context.getInput());
-//		}
-//	}
-//	
+		referenceAllAvailableList.addAll(documentRepository.findAll());
+
+		listViewAllAvailableDocuments.setItems(fiteredReferenceAllAvailableList);
+		listViewReferencedDocuments.setItems(fiteredReferencedList);
+
+		labelAllAvailableDocumentsCounter.textProperty()
+				.bind(Bindings.format("(%d)", Bindings.size(fiteredReferenceAllAvailableList)));
+		labelReferencedDocumentCounter.textProperty()
+				.bind(Bindings.format("(%d)", Bindings.size(fiteredReferencedList)));
+
+		listViewAllAvailableDocuments.setCellFactory(param -> new ReferenceListCellFeature());
+		listViewReferencedDocuments.setCellFactory(param -> new ReferenceListCellFeature());
+
+		textSearchForAvailableDocuments.textProperty()
+				.addListener((observable, oldValue, newValue) -> fiteredReferenceAllAvailableList.setPredicate(p -> {
+					boolean isNewValueEmpty = newValue == null || newValue.isEmpty();
+					boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
+					boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
+					return isNewValueEmpty || isNameEquals || isIdEquals;
+				}));
+
+		textSearchForReferencedDocuments.textProperty()
+				.addListener((observable, oldValue, newValue) -> fiteredReferencedList.setPredicate(p -> {
+					boolean isNewValueEmpty = newValue == null || newValue.isEmpty();
+					boolean isNameEquals = p.getName().toLowerCase().contains(newValue.toLowerCase());
+					boolean isIdEquals = String.valueOf(p.getId()).contains(newValue);
+					return isNewValueEmpty || isNameEquals || isIdEquals;
+				}));
+	}
+
+	private void initBindings() {
+		// Document Properties
+		textAreaComment.textProperty().bindBidirectional(context.documentComment);
+		labelDocumentName.textProperty().bind(context.documentName);
+		labelDocumentId.textProperty().bind(context.documentId);
+		labelDocumentDescription.textProperty().bind(context.documentDescription);
+		labelCreatedOn.textProperty().bind(context.documentCreatedOn);
+		labelUpdatedOn.textProperty().bind(context.documentUpdatedOn);
+
+		textAreaComment.textProperty().bindBidirectional(context.documentComment);
+
+		// Counters
+		labelFilesCount.textProperty().bind(context.countFile);
+		labelCommentCount.textProperty().bind(context.countComment);
+		labelReferenceCount.textProperty().bind(context.countReference);
+		context.countFile.bind(Bindings.format("(%d)", Bindings.size(vboxFiles.getChildren())));
+		context.countComment.bind(Bindings.format("(%d)", Bindings.size(vboxComment.getChildren()).subtract(1)));
+		context.countReference.bind(Bindings.format("(%d)", Bindings.size(vboxReferences.getChildren())));
+
+		// Webdownload Dialog
+		buttonDownloadDialogAccept.disableProperty().bind(context.downloadFileName.isEmpty());
+		textDownloadFileID.textProperty().bindBidirectional(context.downloadFileID);
+		textDownloadFilename.textProperty().bindBidirectional(context.downloadFileName);
+		textDownloadTransactionMessage.textProperty().bindBidirectional(context.downloadTransactionMessage);
+		textDownloadTUrl.textProperty().bindBidirectional(context.downloadUrl);
+
+		// Clipboard Dialog
+		buttonClipboardHelperAccept.disableProperty().bind(context.clipboardFileName.isEmpty());
+		textFilename.textProperty().bindBidirectional(context.clipboardFileName);
+		textFileID.textProperty().bindBidirectional(context.clipboardFileID);
+		textTransactionMessage.textProperty().bindBidirectional(context.clipboardTransactionMessage);
+		imageViewClipboard.imageProperty().bindBidirectional(context.clipboardImageContent);
+
+		// Add Listeners
+		context.current.addListener(this::onDocumentChanged);
+		context.toOpenFile.addListener(this::onOpenFileChanged);
+	}
+
 //	@Subscribe
 //	public void openFileAttachmentViaEventBroker(EventContext<String> context) {
 //		if (context.getEventId().contentEquals("/open/file/attachment")) {
 //			onOpenFileChanged(null, null, context.getInput());
 //		}
 //	}
-//	
-//	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
-//		try {
-//			File file = JRegisPlatform.getInstance(DocumentFolderService.class).getAttachmentByName(context.current.get(), newValue);
-//			documentPreview.show(file);
-//			root.setVvalue(0d);
-//		} catch (Exception e) {
-//			Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
-//		}
-//	}
-//
-//	private void onDocumentChanged(ObservableValue<? extends Document> obs, Document oldValue,
-//			Document newValue) {
-//		vboxReferences.getChildren().clear();
-//		flowPaneFiles.getChildren().clear();
-//		vboxFiles.getChildren().clear();
-//		referencesRegistry.clear();
-//		
-//		context.documentComment.set("");
-//
-//		rating.setRating(0);
-//		
-//		// Fill References
-//		List<Reference> references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
-//		references = references.stream().filter(e-> e.getFirstId()==context.current.get().getId()).collect(Collectors.toList());
-//		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, false)));
-//		// Parent References
-//		references = JRegisPlatform.getInstance(ReferenceRepository.class).findAll();
-//		references = references.stream().filter(e-> e.getSecondId()==context.current.get().getId()).collect(Collectors.toList());
-//		references.forEach(e->{
-//			referencesRegistry.add(e);
-//			vboxReferences.getChildren().add(new ReferenceControl(e, true));
-//		});
-//		
-//		populateHistoryList(newValue);
-//
-//		// Set document properties
-//		context.documentCreatedOn.set(newValue.getCreatedOnAsString());
-//		context.documentUpdatedOn.set(newValue.getUpdatedOnAsString());
-//		context.documentDescription.set(newValue.getDescription());
-//		context.documentId.set(String.format("JREG-%05d", newValue.getId()));
-//		context.documentName.set(newValue.getName());
-//	}
+	
+	private void onOpenFileChanged(ObservableValue<? extends String> obs, String oldValue, String newValue) {
+		try {
+			File file = folderService.getAttachmentByName(context.current.get(), newValue);
+			viewer.show(file);
+			root.setVvalue(0d);
+		} catch (Exception e) {
+			Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
+		}
+	}
+
+	private void onDocumentChanged(ObservableValue<? extends Document> obs, Document oldValue,
+			Document newValue) {
+		vboxReferences.getChildren().clear();
+		flowPaneFiles.getChildren().clear();
+		vboxFiles.getChildren().clear();
+		referencesRegistry.clear();
+		
+		context.documentComment.set("");
+
+		rating.setRating(0);
+		
+		// Fill References
+		List<DocumentReference> references = referenceService.findAllById(context.current.get().getId());
+		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, false)));
+		// Parent References
+		references = referenceService.findAllById(context.current.get().getId());
+		references.forEach(e->{
+			referencesRegistry.add(e);
+			vboxReferences.getChildren().add(new ReferenceControl(e, true));
+		});
+		
+		populateHistoryList(newValue);
+
+		// Set document properties
+		context.documentCreatedOn.set(newValue.getCreatedOn().toString());
+		context.documentUpdatedOn.set(newValue.getUpdatedOn().toString());
+		context.documentDescription.set(newValue.getDescription());
+		context.documentId.set(String.format("JREG-%05d", newValue.getId()));
+		context.documentName.set(newValue.getName());
+	}
 
 	public void setSelection(Document document) {
-//		context.current.set(document);
+		context.current.set(document);
 
 		// Used focus for handle escape key
 		root.requestFocus();
 	}
 
-//	private void populateHistoryList(Document document) {
-//		vboxComment.getChildren().clear();
-//		vboxComment.getChildren().add(vboxCommentEditBox);
-//		vboxFiles.getChildren().clear();
-//		
-//		filteredHistory.setPredicate(e -> {
-//			boolean filterCriteria = e.getDocumentId() == document.getId();
-//			if (checkBoxShowDeletedComments.isSelected()) {
-//				filterCriteria = filterCriteria && e.getStatus() == HistoryStatus.ADD.getStatusValue();
-//			}
-//			return filterCriteria;
-//		});
-//		filteredHistory.stream().forEach(e -> {
-//			// Workaround: Fix oherwise on each click attachments will be added
-//			e.getAttachments().clear();
-//			addAttachment(e);
-//			addHistory(e);
-//		});
-//		
-//		if (vboxComment.getChildren().size()==1) {
-//			File[] contents = JRegisPlatform.getInstance(DocumentFolderService.class).getFolderContent(context.current.get());
-//			if (contents.length>0) {
-//				HistoryRepository historyRepository = JRegisPlatform.getInstance(HistoryRepository.class);
-//				AttachmentRepository attachmentRepository = JRegisPlatform.getInstance(AttachmentRepository.class);
-//				
-//				LocalDateTime createdOn = context.current.get().getCreatedOn();
-//				LocalDateTime updatedOn = LocalDateTime.now();
-//				Long documentId = context.current.get().getId();
-//				History history = new History("Reimport file(s) to history, because no history available.", createdOn , updatedOn, documentId );
-//				long historyId = historyRepository.save(history);
-//				history.setId(historyId);
-//				
-//				for (File file : contents) {
-//					Attachment attachment = new Attachment(file.getName(), createdOn, updatedOn, historyId);
-//					long attachmentId = attachmentRepository.save(attachment);
-//					attachment.setId(attachmentId);
-//					history.getAttachments().add(attachment);
-//				}
-//				addHistory(history);
-//			}
-//		}
-//	}
-//
-//	private void addAttachment(History history) {
-//		JRegisPlatform.getInstance(AttachmentRepository.class).findAll().stream()
-//				.filter(e -> e.getHistoryId() == history.getId())
-//				.filter(e -> e.getStatus() == AttachmentStatus.ADD.getStatusValue()).forEach(e -> {
-//					vboxFiles.getChildren().add(new AttachmentControl(e));
-//					history.getAttachments().add(e);
-//				});
-//	}
-//
-//	private void addHistory(History history) {
-//		DocumentHistoryItem item = new DocumentHistoryItem();
-//		item.setHistory(history, t -> context.toOpenFile.set(t));
-//		vboxComment.getChildren().add(item);
-//	}
-//
-//	@Override
-//	protected void onLinkBackAction(ActionEvent event) {
-//		root.toBack();
-//	}
-//
-//	@Override
-//	protected void onButtonSubmitComment(ActionEvent event) {
-//		History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
-//
-//		flowPaneFiles.getChildren().stream().forEach(e -> {
-//			try {
-//				JRegisPlatform.getInstance(DocumentFolderService.class).copyFile(context.current.get(),
-//						e.getAccessibleText());
-//			} catch (IOException e1) {
-//				Notifications.create().darkStyle().text("Failed to copy file " + e.getAccessibleText())
-//						.title("File Copy Error!").show();
-//				return;
-//			}
-//
-//			Attachment attachment = JRegisPlatform.getInstance(AttachmentService.class).create(history, ((Hyperlink) e).getText());
-//
-//			vboxFiles.getChildren().add(new AttachmentControl(attachment));
-//			history.getAttachments().add(attachment);
-//		});
-//
-//		textAreaComment.clear();
-//		flowPaneFiles.getChildren().clear();
-//
-//		Notifications.create().title("New Comment").text("Created new comment with attachments!").darkStyle().show();
-//
-//		addHistory(history);
-//	}
-//
+	private void populateHistoryList(Document document) {
+		vboxComment.getChildren().clear();
+		vboxComment.getChildren().add(vboxCommentEditBox);
+		vboxFiles.getChildren().clear();
+		
+		filteredHistory.setPredicate(e -> {
+			boolean filterCriteria = e.getDocumentId() == document.getId();
+			if (checkBoxShowDeletedComments.isSelected()) {
+				filterCriteria = filterCriteria && e.getStatus() == DocumentHistoryStatus.ADD.getStatusValue();
+			}
+			return filterCriteria;
+		});
+		filteredHistory.stream().forEach(e -> {
+			// Workaround: Fix oherwise on each click attachments will be added
+			e.getAttachments().clear();
+			addAttachment(e);
+			addHistory(e);
+		});
+		
+		if (vboxComment.getChildren().size()==1) {
+			File[] contents = folderService.getFolderContent(context.current.get());
+			if (contents.length>0) {
+				LocalDateTime createdOn = context.current.get().getCreatedOn();
+				LocalDateTime updatedOn = LocalDateTime.now();
+				Long documentId = context.current.get().getId();
+				DocumentHistory history = new DocumentHistory("Reimport file(s) to history, because no history available.", createdOn , updatedOn, documentId );
+				history = historyRepository.save(history);
+				
+				for (File file : contents) {
+					DocumentAttachment attachment = new DocumentAttachment(file.getName(), createdOn, updatedOn, history.getId());
+					attachment = attachmentService.save(attachment);
+					history.getAttachments().add(attachment);
+				}
+				addHistory(history);
+			}
+		}
+	}
+
+	private void addAttachment(DocumentHistory history) {
+		attachmentService.findAll().stream()
+				.filter(e -> e.getHistoryId() == history.getId())
+				.filter(e -> e.getStatus() == DocumentAttachmentStatus.ADD.getStatusValue()).forEach(e -> {
+					vboxFiles.getChildren().add(new AttachmentControl(e));
+					history.getAttachments().add(e);
+				});
+	}
+
+	private void addHistory(DocumentHistory history) {
+		DocumentHistoryItem item = new DocumentHistoryItem();
+		item.setHistory(history, t -> context.toOpenFile.set(t));
+		vboxComment.getChildren().add(item);
+	}
+	
 //	@Override
 //	protected void onButtonAttachmentsAction(ActionEvent event) {
 //		FileChooser chooser = new FileChooser();
@@ -408,15 +416,8 @@ public class DocumentDetails extends BaseDocumentDetails {
 //			textAreaComment.setText("Attached files from os.");
 //		}
 //	}
-//
-//	@Override
-//	protected void onScrollPaneKeyPressed(KeyEvent e) {
-//		if (e.getCode().equals(KeyCode.ESCAPE)) {
-//			root.toBack();
-//		}
-//	}
-//
-//	@Override
+
+	// @Override
 //	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
 //		Dragboard db = event.getDragboard();
 //		boolean success = false;

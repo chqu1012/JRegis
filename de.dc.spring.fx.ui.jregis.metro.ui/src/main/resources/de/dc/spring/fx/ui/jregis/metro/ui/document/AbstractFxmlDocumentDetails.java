@@ -68,7 +68,7 @@ public abstract class AbstractFxmlDocumentDetails extends ScrollPane {
 	protected ListView<Document> listViewAllAvailableDocuments;
 
 	@FXML
-	protected ListView<?> listViewReferencedDocuments;
+	protected ListView<Document> listViewReferencedDocuments;
 
 	@FXML
 	protected AnchorPane downloadDialog;

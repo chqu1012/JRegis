@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" spacing="5.0" styleClass="filehbox" stylesheets="@css/DocumentsFileItem.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </HBox.margin>
+      </ImageView>
+      <Hyperlink fx:id="fileNameLabel" maxHeight="1.7976931348623157E308" onAction="#onHyperlinkClicked" styleClass="filehyperlink" text="Hello File.txt" underline="true" HBox.hgrow="ALWAYS" />
+   </children>
+</fx:root>

@@ -1,21 +1,22 @@
-package de.dc.fx.ui.jregis.metro.ui.control.document.management;
+package de.dc.spring.fx.ui.jregis.metro.ui.document.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.controlsfx.control.Notifications;
 
-import de.dc.fx.ui.jregis.metro.ui.di.JRegisPlatform;
-import de.dc.fx.ui.jregis.metro.ui.service.DocumentFolderService;
+import de.dc.spring.fx.ui.jregis.metro.ui.document.BaseDocumentViewer;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
@@ -27,10 +28,10 @@ import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 
-public class DocumentPreview extends BaseDocumentPreview {
+public class DocumentViewer extends BaseDocumentViewer {
 
-	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/document/DocumentPreview.fxml";
-
+	private Logger log = Logger.getLogger(DocumentViewer.class);
+	
 	private Screen primary = Screen.getPrimary();
 	private Rectangle2D bounds = primary.getBounds();
 	private static final double ZOOM_FACTOR = 1.0014450997779993488675056142818;
@@ -39,31 +40,20 @@ public class DocumentPreview extends BaseDocumentPreview {
 	private final DoubleProperty mouseYProperty = new SimpleDoubleProperty();
 
 	private Image image;
-
 	private PDDocument doc;
 
-	public DocumentPreview() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		}
-
-		AnchorPane.setBottomAnchor(this, 0d);
-		AnchorPane.setTopAnchor(this, 0d);
-		AnchorPane.setLeftAnchor(this, 0d);
-		AnchorPane.setRightAnchor(this, 0d);
+	public void initialize() {
+		AnchorPane.setBottomAnchor(panePreview, 0d);
+		AnchorPane.setTopAnchor(panePreview, 0d);
+		AnchorPane.setLeftAnchor(panePreview, 0d);
+		AnchorPane.setRightAnchor(panePreview, 0d);
 
 		initScrollPane();
 
 		setVisible(false);
 		toBack();
 	}
-
+	
 	private void initScrollPane() {
 		scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
@@ -200,7 +190,7 @@ public class DocumentPreview extends BaseDocumentPreview {
 			
 		} else {
 			try {
-				JRegisPlatform.getInstance(DocumentFolderService.class).openFile(attachmentFile);
+				EventBroker.getDefault().post(new EventContext<>("/open/file", attachmentFile.getAbsolutePath()));
 			} catch (Exception e) {
 				Notifications.create().darkStyle().text(e.getLocalizedMessage()).title("File Error").showError();
 			}
@@ -254,6 +244,7 @@ public class DocumentPreview extends BaseDocumentPreview {
 				zoomProperty.set(Math.min(imageViewPreview.getFitWidth() / imageViewPreview.getImage().getWidth(),
 						imageViewPreview.getFitHeight() / imageViewPreview.getImage().getHeight()));
 			} catch (IOException e) {
+				log.error("failed to render image or pdf", e);
 			}
 		}
 

@@ -1,18 +1,15 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.document.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 @Entity
-public class DocumentHistory{
+public class DocumentReference {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,54 +18,29 @@ public class DocumentHistory{
 
 	@Column(nullable = true)
 	private String name;
-	
-	@Column(nullable = false)
-	private Long status;
 
 	@Column(nullable = false)
-	private Long documentId;
-	
+	private Long referenceTypeId;
+
+	@Column(nullable = false)
+	private Long firstId;
+
+	@Column(nullable = false)
+	private Long secondId;
+
 	@Column(nullable = false)
 	private LocalDateTime createdOn;
 
 	@Column(nullable = true)
 	private LocalDateTime updatedOn;
 
-	@Transient
-	private List<DocumentAttachment> attachments = new ArrayList<>();
-
-	public DocumentHistory() {
-	}
-	
-	public DocumentHistory(String name, LocalDateTime createdOn, LocalDateTime updatedOn, Long documentId) {
-		this.name = name;
+	public DocumentReference(LocalDateTime createdOn, LocalDateTime updatedOn, Long referenceTypeId, Long firstId,
+			Long secondId) {
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
-		this.documentId = documentId;
-	}
-
-	public Long getDocumentId() {
-		return documentId;
-	}
-
-	public void setDocumentId(Long documentId) {
-		this.documentId = documentId;
-	}
-
-	public Long getStatus() {
-		return status;
-	}
-
-	public void setStatus(Long status) {
-		this.status = status;
-	}
-
-	public List<DocumentAttachment> getAttachments() {
-		return attachments;
-	}
-
-	public void setAttachments(List<DocumentAttachment> attachments) {
-		this.attachments = attachments;
+		this.referenceTypeId = referenceTypeId;
+		this.firstId = firstId;
+		this.secondId = secondId;
 	}
 
 	public Long getId() {
@@ -102,4 +74,41 @@ public class DocumentHistory{
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+
+	public void setReferenceTypeId(Long referenceTypeId) {
+		this.referenceTypeId = referenceTypeId;
+	}
+
+	public void setFirstId(Long firstId) {
+		this.firstId = firstId;
+	}
+
+	public void setSecondId(Long secondId) {
+		this.secondId = secondId;
+	}
+
+	public long getReferenceTypeId() {
+		return referenceTypeId;
+	}
+
+	public void setReferenceTypeId(long referenceTypeId) {
+		this.referenceTypeId = referenceTypeId;
+	}
+
+	public long getFirstId() {
+		return firstId;
+	}
+
+	public void setFirstId(long firstId) {
+		this.firstId = firstId;
+	}
+
+	public long getSecondId() {
+		return secondId;
+	}
+
+	public void setSecondId(long secondId) {
+		this.secondId = secondId;
+	}
+
 }

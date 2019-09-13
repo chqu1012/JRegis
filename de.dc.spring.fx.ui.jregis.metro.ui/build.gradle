@@ -51,4 +51,6 @@ dependencies {
 
 	compile group: 'at.bestsolution.efxclipse.rt', name: 'org.eclipse.fx.ui.controls', version: '+'
 	compile group: 'at.bestsolution.efxclipse.rt', name: 'org.eclipse.fx.ui.dialogs', version: '+'
+	
+	compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.16'
 }

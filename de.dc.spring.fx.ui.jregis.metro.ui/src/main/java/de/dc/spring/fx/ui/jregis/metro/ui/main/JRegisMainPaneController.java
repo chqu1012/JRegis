@@ -2,6 +2,7 @@ package de.dc.spring.fx.ui.jregis.metro.ui.main;
 
 import static de.dc.spring.fx.ui.jregis.metro.ui.main.UIConstants.FXML_DOCUMENT;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.preferences.PreferencePage;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationAlerts;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.NotificationUser;
 import de.dc.spring.fx.ui.jregis.metro.ui.toolbar.ProfilePage;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
@@ -31,6 +33,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Autowired ConfigurableApplicationContext springContext;
+	@Autowired HostServices hostServices;
 
 	private NotificationUser notificationUser = new NotificationUser();
 	private NotificationAlerts notificationAlerts = new NotificationAlerts();
@@ -131,6 +134,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			inbox.toFront();
 		}else if (eventId.equals("/open/document/details")) {
 			paneDocumentDetails.toFront();
+		}else if (eventId.equals("/open/file")) {
+			hostServices.showDocument(context.getInput());
 		}
 	}
 	

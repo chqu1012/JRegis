@@ -20,6 +20,12 @@ public class DocumentAttachment{
 	private String name;
 	
 	@Column(nullable = false)
+	private Long historyId;
+
+	@Column(nullable = false)
+	private Long status;
+	
+	@Column(nullable = false)
 	private LocalDateTime createdOn;
 
 	@Column(nullable = true)
@@ -28,10 +34,27 @@ public class DocumentAttachment{
 	public DocumentAttachment() {
 	}
 	
-	public DocumentAttachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn) {
+	public DocumentAttachment(String name, LocalDateTime createdOn, LocalDateTime updatedOn, long historyId) {
 		this.name = name;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
+		this.historyId = historyId;
+	}
+	
+	public Long getHistoryId() {
+		return historyId;
+	}
+
+	public void setHistoryId(Long historyId) {
+		this.historyId = historyId;
+	}
+
+	public Long getStatus() {
+		return status;
+	}
+
+	public void setStatus(Long status) {
+		this.status = status;
 	}
 
 	public Long getId() {
