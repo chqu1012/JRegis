@@ -43,9 +43,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -148,6 +150,8 @@ public class DocumentDetails extends BaseDocumentDetails {
 			dispatchOpenClipboardHelperDialog();
 		}else if (source == buttomSubmitComment) {
 			dispatchSubmitComment();
+		}else if (source == checkBoxShowDeletedComments) {
+			populateHistoryList(context.current.get());
 		}
 	}
 
@@ -291,14 +295,49 @@ public class DocumentDetails extends BaseDocumentDetails {
 
 	@Override
 	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
-		// TODO Auto-generated method stub
+		Dragboard db = event.getDragboard();
+		boolean success = false;
+		if (db.hasFiles()) {
+			LocalDateTime timestamp = LocalDateTime.now();
 
+			context.documentComment.set("Dragged Files.");
+			DocumentHistory history = historyService.create(context);
+			
+			String destination = folderService.getFolderBy(context.current.get()).getAbsolutePath();
+
+			db.getFiles().stream().forEach(f -> {
+				DocumentAttachment attachment = new DocumentAttachment(f.getName(), timestamp, timestamp, history.getId());
+				attachment.setStatus(DocumentAttachmentStatus.ADD.getStatusValue());
+
+				folderService.copyFileTo(f, new File(destination, f.getName()));
+				attachmentService.save(attachment);
+				
+				vboxFiles.getChildren().add(new AttachmentControl(attachment));
+				history.getAttachments().add(attachment);
+			});
+			addHistory(history);
+
+			success = true;
+			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2) -> e1 + "," + e2);
+			files.ifPresent(s -> Notifications.create().title("Clipboard Notification")
+					.text("Import file(s): " + s + " sucessfully!")
+					.onAction(e -> onOpenFileChanged(null, null, destination))
+					.darkStyle().showInformation());
+		}
+		labelDraggingFilesArea.getStyleClass().clear();
+		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
+		event.setDropCompleted(success);
+		event.consume();
 	}
 
 	@Override
 	protected void onVBoxDraggingFileBoxDragOver(DragEvent event) {
-		// TODO Auto-generated method stub
-
+		labelDraggingFilesArea.getStyleClass().clear();
+		labelDraggingFilesArea.getStyleClass().add("dragged-file-label-dragged");
+		if (event.getDragboard().hasFiles()) {
+			event.acceptTransferModes(TransferMode.COPY);
+		}
+		event.consume();
 	}
 
 	private void initReferenceDialog() {
@@ -474,70 +513,6 @@ public class DocumentDetails extends BaseDocumentDetails {
 		vboxComment.getChildren().add(item);
 	}
 	
-//	@Override
-//	protected void onButtonAttachmentsAction(ActionEvent event) {
-//		FileChooser chooser = new FileChooser();
-//		List<File> files = chooser.showOpenMultipleDialog(new Stage());
-//		if (files != null) {
-//			files.stream().forEach(e -> {
-//				Hyperlink link = new Hyperlink(e.getName(), new ImageView(getFileIcon(e.getName())));
-//				link.setAccessibleText(e.getAbsolutePath());
-//				flowPaneFiles.getChildren().add(link);
-//			});
-//		}
-//
-//		if (textAreaComment.getText().isEmpty()) {
-//			textAreaComment.setText("Attached files from os.");
-//		}
-//	}
-
-	// @Override
-//	protected void onVBoxDraggingFileBoxDragDropped(DragEvent event) {
-//		Dragboard db = event.getDragboard();
-//		boolean success = false;
-//		if (db.hasFiles()) {
-//			LocalDateTime timestamp = LocalDateTime.now();
-//
-//			context.documentComment.set("Dragged Files.");
-//			History history = JRegisPlatform.getInstance(HistoryService.class).create(context);
-//			
-//			String destination = JRegisPlatform.getInstance(DocumentFolderService.class)
-//					.getFolderBy(context.current.get()).getAbsolutePath();
-//
-//			db.getFiles().stream().forEach(f -> {
-//				Attachment attachment = new Attachment(f.getName(), timestamp, timestamp, history.getId());
-//
-//				JRegisPlatform.getInstance(DocumentFolderService.class).copyFileTo(f, new File(destination, f.getName()));
-//				JRegisPlatform.getInstance(AttachmentRepository.class).save(attachment);
-//				
-//				vboxFiles.getChildren().add(new AttachmentControl(attachment));
-//				history.getAttachments().add(attachment);
-//			});
-//			addHistory(history);
-//
-//			success = true;
-//			Optional<String> files = db.getFiles().stream().map(File::getName).reduce((e1, e2) -> e1 + "," + e2);
-//			files.ifPresent(s -> Notifications.create().title("Clipboard Notification")
-//					.text("Import file(s): " + s + " sucessfully!")
-//					.onAction(e -> onOpenFileChanged(null, null, destination))
-//					.darkStyle().showInformation());
-//		}
-//		labelDraggingFilesArea.getStyleClass().clear();
-//		labelDraggingFilesArea.getStyleClass().add("dragged-file-label");
-//		event.setDropCompleted(success);
-//		event.consume();
-//	}
-//
-//	@Override
-//	protected void onVBoxDraggingFileBoxDragOver(DragEvent event) {
-//		labelDraggingFilesArea.getStyleClass().clear();
-//		labelDraggingFilesArea.getStyleClass().add("dragged-file-label-dragged");
-//		if (event.getDragboard().hasFiles()) {
-//			event.acceptTransferModes(TransferMode.COPY);
-//		}
-//		event.consume();
-//	}
-//	
 //	@Subscribe
 //	public void restoreStage(EventContext<ScreenshotContext> context) {
 //		if (context.getEventId().equals("/store/add/screenshot/image")) {
