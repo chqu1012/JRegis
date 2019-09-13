@@ -14,7 +14,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #DBDFE2;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" 
+style="-fx-background-color: #DBDFE2;" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.user.UserManagementPage">
    <children>
       <AnchorPane fx:id="addUserDialog" layoutX="20.0" layoutY="80.0" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: rgba(0, 0, 0, .7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -154,4 +157,4 @@
          </children>
       </AnchorPane>
    </children>
-</fx:root>
+</AnchorPane>

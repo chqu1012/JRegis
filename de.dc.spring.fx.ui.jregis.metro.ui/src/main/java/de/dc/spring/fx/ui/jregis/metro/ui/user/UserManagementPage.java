@@ -1,15 +1,12 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.user;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.logging.Level;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import com.google.common.base.Function;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.user.factory.ColumnUsername;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.model.User;
@@ -21,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 
@@ -30,8 +26,6 @@ public class UserManagementPage extends BaseUserManagementPage {
 
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 	
-	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/user/UserManagement.fxml";
-
 	private ObservableList<User> masterData = FXCollections.observableArrayList();
 	private FilteredList<User> filteredMasterData = new FilteredList<>(masterData, p->true);
 	
@@ -39,17 +33,7 @@ public class UserManagementPage extends BaseUserManagementPage {
 	
 	@Autowired UserRepository userRepository;
 	
-	public UserManagementPage() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-
-		try {
-			fxmlLoader.load();
-		} catch (IOException exception) {
-			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
-		}
-		
+	public void initialize() {
 		textUsername.textProperty().bindBidirectional(context.username);
 		textPassword.textProperty().bindBidirectional(context.password);
 		textFirstname.textProperty().bindBidirectional(context.firstname);
@@ -79,9 +63,7 @@ public class UserManagementPage extends BaseUserManagementPage {
 		setupCellValueFactory(columnRole, e-> new SimpleObjectProperty<>(String.valueOf(e.getRoleId())));
 		setupCellValueFactory(columnStatus, e-> new SimpleObjectProperty<>(String.valueOf(e.getStatus())));
 		tableView.setItems(filteredMasterData);
-	}
-
-	public void initialize() {
+		
 		masterData.addAll(userRepository.findAll());
 	}
 	

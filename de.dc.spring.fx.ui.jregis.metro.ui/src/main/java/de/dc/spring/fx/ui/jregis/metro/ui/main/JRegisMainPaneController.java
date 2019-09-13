@@ -31,7 +31,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	@Autowired ConfigurableApplicationContext springContext;
-	@Autowired UserManagementPage userPage;
 
 	private NotificationUser notificationUser = new NotificationUser();
 	private NotificationAlerts notificationAlerts = new NotificationAlerts();
@@ -44,11 +43,15 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
+	
 	private Pane paneDocument;
+	private Pane paneUser;
 
 	public void initialize() {
 		paneDocument = load(FXML_DOCUMENT);
-		mainStackPane.getChildren().add(userPage);
+		paneUser = load(UIConstants.FXML_USER);
+		
+		mainStackPane.getChildren().add(paneUser);
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
@@ -99,7 +102,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			preferencePage.toFront();
 			preferencePage.init();
 		}else if (source == labelUserManagement) {
-			userPage.toFront();
+			paneUser.toFront();
 		}
 	}
 

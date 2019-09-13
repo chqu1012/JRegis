@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public abstract class BaseUserManagementPage extends AnchorPane {
+public abstract class BaseUserManagementPage{
 
 	@FXML
 	protected AnchorPane addUserDialog;
