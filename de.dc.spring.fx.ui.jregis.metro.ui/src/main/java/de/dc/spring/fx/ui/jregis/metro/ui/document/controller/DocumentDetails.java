@@ -169,11 +169,13 @@ public class DocumentDetails extends BaseDocumentDetails {
 		}else if (source == linkDeleteSuggestion) {
 			dispatchDeleteSuggestion();
 		}else if (source == buttonFullscreenshot) {
-			dispatchOpenFullscreenshot();
+			dispatchOpenFullscreenshot(true);
+		}else if (source == buttonScreenshot) {
+			dispatchOpenFullscreenshot(false);
 		}
 	}
 
-	private void dispatchOpenFullscreenshot() {
+	private void dispatchOpenFullscreenshot(boolean isFullscreenshot) {
 		Stage mainStage = (Stage) root.getScene().getWindow();
 		mainStage.setIconified(true);
 		
@@ -183,7 +185,7 @@ public class DocumentDetails extends BaseDocumentDetails {
 			log.error("Error on running thread#sleep", e);
 		}
 		
-		ScreenshotStage stage = new ScreenshotStage(true);
+		ScreenshotStage stage = new ScreenshotStage(isFullscreenshot);
 		stage.show();
 	}
 
@@ -220,9 +222,11 @@ public class DocumentDetails extends BaseDocumentDetails {
 		
 		LocalDateTime createdOn = LocalDateTime.now();
 		DocumentHistory history = new DocumentHistory("Added Screenshot", createdOn , createdOn, this.context.current.get().getId());
+		history.setStatus(DocumentHistoryStatus.ADD.getStatusValue());
 		history = historyRepository.save(history);
 		
 		DocumentAttachment attachment = new DocumentAttachment(name, createdOn, createdOn, history.getId());
+		attachment.setStatus(DocumentAttachmentStatus.ADD.getStatusValue());
 		attachment = attachmentService.save(attachment);
 		history.getAttachments().add(attachment);
 		
@@ -747,14 +751,5 @@ public class DocumentDetails extends BaseDocumentDetails {
 //			referenceAllAvailableList.add(selection);
 //			referencedList.remove(selection);
 //		}
-//	}
-//
-//	@Override
-//	protected void onButtonScreenshotAction(ActionEvent event) {
-//		Stage mainStage = (Stage) root.getScene().getWindow();
-//		mainStage.setIconified(true);
-//		
-//		ScreenshotStage stage = new ScreenshotStage(false);
-//		stage.show();
 //	}
 }
