@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.2545090180360721, 0.531062124248497" maxHeight="1.7976931348623157E308" 
+maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/Contacts.css" 
+xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.contact.ContactPage">
+   <items>
+      <VBox spacing="5.0" style="-fx-background-color: white;">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="253.0" styleClass="tray-item">
+               <children>
+                  <Label fx:id="labelAllContactsName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onButtonClicked" text="All Contacts" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelContactsSize" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="599">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+            <HBox spacing="5.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="39.0" text="Groups" />
+               </children>
+            </HBox>
+            <ListView fx:id="listViewContactGroups" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+            <HBox spacing="5.0" styleClass="tray-item">
+               <children>
+                  <ImageView fx:id="imageViewDeleteContacts" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onButtonClicked" pickOnBounds="true" preserveRatio="true" styleClass="tray-image-view">
+                     <image>
+                        <Image url="@../../images/icons8-müll-60.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelDeletedContactName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onButtonClicked" text="Deleted Contact(s)" />
+                  <Label fx:id="labelDeletedContactSize" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="vboxContactList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" spacing="5.0" styleClass="hbox">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="36.0" spacing="5.0">
+               <children>
+                  <ComboBox fx:id="comboInboxType" prefWidth="150.0" />
+                  <Label maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewNewUser" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8-männlichen-benutzer-hinzufügen-100.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewPreferences" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8-einstellungen-48.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="textSearchContact" prefHeight="26.0" promptText="Search in all contacts">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </TextField>
+            <ListView fx:id="listViewContacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteContact" text="Delete">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                    </items>
+                  </ContextMenu>
+               </contextMenu></ListView>
+         </children>
+      </VBox>
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="600.0" prefWidth="300.0" styleClass="hbox">
+         <content>
+            <VBox fx:id="panePreview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" spacing="10.0" styleClass="hbox" visible="false">
+               <children>
+                  <HBox prefHeight="153.0" prefWidth="466.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="imageViewUser" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onImageViewUserClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-name-100.png" />
+                           </image>
+                        </ImageView>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label fx:id="labelName" text="Max Mustermann" textFill="#9e9e9e">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelNickname" text="Mamu1984" textFill="#a4a4a4">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Email" textFill="#a1a1a1" />
+                        <Separator fx:id="separatorEmail" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddEmail" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="vboxEmail" spacing="15.0" />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Phonenumbers" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddPhonenumbers" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="vboxPhoneNumbers" spacing="15.0" />
+                  <HBox />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Dates" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddDates" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="vboxDates" spacing="15.0" />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Address" textFill="#ababab" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="imageViewAddAddress" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewAddClicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8-hinzufügen-48.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="vboxAddresses" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
+                     <padding>
+                        <Insets bottom="40.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </items>
+</SplitPane>

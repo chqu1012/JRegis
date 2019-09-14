@@ -1,0 +1,48 @@
+packagePath de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact
+
+Entity Contact{ 
+	useSpring: true
+	
+	Field(name: Firstname, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Lastname, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Username, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: ContactImageId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: ContactGroupId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Status, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: CreatedOn, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+	Field(name: UpdatedOn, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+	Field(name: Emails, datatype:java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email>, 
+		required: false, useByTableView: false, useByRepository: false
+	)
+	Field(name: AddressList, datatype:java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address>, 
+		required: false, useByTableView: false, useByRepository: false
+	)
+	Field(name: PhoneList, datatype:java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber>, 
+		required: false, useByTableView: false, useByRepository: false
+	)
+	Field(name: DateList, datatype:java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates>, 
+		required: false, useByTableView: false, useByRepository: false
+	)
+
+	Repository{
+		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
+	}
+}

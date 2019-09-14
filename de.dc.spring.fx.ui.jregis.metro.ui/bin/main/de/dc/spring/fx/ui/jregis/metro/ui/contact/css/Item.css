@@ -1,0 +1,31 @@
+.root{
+	-fx-background-color: white;
+}
+
+.root:hover{
+	-fx-background-color: lightgray;
+}
+
+.delete-image-view {
+	-fx-image: url('../images/icons8-löschen-24-gray.png');
+}
+
+.delete-image-view:hover {
+	-fx-image: url('../images/icons8-löschen-24.png');
+}
+
+.delete-image-view:pressed{
+    -fx-image: url('../images/icons8-löschen-24-orange.png');
+}
+
+.edit-image-view {
+	-fx-image: url('../images/icons8-bearbeiten-30.png');
+}
+
+.edit-image-view:hover {
+	-fx-image: url('../images/icons8-bearbeiten-30-dark.png');
+}
+
+.edit-image-view:pressed{
+    -fx-image: url('../images/icons8-bearbeiten-30-blue.png');
+}

@@ -42,11 +42,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Inbox inbox = new Inbox();
 	private PreferencePage preferencePage = new PreferencePage();
 	private Dashboard dashboard = new Dashboard();
-	
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 	
+	private Region paneContact;
 	private Region paneDocument;
 	private Region paneUser;
 	private Region paneDocumentDetails;
@@ -55,10 +55,12 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		paneDocument = load(FXML_DOCUMENT);
 		paneUser = load(UIConstants.FXML_USER);
 		paneDocumentDetails = load(UIConstants.FXML_DOCUMENT_DETAILS);
+		paneContact = load(UIConstants.FXML_CONTACT);
 		
 		mainStackPane.getChildren().add(paneUser);
 		mainStackPane.getChildren().add(paneDocumentDetails);
 		mainStackPane.getChildren().add(paneDocument);
+		mainStackPane.getChildren().add(paneContact);
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
@@ -112,6 +114,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			paneUser.toFront();
 		}else if (source == labelDashboard) {
 			dashboard.toFront();
+		}else if (source == imageViewAdbook) {
+			paneContact.toFront();
 		}
 	}
 

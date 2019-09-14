@@ -1,0 +1,40 @@
+packagePath de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address
+
+Entity Address{
+	useSpring: true 
+
+	Field(name: ContactId, datatype:Long, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: AddressType, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Street, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+		columnWidth: 200
+	]
+	Field(name: Country, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: State, datatype:String, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: ZipCode, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: Status, datatype:Integer, required: true, useByTableView: true, useByRepository: true)[ 
+		control: javafx.scene.control.TextField
+	]
+	Field(name: CreatedOn, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+	Field(name: UpdatedOn, datatype:java.time.LocalDateTime, required: true, useByTableView: true, useByRepository: true)[ 
+		control: jfxtras.scene.control.LocalDateTimeTextField
+		binding: localDateTimeProperty
+	]
+
+	Repository{
+		jdbcUrl: "jdbc:h2:file:./data/ContactRepository;DB_CLOSE_ON_EXIT=true;"
+	}
+}

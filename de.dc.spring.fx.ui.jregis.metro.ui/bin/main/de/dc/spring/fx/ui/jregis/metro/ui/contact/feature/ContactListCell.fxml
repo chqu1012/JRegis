@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" prefHeight="49.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageViewUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../../images/icons8-name-64.png" />
+               </image>
+            </ImageView>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="labelName" maxWidth="1.7976931348623157E308" text="Max Mustermann" textFill="#868686">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelUsername" text="mamu1984" textFill="#575757" />
+               </children>
+            </VBox>
+            <Label fx:id="labelGroupname" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: gray; -fx-background-radius: 5; -fx-text-fill: white;" text="---" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <AnchorPane fx:id="paneEdit" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="180.0" prefWidth="250.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../../../images/icons8-name-64.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="50.0" layoutY="10.0" spacing="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label text="Group:" />
+                  <ComboBox fx:id="comboBoxGroup" prefHeight="25.0" prefWidth="191.0" />
+                  <Label text="Username:" />
+                  <TextField fx:id="textUsername" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="191.0" promptText="Username" />
+                  <Label text="Firstname:" />
+                  <TextField fx:id="textFirstname" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="191.0" promptText="Firstname" />
+                  <Label text="Lastname:" />
+                  <TextField fx:id="textLastname" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="191.0" promptText="Lastname" />
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onButtonCancel">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/icons8-abbrechen-2-40.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttonAccept" mnemonicParsing="false" onAction="#onButtonAccept">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/icons8-geprüfter-funkknopf-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="root" stylesheets="@css/Item.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="panelEdit" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" spacing="5.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageViewEdit" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8-post-48.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="textType" maxWidth="1.7976931348623157E308" promptText="Type" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textValue" maxWidth="1.7976931348623157E308" promptText="Value" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#onButtonCancel">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8-abbrechen-2-40.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonAccept" mnemonicParsing="false" onAction="#onButtonAccept">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8-geprüfter-funkknopf-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="panePreview" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageViewMain" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8-post-48.png" />
+               </image>
+            </ImageView>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="labelType" text="Home" textFill="#949494">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <padding>
+                        <Insets left="3.0" />
+                     </padding>
+                  </Label>
+                  <Hyperlink fx:id="labelValue" onAction="#onLinkValueAction" text="MaxMustermann@gmail.com" />
+               </children>
+            </VBox>
+            <ImageView fx:id="imageViewEdit" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewEditItem" pickOnBounds="true" preserveRatio="true" styleClass="edit-image-view">
+               <image>
+                  <Image url="@../../images/icons8-bearbeiten-30.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageViewDelete" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onImageViewDeleteItem" pickOnBounds="true" preserveRatio="true" styleClass="delete-image-view">
+               <image>
+                  <Image url="@../../images/icons8-löschen-24-gray.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets right="30.0" />
+         </padding>
+      </HBox>
+   </children>
+</fx:root>
