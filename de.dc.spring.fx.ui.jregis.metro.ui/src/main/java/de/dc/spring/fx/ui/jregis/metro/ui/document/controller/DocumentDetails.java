@@ -354,9 +354,10 @@ public class DocumentDetails extends BaseDocumentDetails {
 		referenceDialog.toBack();
 
 		LocalDateTime createdOn = LocalDateTime.now();
-		long firstId = context.current.get().getId();
+		Document document = context.current.get();
+		long firstId = document.getId();
 
-		referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId())));
+		referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId(), e.getName())));
 	}
 
 	private void dispatchSubmitComment() {
@@ -543,10 +544,10 @@ public class DocumentDetails extends BaseDocumentDetails {
 		rating.setRating(0);
 		
 		// Fill References
-		List<DocumentReference> references = referenceService.findAllById(context.current.get().getId());
+		List<DocumentReference> references = referenceService.findAllChildById(context.current.get().getId());
 		references.forEach(e->vboxReferences.getChildren().add(new ReferenceControl(e, false)));
 		// Parent References
-		references = referenceService.findAllById(context.current.get().getId());
+		references = referenceService.findAllParentsById(context.current.get().getId());
 		references.forEach(e->{
 			referencesRegistry.add(e);
 			vboxReferences.getChildren().add(new ReferenceControl(e, true));

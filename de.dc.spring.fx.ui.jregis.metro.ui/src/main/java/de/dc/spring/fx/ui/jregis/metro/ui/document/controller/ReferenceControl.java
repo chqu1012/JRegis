@@ -50,11 +50,8 @@ public class ReferenceControl extends BaseReferenceControl {
 		long id = isParent? reference.getFirstId() : reference.getSecondId();
 		String referenceType =isParent? "Parent" : "Child";
 		String color = isParent ? "darkred" : "gray";
-//		Optional<Document> optionalDocument = JRegisPlatform.getInstance(DocumentRepository.class).findById(id);
-//		optionalDocument.ifPresent(d->{
-//			labelDocumentName.setText(String.format("JREG-%05d: %s", d.getId(), d.getName()));
-//			labelReferenceType.setText(referenceType+" Reference");
-//			labelReferenceType.setStyle(String.format("-fx-background-color: %s; -fx-text-fill: white; -fx-background-radius: 2;", color));
-//		});
+		labelDocumentName.setText(String.format("JREG-%05d: %s", id, reference.getName()));
+		labelReferenceType.setText(referenceType+" Reference");
+		labelReferenceType.setStyle(String.format("-fx-background-color: %s; -fx-text-fill: white; -fx-background-radius: 2;", color));
 	}
 }

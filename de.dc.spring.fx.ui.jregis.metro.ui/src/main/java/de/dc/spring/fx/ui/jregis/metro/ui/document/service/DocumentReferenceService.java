@@ -20,4 +20,12 @@ public class DocumentReferenceService {
 	public DocumentReference save(DocumentReference documentReference) {
 		return referenceRepository.save(documentReference);
 	}
+
+	public List<DocumentReference> findAllChildById(Long id) {
+		return referenceRepository.findAllByFirstId(id);
+	}
+
+	public List<DocumentReference> findAllParentsById(Long id) {
+		return referenceRepository.findAllBySecondId(id);
+	}
 }

@@ -10,4 +10,8 @@ public interface DocumentReferenceRepository extends JpaRepository<DocumentRefer
 
 	List<DocumentReference> findAllById(Long id);
 
+	List<DocumentReference> findAllByFirstId(Long id);
+
+	List<DocumentReference> findAllBySecondId(Long id);
+
 }

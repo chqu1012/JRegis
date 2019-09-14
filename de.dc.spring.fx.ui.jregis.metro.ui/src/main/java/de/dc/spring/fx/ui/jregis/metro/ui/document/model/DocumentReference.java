@@ -34,13 +34,17 @@ public class DocumentReference {
 	@Column(nullable = true)
 	private LocalDateTime updatedOn;
 
+	public DocumentReference() {
+	}
+	
 	public DocumentReference(LocalDateTime createdOn, LocalDateTime updatedOn, Long referenceTypeId, Long firstId,
-			Long secondId) {
+			Long secondId, String name) {
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
 		this.referenceTypeId = referenceTypeId;
 		this.firstId = firstId;
 		this.secondId = secondId;
+		this.name = name;
 	}
 
 	public Long getId() {
