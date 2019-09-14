@@ -2,7 +2,6 @@ package de.dc.spring.fx.ui.jregis.metro.ui.main;
 
 import static de.dc.spring.fx.ui.jregis.metro.ui.main.UIConstants.FXML_DOCUMENT;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
@@ -111,6 +110,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			preferencePage.init();
 		}else if (source == labelUserManagement) {
 			paneUser.toFront();
+		}else if (source == labelDashboard) {
+			dashboard.toFront();
 		}
 	}
 
@@ -159,27 +160,6 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 //		dashboard.toFront();
 //	}
 
-//	@Override
-//	protected void onNavigationItemClicked(MouseEvent event) {
-//		Object source = event.getSource();
-//		if (source instanceof Label) {
-//			Label label = (Label) source;
-//			if (label.getText().equals("Dashboard")) {
-//				dashboard.toFront();
-//			} else if (label.getText().equals("Document")) {
-//				paneDocumentTableView.toFront();
-//			} else if (label.getText().equals("User Management")) {
-//				userManagementPage.toFront();
-//			} else if (label.getText().equals("Information")) {
-//
-//			} else if (label.getText().equals("License")) {
-//
-//			} else if (label.getText().equals("Preferences")) {
-//				preferencePage.toFront();
-//			}
-//		}
-//	}
-//
 //	@Override
 //	protected void onImageViewAdbookClicked(MouseEvent event) {
 //		contactPage.toFront();

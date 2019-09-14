@@ -357,7 +357,12 @@ public class DocumentDetails extends BaseDocumentDetails {
 		Document document = context.current.get();
 		long firstId = document.getId();
 
-		referencedList.forEach(e -> referenceService.save(new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId(), e.getName())));
+		referencedList.forEach(e ->{ 
+			DocumentReference reference = new DocumentReference(createdOn , createdOn, 0L, firstId, e.getId(), e.getName());
+			referenceService.save(reference);
+			vboxReferences.getChildren().add(new ReferenceControl(reference, false));
+		});
+		
 	}
 
 	private void dispatchSubmitComment() {
