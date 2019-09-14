@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.contact.feature.ContactListCell;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
@@ -40,6 +41,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -48,7 +50,7 @@ import javafx.stage.Stage;
 @Controller
 public class ContactPage extends BaseContactPage {
 
-	private Logger log = Logger.getLogger(ContactPage.class.getSimpleName());
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/contact/Contacts.fxml";
 
@@ -66,54 +68,53 @@ public class ContactPage extends BaseContactPage {
 	private ObservableList<ContactGroup> contactGruops = FXCollections.observableArrayList();
 	private ObservableList<Contact> deletedContacts = FXCollections.observableArrayList();
 	
-//	@Inject
-	public ContactPage() {
-//		listViewContacts.setCellFactory(e -> new ContactListCell());
-//		listViewContacts.getSelectionModel().selectedItemProperty()
-//				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
-//
-//		contactGruops.addAll(contactGroupRepository.findAll());
-//		listViewContactGroups.setItems(contactGruops);
-//		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
-//			protected void updateItem(ContactGroup item, boolean empty) {
-//				super.updateItem(item, empty);
-//				if (item==null || empty) {
-//					setText(null);
-//				}else {
-//					setText(item.getName());
-//				}
-//			}
-//		});
-//		listViewContactGroups.setOnMouseClicked(arg0 -> {
-//			ContactGroup selection = listViewContactGroups.getSelectionModel().getSelectedItem();
-//			if (selection!=null) {
-//				filteredContacts.setPredicate(p->p.getContactGroupId()==selection.getId());
-//			}
-//		});
-//		
-//		// React on list changes
-//		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
-//		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
-//		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
-//		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
-//		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
-//		
-//		contacts.addAll(contactRepository.findAll());
+	public void initialize() {
+		listViewContacts.setCellFactory(e -> new ContactListCell());
+		listViewContacts.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
+
+		contactGruops.addAll(contactGroupRepository.findAll());
+		listViewContactGroups.setItems(contactGruops);
+		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
+			protected void updateItem(ContactGroup item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item==null || empty) {
+					setText(null);
+				}else {
+					setText(item.getName());
+				}
+			}
+		});
+		listViewContactGroups.setOnMouseClicked(arg0 -> {
+			ContactGroup selection = listViewContactGroups.getSelectionModel().getSelectedItem();
+			if (selection!=null) {
+				filteredContacts.setPredicate(p->p.getContactGroupId()==selection.getId());
+			}
+		});
+		
+		// React on list changes
+		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
+		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
+		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
+		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
+		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
+		
+		contacts.addAll(contactRepository.findAll());
 //		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
-//		filteredContacts.setPredicate(p->p.getStatus()==0);
-//		listViewContacts.setItems(filteredContacts);
-//
-//		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
-//			filteredContacts.setPredicate(p -> {
-//				boolean isEmpty = p == null || newValue.isEmpty();
-//				boolean isFirstnameEquals = p.getFirstname().toLowerCase().contains(newValue.toLowerCase());
-//				boolean isLastnameEquals = p.getLastname().toLowerCase().contains(newValue.toLowerCase());
-//				boolean isUsernameEquals = p.getUsername().toLowerCase().contains(newValue.toLowerCase());
-//				return isEmpty || isFirstnameEquals || isLastnameEquals || isUsernameEquals;
-//			});
-//		});
-//
-//		initBinding(context);
+		filteredContacts.setPredicate(p->p.getStatus()==0);
+		listViewContacts.setItems(filteredContacts);
+
+		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredContacts.setPredicate(p -> {
+				boolean isEmpty = p == null || newValue.isEmpty();
+				boolean isFirstnameEquals = p.getFirstname().toLowerCase().contains(newValue.toLowerCase());
+				boolean isLastnameEquals = p.getLastname().toLowerCase().contains(newValue.toLowerCase());
+				boolean isUsernameEquals = p.getUsername().toLowerCase().contains(newValue.toLowerCase());
+				return isEmpty || isFirstnameEquals || isLastnameEquals || isUsernameEquals;
+			});
+		});
+
+		initBinding(context);
 		
 		EventBroker.getDefault().register(this);
 	}

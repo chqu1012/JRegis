@@ -74,7 +74,7 @@ public class ContactListCell extends ListCell<Contact> {
 			}
 			if (mLLoader == null) {
 				mLLoader = new FXMLLoader(getClass()
-						.getResource("/de/dc/fx/ui/jregis/metro/ui/control/contact/feature/ContactListCell.fxml"));
+						.getResource("/de/dc/spring/fx/ui/jregis/metro/ui/contact/feature/ContactListCell.fxml"));
 				mLLoader.setController(this);
 				try {
 					mLLoader.load();
