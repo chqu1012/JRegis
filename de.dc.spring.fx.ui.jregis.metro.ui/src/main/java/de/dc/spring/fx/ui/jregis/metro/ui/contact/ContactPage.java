@@ -4,8 +4,8 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.google.common.eventbus.Subscribe;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.contact.feature.ContactListCell;
+import de.dc.spring.fx.ui.jregis.metro.ui.contact.service.ContactFolderService;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
@@ -61,8 +62,11 @@ public class ContactPage extends BaseContactPage {
 	@Autowired DatesRepository datesRepository;
 	@Autowired ContactImageRepository contactImageRepository;
 	@Autowired ContactGroupRepository contactGroupRepository;
+
 	@Autowired ContactFX context;
 
+	@Autowired ContactFolderService folderService;
+	
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
 	private ObservableList<ContactGroup> contactGruops = FXCollections.observableArrayList();
@@ -103,8 +107,13 @@ public class ContactPage extends BaseContactPage {
 		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
 
 		contacts.addAll(contactRepository.findAll());
-//		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
-//		filteredContacts.setPredicate(p->pp.getStatus()==0);
+		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
+		filteredContacts.setPredicate(p->{
+			if(p==null) {
+				return false;
+			}
+			return p.getStatus()!=null && p.getStatus()==0;
+		});
 		listViewContacts.setItems(filteredContacts);
 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -133,6 +142,8 @@ public class ContactPage extends BaseContactPage {
 				contactRepository.save(item);
 				Notifications.create().darkStyle().title("Created new contact")
 						.text(item.getLastname() + " " + item.getFirstname() + " was created!").show();
+				
+				log.trace("Created new contact "+item.toString());
 			}
 		}
 	}
@@ -146,14 +157,20 @@ public class ContactPage extends BaseContactPage {
 				emailRepository.save(item);
 				Notifications.create().darkStyle().title("Created new email for contact")
 						.text(item.getName() + " was created!").show();
+				
+				log.trace(String.format("Created email %s for contact ", item.toString()));
 			} else if (id.equals("/update/existing/contact/email")) {
 				emailRepository.save(item);
 				Notifications.create().darkStyle().title("Updated email for contact")
 						.text(item.getName() + " was updated!").show();
+
+				log.trace(String.format("Updated email %s for contact ", item.toString()));
 			} else if (id.equals("/delete/contact/email")) {
 				emailRepository.delete(item);
 				Notifications.create().darkStyle().title("Delete email for contact")
 						.text(item.getName() + " was deleted!").show();
+
+				log.trace(String.format("Deleted email %s for contact ", item.toString()));
 			}
 		}
 	}
@@ -167,14 +184,20 @@ public class ContactPage extends BaseContactPage {
 				datesRepository.save(item);
 				Notifications.create().darkStyle().title("Created new date for contact")
 				.text(item.getName() + " was created!").show();
+				
+				log.trace(String.format("Create date %s for contact ", item.toString()));
 			} else if (id.equals("/update/contact/date")) {
 				datesRepository.save(item);
 				Notifications.create().darkStyle().title("Updated date for contact")
 				.text(item.getName() + " was updated!").show();
+
+				log.trace(String.format("Updated date %s for contact ", item.toString()));
 			} else if (id.equals("/delete/contact/date")) {
 				datesRepository.delete(item);
 				Notifications.create().darkStyle().title("Delete dates for contact")
 				.text(item.getName() + " was deleted!").show();
+
+				log.trace(String.format("Deleted date %s for contact ", item.toString()));
 			}
 		}
 	}
@@ -209,14 +232,20 @@ public class ContactPage extends BaseContactPage {
 				phoneRepository.save(item);
 				Notifications.create().darkStyle().title("Created new phonenumber for contact")
 				.text("Phonenumber was created!").show();
+				
+				log.trace(String.format("Created phonenumber %s for contact ", item.toString()));
 			} else if (id.equals("/update/contact/phone")) {
 				phoneRepository.save(item);
 				Notifications.create().darkStyle().title("Updated phonenumber for contact")
 				.text("Phonenumber was updated!").show();
+
+				log.trace(String.format("Updated phonenumber %s for contact ", item.toString()));
 			} else if (id.equals("/delete/contact/phone")) {
 				phoneRepository.delete(item);
 				Notifications.create().darkStyle().title("Delete phonenumber for contact")
 				.text("Phonenumber was deleted!").show();
+
+				log.trace(String.format("Deleted phonenumber %s for contact ", item.toString()));
 			}
 		}
 	}
@@ -259,11 +288,11 @@ public class ContactPage extends BaseContactPage {
 			Contact contact = context.getContactProperty().get();
 			Optional<ContactImage> optionalImage = contactImageRepository.findById(contact.getContactImageId());
 			if (optionalImage.isPresent()) {
-//				File image = JRegisPlatform.getInstance(ContactFolderService.class).getImage(contact, optionalImage.get().getName());
-//				imageViewUser.setImage(new Image(image.toURI().toString()));
+				File image = folderService.getImage(contact, optionalImage.get().getName());
+				imageViewUser.setImage(new Image(image.toURI().toString()));
 			} else {
 				imageViewUser.setImage(new Image(
-						getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/icons8-name-100.png")));
+						getClass().getResourceAsStream("/de/dc/spring/fx/ui/jregis/metro/ui/contact/images/icons8-name-100.png")));
 			}
 		});
 	}
@@ -369,18 +398,13 @@ public class ContactPage extends BaseContactPage {
 			File file = chooser.showOpenDialog(new Stage());
 			if (file != null) {
 				Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
-//				
-//				JRegisPlatform.getInstance(ContactFolderService.class).copyFile(selection, file);
-//				
-//				ContactImage image = new ContactImage();
-//				image.setCreatedOn(LocalDateTime.now());
-//				image.setName(file.getName());
-//				long imageId = JRegisPlatform.getInstance(ContactImageRepository.class).save(image);
-//				image.setId(imageId);
-//				
-//				selection.setContactImageId(imageId);
-//				JRegisPlatform.getInstance(ContactRepository.class).update(selection);
-
+				folderService.copyFile(selection, file);
+				ContactImage image = new ContactImage();
+				image.setCreatedOn(LocalDateTime.now());
+				image.setName(file.getName());
+				image = contactImageRepository.save(image);
+				selection.setContactImageId(image.getId());
+				contactRepository.save(selection);
 				imageViewUser.setImage(new Image(file.toURI().toString()));
 			}
 		}
@@ -395,8 +419,9 @@ public class ContactPage extends BaseContactPage {
 		DialogUtil.openQuestion("Delete Contact Dialog", "Delete Contact Operation",
 				"Do you really want to delete this contact " + selection.getUsername()).ifPresent(e -> {
 					if (e.getButtonData().equals(ButtonData.OK_DONE)) {
-//				contactRepository.updateStatus(selection.getId(), -1);
-//				
+						selection.setStatus(-1);
+						contactRepository.save(selection);
+				
 //				// TODO: Handle emails, address, phonenumbers and dates?
 //				Platform.runLater(()->{
 //					contacts.remove(selection);
@@ -430,15 +455,15 @@ public class ContactPage extends BaseContactPage {
 		Object source = event.getSource();
 		if (source == menuItemNewGroup) {
 			DialogUtil.openInput("New Group", "New Group*", "Create new group", "Do you want to create a new group?",
-					e -> {
-						ContactGroup group = new ContactGroup(e, 0, LocalDateTime.now(), LocalDateTime.now());
-						group.setColor("blue");
-						group.setHoverColor("blue");
-						contactGroupRepository.save(group);
-						contactGruops.add(group);
+			e -> {
+				ContactGroup group = new ContactGroup(e, 0, LocalDateTime.now(), LocalDateTime.now());
+				group.setColor("blue");
+				group.setHoverColor("blue");
+				contactGroupRepository.save(group);
+				contactGruops.add(group);
 
-						Notifications.create().darkStyle().title("New Group").text("Created new group " + e).show();
-					});
+				Notifications.create().darkStyle().title("New Group").text("Created new group " + e).show();
+			});
 		}
 	}
 

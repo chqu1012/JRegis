@@ -1,10 +1,15 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model;
 
-import java.util.*;
-import java.time.*;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
 public class Contact{
