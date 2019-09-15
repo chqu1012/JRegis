@@ -95,7 +95,7 @@ public abstract class BaseContactItem<T> extends AnchorPane {
     
     private Logger log = Logger.getLogger(getClass().getSimpleName());
 
-	public static final String FXML = "/de/dc/fx/ui/jregis/metro/ui/control/contact/ContactBaseItem.fxml";
+	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/contact/ContactBaseItem.fxml";
 
 	protected T item;
 	
@@ -147,7 +147,7 @@ public abstract class BaseContactItem<T> extends AnchorPane {
 	protected abstract String getImageName();
 
 	public Image getImage(String imageName) {
-		return new Image(getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/"+imageName));
+		return new Image(getClass().getResourceAsStream("/de/dc/spring/fx/ui/jregis/metro/ui/contact/images/"+imageName));
 	}
 	
 	@FXML

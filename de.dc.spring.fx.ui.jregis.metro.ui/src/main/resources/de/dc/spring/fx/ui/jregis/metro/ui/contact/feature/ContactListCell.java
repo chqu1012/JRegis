@@ -3,11 +3,16 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact.feature;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import org.controlsfx.control.Notifications;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.group.model.ContactGroup;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,10 +73,6 @@ public class ContactListCell extends ListCell<Contact> {
 			setGraphic(null);
 
 		} else {
-			if (contactGroups==null) {
-//				contactGroups = JRegisPlatform.getInstance(ContactGroupRepository.class).findAll();
-				
-			}
 			if (mLLoader == null) {
 				mLLoader = new FXMLLoader(getClass()
 						.getResource("/de/dc/spring/fx/ui/jregis/metro/ui/contact/feature/ContactListCell.fxml"));
@@ -96,13 +97,11 @@ public class ContactListCell extends ListCell<Contact> {
 					public ContactGroup fromString(String name) {
 						ContactGroup contactGroup = new ContactGroup();
 						contactGroup.setName("");
-//						List<ContactGroup> groups = JRegisPlatform.getInstance(ContactGroupRepository.class).findAllByName(name);
-//						if (groups.isEmpty()) {
-//							return contactGroup;
-//						}else {
-//							return groups.get(0);
-//						}
-						return contactGroup;
+						if (contactGroups.isEmpty()) {
+							return contactGroup;
+						}else {
+							return contactGroups.get(0);
+						}
 					}
 				});
 				
@@ -113,17 +112,17 @@ public class ContactListCell extends ListCell<Contact> {
 				
 				paneEdit.toFront();
 			}else {
-//				Optional<ContactGroup> optionalGroup = JRegisPlatform.getInstance(ContactGroupRepository.class).findById(item.getContactGroupId());
-//				if(optionalGroup.isPresent()){
-//					ContactGroup group = optionalGroup.get();
-//					labelGroupname.setText(group.getName());
-//					
-//					String color = group.getColor()==null? "gray" : "#"+group.getColor();
-//					labelGroupname.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: 5; -fx-text-fill: white;", color));
-//				}
-//				labelName.setText(item.getFirstname() + " " + item.getLastname());
-//				labelUsername.setText(item.getUsername());
-//				root.getChildren().remove(paneEdit);
+				Optional<ContactGroup> optionalGroup = contactGroups.stream().filter(e->e.getId().equals(item.getContactGroupId())).findFirst();
+				if(optionalGroup.isPresent()){
+					ContactGroup group = optionalGroup.get();
+					labelGroupname.setText(group.getName());
+					
+					String color = group.getColor()==null? "gray" : "#"+group.getColor();
+					labelGroupname.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: 5; -fx-text-fill: white;", color));
+				}
+				labelName.setText(item.getFirstname() + " " + item.getLastname());
+				labelUsername.setText(item.getUsername());
+				root.getChildren().remove(paneEdit);
 			}
 			setGraphic(root);
 		}
@@ -139,14 +138,12 @@ public class ContactListCell extends ListCell<Contact> {
 		getItem().setUpdatedOn(LocalDateTime.now());
 		getItem().setContactGroupId(comboBoxGroup.getSelectionModel().getSelectedItem().getId());
 		getItem().setStatus(0);
-//		long contactId = JRegisPlatform.getInstance(ContactRepository.class).save(getItem());
-//		getItem().setId(contactId);
-//		
-//		labelName.setText(getItem().getFirstname() + " " + getItem().getLastname());
-//		labelUsername.setText(getItem().getUsername());
-//		root.getChildren().remove(paneEdit);
-//		
-//		Platform.runLater(()-> Notifications.create().darkStyle().title("Created new contact").text(textUsername.getText()+" was created!").show());
+		
+		labelName.setText(getItem().getFirstname() + " " + getItem().getLastname());
+		labelUsername.setText(getItem().getUsername());
+		root.getChildren().remove(paneEdit);
+
+		EventBroker.getDefault().post(new EventContext<>("/new/contact/create", getItem()));
 	}
 
 	@FXML

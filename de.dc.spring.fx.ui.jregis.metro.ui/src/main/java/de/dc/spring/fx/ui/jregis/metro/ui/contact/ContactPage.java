@@ -125,6 +125,11 @@ public class ContactPage extends BaseContactPage {
 	public void cancelCreateContactViaEventBroker(EventContext<Contact> context) {
 		if (context.getEventId().equals("/cancel/contact/create")) {
 			contacts.remove(context.getInput());
+		}else if(context.getEventId().equals("/new/contact/create")){
+			Contact contact = context.getInput();
+			contactRepository.save(contact);
+			Platform.runLater(()-> Notifications.create().darkStyle().title("Created new contact")
+					.text(contact.getLastname()+" "+contact.getFirstname()+" was created!").show());
 		}
 	}
 	

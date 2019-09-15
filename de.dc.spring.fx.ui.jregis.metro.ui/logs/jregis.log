@@ -15954,3 +15954,618 @@ insert into contact_group (id, color, created_on, hover_color, name, status, upd
 2019-09-15 11:18:10.652 DEBUG 24232 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_
 2019-09-15 11:18:10.907 DEBUG 24232 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contactgro0_.id as id1_3_, contactgro0_.color as color2_3_, contactgro0_.created_on as created_3_3_, contactgro0_.hover_color as hover_co4_3_, contactgro0_.name as name5_3_, contactgro0_.status as status6_3_, contactgro0_.updated_on as updated_7_3_ from contact_group contactgro0_
 2019-09-15 11:18:10.924 DEBUG 24232 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contact0_.id as id1_2_, contact0_.contact_group_id as contact_2_2_, contact0_.contact_image_id as contact_3_2_, contact0_.created_on as created_4_2_, contact0_.firstname as firstnam5_2_, contact0_.lastname as lastname6_2_, contact0_.status as status7_2_, contact0_.updated_on as updated_8_2_, contact0_.username as username9_2_ from contact contact0_
+2019-09-15 11:28:19.397  INFO 20256 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 20256 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-15 11:28:19.405  INFO 20256 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-15 11:28:19.592  INFO 20256 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cda0d15: startup date [Sun Sep 15 11:28:19 CEST 2019]; root of context hierarchy
+2019-09-15 11:28:22.408  INFO 20256 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-15 11:28:23.537  INFO 20256 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-15 11:28:23.552  INFO 20256 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-15 11:28:23.554  INFO 20256 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-15 11:28:23.763  INFO 20256 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-15 11:28:23.764  INFO 20256 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4177 ms
+2019-09-15 11:28:24.022  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-15 11:28:24.025  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-15 11:28:24.030  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-15 11:28:24.031  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-15 11:28:24.032  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-15 11:28:24.032  INFO 20256 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-15 11:28:24.569  INFO 20256 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:28:24.823  INFO 20256 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Start completed.
+2019-09-15 11:28:24.920  INFO 20256 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:28:24.953  INFO 20256 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-15 11:28:25.058  INFO 20256 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-15 11:28:25.061  INFO 20256 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-15 11:28:25.113  INFO 20256 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-15 11:28:25.369  INFO 20256 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-09-15 11:28:26.303  INFO 20256 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:28:30.403  INFO 20256 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cda0d15: startup date [Sun Sep 15 11:28:19 CEST 2019]; root of context hierarchy
+2019-09-15 11:28:30.569  INFO 20256 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-09-15 11:28:30.572  INFO 20256 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-09-15 11:28:30.630  INFO 20256 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:28:30.630  INFO 20256 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:28:30.701  INFO 20256 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:28:30.767  WARN 20256 --- [JavaFX-Launcher] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-15 11:28:30.783  WARN 20256 --- [JavaFX-Launcher] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][JavaFX-Launcher] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-09-15 11:28:31.518  INFO 20256 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-09-15 11:28:31.522  INFO 20256 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-09-15 11:28:31.532  INFO 20256 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-09-15 11:28:31.623  INFO 20256 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http)
+2019-09-15 11:28:31.631  INFO 20256 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 13.199 seconds (JVM running for 14.028)
+2019-09-15 11:28:31.870  INFO 20256 --- [JavaFX Application Thread] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-09-15 11:28:32.060 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_
+2019-09-15 11:28:32.099 DEBUG 20256 --- [JavaFX Application Thread] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_ order by document0_.id desc
+2019-09-15 11:28:32.138 DEBUG 20256 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_ order by documentca0_.name asc
+2019-09-15 11:28:32.146 DEBUG 20256 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentna0_.id as id1_10_, documentna0_.created_on as created_2_10_, documentna0_.name as name3_10_, documentna0_.updated_on as updated_4_10_ from document_name_suggestion documentna0_ order by documentna0_.name asc
+2019-09-15 11:28:32.200 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select user0_.id as id1_15_, user0_.address as address2_15_, user0_.birthday as birthday3_15_, user0_.city as city4_15_, user0_.country as country5_15_, user0_.created_on as created_6_15_, user0_.email as email7_15_, user0_.firstname as firstnam8_15_, user0_.lastname as lastname9_15_, user0_.mobile as mobile10_15_, user0_.name as name11_15_, user0_.password as passwor12_15_, user0_.role_id as role_id13_15_, user0_.state as state14_15_, user0_.status as status15_15_, user0_.updated_on as updated16_15_, user0_.username as usernam17_15_ from user user0_
+2019-09-15 11:28:32.353 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documenthi0_.id as id1_9_, documenthi0_.created_on as created_2_9_, documenthi0_.document_id as document3_9_, documenthi0_.name as name4_9_, documenthi0_.status as status5_9_, documenthi0_.updated_on as updated_6_9_ from document_history documenthi0_
+2019-09-15 11:28:32.365 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_
+2019-09-15 11:28:32.614 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contactgro0_.id as id1_3_, contactgro0_.color as color2_3_, contactgro0_.created_on as created_3_3_, contactgro0_.hover_color as hover_co4_3_, contactgro0_.name as name5_3_, contactgro0_.status as status6_3_, contactgro0_.updated_on as updated_7_3_ from contact_group contactgro0_
+2019-09-15 11:28:32.628 DEBUG 20256 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contact0_.id as id1_2_, contact0_.contact_group_id as contact_2_2_, contact0_.contact_image_id as contact_3_2_, contact0_.created_on as created_4_2_, contact0_.firstname as firstnam5_2_, contact0_.lastname as lastname6_2_, contact0_.status as status7_2_, contact0_.updated_on as updated_8_2_, contact0_.username as username9_2_ from contact contact0_
+2019-09-15 11:28:58.407 DEBUG 20256 --- [JavaFX Application Thread] org.hibernate.SQL                        : insert into contact (id, contact_group_id, contact_image_id, created_on, firstname, lastname, status, updated_on, username) values (null, ?, ?, ?, ?, ?, ?, ?, ?)
+2019-09-15 11:29:08.297  INFO 20256 --- [JavaFX Application Thread] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cda0d15: startup date [Sun Sep 15 11:28:19 CEST 2019]; root of context hierarchy
+2019-09-15 11:29:08.307  INFO 20256 --- [JavaFX Application Thread] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-09-15 11:29:08.314  INFO 20256 --- [JavaFX Application Thread] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-09-15 11:29:08.333  INFO 20256 --- [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:29:08.338  INFO 20256 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown initiated...
+2019-09-15 11:29:08.373  INFO 20256 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown completed.
+2019-09-15 11:29:32.979  INFO 11712 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 11712 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-15 11:29:33.000  INFO 11712 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-15 11:29:33.259  INFO 11712 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:29:33 CEST 2019]; root of context hierarchy
+2019-09-15 11:29:35.958  INFO 11712 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-15 11:29:37.242  INFO 11712 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-15 11:29:37.257  INFO 11712 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-15 11:29:37.259  INFO 11712 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-15 11:29:37.492  INFO 11712 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-15 11:29:37.493  INFO 11712 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4238 ms
+2019-09-15 11:29:37.774  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-15 11:29:37.778  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-15 11:29:37.788  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-15 11:29:37.790  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-15 11:29:37.794  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-15 11:29:37.798  INFO 11712 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-15 11:29:38.287  INFO 11712 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:29:38.571  INFO 11712 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Start completed.
+2019-09-15 11:29:38.690  INFO 11712 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:29:38.728  INFO 11712 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-15 11:29:38.889  INFO 11712 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-15 11:29:38.892  INFO 11712 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-15 11:29:38.950  INFO 11712 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-15 11:29:39.237  INFO 11712 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-09-15 11:29:40.232  INFO 11712 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:29:44.919  INFO 11712 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:29:33 CEST 2019]; root of context hierarchy
+2019-09-15 11:29:45.097  INFO 11712 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-09-15 11:29:45.100  INFO 11712 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-09-15 11:29:45.187  INFO 11712 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:29:45.189  INFO 11712 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:29:45.264  INFO 11712 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:29:45.361  WARN 11712 --- [JavaFX-Launcher] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-15 11:29:45.390  WARN 11712 --- [JavaFX-Launcher] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][JavaFX-Launcher] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-09-15 11:29:46.076  INFO 11712 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-09-15 11:29:46.079  INFO 11712 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-09-15 11:29:46.091  INFO 11712 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-09-15 11:29:46.189  INFO 11712 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http)
+2019-09-15 11:29:46.196  INFO 11712 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 14.251 seconds (JVM running for 15.06)
+2019-09-15 11:29:46.437  INFO 11712 --- [JavaFX Application Thread] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-09-15 11:29:46.665 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_
+2019-09-15 11:29:46.735 DEBUG 11712 --- [JavaFX Application Thread] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_ order by document0_.id desc
+2019-09-15 11:29:46.761 DEBUG 11712 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_ order by documentca0_.name asc
+2019-09-15 11:29:46.792 DEBUG 11712 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentna0_.id as id1_10_, documentna0_.created_on as created_2_10_, documentna0_.name as name3_10_, documentna0_.updated_on as updated_4_10_ from document_name_suggestion documentna0_ order by documentna0_.name asc
+2019-09-15 11:29:46.807 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select user0_.id as id1_15_, user0_.address as address2_15_, user0_.birthday as birthday3_15_, user0_.city as city4_15_, user0_.country as country5_15_, user0_.created_on as created_6_15_, user0_.email as email7_15_, user0_.firstname as firstnam8_15_, user0_.lastname as lastname9_15_, user0_.mobile as mobile10_15_, user0_.name as name11_15_, user0_.password as passwor12_15_, user0_.role_id as role_id13_15_, user0_.state as state14_15_, user0_.status as status15_15_, user0_.updated_on as updated16_15_, user0_.username as usernam17_15_ from user user0_
+2019-09-15 11:29:46.912 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documenthi0_.id as id1_9_, documenthi0_.created_on as created_2_9_, documenthi0_.document_id as document3_9_, documenthi0_.name as name4_9_, documenthi0_.status as status5_9_, documenthi0_.updated_on as updated_6_9_ from document_history documenthi0_
+2019-09-15 11:29:46.926 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_
+2019-09-15 11:29:47.199 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contactgro0_.id as id1_3_, contactgro0_.color as color2_3_, contactgro0_.created_on as created_3_3_, contactgro0_.hover_color as hover_co4_3_, contactgro0_.name as name5_3_, contactgro0_.status as status6_3_, contactgro0_.updated_on as updated_7_3_ from contact_group contactgro0_
+2019-09-15 11:29:47.218 DEBUG 11712 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contact0_.id as id1_2_, contact0_.contact_group_id as contact_2_2_, contact0_.contact_image_id as contact_3_2_, contact0_.created_on as created_4_2_, contact0_.firstname as firstnam5_2_, contact0_.lastname as lastname6_2_, contact0_.status as status7_2_, contact0_.updated_on as updated_8_2_, contact0_.username as username9_2_ from contact contact0_
+2019-09-15 11:29:49.174  WARN 11712 --- [JavaFX Application Thread] javafx.css                               : CSS Error parsing '*{-fx-background-color: #blue; -fx-background-radius: 5; -fx-text-fill: white;}: Invalid color specification while parsing '-fx-background-color' at [1,24]
+2019-09-15 11:30:03.427 DEBUG 11712 --- [JavaFX Application Thread] org.hibernate.SQL                        : insert into contact (id, contact_group_id, contact_image_id, created_on, firstname, lastname, status, updated_on, username) values (null, ?, ?, ?, ?, ?, ?, ?, ?)
+2019-09-15 11:30:53.709  INFO 19416 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 19416 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-15 11:30:53.716  INFO 19416 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-15 11:30:53.968  INFO 19416 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:30:53 CEST 2019]; root of context hierarchy
+2019-09-15 11:30:56.645  INFO 19416 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-15 11:30:57.831  INFO 19416 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-15 11:30:57.847  INFO 19416 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-15 11:30:57.848  INFO 19416 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-15 11:30:58.037  INFO 19416 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-15 11:30:58.037  INFO 19416 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4074 ms
+2019-09-15 11:30:58.335  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-15 11:30:58.337  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-15 11:30:58.343  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-15 11:30:58.344  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-15 11:30:58.344  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-15 11:30:58.345  INFO 19416 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-15 11:30:58.887  INFO 19416 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:30:59.196  INFO 19416 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Start completed.
+2019-09-15 11:30:59.327  INFO 19416 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:30:59.359  INFO 19416 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-15 11:30:59.498  INFO 19416 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-15 11:30:59.501  INFO 19416 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-15 11:30:59.589  INFO 19416 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-15 11:30:59.837  INFO 19416 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-09-15 11:31:00.828  INFO 19416 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:31:05.765  INFO 19416 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:30:53 CEST 2019]; root of context hierarchy
+2019-09-15 11:31:06.003  INFO 19416 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-09-15 11:31:06.005  INFO 19416 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-09-15 11:31:06.077  INFO 19416 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:31:06.078  INFO 19416 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:31:06.159  INFO 19416 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:31:06.211  WARN 19416 --- [JavaFX-Launcher] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-15 11:31:06.227  WARN 19416 --- [JavaFX-Launcher] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][JavaFX-Launcher] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-09-15 11:31:07.113  INFO 19416 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-09-15 11:31:07.117  INFO 19416 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-09-15 11:31:07.126  INFO 19416 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-09-15 11:31:07.221  INFO 19416 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http)
+2019-09-15 11:31:07.231  INFO 19416 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 14.521 seconds (JVM running for 15.333)
+2019-09-15 11:31:07.475  INFO 19416 --- [JavaFX Application Thread] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-09-15 11:31:07.700 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_
+2019-09-15 11:31:07.721 DEBUG 19416 --- [JavaFX Application Thread] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_ order by document0_.id desc
+2019-09-15 11:31:07.807 DEBUG 19416 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_ order by documentca0_.name asc
+2019-09-15 11:31:07.817 DEBUG 19416 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentna0_.id as id1_10_, documentna0_.created_on as created_2_10_, documentna0_.name as name3_10_, documentna0_.updated_on as updated_4_10_ from document_name_suggestion documentna0_ order by documentna0_.name asc
+2019-09-15 11:31:07.863 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select user0_.id as id1_15_, user0_.address as address2_15_, user0_.birthday as birthday3_15_, user0_.city as city4_15_, user0_.country as country5_15_, user0_.created_on as created_6_15_, user0_.email as email7_15_, user0_.firstname as firstnam8_15_, user0_.lastname as lastname9_15_, user0_.mobile as mobile10_15_, user0_.name as name11_15_, user0_.password as passwor12_15_, user0_.role_id as role_id13_15_, user0_.state as state14_15_, user0_.status as status15_15_, user0_.updated_on as updated16_15_, user0_.username as usernam17_15_ from user user0_
+2019-09-15 11:31:07.998 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documenthi0_.id as id1_9_, documenthi0_.created_on as created_2_9_, documenthi0_.document_id as document3_9_, documenthi0_.name as name4_9_, documenthi0_.status as status5_9_, documenthi0_.updated_on as updated_6_9_ from document_history documenthi0_
+2019-09-15 11:31:08.011 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_
+2019-09-15 11:31:08.287 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contactgro0_.id as id1_3_, contactgro0_.color as color2_3_, contactgro0_.created_on as created_3_3_, contactgro0_.hover_color as hover_co4_3_, contactgro0_.name as name5_3_, contactgro0_.status as status6_3_, contactgro0_.updated_on as updated_7_3_ from contact_group contactgro0_
+2019-09-15 11:31:08.302 DEBUG 19416 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contact0_.id as id1_2_, contact0_.contact_group_id as contact_2_2_, contact0_.contact_image_id as contact_3_2_, contact0_.created_on as created_4_2_, contact0_.firstname as firstnam5_2_, contact0_.lastname as lastname6_2_, contact0_.status as status7_2_, contact0_.updated_on as updated_8_2_, contact0_.username as username9_2_ from contact contact0_
+2019-09-15 11:31:10.126  WARN 19416 --- [JavaFX Application Thread] javafx.css                               : CSS Error parsing '*{-fx-background-color: #blue; -fx-background-radius: 5; -fx-text-fill: white;}: Invalid color specification while parsing '-fx-background-color' at [1,24]
+2019-09-15 11:33:15.216  INFO 11020 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 11020 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-15 11:33:15.227  INFO 11020 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-15 11:33:15.367  INFO 11020 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@42b2ee00: startup date [Sun Sep 15 11:33:15 CEST 2019]; root of context hierarchy
+2019-09-15 11:33:18.259  INFO 11020 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-15 11:33:19.313  INFO 11020 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-15 11:33:19.326  INFO 11020 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-15 11:33:19.327  INFO 11020 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-15 11:33:19.547  INFO 11020 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-15 11:33:19.548  INFO 11020 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4188 ms
+2019-09-15 11:33:19.829  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-15 11:33:19.832  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-15 11:33:19.837  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-15 11:33:19.839  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-15 11:33:19.839  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-15 11:33:19.839  INFO 11020 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-15 11:33:20.363  INFO 11020 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:33:21.531 ERROR 11020 --- [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : testdb - Exception during pool initialization.
+
+org.h2.jdbc.JdbcSQLException: Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.message.DbException.get(DbException.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:188) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.getPageStore(Database.java:2476) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.open(Database.java:697) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.openDatabase(Database.java:276) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.<init>(Database.java:270) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:64) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:176) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:137) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:354) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.Driver.connect(Driver.java:69) ~[h2-1.4.196.jar:1.4.196]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:112) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:118) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:443) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:514) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:111) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:97) [HikariCP-2.6.3.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:151) [spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) [spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) [spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:319) [spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:357) [spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.autoconfigure.orm.jpa.DatabaseLookup.getDatabase(DatabaseLookup.java:72) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.determineDatabase(JpaProperties.java:139) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.jpaVendorAdapter(JpaBaseConfiguration.java:106) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0.CGLIB$jpaVendorAdapter$9(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0$$FastClassBySpringCGLIB$$db3e0942.invoke(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228) [spring-core-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:360) [spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0.jpaVendorAdapter(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_221]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:155) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:575) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:255) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1131) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1058) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:812) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:718) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:458) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:255) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1131) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1058) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:812) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:718) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:458) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:858) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:122) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1245) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1233) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at de.dc.spring.fx.ui.jregis.metro.ui.JRegisFXApplication.init(JRegisFXApplication.java:31) ~[main/:na]
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:841) ~[jfxrt.jar:na]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.8.0_221]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/data/JRegisDB.mv.db [1.4.196/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:765) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.FileStore.open(FileStore.java:173) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:347) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2930) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:155) ~[h2-1.4.196.jar:1.4.196]
+	... 90 common frames omitted
+
+2019-09-15 11:33:21.541  WARN 11020 --- [JavaFX-Launcher] o.s.b.a.orm.jpa.DatabaseLookup           : Unable to determine jdbc url from datasource
+
+org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta data; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.h2.jdbc.JdbcSQLException: Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:328) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:357) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.autoconfigure.orm.jpa.DatabaseLookup.getDatabase(DatabaseLookup.java:72) ~[spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.determineDatabase(JpaProperties.java:139) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.jpaVendorAdapter(JpaBaseConfiguration.java:106) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0.CGLIB$jpaVendorAdapter$9(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0$$FastClassBySpringCGLIB$$db3e0942.invoke(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228) [spring-core-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:360) [spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration$$EnhancerBySpringCGLIB$$ff79c6a0.jpaVendorAdapter(<generated>) [spring-boot-autoconfigure-2.0.0.M3.jar:2.0.0.M3]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_221]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:155) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:575) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:255) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1131) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1058) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:812) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:718) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:458) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:255) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1131) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1058) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:812) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:718) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:458) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1261) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1109) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:858) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:122) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1245) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1233) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at de.dc.spring.fx.ui.jregis.metro.ui.JRegisFXApplication.init(JRegisFXApplication.java:31) ~[main/:na]
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:841) ~[jfxrt.jar:na]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.8.0_221]
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is org.h2.jdbc.JdbcSQLException: Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:319) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	... 64 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLException: Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.message.DbException.get(DbException.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:188) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.getPageStore(Database.java:2476) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.open(Database.java:697) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.openDatabase(Database.java:276) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.<init>(Database.java:270) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:64) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:176) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:137) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:354) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.Driver.connect(Driver.java:69) ~[h2-1.4.196.jar:1.4.196]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:112) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:118) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:443) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:514) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:111) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:97) ~[HikariCP-2.6.3.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:151) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) ~[spring-jdbc-5.0.0.RC3.jar:5.0.0.RC3]
+	... 65 common frames omitted
+Caused by: java.lang.IllegalStateException: The file is locked: nio:E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/data/JRegisDB.mv.db [1.4.196/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:765) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.FileStore.open(FileStore.java:173) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:347) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2930) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:155) ~[h2-1.4.196.jar:1.4.196]
+	... 90 common frames omitted
+
+2019-09-15 11:33:21.655  INFO 11020 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:33:21.693  INFO 11020 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-15 11:33:21.821  INFO 11020 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-15 11:33:21.823  INFO 11020 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-15 11:33:21.878  INFO 11020 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-15 11:33:22.094  INFO 11020 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:33:23.114 ERROR 11020 --- [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : testdb - Exception during pool initialization.
+
+org.h2.jdbc.JdbcSQLException: Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.message.DbException.get(DbException.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:188) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:168) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.getPageStore(Database.java:2476) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.open(Database.java:697) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.openDatabase(Database.java:276) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Database.<init>(Database.java:270) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:64) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.openSession(Engine.java:176) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:137) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:354) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:100) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.Driver.connect(Driver.java:69) ~[h2-1.4.196.jar:1.4.196]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:112) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:118) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:443) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:514) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:111) [HikariCP-2.6.3.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:97) [HikariCP-2.6.3.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:858) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:885) [hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:358) [spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:384) [spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:373) [spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1776) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1712) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) [spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:858) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:122) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1245) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1233) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at de.dc.spring.fx.ui.jregis.metro.ui.JRegisFXApplication.init(JRegisFXApplication.java:31) ~[main/:na]
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:841) ~[jfxrt.jar:na]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.8.0_221]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/data/JRegisDB.mv.db [1.4.196/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:765) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.FileStore.open(FileStore.java:173) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:347) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2930) ~[h2-1.4.196.jar:1.4.196]
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:155) ~[h2-1.4.196.jar:1.4.196]
+	... 63 common frames omitted
+
+2019-09-15 11:33:23.119  WARN 11020 --- [JavaFX-Launcher] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata : Datenbank wird wahrscheinlich bereits benutzt: null. Mögliche Lösungen: alle Verbindungen schliessen; Server Modus verwenden
+Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-196]
+2019-09-15 11:33:23.133  WARN 11020 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaAutoConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+2019-09-15 11:33:23.146  INFO 11020 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-09-15 11:33:23.176  INFO 11020 --- [JavaFX-Launcher] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2019-09-15 11:33:23.177  WARN 11020 --- [JavaFX-Launcher] o.s.b.c.e.EventPublishingRunListener     : Error calling ApplicationEventListener
+
+java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationFailedEvent cannot be cast to org.springframework.boot.web.context.WebServerInitializedEvent
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:159) [spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) [spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.context.event.EventPublishingRunListener.finished(EventPublishingRunListener.java:114) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplicationRunListeners.callFinishedListener(SpringApplicationRunListeners.java:79) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplicationRunListeners.finished(SpringApplicationRunListeners.java:72) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:803) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1245) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1233) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at de.dc.spring.fx.ui.jregis.metro.ui.JRegisFXApplication.init(JRegisFXApplication.java:31) [main/:na]
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:841) [jfxrt.jar:na]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182) [jfxrt.jar:na]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.8.0_221]
+
+2019-09-15 11:33:23.180 ERROR 11020 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaAutoConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1716) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:499) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:858) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:122) ~[spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1245) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1233) [spring-boot-2.0.0.M3.jar:2.0.0.M3]
+	at de.dc.spring.fx.ui.jregis.metro.ui.JRegisFXApplication.init(JRegisFXApplication.java:31) [main/:na]
+	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:841) [jfxrt.jar:na]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182) [jfxrt.jar:na]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.8.0_221]
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:271) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:858) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:885) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:358) ~[spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:384) ~[spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:373) ~[spring-orm-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1776) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1712) ~[spring-beans-5.0.0.RC3.jar:5.0.0.RC3]
+	... 19 common frames omitted
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259) ~[hibernate-core-5.2.10.Final.jar:5.2.10.Final]
+	... 35 common frames omitted
+
+2019-09-15 11:33:48.856  INFO 14080 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on Duye with PID 14080 (started by Dim in E:\Repository\Git\JRegis\de.dc.spring.fx.ui.jregis.metro.ui)
+2019-09-15 11:33:48.863  INFO 14080 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-09-15 11:33:49.004  INFO 14080 --- [JavaFX-Launcher] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:33:48 CEST 2019]; root of context hierarchy
+2019-09-15 11:33:54.087  INFO 14080 --- [JavaFX-Launcher] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-15 11:33:55.691  INFO 14080 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-15 11:33:55.719  INFO 14080 --- [JavaFX-Launcher] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-15 11:33:55.723  INFO 14080 --- [JavaFX-Launcher] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2019-09-15 11:33:56.032  INFO 14080 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-15 11:33:56.033  INFO 14080 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7040 ms
+2019-09-15 11:33:56.521  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-09-15 11:33:56.527  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'webServlet' to [/h2-console/*]
+2019-09-15 11:33:56.536  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-09-15 11:33:56.539  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-09-15 11:33:56.541  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-09-15 11:33:56.541  INFO 14080 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-09-15 11:33:57.353  INFO 14080 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Starting...
+2019-09-15 11:33:57.824  INFO 14080 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : testdb - Start completed.
+2019-09-15 11:33:57.962  INFO 14080 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:33:58.043  INFO 14080 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-09-15 11:33:58.340  INFO 14080 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2019-09-15 11:33:58.345  INFO 14080 --- [JavaFX-Launcher] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-09-15 11:33:58.464  INFO 14080 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-09-15 11:33:58.818  INFO 14080 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-09-15 11:34:00.579  INFO 14080 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:34:09.489  INFO 14080 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:33:48 CEST 2019]; root of context hierarchy
+2019-09-15 11:34:10.011  INFO 14080 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-09-15 11:34:10.015  INFO 14080 --- [JavaFX-Launcher] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-09-15 11:34:10.163  INFO 14080 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:34:10.164  INFO 14080 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:34:10.407  INFO 14080 --- [JavaFX-Launcher] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-09-15 11:34:10.595  WARN 14080 --- [JavaFX-Launcher] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-15 11:34:10.625  WARN 14080 --- [JavaFX-Launcher] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][JavaFX-Launcher] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-09-15 11:34:11.457  INFO 14080 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-09-15 11:34:11.460  INFO 14080 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-09-15 11:34:11.473  INFO 14080 --- [JavaFX-Launcher] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-09-15 11:34:11.573  INFO 14080 --- [JavaFX-Launcher] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http)
+2019-09-15 11:34:11.578  INFO 14080 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 23.74 seconds (JVM running for 24.595)
+2019-09-15 11:34:11.828  INFO 14080 --- [JavaFX Application Thread] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-09-15 11:34:12.057 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_
+2019-09-15 11:34:12.080 DEBUG 14080 --- [JavaFX Application Thread] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_ order by document0_.id desc
+2019-09-15 11:34:12.143 DEBUG 14080 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentca0_.id as id1_8_, documentca0_.created_on as created_2_8_, documentca0_.name as name3_8_, documentca0_.parent_id as parent_i4_8_, documentca0_.updated_on as updated_5_8_ from document_category documentca0_ order by documentca0_.name asc
+2019-09-15 11:34:12.153 DEBUG 14080 --- [JavaFX Application Thread] org.hibernate.SQL                        : select documentna0_.id as id1_10_, documentna0_.created_on as created_2_10_, documentna0_.name as name3_10_, documentna0_.updated_on as updated_4_10_ from document_name_suggestion documentna0_ order by documentna0_.name asc
+2019-09-15 11:34:12.245 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select user0_.id as id1_15_, user0_.address as address2_15_, user0_.birthday as birthday3_15_, user0_.city as city4_15_, user0_.country as country5_15_, user0_.created_on as created_6_15_, user0_.email as email7_15_, user0_.firstname as firstnam8_15_, user0_.lastname as lastname9_15_, user0_.mobile as mobile10_15_, user0_.name as name11_15_, user0_.password as passwor12_15_, user0_.role_id as role_id13_15_, user0_.state as state14_15_, user0_.status as status15_15_, user0_.updated_on as updated16_15_, user0_.username as usernam17_15_ from user user0_
+2019-09-15 11:34:12.358 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select documenthi0_.id as id1_9_, documenthi0_.created_on as created_2_9_, documenthi0_.document_id as document3_9_, documenthi0_.name as name4_9_, documenthi0_.status as status5_9_, documenthi0_.updated_on as updated_6_9_ from document_history documenthi0_
+2019-09-15 11:34:12.372 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select document0_.id as id1_6_, document0_.category_id as category2_6_, document0_.created_on as created_3_6_, document0_.description as descript4_6_, document0_.name as name5_6_, document0_.updated_on as updated_6_6_ from document document0_
+2019-09-15 11:34:12.711 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contactgro0_.id as id1_3_, contactgro0_.color as color2_3_, contactgro0_.created_on as created_3_3_, contactgro0_.hover_color as hover_co4_3_, contactgro0_.name as name5_3_, contactgro0_.status as status6_3_, contactgro0_.updated_on as updated_7_3_ from contact_group contactgro0_
+2019-09-15 11:34:12.732 DEBUG 14080 --- [JavaFX-Launcher] org.hibernate.SQL                        : select contact0_.id as id1_2_, contact0_.contact_group_id as contact_2_2_, contact0_.contact_image_id as contact_3_2_, contact0_.created_on as created_4_2_, contact0_.firstname as firstnam5_2_, contact0_.lastname as lastname6_2_, contact0_.status as status7_2_, contact0_.updated_on as updated_8_2_, contact0_.username as username9_2_ from contact contact0_
+2019-09-15 11:34:15.120  WARN 14080 --- [JavaFX Application Thread] javafx.css                               : CSS Error parsing '*{-fx-background-color: #blue; -fx-background-radius: 5; -fx-text-fill: white;}: Invalid color specification while parsing '-fx-background-color' at [1,24]
+2019-09-15 11:34:21.802  WARN 14080 --- [JavaFX Application Thread] javafx.css                               : Error loading image: file:/E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/bin/main/de/dc/spring/fx/ui/jregis/metro/ui/contact/images/icons8-bearbeiten-30.png
+2019-09-15 11:34:21.803  WARN 14080 --- [JavaFX Application Thread] javafx.css                               : Error loading image: file:/E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/bin/main/de/dc/spring/fx/ui/jregis/metro/ui/contact/images/icons8-löschen-24-gray.png
+2019-09-15 11:34:32.058  WARN 14080 --- [JavaFX Application Thread] javafx.css                               : Error loading image: file:/E:/Repository/Git/JRegis/de.dc.spring.fx.ui.jregis.metro.ui/bin/main/de/dc/spring/fx/ui/jregis/metro/ui/contact/images/icons8-löschen-24.png
+2019-09-15 11:34:37.000  INFO 14080 --- [JavaFX Application Thread] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d3ad102: startup date [Sun Sep 15 11:33:48 CEST 2019]; root of context hierarchy
+2019-09-15 11:34:37.003  INFO 14080 --- [JavaFX Application Thread] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-09-15 11:34:37.008  INFO 14080 --- [JavaFX Application Thread] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-09-15 11:34:37.019  INFO 14080 --- [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-09-15 11:34:37.040  INFO 14080 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown initiated...
+2019-09-15 11:34:37.057  INFO 14080 --- [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : testdb - Shutdown completed.
