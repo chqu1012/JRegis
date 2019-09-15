@@ -68,13 +68,14 @@ public class ContactPage extends BaseContactPage {
 	private ObservableList<Contact> deletedContacts = FXCollections.observableArrayList();
 	
 	public void initialize() {
-		contactGruops.addAll(contactGroupRepository.findAll());
-
-		ContactListCell.contactGroups = contactGruops;
 		listViewContacts.setCellFactory(e -> new ContactListCell());
 		listViewContacts.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
 
+		contactGruops.addAll(contactGroupRepository.findAll());
+		
+		ContactListCell.contactGroups = contactGruops;
+		
 		listViewContactGroups.setItems(contactGruops);
 		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
 			protected void updateItem(ContactGroup item, boolean empty) {
@@ -225,6 +226,7 @@ public class ContactPage extends BaseContactPage {
 	@Override
 	protected void onImageViewNewUser(MouseEvent event) {
 		contacts.add(0, new Contact());
+		listViewContacts.refresh();
 	}
 
 	@Override
