@@ -8,4 +8,7 @@ public abstract class BaseDashboard extends ScrollPane{
 
 	@FXML
 	protected VBox hboxRecentlyActivities;
+	
+	@FXML
+	protected VBox paneTodoList;
 }

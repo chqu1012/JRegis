@@ -7,8 +7,11 @@ import javafx.scene.layout.BorderPane;
 public abstract class BasePreferencesPage{
 
     @FXML
-    protected SplitPane splitPaneActivity;
+    protected SplitPane splitPaneTodo;
 	
+    @FXML
+    protected SplitPane splitPaneActivity;
+    
     @FXML
     protected BorderPane root;
 
