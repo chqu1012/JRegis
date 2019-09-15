@@ -4,20 +4,20 @@ import java.time.LocalDateTime;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class ContactAddressItem extends BaseContactItem<Address>{
+public class ContactAddressItem extends BaseContactItem<ContactAddress>{
 
 	private TextField textCountry;
 	private TextField textState;
 	private TextField textZipCode;
 	
-	public ContactAddressItem(Address t) {
+	public ContactAddressItem(ContactAddress t) {
 		super(t);
 	}
 
@@ -107,12 +107,12 @@ public class ContactAddressItem extends BaseContactItem<Address>{
 	}
 
 	@Override
-	protected void deleteItem(Address item) {
+	protected void deleteItem(ContactAddress item) {
 		EventBroker.getDefault().post(new EventContext<>("/delete/contact/address", item));
 	}
 
 	@Override
-	protected Long getItemId(Address item) {
+	protected Long getItemId(ContactAddress item) {
 		return item.getId();
 	}
 }

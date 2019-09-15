@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+import org.apache.tomcat.jni.Address;
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.thymeleaf.expression.Dates;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -16,21 +18,21 @@ import de.dc.spring.fx.ui.jregis.metro.ui.contact.feature.ContactListCell;
 import de.dc.spring.fx.ui.jregis.metro.ui.contact.service.ContactFolderService;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.repository.AddressRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.repository.ContactAddressRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model.ContactFX;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.repository.ContactRepository;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.DatesRepository;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.repository.EmailRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.repository.ContactDatesRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.repository.ContactEmailRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.group.model.ContactGroup;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.group.repository.ContactGroupRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.image.model.ContactImage;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.image.repository.ContactImageRepository;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.PhonenumberRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.repository.ContactPhonenumberRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.util.DialogUtil;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -55,11 +57,11 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/contact/Contacts.fxml";
 
-	@Autowired PhonenumberRepository phoneRepository;
+	@Autowired ContactPhonenumberRepository phoneRepository;
 	@Autowired ContactRepository contactRepository;
-	@Autowired AddressRepository addressRepository;
-	@Autowired EmailRepository emailRepository;
-	@Autowired DatesRepository datesRepository;
+	@Autowired ContactAddressRepository addressRepository;
+	@Autowired ContactEmailRepository emailRepository;
+	@Autowired ContactDatesRepository datesRepository;
 	@Autowired ContactImageRepository contactImageRepository;
 	@Autowired ContactGroupRepository contactGroupRepository;
 
@@ -149,9 +151,9 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	@Subscribe
-	public void subscribeEmail(EventContext<Email> context) {
-		if (context.getInput() instanceof Email) {
-			Email item = context.getInput();
+	public void subscribeEmail(EventContext<ContactEmail> context) {
+		if (context.getInput() instanceof ContactEmail) {
+			ContactEmail item = context.getInput();
 			String id = context.getEventId();
 			if (id.equals("/create/existing/contact/email")) {
 				emailRepository.save(item);
@@ -176,9 +178,9 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	@Subscribe
-	public void subscribeDates(EventContext<Dates> context) {
-		if (context.getInput() instanceof Dates) {
-			Dates item = context.getInput();
+	public void subscribeDates(EventContext<ContactDates> context) {
+		if (context.getInput() instanceof ContactDates) {
+			ContactDates item = context.getInput();
 			String id = context.getEventId();
 			if (id.equals("/create/contact/date")) {
 				datesRepository.save(item);
@@ -203,9 +205,9 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	@Subscribe
-	public void subscribeAddresses(EventContext<Address> context) {
-		if (context.getInput() instanceof Address) {
-			Address item = context.getInput();
+	public void subscribeAddresses(EventContext<ContactAddress> context) {
+		if (context.getInput() instanceof ContactAddress) {
+			ContactAddress	 item = context.getInput();
 			String id = context.getEventId();
 			if (id.equals("/create/contact/address")) {
 				addressRepository.save(item);
@@ -224,9 +226,9 @@ public class ContactPage extends BaseContactPage {
 	}
 	
 	@Subscribe
-	public void subscribePhonenumber(EventContext<Phonenumber> context) {
-		if (context.getInput() instanceof Phonenumber) {
-			Phonenumber item = context.getInput();
+	public void subscribePhonenumber(EventContext<ContactPhonenumber> context) {
+		if (context.getInput() instanceof ContactPhonenumber) {
+			ContactPhonenumber item = context.getInput();
 			String id = context.getEventId();
 			if (id.equals("/create/contact/phone")) {
 				phoneRepository.save(item);
@@ -250,9 +252,9 @@ public class ContactPage extends BaseContactPage {
 		}
 	}
 
-	private void onAddressListSelectionChanged(Change<? extends Address> c) {
+	private void onAddressListSelectionChanged(Change<? extends ContactAddress> c) {
 		Platform.runLater(() -> {
-			ObservableList<Address> addressList = context.getAddressListProperty().get();
+			ObservableList<ContactAddress> addressList = context.getAddressListProperty().get();
 			vboxAddresses.getChildren().clear();
 			addressList.forEach(e -> {
 				ContactAddressItem item = new ContactAddressItem(e);
@@ -261,9 +263,9 @@ public class ContactPage extends BaseContactPage {
 		});
 	}
 
-	private void onEmailListSelectionChanged(Change<? extends Email> c) {
+	private void onEmailListSelectionChanged(Change<? extends ContactEmail> c) {
 		Platform.runLater(() -> {
-			ObservableList<Email> emailList = context.getEmailsProperty().get();
+			ObservableList<ContactEmail> emailList = context.getEmailsProperty().get();
 			vboxEmail.getChildren().clear();
 			emailList.forEach(e -> {
 				ContactEmailItem item = new ContactEmailItem(e);
@@ -272,9 +274,9 @@ public class ContactPage extends BaseContactPage {
 		});
 	}
 
-	private void onDatesListSelectionChanged(Change<? extends Dates> c) {
+	private void onDatesListSelectionChanged(Change<? extends ContactDates> c) {
 		Platform.runLater(() -> {
-			ObservableList<Dates> datesList = context.getDateListProperty().get();
+			ObservableList<ContactDates> datesList = context.getDateListProperty().get();
 			vboxDates.getChildren().clear();
 			datesList.forEach(e -> {
 				ContactDatesItem item = new ContactDatesItem(e);
@@ -297,8 +299,8 @@ public class ContactPage extends BaseContactPage {
 		});
 	}
 
-	private void onPhoneListSelectionChanged(Change<? extends Phonenumber> c) {
-		ObservableList<Phonenumber> phoneList = context.getPhoneListProperty().get();
+	private void onPhoneListSelectionChanged(Change<? extends ContactPhonenumber> c) {
+		ObservableList<ContactPhonenumber> phoneList = context.getPhoneListProperty().get();
 		vboxPhoneNumbers.getChildren().clear();
 		phoneList.forEach(e -> {
 			ContactPhonenumberItem item = new ContactPhonenumberItem(e);
@@ -317,16 +319,16 @@ public class ContactPage extends BaseContactPage {
 
 			Long id = newValue.getId();
 			if (id != null) {
-				List<Address> addressList = addressRepository.findAllByContactId(id);
+				List<ContactAddress> addressList = addressRepository.findAllByContactId(id);
 				newValue.getAddressList().addAll(addressList);
 				
-				List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
+				List<ContactEmail> emails = emailRepository.findAllByContactId(newValue.getId());
 				newValue.getEmails().addAll(emails);
 				
-				List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
+				List<ContactDates> dates = datesRepository.findAllByContactId(newValue.getId());
 				newValue.getDateList().addAll(dates);
 				
-				List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
+				List<ContactPhonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
 				newValue.getPhoneList().addAll(phones);
 				
 				context.getContactProperty().set(newValue);
@@ -364,25 +366,25 @@ public class ContactPage extends BaseContactPage {
 		if (contact != null) {
 			Long contactId = contact.getId();
 			if (event.getSource() == imageViewAddEmail) {
-				Email newEmail = new Email();
+				ContactEmail newEmail = new ContactEmail();
 				newEmail.setContactId(contactId);
 				ContactEmailItem item = new ContactEmailItem(newEmail);
 				item.setEditMode(true);
 				vboxEmail.getChildren().add(item);
 			} else if (event.getSource() == imageViewAddPhonenumbers) {
-				Phonenumber phonenumber = new Phonenumber();
+				ContactPhonenumber phonenumber = new ContactPhonenumber();
 				phonenumber.setContactId(contactId);
 				ContactPhonenumberItem item = new ContactPhonenumberItem(phonenumber);
 				item.setEditMode(true);
 				vboxPhoneNumbers.getChildren().add(item);
 			} else if (event.getSource() == imageViewAddDates) {
-				Dates dates = new Dates();
+				ContactDates dates = new ContactDates();
 				dates.setContactId(contactId);
 				ContactDatesItem item = new ContactDatesItem(dates);
 				item.setEditMode(true);
 				vboxDates.getChildren().add(item);
 			} else if (event.getSource() == imageViewAddAddress) {
-				Address address = new Address();
+				ContactAddress address = new ContactAddress();
 				address.setContactId(contactId);
 				ContactAddressItem item = new ContactAddressItem(address);
 				item.setEditMode(true);

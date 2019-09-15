@@ -36,10 +36,10 @@ public class ContactFX {
   private IntegerProperty statusProperty = new SimpleIntegerProperty();
   private ObjectProperty<java.time.LocalDateTime> createdOnProperty = new SimpleObjectProperty<>();
   private ObjectProperty<java.time.LocalDateTime> updatedOnProperty = new SimpleObjectProperty<>();
-  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsProperty = new SimpleListProperty<>();
-  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListProperty = new SimpleListProperty<>();
-  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListProperty = new SimpleListProperty<>();
-  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateListProperty = new SimpleListProperty<>();
+  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> emailsProperty = new SimpleListProperty<>();
+  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> addressListProperty = new SimpleListProperty<>();
+  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> phoneListProperty = new SimpleListProperty<>();
+  private ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> dateListProperty = new SimpleListProperty<>();
   
   public ContactFX() {
     this(new Contact());
@@ -167,32 +167,32 @@ public class ContactFX {
   public void setUpdatedOnProperty(ObjectProperty<java.time.LocalDateTime> updatedOnProperty) {
     this.updatedOnProperty = updatedOnProperty;
   }
-  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmailsProperty() {
+  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> getEmailsProperty() {
     return this.emailsProperty;
   }
   
-  public void setEmailsProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emailsProperty) {
+  public void setEmailsProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> emailsProperty) {
     this.emailsProperty = emailsProperty;
   }
-  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> getAddressListProperty() {
+  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> getAddressListProperty() {
     return this.addressListProperty;
   }
   
-  public void setAddressListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressListProperty) {
+  public void setAddressListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> addressListProperty) {
     this.addressListProperty = addressListProperty;
   }
-  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> getPhoneListProperty() {
+  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> getPhoneListProperty() {
     return this.phoneListProperty;
   }
   
-  public void setPhoneListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneListProperty) {
+  public void setPhoneListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> phoneListProperty) {
     this.phoneListProperty = phoneListProperty;
   }
-  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> getDateListProperty() {
+  public ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> getDateListProperty() {
     return this.dateListProperty;
   }
   
-  public void setDateListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateListProperty) {
+  public void setDateListProperty(ListProperty<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> dateListProperty) {
     this.dateListProperty = dateListProperty;
   }
 

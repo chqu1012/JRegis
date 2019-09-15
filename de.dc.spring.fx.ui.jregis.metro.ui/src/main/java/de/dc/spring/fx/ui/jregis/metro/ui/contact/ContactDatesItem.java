@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
@@ -13,7 +13,7 @@ import javafx.scene.layout.Priority;
 import javafx.util.StringConverter;
 import jfxtras.scene.control.LocalDateTimeTextField;
 
-public class ContactDatesItem extends BaseContactItem<Dates>{
+public class ContactDatesItem extends BaseContactItem<ContactDates>{
 
 	private static final String DATE_PATTERN = "dd.MM.yyyy HH:mm";
 	
@@ -21,7 +21,7 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 	
 	private DateTimeFormatter formatter;
 	
-	public ContactDatesItem(Dates item) {
+	public ContactDatesItem(ContactDates item) {
 		super(item);
 	}
 
@@ -68,12 +68,12 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 	}
 
 	@Override
-	protected void deleteItem(Dates item) {
+	protected void deleteItem(ContactDates item) {
 		EventBroker.getDefault().post(new EventContext<>("/delete/contact/date", item));
 	}
 
 	@Override
-	protected Long getItemId(Dates item) {
+	protected Long getItemId(ContactDates item) {
 		return item.getId();
 	}
 

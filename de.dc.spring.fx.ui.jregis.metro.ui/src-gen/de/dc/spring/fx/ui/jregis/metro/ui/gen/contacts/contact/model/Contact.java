@@ -1,15 +1,10 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
+import java.util.*;
+import java.time.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.persistence.*;
 
 @Entity
 public class Contact{
@@ -35,13 +30,13 @@ public class Contact{
 	@Column(nullable = true)
 	private LocalDateTime updatedOn;
 	@Transient
-	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emails = new java.util.ArrayList<>();
+	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> emails = new java.util.ArrayList<>();
 	@Transient
-	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> addressList = new java.util.ArrayList<>();
 	@Transient
-	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> phoneList = new java.util.ArrayList<>();
 	@Transient
-	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateList = new java.util.ArrayList<>();
+	private java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> dateList = new java.util.ArrayList<>();
 	
 	public Contact() {
 	}
@@ -120,32 +115,32 @@ public class Contact{
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
-	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> getEmails() {
+	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> getEmails() {
 		return emails;
 	}
 
-	public void setEmails(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email> emails) {
+	public void setEmails(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail> emails) {
 		this.emails=emails;
 	}
-	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> getAddressList() {
+	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> getAddressList() {
 		return addressList;
 	}
 
-	public void setAddressList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address> addressList) {
+	public void setAddressList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.ContactAddress> addressList) {
 		this.addressList=addressList;
 	}
-	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> getPhoneList() {
+	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> getPhoneList() {
 		return phoneList;
 	}
 
-	public void setPhoneList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber> phoneList) {
+	public void setPhoneList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.ContactPhonenumber> phoneList) {
 		this.phoneList=phoneList;
 	}
-	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> getDateList() {
+	public java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> getDateList() {
 		return dateList;
 	}
 
-	public void setDateList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates> dateList) {
+	public void setDateList(java.util.List<de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates> dateList) {
 		this.dateList=dateList;
 	}
 

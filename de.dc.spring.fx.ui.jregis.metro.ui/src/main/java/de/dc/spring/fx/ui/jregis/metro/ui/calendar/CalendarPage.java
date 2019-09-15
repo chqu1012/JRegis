@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.calendar.appointment.model.XAppointment;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.calendar.appointment.repository.XAppointmentRepository;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.ContactDates;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import jfxtras.scene.control.LocalDateTimeTextField;
@@ -37,8 +36,6 @@ public class CalendarPage extends BaseCalendarPage {
 		AgendaSkinSwitcher switcher = new AgendaSkinSwitcher(agenda);
 		LocalDateTimeTextField lLocalDateTimeTextField = new LocalDateTimeTextField();
 			
-		System.out.println("asfasf");
-		
 		agenda.setAllowResize(true);
 		agenda.setAllowDragging(true);
 		lLocalDateTimeTextField.localDateTimeProperty().bindBidirectional(agenda.displayedLocalDateTime());
@@ -58,9 +55,9 @@ public class CalendarPage extends BaseCalendarPage {
 	}
 	
 	@Subscribe
-	public void addDateViaEventBroker(EventContext<Dates> context) {
+	public void addDateViaEventBroker(EventContext<ContactDates> context) {
 		if (context.getEventId().equals("/open/contact/date")) {
-			Dates input = context.getInput();
+			ContactDates input = context.getInput();
 			if (dates.get(input)==null) {
 				Appointment appointment = new Agenda.AppointmentImplLocal()
 						.withStartLocalDateTime(input.getDate())

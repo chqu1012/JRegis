@@ -148,34 +148,4 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			hostServices.showDocument(context.getInput());
 		}
 	}
-	
-//	public void initialize() {
-//		initData();
-//		initTableView();
-//		initCategoryComboBox();
-//		initControls();
-//		initBindings();
-//
-//		popOverNotification.setContentNode(new NotificationAlerts());
-//		mainStackPane.getChildren().add(preferencePage);
-//		mainStackPane.getChildren().add(JRegisPlatform.getInstance(UserManagementPage.class));
-//		mainStackPane.getChildren().add(documentFlatDetails);
-//		mainStackPane.getChildren().add(profilePage);
-//		mainStackPane.getChildren().add(dashboard);
-//		mainStackPane.getChildren().add(inbox);
-//		mainStackPane.getChildren().add(JRegisPlatform.getInstance(ContactPage.class));
-//		mainStackPane.getChildren().add(calendarPage);
-//
-//		dashboard.toFront();
-//	}
-
-//	@Override
-//	protected void onImageViewAdbookClicked(MouseEvent event) {
-//		contactPage.toFront();
-//	}
-//
-//	@Override
-//	protected void onImageViewCalendarClicked(MouseEvent event) {
-//		calendarPage.toFront();
-//	}
 }

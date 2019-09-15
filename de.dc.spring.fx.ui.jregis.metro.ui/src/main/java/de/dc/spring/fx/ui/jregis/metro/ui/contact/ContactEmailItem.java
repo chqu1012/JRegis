@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.ContactEmail;
 import javafx.event.ActionEvent;
 
-public class ContactEmailItem extends BaseContactItem<Email> {
+public class ContactEmailItem extends BaseContactItem<ContactEmail> {
 
-	public ContactEmailItem(Email item) {
+	public ContactEmailItem(ContactEmail item) {
 		super(item);
 	}
 
@@ -29,12 +29,12 @@ public class ContactEmailItem extends BaseContactItem<Email> {
 	}
 
 	@Override
-	protected void deleteItem(Email item) {
+	protected void deleteItem(ContactEmail item) {
 		EventBroker.getDefault().post(new EventContext<>("/delete/contact/email", item));
 	}
 
 	@Override
-	protected Long getItemId(Email item) {
+	protected Long getItemId(ContactEmail item) {
 		return item.getId();
 	}
 
