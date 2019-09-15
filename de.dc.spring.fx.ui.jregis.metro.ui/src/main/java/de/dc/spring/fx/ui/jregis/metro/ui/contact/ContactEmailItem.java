@@ -2,12 +2,9 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 
 import java.time.LocalDateTime;
 
-import org.controlsfx.control.Notifications;
-
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
 public class ContactEmailItem extends BaseContactItem<Email> {

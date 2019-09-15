@@ -166,6 +166,27 @@ public class ContactPage extends BaseContactPage {
 		}
 	}
 
+	@Subscribe
+	public void subscribeDates(EventContext<Dates> context) {
+		if (context.getInput() instanceof Dates) {
+			Dates item = context.getInput();
+			String id = context.getEventId();
+			if (id.equals("/create/contact/date")) {
+				datesRepository.save(item);
+				Notifications.create().darkStyle().title("Created new date for contact")
+				.text(item.getName() + " was created!").show();
+			} else if (id.equals("/update/contact/date")) {
+				datesRepository.save(item);
+				Notifications.create().darkStyle().title("Updated date for contact")
+				.text(item.getName() + " was updated!").show();
+			} else if (id.equals("/delete/contact/date")) {
+				datesRepository.delete(item);
+				Notifications.create().darkStyle().title("Delete dates for contact")
+				.text(item.getName() + " was deleted!").show();
+			}
+		}
+	}
+
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
 		Platform.runLater(() -> {
 			ObservableList<Address> addressList = context.getAddressListProperty().get();

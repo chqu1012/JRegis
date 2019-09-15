@@ -3,12 +3,9 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.controlsfx.control.Notifications;
-
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.dates.model.Dates;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
@@ -63,18 +60,16 @@ public class ContactDatesItem extends BaseContactItem<Dates>{
 		item.setUpdatedOn(LocalDateTime.now());
 		item.setStatus(0);
 		if (item.getId()!=null) {
-//			JRegisPlatform.getInstance(DatesRepository.class).update(item);
+			EventBroker.getDefault().post(new EventContext<>("/create/contact/date", item));
 		}else {
-//			long itemId = JRegisPlatform.getInstance(DatesRepository.class).save(item);
-//			item.setId(itemId);
+			EventBroker.getDefault().post(new EventContext<>("/update/contact/date", item));
 		}
-		Platform.runLater(() -> Notifications.create().darkStyle().title(item.getClass().getSimpleName()+" added!").text("Created "+textValue.getText()+"!").show());
 		panePreview.toFront();		
 	}
 
 	@Override
 	protected void deleteItem(Dates item) {
-//		JRegisPlatform.getInstance(DatesRepository.class).delete(item);
+		EventBroker.getDefault().post(new EventContext<>("/delete/contact/date", item));
 	}
 
 	@Override

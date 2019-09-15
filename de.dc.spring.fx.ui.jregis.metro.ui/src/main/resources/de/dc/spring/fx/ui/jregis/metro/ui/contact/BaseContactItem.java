@@ -3,9 +3,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.Notifications;
-
-import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,7 +73,6 @@ public abstract class BaseContactItem<T> extends AnchorPane {
     @FXML
 	protected void onImageViewDeleteItem(MouseEvent event) {
     	deleteItem(item);
-    	Platform.runLater(() -> Notifications.create().darkStyle().title(getClass().getSimpleName()+" delete!").text("Deleted "+textValue.getText()+"!").show());
 		Parent parent = root.getParent();
 		if (parent instanceof VBox) {
 			VBox vbox = (VBox) parent;
