@@ -2,10 +2,9 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 
 import java.time.LocalDateTime;
 
-import org.controlsfx.control.Notifications;
-
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.address.model.Address;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -67,12 +66,10 @@ public class ContactAddressItem extends BaseContactItem<Address>{
 		item.setUpdatedOn(LocalDateTime.now());
 		item.setStatus(0);
 		if (item.getId()!=null) {
-//			JRegisPlatform.getInstance(AddressRepository.class).update(item);
+			EventBroker.getDefault().post(new EventContext<>("/update/contact/address", item));
 		}else {
-//			long itemId = JRegisPlatform.getInstance(AddressRepository.class).save(item);
-//			item.setId(itemId);
+			EventBroker.getDefault().post(new EventContext<>("/create/contact/address", item));
 		}
-		Platform.runLater(() -> Notifications.create().darkStyle().title(item.getClass().getSimpleName()+" added!").text("Created "+textValue.getText()+"!").show());
 		panePreview.toFront();		
 	}
 
@@ -111,7 +108,7 @@ public class ContactAddressItem extends BaseContactItem<Address>{
 
 	@Override
 	protected void deleteItem(Address item) {
-//		JRegisPlatform.getInstance(AddressRepository.class).delete(item);
+		EventBroker.getDefault().post(new EventContext<>("/delete/contact/address", item));
 	}
 
 	@Override

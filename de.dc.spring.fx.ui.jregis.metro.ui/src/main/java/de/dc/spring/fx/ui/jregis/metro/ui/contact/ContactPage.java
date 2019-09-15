@@ -187,6 +187,27 @@ public class ContactPage extends BaseContactPage {
 		}
 	}
 
+	@Subscribe
+	public void subscribeAddresses(EventContext<Address> context) {
+		if (context.getInput() instanceof Address) {
+			Address item = context.getInput();
+			String id = context.getEventId();
+			if (id.equals("/create/contact/address")) {
+				addressRepository.save(item);
+				Notifications.create().darkStyle().title("Created new address for contact")
+				.text("Address was created!").show();
+			} else if (id.equals("/update/contact/address")) {
+				addressRepository.save(item);
+				Notifications.create().darkStyle().title("Updated address for contact")
+				.text("Address was updated!").show();
+			} else if (id.equals("/delete/contact/address")) {
+				addressRepository.delete(item);
+				Notifications.create().darkStyle().title("Delete address for contact")
+				.text("Address was deleted!").show();
+			}
+		}
+	}
+
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
 		Platform.runLater(() -> {
 			ObservableList<Address> addressList = context.getAddressListProperty().get();
