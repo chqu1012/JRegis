@@ -25,6 +25,8 @@ public class Activity{
 	private LocalDateTime createdOn;
 	@Column(nullable = true)
 	private LocalDateTime updatedOn;
+	@Transient
+	private String author;
 	
 	public Activity() {
 	}
@@ -38,6 +40,14 @@ public class Activity{
 		this.updatedOn = updatedOn;
 	}
 	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	public Long getId(){
 		return id;
 	}

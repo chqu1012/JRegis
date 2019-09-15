@@ -23,5 +23,10 @@ public class RecentlyActivityItem extends BaseRecentlyActivityItem {
 		} catch (IOException exception) {
 			log.log(Level.SEVERE, "Failed to load fxml "+FXML, exception);
 		}
+		
+		labelTimestamp.setText(activity.getCreatedOn().toString());
+		labelContent.setText(activity.getDescription());
+		labelUser.setText(activity.getAuthor());
+		labelDescription.setText(activity.getTitle());
 	}
 }
