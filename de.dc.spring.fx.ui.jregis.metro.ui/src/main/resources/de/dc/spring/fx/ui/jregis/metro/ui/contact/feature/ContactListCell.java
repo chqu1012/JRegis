@@ -58,7 +58,7 @@ public class ContactListCell extends ListCell<Contact> {
 
 	private FXMLLoader mLLoader;
 
-	private static List<ContactGroup> contactGroups;
+	public static List<ContactGroup> contactGroups;
 	
 	@Override
 	protected void updateItem(Contact item, boolean empty) {

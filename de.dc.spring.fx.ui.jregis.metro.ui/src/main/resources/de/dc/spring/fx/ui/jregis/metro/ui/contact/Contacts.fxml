@@ -17,10 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.2545090180360721, 0.531062124248497" maxHeight="1.7976931348623157E308" 
-maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/Contacts.css" 
-xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.contact.ContactPage">
+<SplitPane dividerPositions="0.2545090180360721, 0.531062124248497" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/Contacts.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.contact.ContactPage">
    <items>
       <VBox spacing="5.0" style="-fx-background-color: white;">
          <children>
@@ -45,7 +42,14 @@ fx:controller="de.dc.spring.fx.ui.jregis.metro.ui.contact.ContactPage">
                   <Label prefHeight="25.0" prefWidth="39.0" text="Groups" />
                </children>
             </HBox>
-            <ListView fx:id="listViewContactGroups" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="listViewContactGroups" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem fx:id="menuItemNewGroup" mnemonicParsing="false" onAction="#onMenuItemAction" text="New Group" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></ListView>
             <HBox spacing="5.0" styleClass="tray-item">
                <children>
                   <ImageView fx:id="imageViewDeleteContacts" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onButtonClicked" pickOnBounds="true" preserveRatio="true" styleClass="tray-image-view">

@@ -1,11 +1,11 @@
 package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 
 import java.io.File;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -38,7 +38,6 @@ import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ListCell;
@@ -69,11 +68,13 @@ public class ContactPage extends BaseContactPage {
 	private ObservableList<Contact> deletedContacts = FXCollections.observableArrayList();
 	
 	public void initialize() {
+		contactGruops.addAll(contactGroupRepository.findAll());
+
+		ContactListCell.contactGroups = contactGruops;
 		listViewContacts.setCellFactory(e -> new ContactListCell());
 		listViewContacts.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
 
-		contactGruops.addAll(contactGroupRepository.findAll());
 		listViewContactGroups.setItems(contactGruops);
 		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
 			protected void updateItem(ContactGroup item, boolean empty) {
@@ -101,7 +102,7 @@ public class ContactPage extends BaseContactPage {
 		
 		contacts.addAll(contactRepository.findAll());
 //		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
-		filteredContacts.setPredicate(p->p.getStatus()==0);
+//		filteredContacts.setPredicate(p->pp.getStatus()==0);
 		listViewContacts.setItems(filteredContacts);
 
 		textSearchContact.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -321,6 +322,22 @@ public class ContactPage extends BaseContactPage {
 			filteredContacts.setPredicate(p->p.getStatus()==-1);
 		}else if (event.getSource()==labelAllContactsName) {
 			filteredContacts.setPredicate(p->true);
+		}
+	}
+
+	@Override
+	protected void onMenuItemAction(ActionEvent event) {
+		Object source = event.getSource();
+		if (source == menuItemNewGroup) {
+			DialogUtil.openInput("New Group", "New Group*", "Create new group", "Do you want to create a new group?", e->{
+				ContactGroup group = new ContactGroup(e, 0, LocalDateTime.now(), LocalDateTime.now());
+				group.setColor("blue");
+				group.setHoverColor("blue");
+				contactGroupRepository.save(group);
+				contactGruops.add(group);
+				
+				Notifications.create().darkStyle().title("New Group").text("Created new group "+e).show();
+			});
 		}
 	}
 
