@@ -2,10 +2,9 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 
 import java.time.LocalDateTime;
 
-import org.controlsfx.control.Notifications;
-
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.phone.model.Phonenumber;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
 public class ContactPhonenumberItem extends BaseContactItem<Phonenumber> {
@@ -21,19 +20,17 @@ public class ContactPhonenumberItem extends BaseContactItem<Phonenumber> {
 		item.setCreatedOn(LocalDateTime.now());
 		item.setUpdatedOn(LocalDateTime.now());
 		item.setStatus(0);
-//		if (item.getId()!=null) {
-//			JRegisPlatform.getInstance(PhonenumberRepository.class).update(item);
-//		}else {
-//			long itemId = JRegisPlatform.getInstance(PhonenumberRepository.class).save(item);
-//			item.setId(itemId);
-//		}
-		Platform.runLater(() -> Notifications.create().darkStyle().title("Phonenumber added!").text("Created "+textValue.getText()+"!").show());
+		if (item.getId()!=null) {
+			EventBroker.getDefault().post(new EventContext<>("/create/contact/phone", item));
+		}else {
+			EventBroker.getDefault().post(new EventContext<>("/update/contact/phone", item));
+		}
 		panePreview.toFront();				
 	}
 
 	@Override
 	protected void deleteItem(Phonenumber item) {
-//		JRegisPlatform.getInstance(PhonenumberRepository.class).delete(item);
+		EventBroker.getDefault().post(new EventContext<>("/delete/contact/phone", item));
 	}
 
 	@Override

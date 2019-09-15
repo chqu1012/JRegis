@@ -54,22 +54,14 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/contact/Contacts.fxml";
 
-	@Autowired
-	PhonenumberRepository phoneRepository;
-	@Autowired
-	ContactRepository contactRepository;
-	@Autowired
-	AddressRepository addressRepository;
-	@Autowired
-	EmailRepository emailRepository;
-	@Autowired
-	DatesRepository datesRepository;
-	@Autowired
-	ContactImageRepository contactImageRepository;
-	@Autowired
-	ContactGroupRepository contactGroupRepository;
-	@Autowired
-	ContactFX context;
+	@Autowired PhonenumberRepository phoneRepository;
+	@Autowired ContactRepository contactRepository;
+	@Autowired AddressRepository addressRepository;
+	@Autowired EmailRepository emailRepository;
+	@Autowired DatesRepository datesRepository;
+	@Autowired ContactImageRepository contactImageRepository;
+	@Autowired ContactGroupRepository contactGroupRepository;
+	@Autowired ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
@@ -204,6 +196,27 @@ public class ContactPage extends BaseContactPage {
 				addressRepository.delete(item);
 				Notifications.create().darkStyle().title("Delete address for contact")
 				.text("Address was deleted!").show();
+			}
+		}
+	}
+	
+	@Subscribe
+	public void subscribePhonenumber(EventContext<Phonenumber> context) {
+		if (context.getInput() instanceof Phonenumber) {
+			Phonenumber item = context.getInput();
+			String id = context.getEventId();
+			if (id.equals("/create/contact/phone")) {
+				phoneRepository.save(item);
+				Notifications.create().darkStyle().title("Created new phonenumber for contact")
+				.text("Phonenumber was created!").show();
+			} else if (id.equals("/update/contact/phone")) {
+				phoneRepository.save(item);
+				Notifications.create().darkStyle().title("Updated phonenumber for contact")
+				.text("Phonenumber was updated!").show();
+			} else if (id.equals("/delete/contact/phone")) {
+				phoneRepository.delete(item);
+				Notifications.create().darkStyle().title("Delete phonenumber for contact")
+				.text("Phonenumber was deleted!").show();
 			}
 		}
 	}
