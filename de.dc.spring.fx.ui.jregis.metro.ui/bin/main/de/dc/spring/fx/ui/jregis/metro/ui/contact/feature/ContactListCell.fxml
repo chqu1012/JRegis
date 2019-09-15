@@ -21,7 +21,7 @@
                   <Insets />
                </HBox.margin>
                <image>
-                  <Image url="@../../../images/icons8-name-64.png" />
+                  <Image url="@../images/icons8-name-64.png" />
                </image>
             </ImageView>
             <VBox HBox.hgrow="ALWAYS">
@@ -44,7 +44,7 @@
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../../../images/icons8-name-64.png" />
+                  <Image url="@../images/icons8-name-64.png" />
                </image>
             </ImageView>
             <VBox layoutX="50.0" layoutY="10.0" spacing="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
@@ -63,7 +63,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../images/icons8-abbrechen-2-40.png" />
+                                    <Image url="@../images/icons8-abbrechen-2-40.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -72,7 +72,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../images/icons8-geprüfter-funkknopf-48.png" />
+                                    <Image url="@../images/icons8-geprüfter-funkknopf-48.png" />
                                  </image>
                               </ImageView>
                            </graphic>
