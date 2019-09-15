@@ -45,8 +45,9 @@ public class PreferencePage extends BasePreferencesPage {
 
 	private void initPaneActivity() {
 		tableViewActivity.getMasterData().addAll(repositoryActivity.findAll());
-		borderPaneActivity.setCenter(tableViewActivity);
-		borderPaneActivity.setRight(formActivity);
+		splitPaneActivity.setDividerPosition(0, 0.75);
+		splitPaneActivity.getItems().add(tableViewActivity);
+		splitPaneActivity.getItems().add(formActivity);
 	}
 }
 

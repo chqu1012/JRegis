@@ -766,3 +766,7 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:E:/Repositor
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "'Sunday Morning Breakfast' (ACTIVITY: TITLE BIGINT)"
 Data conversion error converting "'Sunday Morning Breakfast' (ACTIVITY: TITLE BIGINT)"; SQL statement:
 insert into activity (id, created_on, description, status, title, updated_on, user_id) values (null, ?, ?, ?, ?, ?, ?) -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6) [22018-196]
+2019-09-15 15:10:04 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Wert zu gross / lang für Feld "DESCRIPTION VARCHAR(255)": "STRINGDECODE('Karlsruhe ist eine Stadt im s\u00fcdwestdeutschen Bundesland Baden-W\u00fcrttemberg. In einer ehemaligen Munitions... (500)"
+Value too long for column "DESCRIPTION VARCHAR(255)": "STRINGDECODE('Karlsruhe ist eine Stadt im s\u00fcdwestdeutschen Bundesland Baden-W\u00fcrttemberg. In einer ehemaligen Munitions... (500)"; SQL statement:
+insert into activity (id, created_on, description, status, title, updated_on, user_id) values (null, ?, ?, ?, ?, ?, ?) [22001-196]

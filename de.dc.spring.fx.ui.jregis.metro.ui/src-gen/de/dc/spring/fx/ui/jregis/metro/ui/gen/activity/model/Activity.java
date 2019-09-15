@@ -20,6 +20,7 @@ public class Activity{
 	@Column(nullable = true)
 	private Long userId;
 	@Column(nullable = true)
+	@Lob
 	private String description;
 	@Column(nullable = true)
 	private LocalDateTime createdOn;
