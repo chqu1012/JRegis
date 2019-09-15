@@ -2,6 +2,7 @@ package de.dc.spring.fx.ui.jregis.metro.ui.contact;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -53,54 +54,62 @@ public class ContactPage extends BaseContactPage {
 
 	public static final String FXML = "/de/dc/spring/fx/ui/jregis/metro/ui/contact/Contacts.fxml";
 
-	@Autowired PhonenumberRepository phoneRepository;
-	@Autowired ContactRepository contactRepository;
-	@Autowired AddressRepository addressRepository;
-	@Autowired EmailRepository emailRepository;
-	@Autowired DatesRepository datesRepository;
-	@Autowired ContactImageRepository contactImageRepository;
-	@Autowired ContactGroupRepository contactGroupRepository;
-	@Autowired ContactFX context;
+	@Autowired
+	PhonenumberRepository phoneRepository;
+	@Autowired
+	ContactRepository contactRepository;
+	@Autowired
+	AddressRepository addressRepository;
+	@Autowired
+	EmailRepository emailRepository;
+	@Autowired
+	DatesRepository datesRepository;
+	@Autowired
+	ContactImageRepository contactImageRepository;
+	@Autowired
+	ContactGroupRepository contactGroupRepository;
+	@Autowired
+	ContactFX context;
 
 	private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 	private FilteredList<Contact> filteredContacts = new FilteredList<>(contacts, p -> true);
 	private ObservableList<ContactGroup> contactGruops = FXCollections.observableArrayList();
 	private ObservableList<Contact> deletedContacts = FXCollections.observableArrayList();
-	
+
 	public void initialize() {
 		listViewContacts.setCellFactory(e -> new ContactListCell());
 		listViewContacts.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> onContactSelectionChanged(newValue));
 
 		contactGruops.addAll(contactGroupRepository.findAll());
-		
+
 		ContactListCell.contactGroups = contactGruops;
-		
+
 		listViewContactGroups.setItems(contactGruops);
 		listViewContactGroups.setCellFactory(param -> new ListCell<ContactGroup>() {
 			protected void updateItem(ContactGroup item, boolean empty) {
 				super.updateItem(item, empty);
-				if (item==null || empty) {
+				if (item == null || empty) {
 					setText(null);
-				}else {
+				} else {
 					setText(item.getName());
 				}
 			}
 		});
 		listViewContactGroups.setOnMouseClicked(arg0 -> {
 			ContactGroup selection = listViewContactGroups.getSelectionModel().getSelectedItem();
-			if (selection!=null) {
-				filteredContacts.setPredicate(p->p.getContactGroupId()==selection.getId());
+			if (selection != null) {
+				filteredContacts.setPredicate(p -> p.getContactGroupId() == selection.getId());
 			}
 		});
-		
+
 		// React on list changes
 		context.getAddressListProperty().addListener(this::onAddressListSelectionChanged);
 		context.getEmailsProperty().addListener(this::onEmailListSelectionChanged);
 		context.getDateListProperty().addListener(this::onDatesListSelectionChanged);
 		context.getPhoneListProperty().addListener(this::onPhoneListSelectionChanged);
 		context.getContactImageIdProperty().addListener(this::onContactImageIdSelectionChanged);
-		
+
 		contacts.addAll(contactRepository.findAll());
 //		deletedContacts.addAll(contactRepository.findAllByStatus(-1));
 //		filteredContacts.setPredicate(p->pp.getStatus()==0);
@@ -117,24 +126,48 @@ public class ContactPage extends BaseContactPage {
 		});
 
 		initBinding(context);
-		
+
 		EventBroker.getDefault().register(this);
 	}
 
 	@Subscribe
-	public void cancelCreateContactViaEventBroker(EventContext<Contact> context) {
-		if (context.getEventId().equals("/cancel/contact/create")) {
-			contacts.remove(context.getInput());
-		}else if(context.getEventId().equals("/new/contact/create")){
-			Contact contact = context.getInput();
-			contactRepository.save(contact);
-			Platform.runLater(()-> Notifications.create().darkStyle().title("Created new contact")
-					.text(contact.getLastname()+" "+contact.getFirstname()+" was created!").show());
+	public void subscribeContact(EventContext<Contact> context) {
+		if (context.getInput() instanceof Contact) {
+			Contact item = context.getInput();
+			String id = context.getEventId();
+			if (id.equals("/cancel/contact/create")) {
+				contacts.remove(item);
+			} else if (id.equals("/new/contact/create")) {
+				contactRepository.save(item);
+				Notifications.create().darkStyle().title("Created new contact")
+						.text(item.getLastname() + " " + item.getFirstname() + " was created!").show();
+			}
 		}
 	}
-	
+
+	@Subscribe
+	public void subscribeEmail(EventContext<Email> context) {
+		if (context.getInput() instanceof Email) {
+			Email item = context.getInput();
+			String id = context.getEventId();
+			if (id.equals("/create/existing/contact/email")) {
+				emailRepository.save(item);
+				Notifications.create().darkStyle().title("Created new email for contact")
+						.text(item.getName() + " was created!").show();
+			} else if (id.equals("/update/existing/contact/email")) {
+				emailRepository.save(item);
+				Notifications.create().darkStyle().title("Updated email for contact")
+						.text(item.getName() + " was updated!").show();
+			} else if (id.equals("/delete/contact/email")) {
+				emailRepository.delete(item);
+				Notifications.create().darkStyle().title("Delete email for contact")
+						.text(item.getName() + " was deleted!").show();
+			}
+		}
+	}
+
 	private void onAddressListSelectionChanged(Change<? extends Address> c) {
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			ObservableList<Address> addressList = context.getAddressListProperty().get();
 			vboxAddresses.getChildren().clear();
 			addressList.forEach(e -> {
@@ -145,7 +178,7 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	private void onEmailListSelectionChanged(Change<? extends Email> c) {
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			ObservableList<Email> emailList = context.getEmailsProperty().get();
 			vboxEmail.getChildren().clear();
 			emailList.forEach(e -> {
@@ -156,7 +189,7 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	private void onDatesListSelectionChanged(Change<? extends Dates> c) {
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			ObservableList<Dates> datesList = context.getDateListProperty().get();
 			vboxDates.getChildren().clear();
 			datesList.forEach(e -> {
@@ -167,14 +200,15 @@ public class ContactPage extends BaseContactPage {
 	}
 
 	private void onContactImageIdSelectionChanged(Observable e) {
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			Contact contact = context.getContactProperty().get();
 			Optional<ContactImage> optionalImage = contactImageRepository.findById(contact.getContactImageId());
 			if (optionalImage.isPresent()) {
 //				File image = JRegisPlatform.getInstance(ContactFolderService.class).getImage(contact, optionalImage.get().getName());
 //				imageViewUser.setImage(new Image(image.toURI().toString()));
-			}else {
-				imageViewUser.setImage(new Image(getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/icons8-name-100.png")));
+			} else {
+				imageViewUser.setImage(new Image(
+						getClass().getResourceAsStream("/de/dc/fx/ui/jregis/metro/ui/images/icons8-name-100.png")));
 			}
 		});
 	}
@@ -191,27 +225,27 @@ public class ContactPage extends BaseContactPage {
 	private void onContactSelectionChanged(Contact newValue) {
 		if (newValue != null) {
 			panePreview.setVisible(true);
-						
+
 			newValue.getAddressList().clear();
 			newValue.getEmails().clear();
 			newValue.getDateList().clear();
 			newValue.getPhoneList().clear();
 
 			Long id = newValue.getId();
-			if (id!=null) {
-//				List<Address> addressList = addressRepository.findAllByContactId(id);
-//				newValue.getAddressList().addAll(addressList);
-//				
-//				List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
-//				newValue.getEmails().addAll(emails);
-//				
-//				List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
-//				newValue.getDateList().addAll(dates);
-//				
-//				List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
-//				newValue.getPhoneList().addAll(phones);
-//				
-//				context.getContactProperty().set(newValue);
+			if (id != null) {
+				List<Address> addressList = addressRepository.findAllByContactId(id);
+				newValue.getAddressList().addAll(addressList);
+				
+				List<Email> emails = emailRepository.findAllByContactId(newValue.getId());
+				newValue.getEmails().addAll(emails);
+				
+				List<Dates> dates = datesRepository.findAllByContactId(newValue.getId());
+				newValue.getDateList().addAll(dates);
+				
+				List<Phonenumber> phones = phoneRepository.findAllByContactId(newValue.getId());
+				newValue.getPhoneList().addAll(phones);
+				
+				context.getContactProperty().set(newValue);
 			}
 		}
 	}
@@ -243,7 +277,7 @@ public class ContactPage extends BaseContactPage {
 	@Override
 	protected void onImageViewAddClicked(MouseEvent event) {
 		Contact contact = listViewContacts.getSelectionModel().getSelectedItem();
-		if (contact!=null) {
+		if (contact != null) {
 			Long contactId = contact.getId();
 			if (event.getSource() == imageViewAddEmail) {
 				Email newEmail = new Email();
@@ -251,19 +285,19 @@ public class ContactPage extends BaseContactPage {
 				ContactEmailItem item = new ContactEmailItem(newEmail);
 				item.setEditMode(true);
 				vboxEmail.getChildren().add(item);
-			}else if (event.getSource()==imageViewAddPhonenumbers) {
+			} else if (event.getSource() == imageViewAddPhonenumbers) {
 				Phonenumber phonenumber = new Phonenumber();
 				phonenumber.setContactId(contactId);
 				ContactPhonenumberItem item = new ContactPhonenumberItem(phonenumber);
 				item.setEditMode(true);
 				vboxPhoneNumbers.getChildren().add(item);
-			}else if (event.getSource()==imageViewAddDates) {
+			} else if (event.getSource() == imageViewAddDates) {
 				Dates dates = new Dates();
 				dates.setContactId(contactId);
 				ContactDatesItem item = new ContactDatesItem(dates);
 				item.setEditMode(true);
 				vboxDates.getChildren().add(item);
-			}else if (event.getSource()==imageViewAddAddress) {
+			} else if (event.getSource() == imageViewAddAddress) {
 				Address address = new Address();
 				address.setContactId(contactId);
 				ContactAddressItem item = new ContactAddressItem(address);
@@ -275,10 +309,10 @@ public class ContactPage extends BaseContactPage {
 
 	@Override
 	protected void onImageViewUserClicked(MouseEvent event) {
-		if (event.getClickCount()==2) {
+		if (event.getClickCount() == 2) {
 			FileChooser chooser = new FileChooser();
 			File file = chooser.showOpenDialog(new Stage());
-			if (file!=null) {
+			if (file != null) {
 				Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
 //				
 //				JRegisPlatform.getInstance(ContactFolderService.class).copyFile(selection, file);
@@ -291,7 +325,7 @@ public class ContactPage extends BaseContactPage {
 //				
 //				selection.setContactImageId(imageId);
 //				JRegisPlatform.getInstance(ContactRepository.class).update(selection);
-				
+
 				imageViewUser.setImage(new Image(file.toURI().toString()));
 			}
 		}
@@ -300,11 +334,12 @@ public class ContactPage extends BaseContactPage {
 	@Override
 	protected void onMenuItemDeleteContact(ActionEvent event) {
 		Contact selection = listViewContacts.getSelectionModel().getSelectedItem();
-		if (selection==null) {
+		if (selection == null) {
 			return;
 		}
-		DialogUtil.openQuestion("Delete Contact Dialog", "Delete Contact Operation", "Do you really want to delete this contact "+selection.getUsername()).ifPresent(e->{
-			if(e.getButtonData().equals(ButtonData.OK_DONE)) {
+		DialogUtil.openQuestion("Delete Contact Dialog", "Delete Contact Operation",
+				"Do you really want to delete this contact " + selection.getUsername()).ifPresent(e -> {
+					if (e.getButtonData().equals(ButtonData.OK_DONE)) {
 //				contactRepository.updateStatus(selection.getId(), -1);
 //				
 //				// TODO: Handle emails, address, phonenumbers and dates?
@@ -313,22 +348,25 @@ public class ContactPage extends BaseContactPage {
 //					deletedContacts.add(selection);
 //					Notifications.create().darkStyle().text("Contact "+selection.getUsername()+" deleted!").title("Deleted contact").show();
 //				});
-			}
-		});
+					}
+				});
 	}
 
 	@Override
 	protected void onButtonClicked(MouseEvent event) {
-		if (event.getSource()==imageViewDeleteContacts) {
-			DialogUtil.openQuestion("Clear Dialog", "Clear Operations", "Clear trashcan with "+labelDeletedContactSize.getText()+" contact(s)?").ifPresent(e->{
-				if (e.getButtonData().equals(ButtonData.OK_DONE)) {
-					filteredContacts.setPredicate(p->false);
-				}
-			});
-		}else if (event.getSource()==labelDeletedContactName) {
-			filteredContacts.setPredicate(p->p.getStatus()==-1);
-		}else if (event.getSource()==labelAllContactsName) {
-			filteredContacts.setPredicate(p->true);
+		if (event.getSource() == imageViewDeleteContacts) {
+			DialogUtil
+					.openQuestion("Clear Dialog", "Clear Operations",
+							"Clear trashcan with " + labelDeletedContactSize.getText() + " contact(s)?")
+					.ifPresent(e -> {
+						if (e.getButtonData().equals(ButtonData.OK_DONE)) {
+							filteredContacts.setPredicate(p -> false);
+						}
+					});
+		} else if (event.getSource() == labelDeletedContactName) {
+			filteredContacts.setPredicate(p -> p.getStatus() == -1);
+		} else if (event.getSource() == labelAllContactsName) {
+			filteredContacts.setPredicate(p -> true);
 		}
 	}
 
@@ -336,15 +374,16 @@ public class ContactPage extends BaseContactPage {
 	protected void onMenuItemAction(ActionEvent event) {
 		Object source = event.getSource();
 		if (source == menuItemNewGroup) {
-			DialogUtil.openInput("New Group", "New Group*", "Create new group", "Do you want to create a new group?", e->{
-				ContactGroup group = new ContactGroup(e, 0, LocalDateTime.now(), LocalDateTime.now());
-				group.setColor("blue");
-				group.setHoverColor("blue");
-				contactGroupRepository.save(group);
-				contactGruops.add(group);
-				
-				Notifications.create().darkStyle().title("New Group").text("Created new group "+e).show();
-			});
+			DialogUtil.openInput("New Group", "New Group*", "Create new group", "Do you want to create a new group?",
+					e -> {
+						ContactGroup group = new ContactGroup(e, 0, LocalDateTime.now(), LocalDateTime.now());
+						group.setColor("blue");
+						group.setHoverColor("blue");
+						contactGroupRepository.save(group);
+						contactGruops.add(group);
+
+						Notifications.create().darkStyle().title("New Group").text("Created new group " + e).show();
+					});
 		}
 	}
 

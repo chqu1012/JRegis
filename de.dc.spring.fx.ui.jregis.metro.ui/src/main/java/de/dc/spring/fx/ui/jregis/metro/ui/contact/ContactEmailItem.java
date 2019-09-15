@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.controlsfx.control.Notifications;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
+import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.email.model.Email;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,18 +24,16 @@ public class ContactEmailItem extends BaseContactItem<Email> {
 		item.setUpdatedOn(LocalDateTime.now());
 		item.setStatus(0);
 		if (item.getId()!=null) {
-//			JRegisPlatform.getInstance(EmailRepository.class).update(item);
+			EventBroker.getDefault().post(new EventContext<>("/update/existing/contact/email", item));
 		}else {
-//			long itemId = JRegisPlatform.getInstance(EmailRepository.class).save(item);
-//			item.setId(itemId);
+			EventBroker.getDefault().post(new EventContext<>("/create/existing/contact/email", item));
 		}
-		Platform.runLater(() -> Notifications.create().darkStyle().title("Email added!").text("Created "+textValue.getText()+"!").show());
 		panePreview.toFront();		
 	}
 
 	@Override
 	protected void deleteItem(Email item) {
-//		JRegisPlatform.getInstance(EmailRepository.class).delete(item);
+		EventBroker.getDefault().post(new EventContext<>("/delete/contact/email", item));
 	}
 
 	@Override

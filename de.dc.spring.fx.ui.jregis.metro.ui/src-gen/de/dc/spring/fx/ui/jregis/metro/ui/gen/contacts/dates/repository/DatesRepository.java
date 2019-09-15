@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DatesRepository extends JpaRepository<Dates, Long>{
+
+	List<Dates> findAllByContactId(Long id);
 }

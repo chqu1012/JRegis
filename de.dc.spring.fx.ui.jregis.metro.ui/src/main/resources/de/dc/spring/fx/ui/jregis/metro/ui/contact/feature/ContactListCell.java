@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
-import org.controlsfx.control.Notifications;
+import org.apache.log4j.Logger;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventBroker;
 import de.dc.spring.fx.ui.jregis.metro.ui.events.EventContext;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.contact.model.Contact;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.contacts.group.model.ContactGroup;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +26,8 @@ import javafx.util.StringConverter;
 
 public class ContactListCell extends ListCell<Contact> {
 
+	private Logger log = Logger.getLogger(getClass().getSimpleName());
+	
 	@FXML
 	protected Label labelGroupname;
 	
@@ -80,7 +80,7 @@ public class ContactListCell extends ListCell<Contact> {
 				try {
 					mLLoader.load();
 				} catch (IOException e) {
-					e.printStackTrace();
+					log.error("Failed to load fxml", e);
 				}
 			}
 			
