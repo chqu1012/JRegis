@@ -117,7 +117,7 @@ public class ContactListCell extends ListCell<Contact> {
 					ContactGroup group = optionalGroup.get();
 					labelGroupname.setText(group.getName());
 					
-					String color = group.getColor()==null? "gray" : "#"+group.getColor();
+					String color = group.getColor()==null? "gray" : group.getColor();
 					labelGroupname.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: 5; -fx-text-fill: white;", color));
 				}
 				labelName.setText(item.getFirstname() + " " + item.getLastname());

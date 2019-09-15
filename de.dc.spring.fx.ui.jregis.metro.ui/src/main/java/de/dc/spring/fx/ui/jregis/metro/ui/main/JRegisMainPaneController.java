@@ -40,12 +40,12 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	// No injection required, only static pages
 	private ProfilePage profilePage = new ProfilePage();
 	private Inbox inbox = new Inbox();
-	private PreferencePage preferencePage = new PreferencePage();
-	private Dashboard dashboard = new Dashboard();
 	private PopOver popOverNotification = new PopOver();
 	private PopOver popOverPreferences = new PopOver();
 	private PopOver popOverUser = new PopOver();
 	
+	private Region paneDashboard;
+	private Region preferencePage;
 	private Region paneContact;
 	private Region paneDocument;
 	private Region paneUser;
@@ -58,6 +58,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		paneDocumentDetails = load(UIConstants.FXML_DOCUMENT_DETAILS);
 		paneContact = load(UIConstants.FXML_CONTACT);
 		paneCalendar= load(UIConstants.FXML_CALENDAR);
+		paneDashboard= load(UIConstants.FXML_DASHBOARD);
+		preferencePage= load(UIConstants.FXML_PREFERENCES);
 		
 		mainStackPane.getChildren().add(paneCalendar);
 		mainStackPane.getChildren().add(paneUser);
@@ -67,7 +69,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		mainStackPane.getChildren().add(preferencePage);
 		mainStackPane.getChildren().add(inbox);
 		mainStackPane.getChildren().add(profilePage);
-		mainStackPane.getChildren().add(dashboard);
+		mainStackPane.getChildren().add(paneDashboard);
 		
 		popOverNotification.setContentNode(notificationAlerts);
 		popOverUser.setContentNode(notificationUser);
@@ -112,11 +114,11 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			popOverPreferences.show(imageViewPreferences);
 		}else if (source== labelPreferences) {
 			preferencePage.toFront();
-			preferencePage.init();
+			EventBroker.getDefault().post(new EventContext<>("/init/web/browser/preferences", ""));
 		}else if (source == labelUserManagement) {
 			paneUser.toFront();
 		}else if (source == labelDashboard) {
-			dashboard.toFront();
+			paneDashboard.toFront();
 		}else if (source == imageViewAdbook) {
 			paneContact.toFront();
 		}else if (source == imageViewCalendar) {
