@@ -49,6 +49,7 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 	private Region paneContact;
 	private Region paneDocument;
 	private Region paneUser;
+	private Region paneCalendar;
 	private Region paneDocumentDetails;
 
 	public void initialize() {
@@ -56,7 +57,9 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 		paneUser = load(UIConstants.FXML_USER);
 		paneDocumentDetails = load(UIConstants.FXML_DOCUMENT_DETAILS);
 		paneContact = load(UIConstants.FXML_CONTACT);
+		paneCalendar= load(UIConstants.FXML_CALENDAR);
 		
+		mainStackPane.getChildren().add(paneCalendar);
 		mainStackPane.getChildren().add(paneUser);
 		mainStackPane.getChildren().add(paneDocumentDetails);
 		mainStackPane.getChildren().add(paneDocument);
@@ -116,6 +119,8 @@ public class JRegisMainPaneController extends BaseFxmlJRegisMainPaneController {
 			dashboard.toFront();
 		}else if (source == imageViewAdbook) {
 			paneContact.toFront();
+		}else if (source == imageViewCalendar) {
+			paneCalendar.toFront();
 		}
 	}
 
