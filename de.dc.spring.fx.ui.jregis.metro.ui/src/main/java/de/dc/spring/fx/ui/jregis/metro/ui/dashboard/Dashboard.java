@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.activity.model.Activity;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.activity.repository.ActivityRepository;
-import de.dc.spring.fx.ui.jregis.metro.ui.gen.todo.model.Todo;
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.todo.repository.TodoRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.model.User;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.repository.UserRepository;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 
 @Controller
@@ -21,7 +23,11 @@ public class Dashboard extends BaseDashboard {
 	@Autowired UserRepository userRepository;
 	@Autowired TodoRepository todoRepository;
 	
+	private ObservableList<User> userData = FXCollections.observableArrayList();
+	
 	public void initialize() {
+		userData.addAll(userRepository.findAll());
+		
 		List<Activity> activities = activityRepository.findAll();
 		for (Activity a : activities) {
 			Optional<User> optionalUser = userRepository.findById(a.getUserId());
@@ -30,13 +36,8 @@ public class Dashboard extends BaseDashboard {
 			hboxRecentlyActivities.getChildren().add(new RecentlyActivityItem(a));
 		}
 		
-		List<Todo> todoList = todoRepository.findAll();
+		todoRepository.findAll().forEach(e->paneTodoList.getChildren().add(new CheckBox(e.getName())));
 		
-		for (Todo todo : todoList) {
-			for (int i = 0; i < 20; i++) {
-				paneTodoList.getChildren().add(new CheckBox(todo.getName()));
-			}
-			paneTodoList.getChildren().add(new CheckBox(todo.getName()));
-		}
+		labelUserCounter.textProperty().bind(Bindings.size(userData).asString());
 	}
 }
