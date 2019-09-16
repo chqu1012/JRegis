@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Document {
@@ -31,6 +32,9 @@ public class Document {
 	@Column(nullable = true)
 	private LocalDateTime updatedOn;
 
+	@Transient
+	private DocumentCategory category;
+	
 	public Document() {
 	}
 
@@ -41,6 +45,14 @@ public class Document {
 		this.categoryId = categoryId;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
+	}
+
+	public DocumentCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(DocumentCategory category) {
+		this.category = category;
 	}
 
 	public String getDescription() {
