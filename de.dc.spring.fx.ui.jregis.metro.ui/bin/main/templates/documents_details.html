@@ -1,0 +1,52 @@
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+  <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#tab_details" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Details</a>
+    </li>
+    <li role="presentation" class=""><a href="#tab_files" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Files</a>
+    </li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="tab_details" aria-labelledby="home-tab">
+	    <table th:object="${document}">
+			<tr>
+				<td>Id:</td>
+				<td th:text="${id}">d.id</td>
+			</tr>
+			<tr>
+				<td>Name:</td>
+				<td th:text="*{name}">d.name</td>
+			</tr>
+			<tr>
+				<td>Extra info:</td>
+				<td>And any further details here (images etc)...</td>
+			</tr>
+			<tr>
+				<td>Created on:</td>
+				<td th:text="*{createdOn}">d.createdOn</td>
+			</tr>
+			<tr>
+				<td>Updated on:</td>
+				<td th:text="*{updatedOn}">d.updatedOn</td>
+			</tr>
+		</table>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tab_files" aria-labelledby="profile-tab">
+    	<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col" width="50">#</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Download</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<tr th:each="file, rowStat: ${files}">
+		  		<td th:text="${rowStat.index}"></td>
+		  		<td th:text="${file.name}"></td>
+		  		<td ><a th:href="${file.url}">Link</a></td>
+		  	</tr>
+		  </tbody>
+		</table>
+    </div>
+  </div>
+</div>

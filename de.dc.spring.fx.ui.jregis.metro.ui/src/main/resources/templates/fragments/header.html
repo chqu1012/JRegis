@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+		<!-- Bootstrap -->
+	    <link href="/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	    <!-- Bootstrap-progressbar -->
+	    <link href="/webjars/bootstrap-progressbar/0.9.0/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"/>
+	    <!-- Bootstrap-daterangepicker -->
+	    <link href="/webjars/bootstrap-daterangepicker/2.1.24/daterangepicker.css" rel="stylesheet"/>
+	    <!-- Bootstrap-wysiwyg -->
+    	<link href="/webjars/google-code-prettify/1.0.5/bin/prettify.min.js" rel="stylesheet">
+	    <!-- bootstrap-datetimepicker -->
+	    <link href="/webjars/bootstrap-datepicker/1.8.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	    <!-- Font Awesome -->
+	    <link href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	    <!-- NProgress -->
+	    <link href="/webjars/nprogress/0.2.0/nprogress.css" rel="stylesheet"/>
+	    <!-- JQVMap -->
+	    <link href="/webjars/jqvmap/1.5.1/dist/jqvmap.min.css" rel="stylesheet"/>
+	    <!-- DateTimePicker -->
+	    <link rel="stylesheet" href="/webjars/eonasdan-bootstrap-datetimepicker/4.17.47/build/css/bootstrap-datetimepicker.min.css" />
+	    <!-- Datatables -->
+	    <link href="/webjars/datatables.net-bs/2.1.1/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	    <link href="/webjars/datatables.net-fixedheader-bs/3.1.3/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+	    <link href="/webjars/datatables.net-responsive-bs/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet">
+	    <link href="/webjars/datatables.net-scroller-bs/1.4.3/css/scroller.bootstrap.min.css" rel="stylesheet">
+	    <link href="/webjars/datatables.net-select-bs/1.2.3/css/select.bootstrap.min.css" rel="stylesheet">
+	    
+	    <link href="/css/custom.css" rel="stylesheet"/>
+    </div>
+    <div th:fragment="header-js">
+    	<!-- Moment -->
+	    <script src="/webjars/moment/2.9.0/min/moment.min.js"></script>
+        <!-- jQuery -->
+	    <script src="/webjars/jquery/2.2.4/dist/jquery.min.js"></script>
+	    <!-- Bootstrap -->
+	    <script src="/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
+	    <!-- Bootstrap-progressbar -->
+	    <script src="/webjars/bootstrap-progressbar/0.9.0/bootstrap-progressbar.min.js"></script>
+	    <!-- Bootstrap-daterangepicker -->
+	    <script src="/webjars/bootstrap-daterangepicker/2.1.24/daterangepicker.js"></script>
+	    <!-- bootstrap-datetimepicker -->    
+    	<script src="/webjars/bootstrap-datepicker/1.8.0/dist/js/bootstrap-datepicker.min.js"></script>
+	    <!-- bootstrap-wysiwyg -->
+	    <script src="/webjars/bootstrap-wysiwyg-steveathon/1.0.5/js/bootstrap-wysiwyg.min.js"></script>
+	    <script src="/webjars/jQuery.Hotkeys/0.2.0/jquery.hotkeys.js"></script>
+	    <script src="/webjars/google-code-prettify/1.0.5/src/prettify.js"></script>
+	    <!-- DateTimePicker -->
+	    <script type="text/javascript" src="/webjars/eonasdan-bootstrap-datetimepicker/4.17.47/build/js/bootstrap-datetimepicker.min.js"></script>
+	    <!-- Chart.js -->
+	    <script src="/webjars/Chart.js/2.5.0/dist/Chart.min.js"></script>
+	    <!-- gauge.js -->
+	    <script src="/vendors/gauge.js/dist/gauge.min.js"></script>
+	    <!-- Flot -->
+	    <script src="/webjars/flot/0.8.3/jquery.flot.js"></script>
+	    <script src="/webjars/flot/0.8.3/jquery.flot.pie.js"></script>
+	    <script src="/webjars/flot/0.8.3/jquery.flot.time.js"></script>
+	    <script src="/webjars/flot/0.8.3/jquery.flot.stack.js"></script>
+	    <script src="/webjars/flot/0.8.3/jquery.flot.resize.js"></script>
+	    <!-- Flot plugins -->
+	    <script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+	    <script src="/webjars/flot-spline/0.8.2/js/jquery.flot.spline.min.js"></script>
+	    <script src="/webjars/flot.curvedlines/1.1.1/curvedLines.js"></script>
+	    <!-- DateJS -->
+	    <script src="/webjars/datejs/1.0.0-rc3/build/date.js"></script>
+	    <!-- JQVMap -->
+	    <script src="/webjars/jqvmap/1.5.1/dist/jquery.vmap.js"></script>
+	    <script src="/webjars/jqvmap/1.5.1/dist/maps/jquery.vmap.world.js"></script>
+	    <script src="/webjars/jqvmap/1.5.1/examples/js/jquery.vmap.sampledata.js"></script>
+	    <!-- Datatables -->
+	    <script src="/webjars/datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	    <script src="/webjars/datatables.net-bs/2.1.1/js/dataTables.bootstrap.min.js"></script>
+	    <script src="/webjars/datatables.net-select/1.2.3/js/dataTables.select.min.js"></script>
+	    <script src="/webjars/datatables.net-fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
+	    <script src="/webjars/datatables.net-keytable/2.4.1/js/dataTables.keyTable.min.js"></script>
+	    <script src="/webjars/datatables.net-responsive/2.2.0/js/dataTables.responsive.min.js"></script>
+	    <script src="/webjars/datatables.net-responsive-bs/2.2.3/js/responsive.bootstrap.min.js"></script>
+	    <script src="/webjars/datatables.net-scroller/1.5.1/js/dataTables.scroller.min.js"></script>
+	    <!-- Pdf Make -->
+	    <script src="/webjars/pdfmake/0.1.36/build/pdfmake.min.js"></script>
+	    <script src="/webjars/pdfmake/0.1.36/build/vfs_fonts.js"></script>
+	    <!-- ECharts -->
+	    <script src="/webjars/echarts/3.1.7/dist/echarts.min.js"></script>
+	    
+	    <script src="/vendors/jszip/dist/jszip.min.js"></script>
+	    
+	    <script src="/js/custom.js"></script>
+    </div>
+</head>
+</html>
