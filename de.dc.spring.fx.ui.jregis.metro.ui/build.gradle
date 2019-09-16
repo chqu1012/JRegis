@@ -44,6 +44,11 @@ dependencies {
 	compile group: 'org.jfxtras', name: 'jfxtras-labs', version: '8.0-r5'
     compile group: 'commons-io', name: 'commons-io', version: '+'
     
+	compile 'org.webjars:bootstrap:4.1.1'
+	compile 'org.webjars:jquery:1.12.4'
+	compile 'org.webjars:jquery-ui:+'
+	compile 'org.webjars:datatables:1.10.19'
+	compile 'org.webjars.bower:momentjs:+'
 	
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: '+'
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: '+'

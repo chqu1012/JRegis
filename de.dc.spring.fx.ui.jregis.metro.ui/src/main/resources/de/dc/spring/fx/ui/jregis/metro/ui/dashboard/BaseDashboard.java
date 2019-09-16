@@ -16,4 +16,7 @@ public abstract class BaseDashboard extends ScrollPane{
 	@FXML
 	protected Label labelUserCounter;
 	
+	@FXML
+	protected Label labelDocumentsCounter;
+	
 }
