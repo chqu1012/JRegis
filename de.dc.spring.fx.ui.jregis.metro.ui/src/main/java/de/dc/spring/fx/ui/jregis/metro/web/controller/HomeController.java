@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import de.dc.spring.fx.ui.jregis.metro.ui.gen.activity.repository.ActivityRepository;
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.todo.repository.TodoRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.repository.UserRepository;
 
 @Controller
@@ -13,10 +14,14 @@ public class HomeController {
 
 	@Autowired UserRepository userRepository;
 	@Autowired ActivityRepository activityReposity;
+	@Autowired TodoRepository todoReposity;
 	
 	@GetMapping("/")
 	public String greeting(Model model) {
+		model.addAttribute("todoList", todoReposity.findAll());
 		model.addAttribute("recentActivities", activityReposity.findAll());
+
+		model.addAttribute("userCount", userRepository.findAll().size());
 		return "index";
 	}
 	
