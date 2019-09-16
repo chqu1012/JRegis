@@ -5,16 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import de.dc.spring.fx.ui.jregis.metro.ui.gen.activity.repository.ActivityRepository;
 import de.dc.spring.fx.ui.jregis.metro.ui.user.repository.UserRepository;
 
 @Controller
 public class HomeController {
 
 	@Autowired UserRepository userRepository;
+	@Autowired ActivityRepository activityReposity;
 	
 	@GetMapping("/")
 	public String greeting(Model model) {
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("recentActivities", activityReposity.findAll());
 		return "index";
 	}
 	
