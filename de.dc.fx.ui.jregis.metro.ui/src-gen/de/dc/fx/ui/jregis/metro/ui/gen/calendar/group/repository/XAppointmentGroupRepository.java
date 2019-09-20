@@ -20,6 +20,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 		return xAppointmentGroup;
 	}
 	
+	public void updateAppointmentId(long id, java.lang.Long appointmentId) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET APPOINTMENT_ID ='"+appointmentId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByAppointmentId(java.lang.Long appointmentId) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID = '"+appointmentId+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllByAppointmentId(Long appointmentId){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID = '%s'", String.valueOf(appointmentId)));
 	}
@@ -43,6 +51,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	public List<XAppointmentGroup> findAllByAppointmentIdLikeOrderByDesc(Long appointmentId){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_ID like '%%s%' ORDER BY APPOINTMENT_ID DESC", String.valueOf(appointmentId)));
 	}
+	public void updateTopic(long id, java.lang.String topic) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET TOPIC ='"+topic+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByTopic(java.lang.String topic) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE TOPIC = '"+topic+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllByTopic(String topic){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC = '%s'", String.valueOf(topic)));
 	}
@@ -66,6 +82,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	public List<XAppointmentGroup> findAllByTopicLikeOrderByDesc(String topic){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE TOPIC like '%%s%' ORDER BY TOPIC DESC", String.valueOf(topic)));
 	}
+	public void updateSummary(long id, java.lang.String summary) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET SUMMARY ='"+summary+"' WHERE ID = "+id);
+	}
+	
+	public void deleteBySummary(java.lang.String summary) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE SUMMARY = '"+summary+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllBySummary(String summary){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY = '%s'", String.valueOf(summary)));
 	}
@@ -89,6 +113,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	public List<XAppointmentGroup> findAllBySummaryLikeOrderByDesc(String summary){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE SUMMARY like '%%s%' ORDER BY SUMMARY DESC", String.valueOf(summary)));
 	}
+	public void updateStart(long id, java.time.LocalDateTime start) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET START ='"+start+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByStart(java.time.LocalDateTime start) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE START = '"+start+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllByStart(LocalDateTime start){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START = '%s'", String.valueOf(start)));
 	}
@@ -112,6 +144,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	public List<XAppointmentGroup> findAllByStartLikeOrderByDesc(LocalDateTime start){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE START like '%%s%' ORDER BY START DESC", String.valueOf(start)));
 	}
+	public void updateEnd(long id, java.time.LocalDateTime end) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET END ='"+end+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByEnd(java.time.LocalDateTime end) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE END = '"+end+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllByEnd(LocalDateTime end){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END = '%s'", String.valueOf(end)));
 	}
@@ -135,6 +175,14 @@ public class XAppointmentGroupRepository extends BaseRepository<XAppointmentGrou
 	public List<XAppointmentGroup> findAllByEndLikeOrderByDesc(LocalDateTime end){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE END like '%%s%' ORDER BY END DESC", String.valueOf(end)));
 	}
+	public void updateAppointmentGroupId(long id, java.lang.Integer appointmentGroupId) {
+		queryExecute("UPDATE X_APPOINTMENT_GROUP SET APPOINTMENT_GROUP_ID ='"+appointmentGroupId+"' WHERE ID = "+id);
+	}
+	
+	public void deleteByAppointmentGroupId(java.lang.Integer appointmentGroupId) {
+		queryExecute("DELETE X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID = '"+appointmentGroupId+"'");
+	}
+	
 	public List<XAppointmentGroup> findAllByAppointmentGroupId(Integer appointmentGroupId){
 		return query(String.format("SELECT * FROM X_APPOINTMENT_GROUP WHERE APPOINTMENT_GROUP_ID = '%s'", String.valueOf(appointmentGroupId)));
 	}

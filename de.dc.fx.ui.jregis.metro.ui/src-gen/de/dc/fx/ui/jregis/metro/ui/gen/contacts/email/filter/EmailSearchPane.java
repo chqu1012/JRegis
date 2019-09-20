@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
-import java.util.Optional;
 
 public class EmailSearchPane extends VBox{
 
@@ -105,28 +104,22 @@ public class EmailSearchPane extends VBox{
 		fxmlLoader.setController(this);
 		
 		try {
-			fxmlLoader.load();
+		fxmlLoader.load();
 		} catch (IOException exception) {
-			exception.printStackTrace();
+		exception.printStackTrace();
 		}
 		hboxContactId.disableProperty().bind(checkboxContactId.selectedProperty().not());
 		comboboxContactId.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxContactId.getSelectionModel().selectFirst();
 		hboxName.disableProperty().bind(checkboxName.selectedProperty().not());
 		comboboxName.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxName.getSelectionModel().selectFirst();
 		hboxAddress.disableProperty().bind(checkboxAddress.selectedProperty().not());
 		comboboxAddress.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxAddress.getSelectionModel().selectFirst();
 		hboxStatus.disableProperty().bind(checkboxStatus.selectedProperty().not());
 		comboboxStatus.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxStatus.getSelectionModel().selectFirst();
 		hboxCreatedOn.disableProperty().bind(checkboxCreatedOn.selectedProperty().not());
 		comboboxCreatedOn.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxCreatedOn.getSelectionModel().selectFirst();
 		hboxUpdatedOn.disableProperty().bind(checkboxUpdatedOn.selectedProperty().not());
 		comboboxUpdatedOn.setItems(FXCollections.observableArrayList(EmailSearchType.values()));
-		comboboxUpdatedOn.getSelectionModel().selectFirst();
 	}
      
     @FXML
@@ -169,10 +162,7 @@ public class EmailSearchPane extends VBox{
 				EmailSearchType type = comboboxUpdatedOn.getSelectionModel().getSelectedItem();
 				content.add(new EmailSearchContent(name, value, type));
 			}
-			
-			String select = "SELECT * FROM CONTACT WHERE ";
-			Optional<String> result = content.stream().map(e-> e.getName()+" = '"+e.getValue()+"'").reduce((e1,e2) -> e1 +" OR "+e2);
-			result.ifPresent(e-> System.out.println(select+e));
+			content.stream().forEach(System.out::println);
 		}
     	root.toBack();
     }

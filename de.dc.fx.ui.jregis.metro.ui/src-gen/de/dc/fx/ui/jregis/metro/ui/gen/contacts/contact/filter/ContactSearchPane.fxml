@@ -24,7 +24,7 @@
             <Label layoutX="31.0" layoutY="59.0" text="Multiple search for Contact objects available." />
          </children>
       </AnchorPane>
-      <VBox fx:id="paneContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" prefHeight="367.0" prefWidth="600.0" spacing="5.0" VBox.vgrow="ALWAYS">
+      <VBox fx:id="paneContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" prefHeight="367.0" prefWidth="600.0" spacing="5.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" spacing="10.0">
             	<children>
@@ -166,7 +166,7 @@
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="60.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="buttonAccept" layoutX="523.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionEvent" text="Accept" />
-            <Hyperlink fx:id="linkCancel" layoutX="479.0" layoutY="19.0" text="Cancel" onAction="#onActionEvent"/>
+            <Hyperlink fx:id="linkCancel" layoutX="479.0" layoutY="19.0" text="Cancel" />
          </children>
       </AnchorPane>
    </children>

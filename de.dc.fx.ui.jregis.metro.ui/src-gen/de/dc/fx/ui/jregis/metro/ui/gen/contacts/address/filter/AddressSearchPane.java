@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
-import java.util.Optional;
 
 public class AddressSearchPane extends VBox{
 
@@ -138,37 +137,28 @@ public class AddressSearchPane extends VBox{
 		fxmlLoader.setController(this);
 		
 		try {
-			fxmlLoader.load();
+		fxmlLoader.load();
 		} catch (IOException exception) {
-			exception.printStackTrace();
+		exception.printStackTrace();
 		}
 		hboxContactId.disableProperty().bind(checkboxContactId.selectedProperty().not());
 		comboboxContactId.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxContactId.getSelectionModel().selectFirst();
 		hboxAddressType.disableProperty().bind(checkboxAddressType.selectedProperty().not());
 		comboboxAddressType.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxAddressType.getSelectionModel().selectFirst();
 		hboxStreet.disableProperty().bind(checkboxStreet.selectedProperty().not());
 		comboboxStreet.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxStreet.getSelectionModel().selectFirst();
 		hboxCountry.disableProperty().bind(checkboxCountry.selectedProperty().not());
 		comboboxCountry.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxCountry.getSelectionModel().selectFirst();
 		hboxState.disableProperty().bind(checkboxState.selectedProperty().not());
 		comboboxState.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxState.getSelectionModel().selectFirst();
 		hboxZipCode.disableProperty().bind(checkboxZipCode.selectedProperty().not());
 		comboboxZipCode.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxZipCode.getSelectionModel().selectFirst();
 		hboxStatus.disableProperty().bind(checkboxStatus.selectedProperty().not());
 		comboboxStatus.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxStatus.getSelectionModel().selectFirst();
 		hboxCreatedOn.disableProperty().bind(checkboxCreatedOn.selectedProperty().not());
 		comboboxCreatedOn.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxCreatedOn.getSelectionModel().selectFirst();
 		hboxUpdatedOn.disableProperty().bind(checkboxUpdatedOn.selectedProperty().not());
 		comboboxUpdatedOn.setItems(FXCollections.observableArrayList(AddressSearchType.values()));
-		comboboxUpdatedOn.getSelectionModel().selectFirst();
 	}
      
     @FXML
@@ -229,10 +219,7 @@ public class AddressSearchPane extends VBox{
 				AddressSearchType type = comboboxUpdatedOn.getSelectionModel().getSelectedItem();
 				content.add(new AddressSearchContent(name, value, type));
 			}
-			
-			String select = "SELECT * FROM CONTACT WHERE ";
-			Optional<String> result = content.stream().map(e-> e.getName()+" = '"+e.getValue()+"'").reduce((e1,e2) -> e1 +" OR "+e2);
-			result.ifPresent(e-> System.out.println(select+e));
+			content.stream().forEach(System.out::println);
 		}
     	root.toBack();
     }
